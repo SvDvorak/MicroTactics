@@ -56,6 +56,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Arrow.cs" />
+    <Compile Include="Assets\Maybe.cs" />
+    <Compile Include="Assets\ObjectExtensions.cs" />
     <Compile Include="Assets\RotateTestCode.cs" />
     <Compile Include="Assets\SoldierAI.cs" />
     <Compile Include="Assets\SquadController.cs" />

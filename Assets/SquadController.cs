@@ -6,9 +6,11 @@ public class SquadController : MonoBehaviour
     public GameObject UnitTemplate;
     public int Rows;
     public int Columns;
+    public Arrow MoveArrow;
 
     private TwoDimensionalCollection<GameObject> _units;
     private Vector3 _dragStartPoint;
+    private bool _isDragging;
     private const float Spacing = 3;
 
     void Start()
@@ -25,25 +27,35 @@ public class SquadController : MonoBehaviour
 
     private void Update()
     {
+        WilDebug.DrawQuaternion(transform.position, transform.rotation, Color.red);
+        var possibleHit = RaycastUsingCamera();
+
+        if (!possibleHit.HasValue)
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
-            var possibleHit = RaycastUsingCamera();
-            if (possibleHit.HasValue)
-            {
-                _dragStartPoint = possibleHit.Value.point;
-            }
+            _dragStartPoint = possibleHit.Value.point;
+            _isDragging = true;
+            MoveArrow.SetVisible(true);
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            var possibleHit = RaycastUsingCamera();
-            if (possibleHit.HasValue)
-            {
-                var lookDirection = (possibleHit.Value.point - _dragStartPoint).normalized;
-                var squadTowardsBackRotation = Quaternion.LookRotation(-lookDirection, Vector3.up);
-                transform.position = _dragStartPoint;
+            var lookDirection = (possibleHit.Value.point - _dragStartPoint).normalized;
+            var squadTowardsBackRotation = Quaternion.LookRotation(-lookDirection, Vector3.up);
+            transform.position = possibleHit.Value.point;
+            transform.rotation = squadTowardsBackRotation;
 
-                PerformForEachUnit((x, y) => SetUnitPositionInSquad(x, y, squadTowardsBackRotation));
-            }
+            PerformForEachUnit((x, y) => SetUnitPositionInSquad(x, y, squadTowardsBackRotation));
+            _isDragging = false;
+            MoveArrow.SetVisible(false);
+        }
+
+        if (_isDragging)
+        {
+            MoveArrow.SetPositions(_dragStartPoint, possibleHit.Value.point);
         }
     }
 
@@ -64,7 +76,7 @@ public class SquadController : MonoBehaviour
         var centerHitpoint = new Vector3((Columns - 1)/2f, 0, 0)*Spacing;
         var unitInSquadPosition = new Vector3(x, 0, y)*Spacing;
         _units[x, y].SendMessage("SetSquadPosition",
-            transform.position + squadTowardsBackRotation*(unitInSquadPosition - centerHitpoint));
+            _dragStartPoint + squadTowardsBackRotation*(unitInSquadPosition - centerHitpoint));
     }
 
     private void PerformForEachUnit(Action<int, int> action)
@@ -79,25 +91,10 @@ public class SquadController : MonoBehaviour
     }
 }
 
-public struct Maybe<T>
+public static class WilDebug
 {
-    private T _element;
-
-    public Maybe(T element)
+    public static void DrawQuaternion(Vector3 position, Quaternion quaternion, Color color)
     {
-        _element = element;
-    }
-
-    public static Maybe<T> Nothing { get { return new Maybe<T>(); } } 
-
-    public T Value { get { return _element; } }
-    public bool HasValue { get { return _element != null; } }
-}
-
-public static class ObjectExtensions
-{
-    public static Maybe<T> ToMaybe<T>(this T element)
-    {
-        return new Maybe<T>(element);
+        Debug.DrawLine(position, position + quaternion*Vector3.forward*3, color);
     }
 }
