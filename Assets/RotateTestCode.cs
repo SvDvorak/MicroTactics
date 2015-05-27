@@ -27,15 +27,11 @@ public class RotateTestCode : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 var toHitDirection = (hit.point - transform.position).normalized;
-                var toHitRotation = Quaternion.LookRotation(toHitDirection, Vector3.up);
                 _startRotation = transform.rotation;
-                _targetRotation = toHitRotation;
+                _targetRotation = Quaternion.LookRotation(toHitDirection, Vector3.up);
                 Vector3 axis;
                 float angle;
                 Quaternion.FromToRotation(transform.rotation*Vector3.forward, toHitDirection).ToAngleAxis(out angle, out axis);
-                Debug.Log("Angle: " + angle);
-                Debug.DrawLine(Vector3.zero, hit.point, Color.red, 5);
-                Debug.DrawLine(Vector3.zero, transform.rotation*transform.forward*10, Color.blue, 5);
                 _time = 0;
                 _totalTime = angle/80;
             }
