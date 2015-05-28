@@ -11,12 +11,18 @@ public class SquadState : MonoBehaviour
     public int Columns;
     public float Spacing = 3;
     public State InteractState;
+    public Vector3 CenterPosition { get; set; }
 
     void Start()
     {
         Units = new TwoDimensionalCollection<GameObject>();
         foreach (Transform child in transform)
         {
+            if (child.name != "Unit")
+            {
+                continue;
+            }
+
             var x = Convert.ToInt32(child.position.x/Spacing);
             var y = Convert.ToInt32(child.position.z/Spacing);
             Units[x, y] = child.gameObject;
@@ -52,6 +58,8 @@ public class SquadState : MonoBehaviour
                 var unit = ((GameObject)Instantiate(UnitTemplate, new Vector3(x, 0, y) * Spacing, Quaternion.identity));
                 unit.name = "Unit";
                 unit.transform.SetParent(transform);
+                var unitCollider = unit.GetComponent<BoxCollider>();
+                unitCollider.size = unitCollider.size + new Vector3(Spacing/2, 0, Spacing/2);
 
                 Units[x, y] = unit;
             }
