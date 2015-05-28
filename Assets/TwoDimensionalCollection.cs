@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public interface ITwoDimensionalCollection<TValue> where TValue : class
 {
@@ -34,6 +35,21 @@ public class TwoDimensionalCollection<TValue> : ITwoDimensionalCollection<TValue
             }
 
             _collection[x][y] = value;
+        }
+    }
+
+    public bool IsEmpty { get { return _collection.Count == 0; } }
+
+    public void Clear()
+    {
+        _collection.Clear();
+    }
+
+    public void Iterate(Action<TValue> action)
+    {
+        foreach (var item in _collection.Values.SelectMany(subCollection => subCollection.Values))
+        {
+            action(item);
         }
     }
 }

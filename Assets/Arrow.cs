@@ -6,15 +6,15 @@ public class Arrow : MonoBehaviour
     public Transform ArrowBase;
     public Transform ArrowHead;
 
-	void Start ()
-	{
-	
-	}
-	
-	void Update ()
-	{
-	
-	}
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+
+    }
 
     public void SetPositions(Vector3 start, Vector3 end)
     {
@@ -35,8 +35,9 @@ public class Arrow : MonoBehaviour
         }
     }
 
-    public void SetVisible(bool isVisible)
+    public bool IsVisible
     {
-        gameObject.SetActive(isVisible);
+        get { return gameObject.activeSelf; }
+        set { gameObject.SetActive(value); }
     }
 }
