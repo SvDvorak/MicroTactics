@@ -43,6 +43,5 @@ public class SoldierAI : MonoBehaviour
         var arrowRotation = Quaternion.LookRotation(fireDirection, Vector3.up);
         var arrow = (Rigidbody)Instantiate(ArrowTemplate, transform.position, arrowRotation);
         arrow.AddForce(fireDirection*ArrowForce);
-        //arrow.transform.GetChild(0).GetComponent<Rigidbody>().AddForce(fireDirection*ArrowForce);
     }
 }
