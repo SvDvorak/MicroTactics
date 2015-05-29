@@ -63,14 +63,16 @@
     <Compile Include="Assets\Maybe.cs" />
     <Compile Include="Assets\ObjectExtensions.cs" />
     <Compile Include="Assets\RotateTestCode.cs" />
-    <Compile Include="Assets\SoldierAI.cs" />
-    <Compile Include="Assets\SquadAttack.cs" />
-    <Compile Include="Assets\SquadCenterPosition.cs" />
-    <Compile Include="Assets\SquadMove.cs" />
-    <Compile Include="Assets\SquadState.cs" />
+    <Compile Include="Assets\Squad\ArrowTipRotation.cs" />
+    <Compile Include="Assets\Squad\SoldierAI.cs" />
+    <Compile Include="Assets\Squad\SquadAttack.cs" />
+    <Compile Include="Assets\Squad\SquadCenterPosition.cs" />
+    <Compile Include="Assets\Squad\SquadMove.cs" />
+    <Compile Include="Assets\Squad\SquadState.cs" />
+    <Compile Include="Assets\Squad\UnitClicked.cs" />
+    <Compile Include="Assets\TimedDestroy.cs" />
     <Compile Include="Assets\Triangulator.cs" />
     <Compile Include="Assets\TwoDimensionalCollection.cs" />
-    <Compile Include="Assets\UnitClicked.cs" />
     <Compile Include="Assets\WilDebug.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

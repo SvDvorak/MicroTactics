@@ -11,7 +11,8 @@ public class SquadState : MonoBehaviour
     public int Columns;
     public float Spacing = 3;
     public State InteractState;
-    public Vector3 CenterPosition { get; set; }
+    public Vector3 CenterPosition;
+    public Quaternion CenterRotation;
 
     void Start()
     {
@@ -59,7 +60,7 @@ public class SquadState : MonoBehaviour
                 unit.name = "Unit";
                 unit.transform.SetParent(transform);
                 var unitCollider = unit.GetComponent<BoxCollider>();
-                unitCollider.size = unitCollider.size + new Vector3(Spacing/2, 0, Spacing/2);
+                unitCollider.size = unitCollider.size + new Vector3((Spacing-1)/unit.transform.localScale.x, 0, (Spacing-1)/unit.transform.localScale.z);
 
                 Units[x, y] = unit;
             }

@@ -22,6 +22,6 @@ public class SquadCenterPosition : MonoBehaviour
 
         _squadState.CenterPosition = summedPositions/count;
 
-        Debug.DrawLine(_squadState.CenterPosition, _squadState.CenterPosition + Vector3.up*3, Color.green);
+        Debug.DrawLine(_squadState.CenterPosition, _squadState.CenterPosition + _squadState.CenterRotation*Vector3.forward, Color.red);
     }
 }

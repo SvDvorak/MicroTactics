@@ -32,7 +32,8 @@ public class SquadMove : MonoBehaviour
         else if (Input.GetMouseButtonUp(0) && _squadState.InteractState == SquadState.State.Move)
         {
             var lookDirection = (possibleHit.Value.point - _dragStartPoint).normalized;
-            var squadTowardsBackRotation = Quaternion.LookRotation(-lookDirection, Vector3.up);
+            _squadState.CenterRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
+            var squadTowardsBackRotation = _squadState.CenterRotation*Quaternion.AngleAxis(180, Vector3.up);
 
             _squadState.PerformForEachUnit((x, y) => SetUnitPositionInSquad(x, y, squadTowardsBackRotation));
             _squadState.InteractState = SquadState.State.Idle;
