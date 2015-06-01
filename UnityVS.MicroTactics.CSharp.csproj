@@ -63,6 +63,7 @@
     <Compile Include="Assets\Maybe.cs" />
     <Compile Include="Assets\ObjectExtensions.cs" />
     <Compile Include="Assets\RotateTestCode.cs" />
+    <Compile Include="Assets\Squad\ArrowStickOnHit.cs" />
     <Compile Include="Assets\Squad\ArrowTipRotation.cs" />
     <Compile Include="Assets\Squad\SoldierAI.cs" />
     <Compile Include="Assets\Squad\SquadAttack.cs" />

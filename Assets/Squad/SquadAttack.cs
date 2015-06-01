@@ -45,7 +45,7 @@ public class SquadAttack : MonoBehaviour
     private void FireArrow(int x, int y)
     {
         const int inversePositions = -1;
-        var unitPositionOffset = new Vector3(x*_squadState.Spacing, 0, y*_squadState.Spacing)*inversePositions;
+        var unitPositionOffset = new Vector3((x-_squadState.Columns/2)*_squadState.Spacing, 0, (y-_squadState.Rows/2)*_squadState.Spacing)*inversePositions;
         _squadState.Units[x, y].SendMessage("FireArrow", _lastMousePosition + _squadState.CenterRotation*unitPositionOffset);
     }
 }

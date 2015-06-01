@@ -12,6 +12,9 @@ public class ArrowTipRotation : MonoBehaviour
 
     void Update ()
     {
-        transform.forward = _rigidBody.velocity.normalized;
+        if(Mathf.Abs(_rigidBody.velocity.sqrMagnitude) >= 0.001f)
+        {
+            transform.forward = _rigidBody.velocity.normalized;
+        }
     }
 }

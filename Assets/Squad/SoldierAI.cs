@@ -4,12 +4,12 @@ using System.Collections;
 public class SoldierAI : MonoBehaviour
 {
     public Rigidbody ArrowTemplate;
-    public float ArrowForce = 800;
 
     private const float MoveSpeed = 4;
     private Vector3 _targetPosition;
     private Animator _animator;
     private float _delay;
+    private const float FireAngle = 45;
 
     void Start ()
     {
@@ -39,9 +39,17 @@ public class SoldierAI : MonoBehaviour
 
     public void FireArrow(Vector3 target)
     {
-        var fireDirection = ((target - transform.position).normalized + Vector3.up).normalized;
-        var arrowRotation = Quaternion.LookRotation(fireDirection, Vector3.up);
-        var arrow = (Rigidbody)Instantiate(ArrowTemplate, transform.position, arrowRotation);
-        arrow.AddForce(fireDirection*ArrowForce);
+        // Algorithm taken from http://en.wikipedia.org/wiki/Trajectory_of_a_projectile
+        var toTarget = target - transform.position;
+        var targetRotation = Quaternion.LookRotation(toTarget, Vector3.up);
+
+        var firePosition = transform.position + Vector3.up;
+        var arrow = (Rigidbody)Instantiate(ArrowTemplate, firePosition, targetRotation);
+
+        var verticalAimRotation = Quaternion.AngleAxis(FireAngle, Vector3.left);
+        var fireDirection = targetRotation * verticalAimRotation * Vector3.forward;
+        var requiredVelocity = Mathf.Sqrt((toTarget.magnitude*Physics.gravity.magnitude)/Mathf.Sin(Mathf.Deg2Rad*FireAngle*2));
+        var requiredForce = requiredVelocity*(1/Time.fixedDeltaTime)*arrow.mass;
+        arrow.AddForce(fireDirection * requiredForce);
     }
 }
