@@ -9,7 +9,7 @@ public class ArrowStickOnHit : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         var otherCollider = collision.contacts.First().otherCollider;
-        if(!_isStuck && otherCollider.gameObject.name != "Unit" && !otherCollider.gameObject.name.Contains("Arrow"))
+        if(!_isStuck && !otherCollider.gameObject.name.Contains("Arrow"))
         {
             var rigidBody = GetComponent<Rigidbody>();
             rigidBody.isKinematic = true;
