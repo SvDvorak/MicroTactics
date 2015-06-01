@@ -46,10 +46,16 @@ public class SoldierAI : MonoBehaviour
         var firePosition = transform.position + Vector3.up;
         var arrow = (Rigidbody)Instantiate(ArrowTemplate, firePosition, targetRotation);
 
+        var requiredForce = CalculateForce(targetRotation, toTarget.magnitude, arrow.mass);
+        arrow.AddForce(requiredForce);
+    }
+
+    private Vector3 CalculateForce(Quaternion targetRotation, float targetDistance, float mass)
+    {
         var verticalAimRotation = Quaternion.AngleAxis(FireAngle, Vector3.left);
-        var fireDirection = targetRotation * verticalAimRotation * Vector3.forward;
-        var requiredVelocity = Mathf.Sqrt((toTarget.magnitude*Physics.gravity.magnitude)/Mathf.Sin(Mathf.Deg2Rad*FireAngle*2));
-        var requiredForce = requiredVelocity*(1/Time.fixedDeltaTime)*arrow.mass;
-        arrow.AddForce(fireDirection * requiredForce);
+        var fireDirection = targetRotation*verticalAimRotation*Vector3.forward;
+        var requiredVelocity = Mathf.Sqrt((targetDistance*Physics.gravity.magnitude)/Mathf.Sin(Mathf.Deg2Rad*FireAngle*2));
+        var requiredForce = fireDirection*requiredVelocity*(1/Time.fixedDeltaTime)*mass;
+        return requiredForce;
     }
 }
