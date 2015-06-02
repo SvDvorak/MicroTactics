@@ -23,6 +23,7 @@ public class SquadCenterPosition : MonoBehaviour
         var newCenterPosition = summedPositions/count;
         _squadState.IsMoving = (_squadState.CenterPosition - newCenterPosition).magnitude > 0.0001f;
         _squadState.CenterPosition = newCenterPosition;
+        transform.position = newCenterPosition;
 
         Debug.DrawLine(_squadState.CenterPosition, _squadState.CenterPosition + _squadState.CenterRotation*Vector3.forward, Color.red);
     }

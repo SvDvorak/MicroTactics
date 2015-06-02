@@ -12,8 +12,8 @@ public class WalkSound : MonoBehaviour
 
     void Start ()
     {
-        _audioSource = GetComponent<AudioSource>();
-        _squadState = GetComponent<SquadState>();
+        _audioSource = GetComponentInParent<AudioSource>();
+        _squadState = GetComponentInParent<SquadState>();
         _pauseDelay = 0;
     }
 
