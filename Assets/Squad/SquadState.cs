@@ -39,6 +39,7 @@ public class SquadState : MonoBehaviour
 
     public enum Interaction
     {
+        Unselected,
         Idle,
         Attack,
         Move
