@@ -20,7 +20,9 @@ public class SquadCenterPosition : MonoBehaviour
 	            summedPositions += unit.transform.position;
 	        });
 
-        _squadState.CenterPosition = summedPositions/count;
+        var newCenterPosition = summedPositions/count;
+        _squadState.IsMoving = (_squadState.CenterPosition - newCenterPosition).magnitude > 0.0001f;
+        _squadState.CenterPosition = newCenterPosition;
 
         Debug.DrawLine(_squadState.CenterPosition, _squadState.CenterPosition + _squadState.CenterRotation*Vector3.forward, Color.red);
     }

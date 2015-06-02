@@ -18,7 +18,7 @@ public class SquadMove : MonoBehaviour
     {
         var possibleHit = RaycastUsingCamera();
 
-        if (_squadState.InteractState == SquadState.State.Attack || !possibleHit.HasValue)
+        if (_squadState.InteractState == SquadState.Interaction.Attack || !possibleHit.HasValue)
         {
             return;
         }
@@ -26,21 +26,21 @@ public class SquadMove : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             _dragStartPoint = possibleHit.Value.point;
-            _squadState.InteractState = SquadState.State.Move;
+            _squadState.InteractState = SquadState.Interaction.Move;
             MoveArrow.IsVisible = true;
         }
-        else if (Input.GetMouseButtonUp(0) && _squadState.InteractState == SquadState.State.Move)
+        else if (Input.GetMouseButtonUp(0) && _squadState.InteractState == SquadState.Interaction.Move)
         {
             var lookDirection = (possibleHit.Value.point - _dragStartPoint).normalized;
             _squadState.CenterRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
             var squadTowardsBackRotation = _squadState.CenterRotation*Quaternion.AngleAxis(180, Vector3.up);
 
             _squadState.PerformForEachUnit((x, y) => SetUnitPositionInSquad(x, y, squadTowardsBackRotation));
-            _squadState.InteractState = SquadState.State.Idle;
+            _squadState.InteractState = SquadState.Interaction.Idle;
             MoveArrow.IsVisible = false;
         }
 
-        if (_squadState.InteractState == SquadState.State.Move)
+        if (_squadState.InteractState == SquadState.Interaction.Move)
         {
             MoveArrow.SetPositions(_dragStartPoint, possibleHit.Value.point);
         }

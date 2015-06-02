@@ -10,9 +10,10 @@ public class SquadState : MonoBehaviour
     public int Rows;
     public int Columns;
     public float Spacing = 3;
-    public State InteractState;
+    public Interaction InteractState;
     public Vector3 CenterPosition;
     public Quaternion CenterRotation;
+    public bool IsMoving;
 
     void Start()
     {
@@ -36,7 +37,7 @@ public class SquadState : MonoBehaviour
         }
     }
 
-    public enum State
+    public enum Interaction
     {
         Idle,
         Attack,

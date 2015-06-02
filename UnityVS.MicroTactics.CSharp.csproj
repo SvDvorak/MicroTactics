@@ -59,18 +59,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Arrow.cs" />
+    <Compile Include="Assets\InteractionArrow\Arrow.cs" />
     <Compile Include="Assets\Maybe.cs" />
     <Compile Include="Assets\ObjectExtensions.cs" />
     <Compile Include="Assets\RotateTestCode.cs" />
-    <Compile Include="Assets\Squad\ArrowStickOnHit.cs" />
-    <Compile Include="Assets\Squad\ArrowTipRotation.cs" />
-    <Compile Include="Assets\Squad\SoldierAI.cs" />
+    <Compile Include="Assets\Squad\Arrow\ArrowStickOnHit.cs" />
+    <Compile Include="Assets\Squad\Arrow\ArrowTipRotation.cs" />
+    <Compile Include="Assets\Squad\Soldier\SoldierAI.cs" />
     <Compile Include="Assets\Squad\SquadAttack.cs" />
     <Compile Include="Assets\Squad\SquadCenterPosition.cs" />
     <Compile Include="Assets\Squad\SquadMove.cs" />
     <Compile Include="Assets\Squad\SquadState.cs" />
     <Compile Include="Assets\Squad\UnitClicked.cs" />
+    <Compile Include="Assets\Squad\WalkSound.cs" />
     <Compile Include="Assets\TimedDestroy.cs" />
     <Compile Include="Assets\Triangulator.cs" />
     <Compile Include="Assets\TwoDimensionalCollection.cs" />

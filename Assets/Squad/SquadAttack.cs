@@ -17,7 +17,7 @@ public class SquadAttack : MonoBehaviour
 
     void Update ()
 	{
-        if (_squadState.InteractState == SquadState.State.Attack)
+        if (_squadState.InteractState == SquadState.Interaction.Attack)
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -32,13 +32,13 @@ public class SquadAttack : MonoBehaviour
     public void OnMouseDown()
     {
         AttackArrow.IsVisible = true;
-        _squadState.InteractState = SquadState.State.Attack;
+        _squadState.InteractState = SquadState.Interaction.Attack;
     }
 
     public void OnMouseUp()
     {
         AttackArrow.IsVisible = false;
-        _squadState.InteractState = SquadState.State.Idle;
+        _squadState.InteractState = SquadState.Interaction.Idle;
         _squadState.PerformForEachUnit(FireArrow);
     }
 
