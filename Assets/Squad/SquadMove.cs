@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SquadMove : MonoBehaviour
+public class SquadMove : SquadInteractionBase
 {
     public Arrow MoveArrow;
 
@@ -18,8 +18,8 @@ public class SquadMove : MonoBehaviour
     {
         var possibleHit = RaycastUsingCamera();
 
-        var isMoving = _squadState.InteractState == SquadState.Interaction.Move;
-        var isIdle = _squadState.InteractState == SquadState.Interaction.Idle;
+        var isMoving = _squadState.InteractState == Interaction.Move;
+        var isIdle = _squadState.InteractState == Interaction.Idle;
         if (!isIdle && !isMoving || !possibleHit.HasValue)
         {
             return;
@@ -28,7 +28,7 @@ public class SquadMove : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             _dragStartPoint = possibleHit.Value.point;
-            _squadState.InteractState = SquadState.Interaction.Move;
+            _squadState.InteractState = Interaction.Move;
             MoveArrow.IsVisible = true;
         }
         else if (Input.GetMouseButtonUp(0) && isMoving)
@@ -38,7 +38,7 @@ public class SquadMove : MonoBehaviour
             var squadTowardsBackRotation = _squadState.CenterRotation*Quaternion.AngleAxis(180, Vector3.up);
 
             _squadState.PerformForEachUnit((x, y) => SetUnitPositionInSquad(x, y, squadTowardsBackRotation));
-            _squadState.InteractState = SquadState.Interaction.Idle;
+            _squadState.InteractState = Interaction.Idle;
             MoveArrow.IsVisible = false;
         }
 

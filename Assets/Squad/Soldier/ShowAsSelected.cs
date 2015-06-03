@@ -16,7 +16,7 @@ public class ShowAsSelected : MonoBehaviour
 
     void Update ()
     {
-        var isNowSelected = _squadState.InteractState != SquadState.Interaction.Unselected;
+        var isNowSelected = _squadState.InteractState != Interaction.Unselected;
         if (_isSelected != isNowSelected)
         {
             IndicatorObject.SetActive(isNowSelected);

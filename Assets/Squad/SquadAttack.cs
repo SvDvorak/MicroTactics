@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class SquadAttack : MonoBehaviour
+public class SquadAttack : SquadInteractionBase
 {
     public Arrow AttackArrow;
 
@@ -17,7 +16,7 @@ public class SquadAttack : MonoBehaviour
 
     void Update ()
 	{
-        if (_squadState.InteractState == SquadState.Interaction.Attack)
+        if (_squadState.InteractState == Interaction.Attack)
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -29,17 +28,23 @@ public class SquadAttack : MonoBehaviour
         }
     }
 
-    public void OnMouseDown()
+    public override void OnMouseDown()
     {
-        AttackArrow.IsVisible = true;
-        _squadState.InteractState = SquadState.Interaction.Attack;
+        if (_squadState.InteractState != Interaction.Unselected)
+        {
+            AttackArrow.IsVisible = true;
+            _squadState.InteractState = Interaction.Attack;
+        }
     }
 
-    public void OnMouseUp()
+    public override void OnMouseUp()
     {
-        AttackArrow.IsVisible = false;
-        _squadState.InteractState = SquadState.Interaction.Idle;
-        _squadState.PerformForEachUnit(FireArrow);
+        if (_squadState.InteractState == Interaction.Attack)
+        {
+            AttackArrow.IsVisible = false;
+            _squadState.InteractState = Interaction.Idle;
+            _squadState.PerformForEachUnit(FireArrow);
+        }
     }
 
     private void FireArrow(int x, int y)

@@ -1,15 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SquadSelection : MonoBehaviour
+public class SquadSelection : SquadInteractionBase
 {
-	void Start ()
+    private bool _wasJustSelected;
+    private SquadState _squadState;
+
+    void Start ()
+    {
+        _squadState = GetComponent<SquadState>();
+    }
+
+    void Update ()
 	{
-	
+        if(_wasJustSelected)
+        {
+            _squadState.InteractState = Interaction.Idle;
+            _wasJustSelected = false;
+        }
 	}
 
-	void Update ()
-	{
-	
-	}
+    public override void OnMouseUp()
+    {
+        if(_squadState.InteractState == Interaction.Unselected)
+        {
+            _wasJustSelected = true;
+        }
+    }
 }

@@ -7,7 +7,7 @@ public class AttackOrderSound : MonoBehaviour
 
     private AudioSource _audioSource;
     private SquadState _squadState;
-    private SquadState.Interaction _previousInteractState;
+    private Interaction _previousInteractState;
 
     void Start ()
 	{
@@ -17,7 +17,7 @@ public class AttackOrderSound : MonoBehaviour
 
     void Update ()
     {
-        if (_previousInteractState != _squadState.InteractState && _squadState.InteractState == SquadState.Interaction.Attack)
+        if (_previousInteractState != _squadState.InteractState && _squadState.InteractState == Interaction.Attack)
         {
             _audioSource.clip = OrderSound;
             _audioSource.Play();
