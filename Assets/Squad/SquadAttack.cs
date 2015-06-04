@@ -5,46 +5,60 @@ public class SquadAttack : SquadInteractionBase
     public Arrow AttackArrow;
 
     private SquadState _squadState;
+    private int _squadLayer;
     private int _groundLayer;
     private Vector3 _lastMousePosition;
 
     void Start ()
     {
         _squadState = GetComponent<SquadState>();
-        _groundLayer = 1 << LayerMask.NameToLayer("Ground");
+        _squadLayer = LayerMask.NameToLayer("Squad");
+        _groundLayer = LayerMask.NameToLayer("Ground");
     }
 
-    void Update ()
-	{
+    private bool HasMovedMouseSinceClick { get { return (_lastMousePosition - _squadState.CenterPosition).sqrMagnitude > 0.0001f; } }
+
+    public override void OnMouseUpdate(RaycastHit value)
+    {
+        _lastMousePosition = value.point;
         if (_squadState.InteractState == Interaction.Attack)
         {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, _groundLayer))
-            {
-                _lastMousePosition = hit.point;
-                AttackArrow.SetPositions(_squadState.CenterPosition, _lastMousePosition);
-            }
+            AttackArrow.IsVisible = true;
+            AttackArrow.SetPositions(_squadState.CenterPosition, _lastMousePosition);
         }
     }
 
-    public override void OnMouseDown()
+    public override void OnMouseDown(RaycastHit value)
     {
-        if (_squadState.InteractState != Interaction.Unselected)
+        var isSquadLayer = value.transform.gameObject.layer == _squadLayer;
+
+        if (isSquadLayer && _squadState.InteractState != Interaction.Unselected)
         {
-            AttackArrow.IsVisible = true;
             _squadState.InteractState = Interaction.Attack;
         }
     }
 
-    public override void OnMouseUp()
+    public override void OnMouseUp(RaycastHit value)
     {
-        if (_squadState.InteractState == Interaction.Attack)
+        var isGroundLayer = value.transform.gameObject.layer == _groundLayer;
+
+        if (isGroundLayer && _squadState.InteractState == Interaction.Attack)
         {
             AttackArrow.IsVisible = false;
             _squadState.InteractState = Interaction.Idle;
             _squadState.PerformForEachUnit(FireArrow);
         }
+    }
+
+    public override bool IsDominant()
+    {
+        var isAttacking = _squadState.InteractState == Interaction.Attack;
+        return isAttacking && HasMovedMouseSinceClick;
+    }
+
+    public override int GetLayersToUse()
+    {
+        return 1 << _groundLayer | 1 << _squadLayer;
     }
 
     private void FireArrow(int x, int y)

@@ -5,59 +5,70 @@ public class SquadMove : SquadInteractionBase
     public Arrow MoveArrow;
 
     private Vector3 _dragStartPoint;
-    private int _groundLayer;
     private SquadState _squadState;
+    private int _squadLayer;
+    private int _groundLayer;
+    private Vector3 _lastMousePosition;
 
     void Start()
     {
-        _groundLayer = 1 << LayerMask.NameToLayer("Ground");
+        _squadLayer = LayerMask.NameToLayer("Squad");
+        _groundLayer = LayerMask.NameToLayer("Ground");
         _squadState = GetComponent<SquadState>();
     }
 
-    private void Update()
-    {
-        var possibleHit = RaycastUsingCamera();
+    private bool HasMovedMouseSinceClick { get { return (_lastMousePosition - _dragStartPoint).sqrMagnitude > 0.0001f; } }
 
+    public override void OnMouseUpdate(RaycastHit value)
+    {
+        _lastMousePosition = value.point;
+        var isMoving = _squadState.InteractState == Interaction.Move;
+
+        if (isMoving && HasMovedMouseSinceClick)
+        {
+            MoveArrow.IsVisible = true;
+            MoveArrow.SetPositions(_dragStartPoint, value.point);
+        }
+    }
+
+    public override void OnMouseDown(RaycastHit value)
+    {
         var isMoving = _squadState.InteractState == Interaction.Move;
         var isIdle = _squadState.InteractState == Interaction.Idle;
-        if (!isIdle && !isMoving || !possibleHit.HasValue)
-        {
-            return;
-        }
+        var isSquadLayer = value.transform.gameObject.layer == _squadLayer;
 
-        if (Input.GetMouseButtonDown(0))
+        if (!isSquadLayer && (isMoving || isIdle))
         {
-            _dragStartPoint = possibleHit.Value.point;
+            _dragStartPoint = value.point;
             _squadState.InteractState = Interaction.Move;
-            MoveArrow.IsVisible = true;
         }
-        else if (Input.GetMouseButtonUp(0) && isMoving)
+    }
+
+    public override void OnMouseUp(RaycastHit value)
+    {
+        var isMoving = _squadState.InteractState == Interaction.Move;
+
+        if (isMoving)
         {
-            var lookDirection = (possibleHit.Value.point - _dragStartPoint).normalized;
+            var lookDirection = (value.point - _dragStartPoint).normalized;
             _squadState.CenterRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
-            var squadTowardsBackRotation = _squadState.CenterRotation*Quaternion.AngleAxis(180, Vector3.up);
+            var squadTowardsBackRotation = _squadState.CenterRotation * Quaternion.AngleAxis(180, Vector3.up);
 
             _squadState.PerformForEachUnit((x, y) => SetUnitPositionInSquad(x, y, squadTowardsBackRotation));
             _squadState.InteractState = Interaction.Idle;
             MoveArrow.IsVisible = false;
         }
-
-        if (isMoving)
-        {
-            MoveArrow.SetPositions(_dragStartPoint, possibleHit.Value.point);
-        }
     }
 
-    private Maybe<RaycastHit> RaycastUsingCamera()
+    public override bool IsDominant()
     {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, _groundLayer))
-        {
-            return hit.ToMaybe();
-        }
+        var isMoving = _squadState.InteractState == Interaction.Move;
+        return isMoving && HasMovedMouseSinceClick;
+    }
 
-        return Maybe<RaycastHit>.Nothing;
+    public override int GetLayersToUse()
+    {
+        return 1 << _groundLayer | 1 << _squadLayer;
     }
 
     private void SetUnitPositionInSquad(int x, int y, Quaternion squadTowardsBackRotation)

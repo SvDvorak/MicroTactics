@@ -3,28 +3,22 @@ using System.Collections;
 
 public class SquadSelection : SquadInteractionBase
 {
-    private bool _wasJustSelected;
     private SquadState _squadState;
+    private int _groupLayer;
 
     void Start ()
     {
+        _groupLayer = 1 << LayerMask.NameToLayer("Squad");
         _squadState = GetComponent<SquadState>();
     }
 
-    void Update ()
-	{
-        if(_wasJustSelected)
-        {
-            _squadState.InteractState = Interaction.Idle;
-            _wasJustSelected = false;
-        }
-	}
-
-    public override void OnMouseUp()
+    public override void OnMouseUp(RaycastHit value)
     {
-        if(_squadState.InteractState == Interaction.Unselected)
-        {
-            _wasJustSelected = true;
-        }
+        _squadState.InteractState = Interaction.Idle;
+    }
+
+    public override int GetLayersToUse()
+    {
+        return _groupLayer;
     }
 }

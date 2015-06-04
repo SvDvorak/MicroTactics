@@ -7,16 +7,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A7A55391-1C2D-C12A-F2C3-D7EDE3D3AACC}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.0.2f1</UnityVersion>
@@ -65,16 +63,16 @@
     <Compile Include="Assets\Maybe.cs" />
     <Compile Include="Assets\ObjectExtensions.cs" />
     <Compile Include="Assets\RotateTestCode.cs" />
-    <Compile Include="Assets\Squad\Arrow\ArrowStickOnHit.cs" />
-    <Compile Include="Assets\Squad\Arrow\ArrowTipRotation.cs" />
     <Compile Include="Assets\Squad\AttackOrderSound.cs" />
     <Compile Include="Assets\Squad\Interaction.cs" />
+    <Compile Include="Assets\Squad\MouseClick.cs" />
+    <Compile Include="Assets\Squad\Soldier\Arrow\ArrowStickOnHit.cs" />
+    <Compile Include="Assets\Squad\Soldier\Arrow\ArrowTipRotation.cs" />
     <Compile Include="Assets\Squad\Soldier\ShowAsSelected.cs" />
     <Compile Include="Assets\Squad\Soldier\SoldierAI.cs" />
-    <Compile Include="Assets\Squad\Soldier\SoldierClicked.cs" />
     <Compile Include="Assets\Squad\SquadAttack.cs" />
     <Compile Include="Assets\Squad\SquadCenterPosition.cs" />
-    <Compile Include="Assets\Squad\SquadClicked.cs" />
+    <Compile Include="Assets\Squad\SquadDeselection.cs" />
     <Compile Include="Assets\Squad\SquadInteractionBase.cs" />
     <Compile Include="Assets\Squad\SquadMove.cs" />
     <Compile Include="Assets\Squad\SquadSelection.cs" />
