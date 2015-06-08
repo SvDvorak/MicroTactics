@@ -19,7 +19,7 @@ public class SquadMove : SquadInteractionBase
 
     private bool HasMovedMouseSinceClick { get { return (_lastMousePosition - _dragStartPoint).sqrMagnitude > 0.0001f; } }
 
-    public override void OnMouseUpdate(RaycastHit value)
+    public override void MouseUpdate(RaycastHit value)
     {
         _lastMousePosition = value.point;
         var isMoving = _squadState.InteractState == Interaction.Move;
@@ -31,7 +31,7 @@ public class SquadMove : SquadInteractionBase
         }
     }
 
-    public override void OnMouseDown(RaycastHit value)
+    public override void MouseDown(RaycastHit value)
     {
         var isMoving = _squadState.InteractState == Interaction.Move;
         var isIdle = _squadState.InteractState == Interaction.Idle;
@@ -44,7 +44,7 @@ public class SquadMove : SquadInteractionBase
         }
     }
 
-    public override void OnMouseUp(RaycastHit value)
+    public override void MouseUp(RaycastHit value)
     {
         var isMoving = _squadState.InteractState == Interaction.Move;
 

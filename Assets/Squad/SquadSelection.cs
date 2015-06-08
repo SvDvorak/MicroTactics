@@ -12,7 +12,7 @@ public class SquadSelection : SquadInteractionBase
         _squadState = GetComponent<SquadState>();
     }
 
-    public override void OnMouseUp(RaycastHit value)
+    public override void MouseUp(RaycastHit value)
     {
         _squadState.InteractState = Interaction.Idle;
     }

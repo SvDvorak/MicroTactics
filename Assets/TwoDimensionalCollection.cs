@@ -47,9 +47,14 @@ public class TwoDimensionalCollection<TValue> : ITwoDimensionalCollection<TValue
 
     public void Iterate(Action<TValue> action)
     {
-        foreach (var item in _collection.Values.SelectMany(subCollection => subCollection.Values))
+        foreach (var item in GetAllValues())
         {
             action(item);
         }
+    }
+
+    public IEnumerable<TValue> GetAllValues()
+    {
+        return _collection.Values.SelectMany(subCollection => subCollection.Values);
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Linq;
 
@@ -52,16 +53,16 @@ public class MouseClick : MonoBehaviour
             return;
         }
 
-        interaction.OnMouseUpdate(possibleHit.Value);
+        interaction.MouseUpdate(possibleHit.Value);
 
         if (Input.GetMouseButtonDown(0))
         {
-            interaction.OnMouseDown(possibleHit.Value);
+            interaction.MouseDown(possibleHit.Value);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            interaction.OnMouseUp(possibleHit.Value);
+            interaction.MouseUp(possibleHit.Value);
         }
     }
 

@@ -4,12 +4,13 @@ using System.Collections;
 public class SoldierAI : MonoBehaviour
 {
     public Rigidbody ArrowTemplate;
+    public float MoveSpeed = 4;
+    public float MaxThinkDelay = 1f;
+    public float FireAngle = 45;
 
-    private const float MoveSpeed = 4;
     private Vector3 _targetPosition;
     private Animator _animator;
     private float _delay;
-    private const float FireAngle = 45;
 
     void Start ()
     {
@@ -34,7 +35,7 @@ public class SoldierAI : MonoBehaviour
     public void SetSquadPosition(Vector3 position)
     {
         _targetPosition = position;
-        _delay = Random.Range(0, 1f);
+        _delay = Random.Range(0, MaxThinkDelay);
     }
 
     public void FireArrow(Vector3 target)

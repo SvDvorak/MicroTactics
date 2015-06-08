@@ -18,7 +18,7 @@ public class SquadAttack : SquadInteractionBase
 
     private bool HasMovedMouseSinceClick { get { return (_lastMousePosition - _squadState.CenterPosition).sqrMagnitude > 0.0001f; } }
 
-    public override void OnMouseUpdate(RaycastHit value)
+    public override void MouseUpdate(RaycastHit value)
     {
         _lastMousePosition = value.point;
         if (_squadState.InteractState == Interaction.Attack)
@@ -28,7 +28,7 @@ public class SquadAttack : SquadInteractionBase
         }
     }
 
-    public override void OnMouseDown(RaycastHit value)
+    public override void MouseDown(RaycastHit value)
     {
         var isSquadLayer = value.transform.gameObject.layer == _squadLayer;
 
@@ -38,7 +38,7 @@ public class SquadAttack : SquadInteractionBase
         }
     }
 
-    public override void OnMouseUp(RaycastHit value)
+    public override void MouseUp(RaycastHit value)
     {
         var isGroundLayer = value.transform.gameObject.layer == _groundLayer;
 

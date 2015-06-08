@@ -4,18 +4,14 @@ using System.Collections.Generic;
 // Code taken from http://wiki.unity3d.com/index.php?title=Triangulator
 public class Triangulator
 {
-    private List<Vector2> m_points = new List<Vector2>();
+    private List<Vector2> _points = new List<Vector2>();
 
-    public Triangulator(Vector2[] points)
+    public int[] Triangulate(Vector2[] points)
     {
-        m_points = new List<Vector2>(points);
-    }
-
-    public int[] Triangulate()
-    {
+        _points = new List<Vector2>(points);
         List<int> indices = new List<int>();
 
-        int n = m_points.Count;
+        int n = _points.Count;
         if (n < 3)
             return indices.ToArray();
 
@@ -71,12 +67,12 @@ public class Triangulator
 
     private float Area()
     {
-        int n = m_points.Count;
+        int n = _points.Count;
         float A = 0.0f;
         for (int p = n - 1, q = 0; q < n; p = q++)
         {
-            Vector2 pval = m_points[p];
-            Vector2 qval = m_points[q];
+            Vector2 pval = _points[p];
+            Vector2 qval = _points[q];
             A += pval.x * qval.y - qval.x * pval.y;
         }
         return (A * 0.5f);
@@ -85,16 +81,16 @@ public class Triangulator
     private bool Snip(int u, int v, int w, int n, int[] V)
     {
         int p;
-        Vector2 A = m_points[V[u]];
-        Vector2 B = m_points[V[v]];
-        Vector2 C = m_points[V[w]];
+        Vector2 A = _points[V[u]];
+        Vector2 B = _points[V[v]];
+        Vector2 C = _points[V[w]];
         if (Mathf.Epsilon > (((B.x - A.x) * (C.y - A.y)) - ((B.y - A.y) * (C.x - A.x))))
             return false;
         for (p = 0; p < n; p++)
         {
             if ((p == u) || (p == v) || (p == w))
                 continue;
-            Vector2 P = m_points[V[p]];
+            Vector2 P = _points[V[p]];
             if (InsideTriangle(A, B, C, P))
                 return false;
         }

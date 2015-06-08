@@ -14,7 +14,7 @@ public class SquadDeselection : SquadInteractionBase
         _squadState = GetComponent<SquadState>();
     }
 
-    public override void OnMouseUp(RaycastHit value)
+    public override void MouseUp(RaycastHit value)
     {
         if(value.transform.gameObject.layer != _squadLayer)
         {
