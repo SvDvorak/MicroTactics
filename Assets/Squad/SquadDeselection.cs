@@ -6,6 +6,7 @@ public class SquadDeselection : SquadInteractionBase
     private SquadState _squadState;
     private int _squadLayer;
     private int _groundLayer;
+    private bool _justDeselected;
 
     void Start()
     {
@@ -19,11 +20,23 @@ public class SquadDeselection : SquadInteractionBase
         if(value.transform.gameObject.layer != _squadLayer)
         {
             _squadState.InteractState = Interaction.Unselected;
+            _justDeselected = true;
         }
     }
 
     public override int GetLayersToUse()
     {
         return 1 << _groundLayer | 1 << _squadLayer;
+    }
+
+    public override bool IsDominant()
+    {
+        if (_justDeselected)
+        {
+            _justDeselected = false;
+            return true;
+        }
+
+        return false;
     }
 }

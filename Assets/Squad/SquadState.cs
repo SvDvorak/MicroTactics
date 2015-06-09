@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Assets.GoodMonotoneChain;
 
 [ExecuteInEditMode]
 public class SquadState : MonoBehaviour
@@ -13,22 +16,35 @@ public class SquadState : MonoBehaviour
     public Interaction InteractState;
     public Vector3 CenterPosition;
     public Quaternion CenterRotation;
+    public Vector3 FormationCenter;
     public bool IsMoving;
 
     void Start()
     {
         Units = new TwoDimensionalCollection<GameObject>();
-        foreach (Transform child in transform)
-        {
-            if (child.name != "Unit")
-            {
-                continue;
-            }
 
-            var x = Convert.ToInt32(child.position.x/Spacing);
-            var y = Convert.ToInt32(child.position.z/Spacing);
-            Units[x, y] = child.gameObject;
+        var squadSoldiers = transform
+            .Cast<Transform>()
+            .Where(x => x.name == "Unit")
+            .ToList();
+
+        var vectorComparer = new VectorComparer();
+        FormationCenter = new Vector3(float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity);
+        foreach (var soldier in squadSoldiers)
+        {
+            if (vectorComparer.Compare(soldier.position, FormationCenter) < 0)
+            {
+                FormationCenter = soldier.position;
+            }
         }
+
+        squadSoldiers.ForEach(soldier =>
+            {
+                var centeredPosition = (soldier.position - FormationCenter)/Spacing;
+                var x = Convert.ToInt32(centeredPosition.x);
+                var y = Convert.ToInt32(centeredPosition.z);
+                Units[x, y] = soldier.gameObject;
+            });
 
         if (Units.IsEmpty)
         {
@@ -52,7 +68,7 @@ public class SquadState : MonoBehaviour
             {
                 var unit = ((GameObject)Instantiate(UnitTemplate, new Vector3(x, 0, y) * Spacing, Quaternion.identity));
                 unit.name = "Unit";
-                unit.transform.SetParent(transform);
+                unit.transform.SetParent(transform, false);
                 //var unitCollider = unit.GetComponent<BoxCollider>();
                 //unitCollider.size = unitCollider.size + new Vector3((Spacing-1)/unit.transform.localScale.x, 0, (Spacing-1)/unit.transform.localScale.z);
 

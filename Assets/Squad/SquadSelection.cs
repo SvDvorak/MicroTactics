@@ -5,6 +5,7 @@ public class SquadSelection : SquadInteractionBase
 {
     private SquadState _squadState;
     private int _groupLayer;
+    private bool _justSelected;
 
     void Start ()
     {
@@ -14,11 +15,26 @@ public class SquadSelection : SquadInteractionBase
 
     public override void MouseUp(RaycastHit value)
     {
-        _squadState.InteractState = Interaction.Idle;
+        if (value.transform.parent == transform)
+        {
+            _squadState.InteractState = Interaction.Idle;
+            _justSelected = true;
+        }
     }
 
     public override int GetLayersToUse()
     {
         return _groupLayer;
+    }
+
+    public override bool IsDominant()
+    {
+        if (_justSelected)
+        {
+            _justSelected = false;
+            return true;
+        }
+
+        return false;
     }
 }
