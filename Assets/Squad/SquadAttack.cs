@@ -16,8 +16,6 @@ public class SquadAttack : SquadInteractionBase
         _groundLayer = LayerMask.NameToLayer("Ground");
     }
 
-    private bool HasMovedMouseSinceClick { get { return (_lastMousePosition - _squadState.CenterPosition).sqrMagnitude > 0.0001f; } }
-
     public override void MouseUpdate(RaycastHit value)
     {
         _lastMousePosition = value.point;
@@ -30,9 +28,9 @@ public class SquadAttack : SquadInteractionBase
 
     public override void MouseDown(RaycastHit value)
     {
-        var isSquadLayer = value.transform.gameObject.layer == _squadLayer;
+        var isThisSquad = value.transform.parent == transform;
 
-        if (isSquadLayer && _squadState.InteractState != Interaction.Unselected)
+        if (isThisSquad && _squadState.InteractState != Interaction.Unselected)
         {
             _squadState.InteractState = Interaction.Attack;
         }
@@ -52,13 +50,17 @@ public class SquadAttack : SquadInteractionBase
 
     public override bool IsDominant()
     {
-        var isAttacking = _squadState.InteractState == Interaction.Attack;
-        return isAttacking && HasMovedMouseSinceClick;
+        return _squadState.InteractState == Interaction.Attack;
     }
 
     public override int GetLayersToUse()
     {
-        return 1 << _groundLayer | 1 << _squadLayer;
+        if (IsDominant())
+        {
+            return 1 << _groundLayer;
+        }
+
+        return 1 << _squadLayer;
     }
 
     private void FireArrow(int x, int y)

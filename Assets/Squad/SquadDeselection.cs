@@ -19,9 +19,14 @@ public class SquadDeselection : SquadInteractionBase
     {
         if(value.transform.gameObject.layer != _squadLayer)
         {
-            _squadState.InteractState = Interaction.Unselected;
-            _justDeselected = true;
+            Deselect();
         }
+    }
+
+    private void Deselect()
+    {
+        _squadState.InteractState = Interaction.Unselected;
+        _justDeselected = true;
     }
 
     public override int GetLayersToUse()
