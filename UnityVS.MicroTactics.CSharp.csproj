@@ -71,6 +71,7 @@
     <Compile Include="Assets\Squad\Interaction.cs" />
     <Compile Include="Assets\Squad\MouseClick.cs" />
     <Compile Include="Assets\Squad\SelectMeshUpdater.cs" />
+    <Compile Include="Assets\Squad\SoldierMoveOrder.cs" />
     <Compile Include="Assets\Squad\Soldier\Arrow\ArrowCollision.cs" />
     <Compile Include="Assets\Squad\Soldier\Arrow\ArrowTipRotation.cs" />
     <Compile Include="Assets\Squad\Soldier\ShowAsSelected.cs" />

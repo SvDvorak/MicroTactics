@@ -52,9 +52,8 @@ public class SquadMove : SquadInteractionBase
         {
             var lookDirection = (value.point - _dragStartPoint).normalized;
             _squadState.CenterRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
-            var squadTowardsBackRotation = _squadState.CenterRotation * Quaternion.AngleAxis(180, Vector3.up);
 
-            _squadState.PerformForEachUnit((x, y) => SetUnitPositionInSquad(x, y, squadTowardsBackRotation));
+            _squadState.PerformForEachUnit((x, y) => SetUnitPositionInSquad(x, y, _squadState.CenterRotation));
             _squadState.InteractState = Interaction.Idle;
             MoveArrow.IsVisible = false;
         }
@@ -71,11 +70,13 @@ public class SquadMove : SquadInteractionBase
         return 1 << _groundLayer | 1 << _squadLayer;
     }
 
-    private void SetUnitPositionInSquad(int x, int y, Quaternion squadTowardsBackRotation)
+    private void SetUnitPositionInSquad(int x, int y, Quaternion squadOrientation)
     {
         var centerHitpoint = new Vector3((_squadState.Columns - 1)/2f, 0, 0)*_squadState.Spacing;
         var unitInSquadPosition = new Vector3(x, 0, y)*_squadState.Spacing;
-        _squadState.Units[x, y].SendMessage("SetSquadPosition",
-            _dragStartPoint + squadTowardsBackRotation*(unitInSquadPosition - centerHitpoint));
+        var squadTowardsBackRotation = squadOrientation * Quaternion.AngleAxis(180, Vector3.up);
+        var newSoldierPosition = _dragStartPoint + squadTowardsBackRotation * (unitInSquadPosition - centerHitpoint);
+        var moveOrder = new SoldierMoveOrder(newSoldierPosition, squadOrientation);
+        _squadState.Units[x, y].SendMessage("SetSquadPosition", moveOrder);
     }
 }

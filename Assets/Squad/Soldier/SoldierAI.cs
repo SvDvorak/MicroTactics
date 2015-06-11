@@ -4,11 +4,14 @@ using System.Collections;
 public class SoldierAI : MonoBehaviour
 {
     public Rigidbody ArrowTemplate;
+    public Transform ArrowSpawnPoint;
     public float MoveSpeed = 4;
+    public float TurnSpeed = 360;
     public float MaxThinkDelay = 1f;
     public float FireAngle = 45;
 
     private Vector3 _targetPosition;
+    private Quaternion _targetOrientation;
     private Animator _animator;
     private float _delay;
 
@@ -16,6 +19,7 @@ public class SoldierAI : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _targetPosition = transform.position;
+        _targetOrientation = transform.rotation;
     }
 
     void Update ()
@@ -26,15 +30,17 @@ public class SoldierAI : MonoBehaviour
             return;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, MoveSpeed*Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, MoveSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, _targetOrientation, TurnSpeed * Time.deltaTime);
 
         var isMoving = Vector3.Distance(transform.position, _targetPosition) > 0.001f;
         _animator.SetBool("IsMoving", isMoving);
     }
 
-    public void SetSquadPosition(Vector3 position)
+    public void SetSquadPosition(SoldierMoveOrder moveOrder)
     {
-        _targetPosition = position;
+        _targetPosition = moveOrder.NewSoldierPosition;
+        _targetOrientation = moveOrder.SquadOrientation;
         _delay = Random.Range(0, MaxThinkDelay);
     }
 
@@ -44,8 +50,7 @@ public class SoldierAI : MonoBehaviour
         var toTarget = target - transform.position;
         var targetRotation = Quaternion.LookRotation(toTarget, Vector3.up);
 
-        var firePosition = transform.position + Vector3.up;
-        var arrow = (Rigidbody)Instantiate(ArrowTemplate, firePosition, targetRotation);
+        var arrow = (Rigidbody)Instantiate(ArrowTemplate, ArrowSpawnPoint.position, targetRotation);
 
         var requiredForce = CalculateForce(targetRotation, toTarget.magnitude, arrow.mass);
         arrow.AddForce(requiredForce);
