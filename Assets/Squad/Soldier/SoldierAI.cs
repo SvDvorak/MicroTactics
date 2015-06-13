@@ -9,6 +9,7 @@ public class SoldierAI : MonoBehaviour
     public float TurnSpeed = 360;
     public float MaxThinkDelay = 1f;
     public float FireAngle = 45;
+    public float Health = 100;
 
     private Vector3 _targetPosition;
     private Quaternion _targetOrientation;
@@ -54,6 +55,11 @@ public class SoldierAI : MonoBehaviour
 
         var requiredForce = CalculateForce(targetRotation, toTarget.magnitude, arrow.mass);
         arrow.AddForce(requiredForce);
+    }
+
+    public void ArrowHit(float arrowForce)
+    {
+        Health -= arrowForce/10f;
     }
 
     private Vector3 CalculateForce(Quaternion targetRotation, float targetDistance, float mass)
