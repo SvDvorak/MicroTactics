@@ -12,7 +12,7 @@ public class ArrowTipRotation : MonoBehaviour
 
     void Update ()
     {
-        if(Mathf.Abs(_rigidBody.velocity.sqrMagnitude) >= 0.001f)
+        if(!_rigidBody.isKinematic && Mathf.Abs(_rigidBody.velocity.sqrMagnitude) >= 0.001f)
         {
             transform.forward = _rigidBody.velocity.normalized;
         }

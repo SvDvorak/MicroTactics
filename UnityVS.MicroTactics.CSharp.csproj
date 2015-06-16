@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Assets\ConvexHullCalculator.cs" />
     <Compile Include="Assets\Events.cs" />
+    <Compile Include="Assets\GroundCollision.cs" />
     <Compile Include="Assets\InteractionArrow\Arrow.cs" />
     <Compile Include="Assets\Maybe.cs" />
     <Compile Include="Assets\ObjectExtensions.cs" />
