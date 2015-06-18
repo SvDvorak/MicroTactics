@@ -9,56 +9,55 @@ using Assets.GoodMonotoneChain;
 public class SquadState : MonoBehaviour
 {
     public GameObject UnitTemplate;
-    public TwoDimensionalCollection<GameObject> Units;
+    public List<GameObject> Units;
     public int Rows;
     public int Columns;
     public float Spacing = 3;
     public Interaction InteractState;
     public Vector3 CenterPosition;
     public Quaternion CenterRotation;
-    public Vector3 FormationCenter;
     public bool IsMoving;
 
     void Start()
     {
-        Units = new TwoDimensionalCollection<GameObject>();
+        RespawnUnits();
+        Units = new List<GameObject>();
 
         var squadSoldiers = transform
             .Cast<Transform>()
             .Where(x => x.name == "Unit")
             .ToList();
 
-        var vectorComparer = new VectorComparer();
-        FormationCenter = new Vector3(float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity);
-        foreach (var soldier in squadSoldiers)
-        {
-            if (vectorComparer.Compare(soldier.position, FormationCenter) < 0)
-            {
-                FormationCenter = soldier.position;
-            }
-        }
-
         squadSoldiers.ForEach(soldier =>
             {
-                var centeredPosition = (soldier.position - FormationCenter)/Spacing;
-                var x = Convert.ToInt32(centeredPosition.x);
-                var y = Convert.ToInt32(centeredPosition.z);
-                Units[x, y] = soldier.gameObject;
+                Units.Add(soldier.gameObject);
             });
 
-        if (Units.IsEmpty)
+        CalculateCenterPosition();
+
+        if (Units.Count == 0)
         {
             Debug.Log("No units in squad here!");
             Debug.DrawLine(transform.position, transform.position + Vector3.up*5);
         }
     }
 
+    public void Update()
+    {
+        CalculateCenterPosition();
+    }
+
+    private void CalculateCenterPosition()
+    {
+        CenterPosition = SquadCenterPosition.GetCenterPoint(Units.Select(x => x.transform.position));
+    }
+
     [ContextMenu("Spawn")]
     private void RespawnUnits()
     {
-        if (!Units.IsEmpty)
+        if (Units.Count != 0)
         {
-            Units.Iterate(DestroyImmediate);
+            Units.ForEach(DestroyImmediate);
             Units.Clear();
         }
 
@@ -70,7 +69,9 @@ public class SquadState : MonoBehaviour
                 unit.name = "Unit";
                 unit.transform.SetParent(transform, false);
 
-                Units[x, y] = unit;
+                const float centerOffset = 0.5f;
+                unit.GetComponent<SoldierAI>().SquadPosition = new Vector3(x-Columns/2f+centerOffset, 0, y-Rows/2f+centerOffset)*Spacing;
+                Units.Add(unit);
             }
         }
     }
@@ -78,16 +79,5 @@ public class SquadState : MonoBehaviour
     public void UnitDied(GameObject unit)
     {
         Debug.Log("Died");
-    }
-
-    public void PerformForEachUnit(Action<int, int> action)
-    {
-        for (var y = 0; y < Rows; y++)
-        {
-            for (var x = 0; x < Columns; x++)
-            {
-                action(x, y);
-            }
-        }
     }
 }

@@ -2,12 +2,12 @@
 
 public class SoldierMoveOrder
 {
-    public Vector3 NewSoldierPosition { get; private set; }
+    public Vector3 MovePosition { get; private set; }
     public Quaternion SquadOrientation { get; private set; }
 
-    public SoldierMoveOrder(Vector3 newSoldierPosition, Quaternion squadOrientation)
+    public SoldierMoveOrder(Vector3 movePosition, Quaternion squadOrientation)
     {
-        NewSoldierPosition = newSoldierPosition;
+        MovePosition = movePosition;
         SquadOrientation = squadOrientation;
     }
 }

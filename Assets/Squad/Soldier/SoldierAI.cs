@@ -10,6 +10,7 @@ public class SoldierAI : MonoBehaviour
     public float MaxThinkDelay = 1f;
     public float FireAngle = 45;
     public float Health = 100;
+    public Vector3 SquadPosition;
 
     private Vector3 _targetPosition;
     private Quaternion _targetOrientation;
@@ -47,9 +48,9 @@ public class SoldierAI : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, _targetOrientation, TurnSpeed * Time.deltaTime);
     }
 
-    public void SetSquadPosition(SoldierMoveOrder moveOrder)
+    public void MoveUnit(SoldierMoveOrder moveOrder)
     {
-        _targetPosition = moveOrder.NewSoldierPosition;
+        _targetPosition = moveOrder.MovePosition + moveOrder.SquadOrientation * SquadPosition;
         _targetOrientation = moveOrder.SquadOrientation;
         _delay = Random.Range(0, MaxThinkDelay);
     }
@@ -62,7 +63,7 @@ public class SoldierAI : MonoBehaviour
         }
 
         // Algorithm taken from http://en.wikipedia.org/wiki/Trajectory_of_a_projectile
-        var toTarget = target - transform.position;
+        var toTarget = target + transform.rotation*SquadPosition - transform.position;
         var targetRotation = Quaternion.LookRotation(toTarget, Vector3.up);
 
         var arrow = (Rigidbody)Instantiate(ArrowTemplate, ArrowSpawnPoint.position, targetRotation);

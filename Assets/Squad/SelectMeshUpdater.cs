@@ -20,10 +20,9 @@ public class SelectMeshUpdater : MonoBehaviour
     private void Update()
     {
         var squadPositions = _squadState.Units
-            .GetAllValues()
             .Select(x => x.transform.position)
             .Select(x => ExpandFromCenter(x, _squadState.CenterPosition))
-            .Select(x => Get2DPosition(x - _squadState.FormationCenter))
+            .Select(x => Get2DPosition(x - transform.position))
             .ToList();
 
         var hullPoints = ConvexHullCalculator.Calculate(squadPositions).ToList();
