@@ -69,12 +69,15 @@ public class SquadState : MonoBehaviour
                 var unit = ((GameObject)Instantiate(UnitTemplate, new Vector3(x, 0, y) * Spacing, Quaternion.identity));
                 unit.name = "Unit";
                 unit.transform.SetParent(transform, false);
-                //var unitCollider = unit.GetComponent<BoxCollider>();
-                //unitCollider.size = unitCollider.size + new Vector3((Spacing-1)/unit.transform.localScale.x, 0, (Spacing-1)/unit.transform.localScale.z);
 
                 Units[x, y] = unit;
             }
         }
+    }
+
+    public void UnitDied(GameObject unit)
+    {
+        Debug.Log("Died");
     }
 
     public void PerformForEachUnit(Action<int, int> action)

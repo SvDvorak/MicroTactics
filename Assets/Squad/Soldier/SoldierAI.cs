@@ -17,7 +17,7 @@ public class SoldierAI : MonoBehaviour
     private float _delay;
     private Rigidbody _rigidBody;
 
-    private bool IsDead { get { return Health <= 0; } }
+    public bool IsDead { get { return Health <= 0; } }
 
     void Start()
     {
@@ -73,11 +73,17 @@ public class SoldierAI : MonoBehaviour
 
     public void ArrowHit(Vector3 arrowForce)
     {
+        var wasJustAlive = !IsDead;
         Health -= arrowForce.magnitude;
         if (IsDead)
         {
+            if (wasJustAlive)
+            {
+                SendMessageUpwards("UnitDied", gameObject);
+            }
+
             _rigidBody.isKinematic = false;
-            _rigidBody.AddForce(-arrowForce*20);
+            _rigidBody.AddForce(arrowForce*20);
         }
     }
 

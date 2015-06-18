@@ -37,11 +37,11 @@ public class ArrowCollision : MonoBehaviour
             if (requiredForceToStick < angledArrowForce)
             {
                 StickToObject(otherCollider);
-                otherCollider.SendMessageUpwards("ArrowStuck", collision.relativeVelocity);
+                otherCollider.SendMessageUpwards("ArrowStuck", -collision.relativeVelocity);
             }
             else
             {
-                otherCollider.SendMessageUpwards("ArrowHit", collision.relativeVelocity);
+                otherCollider.SendMessageUpwards("ArrowHit", -collision.relativeVelocity);
             }
         }
     }
