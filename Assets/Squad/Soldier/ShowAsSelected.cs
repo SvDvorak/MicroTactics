@@ -6,21 +6,24 @@ public class ShowAsSelected : MonoBehaviour
     public GameObject IndicatorObject;
 
     private SquadState _squadState;
-    private bool _isSelected;
+    private SoldierAI _unitState;
+    private bool _isShowingAsSelected;
 
     void Start ()
     {
         _squadState = GetComponentInParent<SquadState>();
-        _isSelected = false;
+        _unitState = GetComponentInParent<SoldierAI>();
+        _isShowingAsSelected = false;
     }
 
     void Update ()
     {
-        var isNowSelected = _squadState.InteractState != Interaction.Unselected;
-        if (_isSelected != isNowSelected)
+        var shouldBeSelected = !_unitState.IsDead && _squadState.InteractState != Interaction.Unselected;
+
+        if (_isShowingAsSelected != shouldBeSelected)
         {
-            IndicatorObject.SetActive(isNowSelected);
-            _isSelected = isNowSelected;
+            IndicatorObject.SetActive(shouldBeSelected);
+            _isShowingAsSelected = shouldBeSelected;
         }
 	}
 }

@@ -78,6 +78,6 @@ public class SquadState : MonoBehaviour
 
     public void UnitDied(GameObject unit)
     {
-        Debug.Log("Died");
+        Units.Remove(unit);
     }
 }
