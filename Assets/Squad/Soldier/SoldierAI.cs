@@ -59,7 +59,9 @@ public class SoldierAI : MonoBehaviour
 
     public void AimAt(Vector3 target)
     {
-        _aimTarget = target + _squadOrientation * SquadPosition - transform.position;
+        const float maxOffset = 1.5f;
+        var aimOffset = new Vector3(Random.Range(-maxOffset, maxOffset), 0, Random.Range(-maxOffset, maxOffset));
+        _aimTarget = target + _squadOrientation * SquadPosition - transform.position + aimOffset;
         _targetRotation = Quaternion.LookRotation(_aimTarget, Vector3.up);
     }
 
