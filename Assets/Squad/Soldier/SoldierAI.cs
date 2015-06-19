@@ -13,10 +13,12 @@ public class SoldierAI : MonoBehaviour
     public Vector3 SquadPosition;
 
     private Vector3 _targetPosition;
-    private Quaternion _targetOrientation;
+    private Quaternion _targetRotation;
+    private Quaternion _squadOrientation;
     private Animator _animator;
     private float _delay;
     private Rigidbody _rigidBody;
+    private Vector3 _aimTarget;
 
     public bool IsDead { get { return Health <= 0; } }
 
@@ -24,7 +26,7 @@ public class SoldierAI : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _targetPosition = transform.position;
-        _targetOrientation = transform.rotation;
+        _squadOrientation = transform.rotation;
         _rigidBody = GetComponent<Rigidbody>();
     }
 
@@ -45,30 +47,32 @@ public class SoldierAI : MonoBehaviour
         }
 
         transform.position = Vector3.MoveTowards(transform.position, _targetPosition, MoveSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, _targetOrientation, TurnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, _targetRotation, TurnSpeed * Time.deltaTime);
     }
 
     public void MoveUnit(SoldierMoveOrder moveOrder)
     {
         _targetPosition = moveOrder.MovePosition + moveOrder.SquadOrientation * SquadPosition;
-        _targetOrientation = moveOrder.SquadOrientation;
+        _squadOrientation = moveOrder.SquadOrientation;
         _delay = Random.Range(0, MaxThinkDelay);
     }
 
-    public void FireArrow(Vector3 target)
+    public void AimAt(Vector3 target)
+    {
+        _aimTarget = target + _squadOrientation * SquadPosition - transform.position;
+        _targetRotation = Quaternion.LookRotation(_aimTarget, Vector3.up);
+    }
+
+    public void FireArrow()
     {
         if (IsDead)
         {
             return;
         }
 
-        // Algorithm taken from http://en.wikipedia.org/wiki/Trajectory_of_a_projectile
-        var toTarget = target + transform.rotation*SquadPosition - transform.position;
-        var targetRotation = Quaternion.LookRotation(toTarget, Vector3.up);
+        var arrow = (Rigidbody)Instantiate(ArrowTemplate, ArrowSpawnPoint.position, transform.rotation);
 
-        var arrow = (Rigidbody)Instantiate(ArrowTemplate, ArrowSpawnPoint.position, targetRotation);
-
-        var requiredForce = CalculateForce(targetRotation, toTarget.magnitude, arrow.mass);
+        var requiredForce = CalculateForce(transform.rotation, _aimTarget.magnitude, arrow.mass);
         arrow.AddForce(requiredForce);
     }
 
@@ -95,6 +99,7 @@ public class SoldierAI : MonoBehaviour
 
     private Vector3 CalculateForce(Quaternion targetRotation, float targetDistance, float mass)
     {
+        // Algorithm taken from http://en.wikipedia.org/wiki/Trajectory_of_a_projectile
         var verticalAimRotation = Quaternion.AngleAxis(FireAngle, Vector3.left);
         var fireDirection = targetRotation * verticalAimRotation * Vector3.forward;
         var requiredVelocity = Mathf.Sqrt((targetDistance * Physics.gravity.magnitude) / Mathf.Sin(Mathf.Deg2Rad * FireAngle * 2));

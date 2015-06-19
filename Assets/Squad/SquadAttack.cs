@@ -23,6 +23,10 @@ public class SquadAttack : SquadInteractionBase
         {
             AttackArrow.IsVisible = true;
             AttackArrow.SetPositions(_squadState.CenterPosition, _lastMousePosition);
+            _squadState.Units.ForEach(unit =>
+                {
+                    unit.SendMessage("AimAt", _lastMousePosition);
+                });
         }
     }
 
@@ -44,7 +48,10 @@ public class SquadAttack : SquadInteractionBase
         {
             AttackArrow.IsVisible = false;
             _squadState.InteractState = Interaction.Idle;
-            _squadState.Units.ForEach(FireArrow);
+            _squadState.Units.ForEach(unit =>
+                {
+                    unit.SendMessage("FireArrow");
+                });
         }
     }
 
@@ -61,15 +68,5 @@ public class SquadAttack : SquadInteractionBase
         }
 
         return 1 << _squadLayer;
-    }
-
-    private void FireArrow(GameObject unit)
-    {
-        //const int inversePositions = -1;
-        //var position = unit.transform.position;
-        //var xOffset = (position.x-_squadState.Columns/2f)*_squadState.Spacing;
-        //var yOffset = (position.z-_squadState.Rows/2f)*_squadState.Spacing;
-        //var unitPositionOffset = new Vector3(xOffset, 0, yOffset)*inversePositions;
-        unit.SendMessage("FireArrow", _lastMousePosition);
     }
 }
