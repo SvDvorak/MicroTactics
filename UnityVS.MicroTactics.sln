@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.MicroTactics.CSharp", "UnityVS.MicroTactics.CSharp.csproj", "{A7A55391-1C2D-C12A-F2C3-D7EDE3D3AACC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroTactics.Tests", "MicroTactics.Tests\MicroTactics.Tests.csproj", "{AB26B5AD-138D-49C2-967D-933A69CB6C4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{A7A55391-1C2D-C12A-F2C3-D7EDE3D3AACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7A55391-1C2D-C12A-F2C3-D7EDE3D3AACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7A55391-1C2D-C12A-F2C3-D7EDE3D3AACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB26B5AD-138D-49C2-967D-933A69CB6C4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB26B5AD-138D-49C2-967D-933A69CB6C4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB26B5AD-138D-49C2-967D-933A69CB6C4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB26B5AD-138D-49C2-967D-933A69CB6C4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

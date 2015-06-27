@@ -1,9 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.GoodMonotoneChain;
 
 [ExecuteInEditMode]
 public class SquadState : MonoBehaviour
@@ -79,5 +77,8 @@ public class SquadState : MonoBehaviour
     public void UnitDied(GameObject unit)
     {
         Units.Remove(unit);
+
+        var formation = new Formation(0);
+        formation.Remove(null);
     }
 }
