@@ -32,8 +32,7 @@ public class SoldierAI : MonoBehaviour
 
     void Update()
     {
-        var toTargetPosition = _targetPosition - transform.position;
-        var distanceToTargetPosition = toTargetPosition.magnitude;
+        var distanceToTargetPosition = Vector3.Distance(_targetPosition, transform.position);
         _animator.SetBool("IsMoving", distanceToTargetPosition > 0.1f && !IsDead);
 
         if (IsDead)
@@ -47,15 +46,8 @@ public class SoldierAI : MonoBehaviour
             return;
         }
 
-        if(distanceToTargetPosition > 0.001f)
-        {
-            var squadState = GetComponentInParent<SquadState>();
-            var congestionMove = new Vector3();//squadState.GetCongestionMovementFor(gameObject);
-
-            transform.position = Vector3.MoveTowards(transform.position, _targetPosition, MoveSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, _targetRotation, TurnSpeed * Time.deltaTime);
-            Debug.DrawLine(transform.position, transform.position + congestionMove, Color.black);
-        }
+        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, MoveSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, _targetRotation, TurnSpeed * Time.deltaTime);
     }
 
     public void MoveUnit(SoldierMoveOrder moveOrder)
