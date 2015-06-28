@@ -32,8 +32,9 @@ public class SoldierAI : MonoBehaviour
 
     void Update()
     {
-        var isMoving = Vector3.Distance(transform.position, _targetPosition) > 0.001f;
-        _animator.SetBool("IsMoving", isMoving && !IsDead);
+        var toTargetPosition = _targetPosition - transform.position;
+        var distanceToTargetPosition = toTargetPosition.magnitude;
+        _animator.SetBool("IsMoving", distanceToTargetPosition > 0.1f && !IsDead);
 
         if (IsDead)
         {
@@ -46,8 +47,15 @@ public class SoldierAI : MonoBehaviour
             return;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, MoveSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, _targetRotation, TurnSpeed * Time.deltaTime);
+        if(distanceToTargetPosition > 0.001f)
+        {
+            var squadState = GetComponentInParent<SquadState>();
+            var congestionMove = new Vector3();//squadState.GetCongestionMovementFor(gameObject);
+
+            transform.position = Vector3.MoveTowards(transform.position, _targetPosition, MoveSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, _targetRotation, TurnSpeed * Time.deltaTime);
+            Debug.DrawLine(transform.position, transform.position + congestionMove, Color.black);
+        }
     }
 
     public void MoveUnit(SoldierMoveOrder moveOrder)
@@ -89,7 +97,9 @@ public class SoldierAI : MonoBehaviour
                 SendMessageUpwards("UnitDied", gameObject);
             }
 
+            _rigidBody.useGravity = true;
             _rigidBody.isKinematic = false;
+            _rigidBody.constraints = RigidbodyConstraints.None;
             _rigidBody.AddForce(arrowForce*20);
         }
     }

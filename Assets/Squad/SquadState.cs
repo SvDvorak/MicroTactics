@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Assets;
 
 [ExecuteInEditMode]
 public class SquadState : MonoBehaviour
@@ -80,5 +81,19 @@ public class SquadState : MonoBehaviour
 
         var formation = new Formation(0);
         formation.Remove(null);
+    }
+
+    public Vector3 GetCongestionMovementFor(GameObject unit)
+    {
+        return Units
+            .Where(x => x != unit)
+            .Select(x => unit.transform.position - x.transform.position)
+            .Select(x => x.ZeroY())
+            .Aggregate(new Vector3(), AddToCongestionMoveVector);
+    }
+
+    private static Vector3 AddToCongestionMoveVector(Vector3 current, Vector3 moveAwayVector)
+    {
+        return current + moveAwayVector.normalized * (1 / Mathf.Pow(moveAwayVector.magnitude, 3));
     }
 }
