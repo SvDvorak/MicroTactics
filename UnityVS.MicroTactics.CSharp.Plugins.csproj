@@ -5,17 +5,17 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A7A55391-1C2D-C12A-F2C3-D7EDE3D3AACC}</ProjectGuid>
+    <ProjectGuid>{9F785126-5669-5162-76EC-F4225E8E3594}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace></RootNamespace>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
-    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityProjectType>GamePlugins:3</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.0.2f1</UnityVersion>
   </PropertyGroup>
@@ -59,43 +59,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="UnityVS.MicroTactics.CSharp.Plugins.csproj">
-      <Project>{9F785126-5669-5162-76EC-F4225E8E3594}</Project>
-      <Name>UnityVS.MicroTactics.CSharp.Plugins</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Assets\Camera\PanControls.cs" />
-    <Compile Include="Assets\ConvexHullCalculator.cs" />
-    <Compile Include="Assets\Events.cs" />
-    <Compile Include="Assets\GroundCollision.cs" />
-    <Compile Include="Assets\InteractionArrow\Arrow.cs" />
-    <Compile Include="Assets\Maybe.cs" />
-    <Compile Include="Assets\ObjectExtensions.cs" />
-    <Compile Include="Assets\RotateTestCode.cs" />
-    <Compile Include="Assets\Squad\AttackOrderSound.cs" />
-    <Compile Include="Assets\Squad\Formation.cs" />
-    <Compile Include="Assets\Squad\Interaction.cs" />
-    <Compile Include="Assets\Squad\MouseClick.cs" />
-    <Compile Include="Assets\Squad\SelectMeshUpdater.cs" />
-    <Compile Include="Assets\Squad\Soldier\Arrow\ArrowCollision.cs" />
-    <Compile Include="Assets\Squad\Soldier\Arrow\ArrowTipRotation.cs" />
-    <Compile Include="Assets\Squad\Soldier\ShowAsSelected.cs" />
-    <Compile Include="Assets\Squad\Soldier\SoldierAI.cs" />
-    <Compile Include="Assets\Squad\SoldierMoveOrder.cs" />
-    <Compile Include="Assets\Squad\SquadAttack.cs" />
-    <Compile Include="Assets\Squad\SquadCenterPosition.cs" />
-    <Compile Include="Assets\Squad\SquadDeselection.cs" />
-    <Compile Include="Assets\Squad\SquadInteractionBase.cs" />
-    <Compile Include="Assets\Squad\SquadMove.cs" />
-    <Compile Include="Assets\Squad\SquadSelection.cs" />
-    <Compile Include="Assets\Squad\SquadState.cs" />
-    <Compile Include="Assets\Squad\WalkSound.cs" />
-    <Compile Include="Assets\TimedDestroy.cs" />
-    <Compile Include="Assets\Triangulator.cs" />
-    <Compile Include="Assets\TwoDimensionalCollection.cs" />
-    <Compile Include="Assets\VectorExtensions.cs" />
-    <Compile Include="Assets\WilDebug.cs" />
+    <Compile Include="Assets\Standard Assets\Cameras\Scripts\AbstractTargetFollower.cs" />
+    <Compile Include="Assets\Standard Assets\Cameras\Scripts\AutoCam.cs" />
+    <Compile Include="Assets\Standard Assets\Cameras\Scripts\FreeLookCam.cs" />
+    <Compile Include="Assets\Standard Assets\Cameras\Scripts\HandHeldCam.cs" />
+    <Compile Include="Assets\Standard Assets\Cameras\Scripts\LookatTarget.cs" />
+    <Compile Include="Assets\Standard Assets\Cameras\Scripts\PivotBasedCameraRig.cs" />
+    <Compile Include="Assets\Standard Assets\Cameras\Scripts\ProtectCameraFromWallClip.cs" />
+    <Compile Include="Assets\Standard Assets\Cameras\Scripts\TargetFieldOfView.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
