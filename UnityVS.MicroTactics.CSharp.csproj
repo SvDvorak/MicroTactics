@@ -65,6 +65,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Camera\ElevationControls.cs" />
     <Compile Include="Assets\Camera\PanControls.cs" />
     <Compile Include="Assets\ConvexHullCalculator.cs" />
     <Compile Include="Assets\Events.cs" />
