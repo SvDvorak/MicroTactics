@@ -27,7 +27,8 @@ public class Arrow : MonoBehaviour, IArrow
     {
         ArrowHead.position = end;
         ArrowBase.position = start;
-        ArrowBase.localScale = ArrowBase.localScale.SetZ((end - start).magnitude - ArrowHead.localScale.z);
+        var baseScale = (end - start).magnitude - ArrowHead.localScale.z;
+        ArrowBase.localScale = ArrowBase.localScale.SetZ(baseScale);
     }
 
     public void SetRotation(Quaternion rotation)
