@@ -27,7 +27,7 @@ public class SquadMove : SquadInteractionBase
         if (isMoving && HasMovedMouseSinceClick)
         {
             MoveArrow.IsVisible = true;
-            MoveArrow.SetPositions(_dragStartPoint, value.point);
+            MoveArrow.SetArrowPoints(_dragStartPoint, value.point);
         }
     }
 

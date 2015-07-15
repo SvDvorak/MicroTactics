@@ -22,7 +22,7 @@ public class SquadAttack : SquadInteractionBase
         if (_squadState.InteractState == Interaction.Attack)
         {
             AttackArrow.IsVisible = true;
-            AttackArrow.SetPositions(_squadState.CenterPosition, _lastMousePosition);
+            AttackArrow.SetArrowPoints(_squadState.CenterPosition, _lastMousePosition);
             _squadState.Units.ForEach(unit =>
                 {
                     unit.SendMessage("AimAt", _lastMousePosition);
