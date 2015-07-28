@@ -15,6 +15,7 @@
 *.booproj
 
 # Compiled C#
+Bin/
 Debug/
 
 # Unity3D Generated File On Crash Reports
