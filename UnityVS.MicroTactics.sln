@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.MicroTactics.CSharp.Plugins", "UnityVS.MicroTactics.CSharp.Plugins.csproj", "{9F785126-5669-5162-76EC-F4225E8E3594}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.MicroTactics.CSharp", "UnityVS.MicroTactics.CSharp.csproj", "{A7A55391-1C2D-C12A-F2C3-D7EDE3D3AACC}"
