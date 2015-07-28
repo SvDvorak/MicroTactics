@@ -102,17 +102,11 @@
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-      <HintPath>Assets\UnityVS\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Messaging">
-      <HintPath>Assets\UnityVS\Editor\SyntaxTree.VisualStudio.Unity.Messaging.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityVS.VersionSpecific">
-      <HintPath>Assets\UnityVS\Editor\UnityVS.VersionSpecific.dll</HintPath>
-    </Reference>
     <Reference Include="NSubstitute">
       <HintPath>Assets\UnityTestTools\UnitTesting\Editor\NSubstitute\NSubstitute.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Assets\UnityTestTools\UnitTesting\Editor\NUnit\Libs\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb">
       <HintPath>Assets\UnityTestTools\UnitTesting\Editor\NUnit\Libs\Mono.Cecil.Mdb.dll</HintPath>
@@ -126,8 +120,14 @@
     <Reference Include="nunit.framework">
       <HintPath>Assets\UnityTestTools\UnitTesting\Editor\NUnit\Libs\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Assets\UnityTestTools\UnitTesting\Editor\NUnit\Libs\Mono.Cecil.dll</HintPath>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>Assets\UnityVS\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Messaging">
+      <HintPath>Assets\UnityVS\Editor\SyntaxTree.VisualStudio.Unity.Messaging.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityVS.VersionSpecific">
+      <HintPath>Assets\UnityVS\Editor\UnityVS.VersionSpecific.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +142,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.CodeGenerator\Editor\CodeGeneratorEditor.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.CodeGenerator\Editor\CodeGeneratorPreferencesDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.CodeGenerator\Editor\Migration.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Editor\EntitasStats.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Editor\VisualDebuggingPreferencesDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\DefaultInstanceCreator\DefaultArrayCreator.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\DefaultInstanceCreator\DefaultStringCreator.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\DefaultInstanceCreator\IDefaultInstanceCreator.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\EntityEditor.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\AnimationCurveTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\ArrayTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\BoolTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\BoundsTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\ColorTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\DateTimeTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\DictionaryTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\EnumTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\FloatTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\HashSetTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\ITypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\IntTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\ListTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\RectTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\StringTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\UnityObjectTypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\Vector2TypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\Vector3TypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\Vector4TypeDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\PoolObserver\Editor\PoolObserverEditor.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\SystemsObserver\Editor\SystemMonitorEditor.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\SystemsObserver\Editor\SystemsDebugEditor.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity\Editor\EntitasCheckForUpdates.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity\Editor\EntitasPreferencesEditor.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionComponentEditor.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionExplorerWindow.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionListRenderer.cs" />
