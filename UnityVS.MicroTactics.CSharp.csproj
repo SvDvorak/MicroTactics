@@ -75,6 +75,8 @@
     <Compile Include="Assets\Camera\PanControls.cs" />
     <Compile Include="Assets\ConvexHullCalculator.cs" />
     <Compile Include="Assets\Events.cs" />
+    <Compile Include="Assets\Generated\ComponentIds.cs" />
+    <Compile Include="Assets\Generated\Pools.cs" />
     <Compile Include="Assets\GroundCollision.cs" />
     <Compile Include="Assets\InteractionArrow\Arrow.cs" />
     <Compile Include="Assets\Libraries\Entitas.CodeGenerator\Attributes\DontGenerateAttribute.cs" />
