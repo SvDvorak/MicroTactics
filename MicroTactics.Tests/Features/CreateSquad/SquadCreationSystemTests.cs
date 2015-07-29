@@ -47,5 +47,15 @@ namespace MicroTactics.Tests.Features.CreateSquad
 
             _pool.Count.Should().Be(4);
         }
+
+        [Fact]
+        public void RemovesExistingUnitsWhenRecreatingSquad()
+        {
+            _squadEntity.AddSquad(2, 2);
+            _sut.Execute(_squadEntity.AsList<Entity>());
+            _sut.Execute(_squadEntity.AsList<Entity>());
+
+            _pool.Count.Should().Be(1);
+        }
     }
 }
