@@ -66,6 +66,9 @@
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
+    <Reference Include="BasicSerializer">
+      <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UnityVS.MicroTactics.CSharp.Plugins.csproj">
@@ -79,14 +82,17 @@
     <Compile Include="Assets\ConvexHullCalculator.cs" />
     <Compile Include="Assets\EntitasSetup.cs" />
     <Compile Include="Assets\Events.cs" />
+    <Compile Include="Assets\Features\CreateSquad\ComponentContainer.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadCreationSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\StartSquadSystem.cs" />
+    <Compile Include="Assets\Features\CreateSquad\UnitComponent.cs" />
     <Compile Include="Assets\Generated\ComponentIds.cs" />
     <Compile Include="Assets\Generated\Pools.cs" />
     <Compile Include="Assets\Generated\SquadComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadCreationSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\StartSquadSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\UnitComponentGeneratedExtension.cs" />
     <Compile Include="Assets\GroundCollision.cs" />
     <Compile Include="Assets\InteractionArrow\Arrow.cs" />
     <Compile Include="Assets\Libraries\Entitas.CodeGenerator\Attributes\DontGenerateAttribute.cs" />
@@ -205,6 +211,10 @@
     <Compile Include="Assets\WilDebug.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Plugins\Editor\Vexe\LICENSE.txt" />
+    <None Include="Assets\Plugins\Vexe\HISTORY.txt" />
+    <None Include="Assets\Plugins\Vexe\LICENSE.txt" />
+    <None Include="Assets\Plugins\Vexe\Runtime\FastSave\README.txt" />
     <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\UnityTestTools\LICENSE.txt" />

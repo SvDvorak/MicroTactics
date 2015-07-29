@@ -57,16 +57,16 @@ namespace Entitas.CodeGenerator {
             return addClassHeader(tag)
                     + addIndices(components)
                     + addIdToString(components)
+                    + addComponentToId(components)
                     + addCloseClass()
                     + addMatcher(tag);
         }
 
         static string addClassHeader(string lookupTag) {
-            var code = string.Format("public static class {0} {{\n", lookupTag);
-            if (stripDefaultTag(lookupTag) != string.Empty) {
-                code = "using Entitas;\n\n" + code;
-            }
-            return code;
+            return "using System;\n" +
+                "using System.Collections.Generic;\n" +
+                "using Entitas;\n\n" +
+                string.Format("public static class {0} {{\n", lookupTag);
         }
 
         static string addIndices(Type[] components) {
@@ -99,6 +99,34 @@ namespace Entitas.CodeGenerator {
 
     public static string IdToString(int componentId) {{
         return components[componentId];
+    }}", code);
+        }
+
+        static string addComponentToId(Type[] components)
+        {
+            
+            const string format = "        {{ typeof ({1}), {2} }},\n";
+            const string formatLast = "        {{ typeof ({1}), {2} }}\n";
+            var code = string.Empty;
+            for (int i = 0; i < components.Length; i++)
+            {
+                if (i < components.Length - 1)
+                {
+                    code += string.Format(format, i, components[i].Name, components[i].RemoveComponentSuffix());
+                }
+                else
+                {
+                    code += string.Format(formatLast, i, components[i].Name, components[i].RemoveComponentSuffix());
+                }
+            }
+
+            return string.Format(@"
+
+    private static readonly IDictionary<Type, int> componentIds = new Dictionary<Type, int>() {{
+{0}    }};
+
+    public static int ComponentToId(IComponent component) {{
+        return componentIds[component.GetType()];
     }}", code);
         }
 

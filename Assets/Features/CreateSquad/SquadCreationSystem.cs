@@ -23,7 +23,7 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
         {
             for (int x = 0; x < singleEntity.squad.Columns; x++)
             {
-                _pool.CreateEntity();
+                _pool.CreateEntity().IsUnit(true);
             }
         }
     }

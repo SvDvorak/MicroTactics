@@ -1,6 +1,8 @@
-﻿using Entitas;
+﻿using System.Linq;
+using Entitas;
+using UnityEngine;
 
-class StartSquadSystem : IStartSystem, ISetPool
+public class StartSquadSystem : IStartSystem, ISetPool
 {
     private Pool _pool;
 
@@ -11,6 +13,19 @@ class StartSquadSystem : IStartSystem, ISetPool
 
     public void Start()
     {
-        _pool.CreateEntity().AddSquad(4, 4);
+        var componentContainers = Object.FindObjectsOfType<ComponentContainer>();
+        foreach (var componentContainer in componentContainers)
+        {
+            CreateEntityFor(componentContainer);
+        }
+    }
+
+    private void CreateEntityFor(ComponentContainer componentContainer)
+    {
+        var entity = _pool.CreateEntity();
+        foreach (var component in componentContainer.Components)
+        {
+            entity.AddComponent(ComponentIds.ComponentToId(component), component);
+        }
     }
 }
