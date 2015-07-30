@@ -5,24 +5,34 @@ using Xunit;
 
 public class AiMoveSystemTests
 {
-    [Fact]
-    public void TriggersOnRemovedOrders()
-    {
-        var sut = new AiMoveSystem();
+    private AiMoveOrderSystem _sut;
+    private TestPool _testPool;
 
-        sut.trigger.Should().Be(Matcher.MoveOrder);
-        sut.eventType.Should().Be(GroupEventType.OnEntityRemoved);
+    public AiMoveSystemTests()
+    {
+        _sut = new AiMoveOrderSystem();
+        _testPool = new TestPool();
+        _sut.SetPool(_testPool);
     }
 
     [Fact]
     public void AddsNewMoveOrder()
     {
-        var sut = new AiMoveSystem();
+        var entity = _testPool.CreateEntity().AddPosition(0, 0, 0).IsAi(true);
 
-        var entity = new TestEntity().AddPosition(new Vector(0, 0, 0));
-        sut.Execute(entity.AsList());
+        _sut.Execute();
 
         entity.hasMoveOrder.Should().BeTrue("unit should have received order");
-        entity.moveOrder.Position.Should().Be(new Vector(1, 0, 0));
+        entity.moveOrder.ShouldBeEquivalentTo(new Vector(1, 0, 0));
+    }
+
+    [Fact]
+    public void DoesNotAddMoveOrderIfOneAlreadyExists()
+    {
+        var entity = _testPool.CreateEntity().AddPosition(0, 0, 0).AddMoveOrder(1, 1, 1).IsAi(true);
+
+        _sut.Execute();
+
+        entity.moveOrder.ShouldBeEquivalentTo(new Vector(1, 1, 1));
     }
 }

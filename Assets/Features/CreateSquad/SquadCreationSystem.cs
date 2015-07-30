@@ -35,7 +35,7 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
             {
                 _pool.CreateEntity()
                     .AddUnit(squad.Number)
-                    .AddPosition(new Vector(column, 0, row));
+                    .AddPosition(column, 0, row);
             }
         }
     }

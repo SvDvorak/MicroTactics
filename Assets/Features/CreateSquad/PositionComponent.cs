@@ -1,6 +1,5 @@
 ﻿using Entitas;
 
-public class PositionComponent : IComponent
+public class PositionComponent : Vector, IComponent
 {
-    public Vector Position;
 }

@@ -13,8 +13,8 @@ public class MoveSystem : IExecuteSystem, ISetPool
     {
         foreach (var entity in _entitiesWithOrder.GetEntities())
         {
-            var order = entity.moveOrder.Position;
-            entity.ReplacePosition(new Vector(order.x, order.y, order.z));
+            var order = entity.moveOrder;
+            entity.ReplacePosition(order.x, order.y, order.z);
         }
     }
 }

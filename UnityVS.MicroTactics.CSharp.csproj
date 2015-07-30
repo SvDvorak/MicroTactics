@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -96,13 +98,13 @@
     <Compile Include="Assets\Features\Destruction\RemoveViewSystem.cs" />
     <Compile Include="Assets\Features\LinkViewsStartSystem.cs" />
     <Compile Include="Assets\Features\Move\AiComponent.cs" />
-    <Compile Include="Assets\Features\Move\AiMoveSystem.cs" />
+    <Compile Include="Assets\Features\Move\AiMoveOrderSystem.cs" />
     <Compile Include="Assets\Features\Move\MoveOrderComponent.cs" />
     <Compile Include="Assets\Features\Move\MoveSystem.cs" />
     <Compile Include="Assets\Features\RenderPositionSystem.cs" />
     <Compile Include="Assets\Generated\AddUnitViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AiComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\AiMoveSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\AiMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ComponentIds.cs" />
     <Compile Include="Assets\Generated\DestroyComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\DestroySystemGeneratedExtension.cs" />

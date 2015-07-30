@@ -109,7 +109,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         public static void ShouldHavePosition(this Entity entity, float x, float y, float z)
         {
             entity.hasPosition.Should().BeTrue("the entity should have a position component");
-            entity.position.Position.Should().Be(new Vector(x, y, z));
+            entity.position.ShouldBeEquivalentTo(new Vector(x, y, z));
         }
     }
 }

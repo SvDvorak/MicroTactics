@@ -12,7 +12,7 @@ public class RenderPositionSystem : IReactiveSystem
     {
         foreach (var e in entities)
         {
-            var pos = e.position.Position;
+            var pos = e.position;
             e.view.GameObject.transform.position = new Vector3(pos.x, pos.y, pos.z);
         }
     }

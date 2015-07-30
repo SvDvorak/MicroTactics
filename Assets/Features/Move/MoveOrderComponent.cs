@@ -1,6 +1,5 @@
 ﻿using Entitas;
 
-public class MoveOrderComponent : IComponent
+public class MoveOrderComponent : Vector, IComponent
 {
-    public Vector Position;
 }

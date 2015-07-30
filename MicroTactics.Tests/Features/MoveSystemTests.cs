@@ -11,14 +11,14 @@ namespace MicroTactics.Tests.Features
         {
             var pool = new TestPool();
             var entity = pool.CreateEntity()
-                .AddPosition(new Vector(0, 0, 0))
-                .AddMoveOrder(new Vector(1, 0, 0));
+                .AddPosition(0, 0, 0)
+                .AddMoveOrder(1, 0, 0);
 
             var sut = new MoveSystem();
             sut.SetPool(pool);
             sut.Execute();
 
-            entity.position.Position.Should().Be(new Vector(1, 0, 0));
+            entity.position.ShouldBeEquivalentTo(new Vector(1, 0, 0));
         }
     }
 }
