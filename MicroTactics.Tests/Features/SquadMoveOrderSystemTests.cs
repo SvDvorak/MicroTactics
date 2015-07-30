@@ -67,11 +67,30 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void ReplacesOrderIfOneAlreadyExistsOnUnit()
         {
-            var unit1 = CreateUnitWithSquadNumber(0).AddMoveOrder(1, 1, 1);
+            var unit = CreateUnitWithSquadNumber(0).AddMoveOrder(1, 1, 1);
 
             _sut.Execute(_squad1.AsList());
 
-            unit1.HasMoveOrderTo(new Vector(0, 1, 0));
+            unit.HasMoveOrderTo(new Vector(0, 1, 0));
+        }
+
+        [Fact]
+        public void DoesNotCrashWhenSquadDimensionIsZero()
+        {
+            CreateUnitWithSquadNumber(0).AddMoveOrder(1, 1, 1);
+            _squad1.ReplaceSquad(0, 0, 0);
+
+            _sut.Execute(_squad1.AsList());
+        }
+
+        [Fact]
+        public void IgnoresDestroyedUnits()
+        {
+            var unit = CreateUnitWithSquadNumber(0).IsDestroy(true);
+
+            _sut.Execute(_squad1.AsList());
+
+            unit.hasMoveOrder.Should().BeFalse("destroyed unit should not get order");
         }
 
         private Entity CreateUnitWithSquadNumber(int squadNumber)

@@ -29,14 +29,12 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
 
     private void CreateUnitsForSquad(SquadComponent squad)
     {
-        for (int row = 0; row < squad.Rows; row++)
+        for (var i = 0; i < squad.Columns*squad.Rows; i++)
         {
-            for (int column = 0; column < squad.Columns; column++)
-            {
-                _pool.CreateEntity()
-                    .AddUnit(squad.Number)
-                    .AddPosition(column, 0, row);
-            }
+            var position = UnitInSquadPositioner.GetPosition(squad, i);
+            _pool.CreateEntity()
+                 .AddUnit(squad.Number)
+                 .AddPosition(position.x, position.y, position.z);
         }
     }
 
