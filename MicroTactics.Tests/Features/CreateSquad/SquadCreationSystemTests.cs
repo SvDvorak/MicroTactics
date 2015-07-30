@@ -56,7 +56,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         }
 
         [Fact]
-        public void RemovesExistingUnitsWhenRecreatingSquad()
+        public void SetsDestroyOnExistingUnitsWhenRecreatingSquad()
         {
             _squad1.ReplaceSquad(0, 2, 2);
             _sut.Execute(_squad1.AsList());
@@ -64,7 +64,9 @@ namespace MicroTactics.Tests.Features.CreateSquad
             _squad1.ReplaceSquad(0, 1, 1);
             _sut.Execute(_squad1.AsList());
 
-            _pool.Count.Should().Be(1);
+            var currentEntities = _pool.GetEntities();
+            currentEntities.Should().HaveCount(5);
+            currentEntities.Where(x => x.isDestroy).Should().HaveCount(4, "all units from first squad should be destroyed");
         }
 
         [Fact]

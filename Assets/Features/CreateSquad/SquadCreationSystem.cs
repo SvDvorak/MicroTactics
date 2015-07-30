@@ -29,13 +29,13 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
 
     private void CreateUnitsForSquad(SquadComponent squad)
     {
-        for (int y = 0; y < squad.Rows; y++)
+        for (int row = 0; row < squad.Rows; row++)
         {
-            for (int x = 0; x < squad.Columns; x++)
+            for (int column = 0; column < squad.Columns; column++)
             {
                 _pool.CreateEntity()
                     .AddUnit(squad.Number)
-                    .AddPosition(x, 0, y);
+                    .AddPosition(column, 0, row);
             }
         }
     }
@@ -43,6 +43,6 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
     private void RemoveExistingUnitsFromSquad(int squadNumber)
     {
         var unitsInSquad = _unitsGroup.GetEntities().Where(x => x.unit.SquadNumber == squadNumber);
-        unitsInSquad.Foreach(x => _pool.DestroyEntity(x));
+        unitsInSquad.Foreach(x => x.IsDestroy(true));
     }
 }
