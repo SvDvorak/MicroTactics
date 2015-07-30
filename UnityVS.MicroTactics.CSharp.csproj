@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -84,24 +82,33 @@
     <Compile Include="Assets\ConvexHullCalculator.cs" />
     <Compile Include="Assets\EntitasSetup.cs" />
     <Compile Include="Assets\Events.cs" />
-    <Compile Include="Assets\Features\CreateSquad\AddUnitViewSystem.cs" />
     <Compile Include="Assets\Features\ComponentContainer.cs" />
+    <Compile Include="Assets\Features\CreateSquad\AddUnitViewSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\PositionComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadCreationSystem.cs" />
-    <Compile Include="Assets\Features\LinkViewsStartSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\UnitComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\UnitTemplateComponent.cs" />
+    <Compile Include="Assets\Features\CreateSquad\Vector.cs" />
     <Compile Include="Assets\Features\CreateSquad\ViewComponent.cs" />
     <Compile Include="Assets\Features\Destruction\DestroyComponent.cs" />
     <Compile Include="Assets\Features\Destruction\DestroySystem.cs" />
     <Compile Include="Assets\Features\Destruction\RemoveViewSystem.cs" />
+    <Compile Include="Assets\Features\LinkViewsStartSystem.cs" />
+    <Compile Include="Assets\Features\Move\AiComponent.cs" />
+    <Compile Include="Assets\Features\Move\AiMoveSystem.cs" />
+    <Compile Include="Assets\Features\Move\MoveOrderComponent.cs" />
+    <Compile Include="Assets\Features\Move\MoveSystem.cs" />
     <Compile Include="Assets\Features\RenderPositionSystem.cs" />
     <Compile Include="Assets\Generated\AddUnitViewSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\AiComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\AiMoveSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ComponentIds.cs" />
     <Compile Include="Assets\Generated\DestroyComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\DestroySystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\LinkViewsStartSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\MoveOrderComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\MoveSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Pools.cs" />
     <Compile Include="Assets\Generated\PositionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RemoveViewSystemGeneratedExtension.cs" />
