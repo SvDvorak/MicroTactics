@@ -2,7 +2,7 @@
 using Entitas;
 using UnityEngine;
 
-public class StartSquadSystem : IStartSystem, ISetPool
+public class LinkViewsStartSystem : IStartSystem, ISetPool
 {
     private Pool _pool;
 
