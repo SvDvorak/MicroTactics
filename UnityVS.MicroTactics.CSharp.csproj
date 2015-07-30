@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -84,6 +86,7 @@
     <Compile Include="Assets\Events.cs" />
     <Compile Include="Assets\Features\CreateSquad\AddUnitViewSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\ComponentContainer.cs" />
+    <Compile Include="Assets\Features\CreateSquad\PositionComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadCreationSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\StartSquadSystem.cs" />
@@ -93,6 +96,7 @@
     <Compile Include="Assets\Generated\AddUnitViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ComponentIds.cs" />
     <Compile Include="Assets\Generated\Pools.cs" />
+    <Compile Include="Assets\Generated\PositionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadCreationSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\StartSquadSystemGeneratedExtension.cs" />
@@ -100,6 +104,7 @@
     <Compile Include="Assets\Generated\UnitTemplateComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\UnitViewComponentGeneratedExtension.cs" />
     <Compile Include="Assets\GroundCollision.cs" />
+    <Compile Include="Assets\IEnumerableExtensions.cs" />
     <Compile Include="Assets\InteractionArrow\Arrow.cs" />
     <Compile Include="Assets\Libraries\Entitas.CodeGenerator\Attributes\DontGenerateAttribute.cs" />
     <Compile Include="Assets\Libraries\Entitas.CodeGenerator\Attributes\PoolAttribute.cs" />
