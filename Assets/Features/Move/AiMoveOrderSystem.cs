@@ -1,23 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using Entitas;
 
 public class AiMoveOrderSystem : IExecuteSystem, ISetPool
 {
-    private Group _moveableAiGroup;
+    private Group _aiSquads;
+    private Group _positionableUnits;
 
     public void SetPool(Pool pool)
     {
-        _moveableAiGroup = pool.GetGroup(Matcher.AllOf(Matcher.Position, Matcher.Ai));
+        _aiSquads = pool.GetGroup(Matcher.AllOf(Matcher.Squad, Matcher.Ai));
+        _positionableUnits = pool.GetGroup(Matcher.AllOf(Matcher.Unit, Matcher.Position));
     }
 
     public void Execute()
     {
-        foreach (var entity in _moveableAiGroup.GetEntities())
+        var squadUnitGroups = _positionableUnits.GetEntities().GroupBy(x => x.unit.SquadNumber).ToList();
+
+        foreach (var aiSquad in _aiSquads.GetEntities())
         {
-            if (!entity.hasMoveOrder)
+            var unitsInSquad = squadUnitGroups.Find(x => x.Key == aiSquad.squad.Number);
+            OrderUnitsToSquadRelativePositions(unitsInSquad, aiSquad.squad);
+        }
+    }
+
+    private static void OrderUnitsToSquadRelativePositions(IGrouping<int, Entity> unitsInSquad, SquadComponent squad)
+    {
+        for (var i = 0; i < unitsInSquad.Count(); i++)
+        {
+            var unit = unitsInSquad.ElementAt(i);
+            if (!unit.hasMoveOrder)
             {
-                var pos = entity.position;
-                entity.AddMoveOrder(pos.x + 1, pos.y, pos.z);
+                unit.AddMoveOrder(i%squad.Columns, 0, i/squad.Rows);
             }
         }
     }

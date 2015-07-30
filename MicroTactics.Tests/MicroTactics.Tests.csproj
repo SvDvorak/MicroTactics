@@ -76,7 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\AiMoveSystemTests.cs" />
+    <Compile Include="Features\AiMoveOrderSystemTests.cs" />
     <Compile Include="Features\CreateSquad\SquadCreationSystemTests.cs" />
     <Compile Include="Features\CreateSquad\TestEntity.cs" />
     <Compile Include="Features\CreateSquad\TestPool.cs" />

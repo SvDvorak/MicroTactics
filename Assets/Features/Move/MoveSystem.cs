@@ -15,6 +15,7 @@ public class MoveSystem : IExecuteSystem, ISetPool
         {
             var order = entity.moveOrder;
             entity.ReplacePosition(order.x, order.y, order.z);
+            entity.RemoveMoveOrder();
         }
     }
 }
