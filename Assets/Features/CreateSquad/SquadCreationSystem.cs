@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Entitas;
+using Vexe.Runtime.Extensions;
 
 public class SquadCreationSystem : IReactiveSystem, ISetPool
 {
+    private Group _unitsGroup;
     private Pool _pool;
 
     public IMatcher trigger { get { return Matcher.Squad; } }
@@ -13,18 +16,31 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
     public void SetPool(Pool pool)
     {
         _pool = pool;
+        _unitsGroup = pool.GetGroup(Matcher.Unit);
     }
 
     public void Execute(List<Entity> entities)
     {
-        var singleEntity = entities.SingleEntity();
+        var squad = entities.SingleEntity().squad;
 
-        for (int y = 0; y < singleEntity.squad.Rows; y++)
+        RemoveExistingUnitsFromSquad(squad.Number);
+        CreateUnitsForSquad(squad);
+    }
+
+    private void CreateUnitsForSquad(SquadComponent squad)
+    {
+        for (int y = 0; y < squad.Rows; y++)
         {
-            for (int x = 0; x < singleEntity.squad.Columns; x++)
+            for (int x = 0; x < squad.Columns; x++)
             {
-                _pool.CreateEntity().IsUnit(true);
+                _pool.CreateEntity().AddUnit(squad.Number);
             }
         }
+    }
+
+    private void RemoveExistingUnitsFromSquad(int squadNumber)
+    {
+        var unitsInSquad = _unitsGroup.GetEntities().Where(x => x.unit.SquadNumber == squadNumber);
+        unitsInSquad.Foreach(x => _pool.DestroyEntity(x));
     }
 }

@@ -2,4 +2,5 @@
 
 public class UnitComponent : IComponent
 {
+    public int SquadNumber;
 }

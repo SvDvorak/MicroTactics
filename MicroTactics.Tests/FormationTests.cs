@@ -7,7 +7,6 @@ namespace MicroTactics.Tests
 {
     public class FormationTests
     {
-        [Fact]
         public void Expands_formation_using_columns_to_row_relation()
         {
             var sut = new Formation(2/2);

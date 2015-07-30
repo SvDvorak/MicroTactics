@@ -9,13 +9,16 @@ namespace MicroTactics.Tests.Features.CreateSquad
     {
         private readonly SquadCreationSystem _sut;
         private readonly TestPool _pool;
-        private readonly TestEntity _squadEntity = new TestEntity();
+        private readonly Entity _squad1 = new TestEntity().AddSquad(0, 0, 0);
+        private readonly Entity _squad2 = new TestEntity().AddSquad(0, 0, 0);
 
         public SquadCreationSystemTests()
         {
             _sut = new SquadCreationSystem();
             _pool = new TestPool();
             _sut.SetPool(_pool);
+
+            _pool.Count.Should().Be(0);
         }
 
         [Fact]
@@ -33,8 +36,9 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void EmptySquadProducesNoUnits()
         {
-            _squadEntity.AddSquad(0, 0);
-            _sut.Execute(_squadEntity.AsList<Entity>());
+            _squad1.ReplaceSquad(0, 0, 0);
+
+            _sut.Execute(_squad1.AsList());
 
             _pool.Count.Should().Be(0);
         }
@@ -42,8 +46,9 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void AddsMultipleUnitsAccordingToSquadSize()
         {
-            _squadEntity.AddSquad(2, 2);
-            _sut.Execute(_squadEntity.AsList<Entity>());
+            _squad1.ReplaceSquad(0, 2, 2);
+
+            _sut.Execute(_squad1.AsList());
 
             _pool.Count.Should().Be(4);
         }
@@ -51,11 +56,22 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void RemovesExistingUnitsWhenRecreatingSquad()
         {
-            _squadEntity.AddSquad(2, 2);
-            _sut.Execute(_squadEntity.AsList<Entity>());
-            _sut.Execute(_squadEntity.AsList<Entity>());
+            _squad1.ReplaceSquad(0, 2, 2);
+            _sut.Execute(_squad1.AsList());
+
+            _squad1.ReplaceSquad(0, 1, 1);
+            _sut.Execute(_squad1.AsList());
 
             _pool.Count.Should().Be(1);
+        }
+
+        [Fact]
+        public void DoesNotTouchUnitsInOtherSquadsWhenRecreatingSquad()
+        {
+            _sut.Execute(_squad1.ReplaceSquad(0, 1, 1).AsList());
+            _sut.Execute(_squad2.ReplaceSquad(1, 1, 1).AsList());
+
+            _pool.Count.Should().Be(2);
         }
     }
 }

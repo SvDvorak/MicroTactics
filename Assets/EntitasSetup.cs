@@ -25,6 +25,7 @@ public class EntitasSetup : MonoBehaviour
         return new Systems()
 #endif
             .Add(pool.CreateStartSquadSystem())
-            .Add(pool.CreateSquadCreationSystem());
+            .Add(pool.CreateSquadCreationSystem())
+            .Add(pool.CreateAddUnitViewSystem());
     }
 }
