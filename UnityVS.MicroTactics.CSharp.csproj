@@ -101,6 +101,7 @@
     <Compile Include="Assets\Features\Move\AiMoveOrderSystem.cs" />
     <Compile Include="Assets\Features\Move\MoveOrderComponent.cs" />
     <Compile Include="Assets\Features\Move\MoveSystem.cs" />
+    <Compile Include="Assets\Features\Move\SquadMoveOrderSystem.cs" />
     <Compile Include="Assets\Features\RenderPositionSystem.cs" />
     <Compile Include="Assets\Generated\AddUnitViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AiComponentGeneratedExtension.cs" />

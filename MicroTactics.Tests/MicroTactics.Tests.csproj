@@ -81,7 +81,9 @@
     <Compile Include="Features\CreateSquad\TestEntity.cs" />
     <Compile Include="Features\CreateSquad\TestPool.cs" />
     <Compile Include="Features\DestroySystemTests.cs" />
+    <Compile Include="Features\EntityExtensions.cs" />
     <Compile Include="Features\MoveSystemTests.cs" />
+    <Compile Include="Features\SquadMoveOrderSystemTests.cs" />
     <Compile Include="FormationTests.cs" />
     <Compile Include="IEnumerableExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
