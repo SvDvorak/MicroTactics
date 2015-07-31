@@ -159,6 +159,8 @@
     <Compile Include="Assets\Libraries\Entitas\Interfaces\IComponent.cs" />
     <Compile Include="Assets\Libraries\Entitas\Interfaces\IExecuteSystem.cs" />
     <Compile Include="Assets\Libraries\Entitas\Interfaces\IMatcher.cs" />
+    <Compile Include="Assets\Libraries\Entitas\Interfaces\IMultiReactiveSystem.cs" />
+    <Compile Include="Assets\Libraries\Entitas\Interfaces\IReactiveExecuteSystem.cs" />
     <Compile Include="Assets\Libraries\Entitas\Interfaces\IReactiveSystem.cs" />
     <Compile Include="Assets\Libraries\Entitas\Interfaces\IStartSystem.cs" />
     <Compile Include="Assets\Libraries\Entitas\Interfaces\ISystem.cs" />

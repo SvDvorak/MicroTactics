@@ -1,13 +1,30 @@
+# 0.19.1
+
+##### Entitas
+- GroupObserver supports observing multiple groups
+- Added support for IMultiReactiveSystem
+- Added internal entity._isEnabled to prevent modifying pooled entities
+- Replaced internal object pool with Stack<Entity>
+
+##### Entitas.CodeGenerator
+- Fixed generated replace method, when replacing non existent component
+
+##### Entitas.Unity.VisualDebugging
+- Drastically improved performance and memory usage by caching ToString() and reducing setting gameObject.name
+
+
 # 0.19.0
 
 ##### Breaking changes
+Please follow the [Entitas upgrade guide](https://github.com/sschmid/Entitas-CSharp/blob/master/EntitasUpgradeGuide.md)
+
 - Entitas
   - Added new e.OnComponentReplaced and removed all *WillBeRemoved events
   - Added component index and changed component to OnEntityAdded and OnEntityRemoved
   - IReactiveSystem.Execute takes List<Entity> instead of Entity[]
     - Entitas now runs without producing garbage!
 
-- Entitas.Unity.CodeGenerator
+- Entitas.CodeGenerator
   - Removed support for properties in components
 
 - Entitas.Unity.VisualDebugging
