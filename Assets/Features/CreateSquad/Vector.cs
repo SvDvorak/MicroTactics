@@ -1,4 +1,6 @@
-﻿public class Vector
+﻿using UnityEngine;
+
+public class Vector
 {
     public float x;
     public float y;
@@ -11,6 +13,11 @@
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public Vector3 ToV3()
+    {
+        return new Vector3(x, y, z);
     }
 
     #region Equality-methods

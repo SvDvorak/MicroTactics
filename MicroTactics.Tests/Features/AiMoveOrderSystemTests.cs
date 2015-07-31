@@ -1,6 +1,5 @@
 ﻿using Entitas;
 using FluentAssertions;
-using MicroTactics.Tests;
 using Xunit;
 
 public class AiMoveOrderSystemTests
@@ -15,30 +14,59 @@ public class AiMoveOrderSystemTests
         _testPool = new TestPool();
         _sut.SetPool(_testPool);
         _squad = _testPool.CreateEntity()
+            .AddPosition(0, 0, 0)
             .AddSquad(0, 1, 1)
             .IsAi(true);
     }
 
     [Fact]
-    public void GivesDifferentOrdersPerSquad()
+    public void DoesGiveAddMoveOrderIfNoEnemiesArePresent()
     {
-        var squad2 = _testPool.CreateEntity()
-            .AddSquad(1, 1, 1)
-            .IsAi(true);
-
         _sut.Execute();
 
-        _squad.HasMoveOrderTo(new Vector(0, 0, 0));
-        squad2.HasMoveOrderTo(new Vector(1, 0, 0));
+        _squad.hasMoveOrder.Should().BeFalse("no enemy is present so no move order should be given");
     }
 
     [Fact]
-    public void DoesNotAddMoveOrderIfOneAlreadyExists()
+    public void DoesNotGiveMoveOrderIfEnemyIsFarAway()
     {
-        _squad.AddMoveOrder(1, 1, 1);
+        _testPool.CreateEntity()
+            .AddPosition(float.PositiveInfinity, 0, 0)
+            .IsEnemy(true);
 
         _sut.Execute();
 
-        _squad.moveOrder.ShouldBeEquivalentTo(new Vector(1, 1, 1));
+        _squad.hasMoveOrder.Should().BeFalse("enemy is far away so no move order should be given");
+    }
+
+    [Fact]
+    public void GivesDefaultMoveOrderWhenEnemyIsOnSamePosition()
+    {
+        _testPool.CreateEntity()
+            .AddPosition(0, 0, 0)
+            .IsEnemy(true);
+
+        _sut.Execute();
+
+        _squad.HasMoveOrderTo(new Vector(1, 0, 0));
+    }
+
+    [Fact]
+    public void GivesMoveOrdersToMoveAwayFromEnemy()
+    {
+        _squad.ReplacePosition(-0.5f, 0, 0);
+        var squad2 = _testPool.CreateEntity()
+            .AddPosition(0, 0, 0.5f)
+            .AddSquad(1, 1, 1)
+            .IsAi(true);
+
+        _testPool.CreateEntity()
+            .AddPosition(0, 0, 0)
+            .IsEnemy(true);
+
+        _sut.Execute();
+
+        _squad.HasMoveOrderTo(new Vector(-1f, 0, 0));
+        squad2.HasMoveOrderTo(new Vector(0, 0, 1));
     }
 }
