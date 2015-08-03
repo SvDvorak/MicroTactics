@@ -9,7 +9,7 @@ public class AddUnitViewSystem : IReactiveSystem, ISetPool
 
     private readonly Transform _unitContainer = new GameObject("Units").transform;
 
-    public IMatcher trigger { get { return Matcher.Unit; } }
+    public IMatcher trigger { get { return Matcher.AllOf(Matcher.Unit, Matcher.Position); } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
     public void SetPool(Pool pool)
@@ -31,7 +31,7 @@ public class AddUnitViewSystem : IReactiveSystem, ISetPool
     private void AddUnitViewUsingSquadTemplate(Entity entity)
     {
         var squad = _squads.GetEntities().Single(x => x.squad.Number == entity.unit.SquadNumber);
-        var gameObject = Object.Instantiate(squad.unitTemplate.Template);
+        var gameObject = (GameObject)Object.Instantiate(squad.unitTemplate.Template, entity.position.ToV3(), new Quaternion());
         gameObject.transform.SetParent(_unitContainer);
         entity.AddView(gameObject);
     }

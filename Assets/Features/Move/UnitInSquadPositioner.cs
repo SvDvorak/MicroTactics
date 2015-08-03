@@ -2,11 +2,11 @@
 
 public class UnitInSquadPositioner
 {
-    public static Vector GetPosition(SquadComponent squad, int unitNumber)
+    public static Vector GetPosition(BoxFormationComponent formation, int unitNumber)
     {
-        var squadPositionX = unitNumber%squad.Columns;
-        var squadPositionZ = unitNumber/squad.Columns;
+        var squadPositionX = unitNumber%formation.Columns;
+        var squadPositionZ = unitNumber/formation.Columns;
 
-        return new Vector(squadPositionX, 0, squadPositionZ);
+        return new Vector(squadPositionX*formation.Spacing, 0, squadPositionZ*formation.Spacing);
     }
 }

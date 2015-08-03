@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Entitas;
 
@@ -21,7 +22,7 @@ public class SquadMoveOrderSystem : IReactiveSystem, ISetPool
         foreach (var squadEntity in entities)
         {
             var unitsInSquad = squadUnitGroups.Find(x => x.Key == squadEntity.squad.Number);
-            if (squadEntity.squad.Columns*squadEntity.squad.Rows == 0 || unitsInSquad == null)
+            if (squadEntity.boxFormation.Columns * squadEntity.boxFormation.Rows == 0 || unitsInSquad == null)
             {
                 continue;
             }
@@ -35,7 +36,7 @@ public class SquadMoveOrderSystem : IReactiveSystem, ISetPool
         for (var i = 0; i < unitsInSquad.Count(); i++)
         {
             var unit = unitsInSquad.ElementAt(i);
-            var squadPosition = UnitInSquadPositioner.GetPosition(squadEntity.squad, i);
+            var squadPosition = UnitInSquadPositioner.GetPosition(squadEntity.boxFormation, i);
 
             if (unit.hasMoveOrder)
             {

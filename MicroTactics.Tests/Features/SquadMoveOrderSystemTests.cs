@@ -20,11 +20,13 @@ namespace MicroTactics.Tests.Features
             _sut.SetPool(_testPool);
 
             _squad1 = _testPool.CreateEntity()
-                .AddSquad(0, 1, 1)
+                .AddSquad(0)
+                .AddBoxFormation(1, 1, 0)
                 .AddMoveOrder(0, 1, 0);
 
             _squad2 = _testPool.CreateEntity()
-                .AddSquad(1, 1, 1)
+                .AddSquad(1)
+                .AddBoxFormation(1, 1, 0)
                 .AddMoveOrder(0, 2, 0);
         }
 
@@ -36,9 +38,9 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void OrdersUnitsAccordingToSquadSettings()
+        public void OrdersUnitsAccordingToFormation()
         {
-            _squad1.ReplaceSquad(0, 2, 2);
+            _squad1.ReplaceBoxFormation(2, 2, 2);
             var unit1 = CreateUnitWithSquadNumber(0);
             var unit2 = CreateUnitWithSquadNumber(0);
             var unit3 = CreateUnitWithSquadNumber(0);
@@ -47,9 +49,9 @@ namespace MicroTactics.Tests.Features
             _sut.Execute(_squad1.AsList());
 
             unit1.HasMoveOrderTo(new Vector(0, 1, 0));
-            unit2.HasMoveOrderTo(new Vector(1, 1, 0));
-            unit3.HasMoveOrderTo(new Vector(0, 1, 1));
-            unit4.HasMoveOrderTo(new Vector(1, 1, 1));
+            unit2.HasMoveOrderTo(new Vector(2, 1, 0));
+            unit3.HasMoveOrderTo(new Vector(0, 1, 2));
+            unit4.HasMoveOrderTo(new Vector(2, 1, 2));
         }
 
         [Fact]
@@ -78,7 +80,7 @@ namespace MicroTactics.Tests.Features
         public void DoesNotCrashWhenSquadDimensionIsZero()
         {
             CreateUnitWithSquadNumber(0).AddMoveOrder(1, 1, 1);
-            _squad1.ReplaceSquad(0, 0, 0);
+            _squad1.ReplaceBoxFormation(0, 0, 0);
 
             _sut.Execute(_squad1.AsList());
         }

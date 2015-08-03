@@ -11,8 +11,8 @@ namespace MicroTactics.Tests.Features.CreateSquad
     {
         private readonly SquadCreationSystem _sut;
         private readonly TestPool _pool;
-        private readonly Entity _squad1 = new TestEntity().AddSquad(0, 0, 0);
-        private readonly Entity _squad2 = new TestEntity().AddSquad(0, 0, 0);
+        private readonly Entity _squad1 = new TestEntity().AddSquad(0).AddBoxFormation(0, 0, 0);
+        private readonly Entity _squad2 = new TestEntity().AddSquad(0).AddBoxFormation(0, 0, 0);
 
         public SquadCreationSystemTests()
         {
@@ -26,7 +26,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void MatchesSquadComponents()
         {
-            _sut.trigger.Should().Be(Matcher.Squad);
+            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.Squad, Matcher.BoxFormation));
         }
 
         [Fact]
@@ -38,8 +38,6 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void EmptySquadProducesNoUnits()
         {
-            _squad1.ReplaceSquad(0, 0, 0);
-
             _sut.Execute(_squad1.AsList());
 
             _pool.Count.Should().Be(0);
@@ -48,7 +46,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void AddsMultipleUnitsAccordingToSquadSize()
         {
-            _squad1.ReplaceSquad(0, 2, 2);
+            _squad1.ReplaceBoxFormation(2, 2, 0);
 
             _sut.Execute(_squad1.AsList());
 
@@ -58,10 +56,10 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void SetsDestroyOnExistingUnitsWhenRecreatingSquad()
         {
-            _squad1.ReplaceSquad(0, 2, 2);
+            _squad1.ReplaceBoxFormation(2, 2, 0);
             _sut.Execute(_squad1.AsList());
 
-            _squad1.ReplaceSquad(0, 1, 1);
+            _squad1.ReplaceBoxFormation(1, 1, 0);
             _sut.Execute(_squad1.AsList());
 
             var currentEntities = _pool.GetEntities();
@@ -72,8 +70,8 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void DoesNotTouchUnitsInOtherSquadsWhenRecreatingSquad()
         {
-            _sut.Execute(_squad1.ReplaceSquad(0, 1, 1).AsList());
-            _sut.Execute(_squad2.ReplaceSquad(1, 1, 1).AsList());
+            _sut.Execute(_squad1.ReplaceBoxFormation(1, 1, 0).AsList());
+            _sut.Execute(_squad2.ReplaceBoxFormation(1, 1, 0).AsList());
 
             _pool.Count.Should().Be(2);
         }
@@ -81,7 +79,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void AddsUnitComponentToEachUnit()
         {
-            _sut.Execute(_squad1.ReplaceSquad(0, 1, 1).AsList());
+            _sut.Execute(_squad1.ReplaceBoxFormation(1, 1, 0).AsList());
 
             var createdEntity = _pool.GetEntities().SingleEntity();
             createdEntity.hasUnit.Should().BeTrue("the entity should have a unit component");
@@ -91,16 +89,16 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void AddsPositionAndPlacesEachUnit()
         {
-            _sut.Execute(_squad1.ReplaceSquad(0, 2, 2).AsList());
+            _sut.Execute(_squad1.ReplaceBoxFormation(2, 2, 2).AsList());
 
             var unit1 = _pool.GetEntities().First();
             var unit2 = _pool.GetEntities().Second();
             var unit3 = _pool.GetEntities().Third();
             var unit4 = _pool.GetEntities().Fourth();
             unit1.ShouldHavePosition(0, 0, 0);
-            unit2.ShouldHavePosition(1, 0, 0);
-            unit3.ShouldHavePosition(0, 0, 1);
-            unit4.ShouldHavePosition(1, 0, 1);
+            unit2.ShouldHavePosition(2, 0, 0);
+            unit3.ShouldHavePosition(0, 0, 2);
+            unit4.ShouldHavePosition(2, 0, 2);
         }
     }
 

@@ -10,7 +10,7 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
     private Group _unitsGroup;
     private Pool _pool;
 
-    public IMatcher trigger { get { return Matcher.Squad; } }
+    public IMatcher trigger { get { return Matcher.AllOf(Matcher.Squad, Matcher.BoxFormation); } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
     public void SetPool(Pool pool)
@@ -21,17 +21,17 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
 
     public void Execute(List<Entity> entities)
     {
-        var squad = entities.SingleEntity().squad;
+        var squadEntity = entities.SingleEntity();
 
-        RemoveExistingUnitsFromSquad(squad.Number);
-        CreateUnitsForSquad(squad);
+        RemoveExistingUnitsFromSquad(squadEntity.squad.Number);
+        CreateUnitsForSquad(squadEntity.squad, squadEntity.boxFormation);
     }
 
-    private void CreateUnitsForSquad(SquadComponent squad)
+    private void CreateUnitsForSquad(SquadComponent squad, BoxFormationComponent formation)
     {
-        for (var i = 0; i < squad.Columns*squad.Rows; i++)
+        for (var i = 0; i < formation.Columns*formation.Rows; i++)
         {
-            var position = UnitInSquadPositioner.GetPosition(squad, i);
+            var position = UnitInSquadPositioner.GetPosition(formation, i);
             _pool.CreateEntity()
                  .AddUnit(squad.Number)
                  .AddPosition(position.x, position.y, position.z);

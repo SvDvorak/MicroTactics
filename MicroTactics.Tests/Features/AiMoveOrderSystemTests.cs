@@ -15,7 +15,7 @@ public class AiMoveOrderSystemTests
         _sut.SetPool(_testPool);
         _squad = _testPool.CreateEntity()
             .AddPosition(0, 0, 0)
-            .AddSquad(0, 1, 1)
+            .AddSquad(0)
             .IsAi(true);
     }
 
@@ -57,7 +57,7 @@ public class AiMoveOrderSystemTests
         _squad.ReplacePosition(-0.5f, 0, 0);
         var squad2 = _testPool.CreateEntity()
             .AddPosition(0, 0, 0.5f)
-            .AddSquad(1, 1, 1)
+            .AddSquad(1)
             .IsAi(true);
 
         _testPool.CreateEntity()
