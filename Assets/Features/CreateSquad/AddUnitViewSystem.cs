@@ -30,9 +30,26 @@ public class AddUnitViewSystem : IReactiveSystem, ISetPool
 
     private void AddUnitViewUsingSquadTemplate(Entity entity)
     {
-        var squad = _squads.GetEntities().Single(x => x.squad.Number == entity.unit.SquadNumber);
-        var gameObject = (GameObject)Object.Instantiate(squad.unitTemplate.Template, entity.position.ToV3(), new Quaternion());
+        var squad = GetMatchingSquad(entity);
+        var gameObject = InstantiateGameObject(entity, squad.unitTemplate.Template);
+        var animator = gameObject.GetComponent<Animator>();
+
+        entity
+            .AddView(gameObject)
+            .AddAnimate(animator);
+    }
+
+    private Entity GetMatchingSquad(Entity entity)
+    {
+        return _squads.GetEntities().Single(x => x.squad.Number == entity.unit.SquadNumber);
+    }
+
+    private GameObject InstantiateGameObject(Entity entity, GameObject unitTemplate)
+    {
+        var gameObject =
+            (GameObject) Object.Instantiate(unitTemplate, entity.position.ToV3(), new Quaternion());
         gameObject.transform.SetParent(_unitContainer);
-        entity.AddView(gameObject);
+
+        return gameObject;
     }
 }

@@ -15,6 +15,12 @@ public class MoveSystem : IExecuteSystem, ISetPool
         foreach (var entity in _entitiesWithOrder.GetEntities())
         {
             var newPosition = Vector3.MoveTowards(entity.position.ToV3(), entity.moveOrder.ToV3(), entity.movement.MoveSpeed);
+
+            if (entity.position.ToV3() == newPosition)
+            {
+                entity.RemoveMoveOrder();
+            }
+
             entity.ReplacePosition(newPosition.x, newPosition.y, newPosition.z);
         }
     }
