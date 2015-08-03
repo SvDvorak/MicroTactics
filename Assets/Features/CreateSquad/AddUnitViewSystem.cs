@@ -14,7 +14,7 @@ public class AddUnitViewSystem : IReactiveSystem, ISetPool
 
     public void SetPool(Pool pool)
     {
-        _squads = pool.GetGroup(Matcher.Squad);
+        _squads = pool.GetGroup(Matcher.AllOf(Matcher.Squad, Matcher.UnitTemplate));
     }
 
     public void Execute(List<Entity> entities)
