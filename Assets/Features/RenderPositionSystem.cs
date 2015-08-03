@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Entitas;
+﻿using Entitas;
 using UnityEngine;
 
 public class RenderPositionSystem : IExecuteSystem, ISetPool
@@ -17,7 +16,7 @@ public class RenderPositionSystem : IExecuteSystem, ISetPool
         {
             var pos = e.position;
             var transform = e.view.GameObject.transform;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(pos.x, pos.y, pos.z), 0.06f);
+            transform.position = new Vector3(pos.x, pos.y, pos.z);
         }
     }
 }

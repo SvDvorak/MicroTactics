@@ -77,13 +77,13 @@ namespace MicroTactics.Tests.Features.CreateSquad
         }
 
         [Fact]
-        public void AddsUnitComponentToEachUnit()
+        public void AddsUnitAndMovementComponentToEachUnit()
         {
             _sut.Execute(_squad1.ReplaceBoxFormation(1, 1, 0).AsList());
 
             var createdEntity = _pool.GetEntities().SingleEntity();
-            createdEntity.hasUnit.Should().BeTrue("the entity should have a unit component");
-            createdEntity.unit.SquadNumber.Should().Be(0);
+            createdEntity.ShouldHaveUnit(0);
+            createdEntity.ShouldHaveMovement(0.06f);
         }
 
         [Fact]
@@ -104,6 +104,18 @@ namespace MicroTactics.Tests.Features.CreateSquad
 
     public static class EntityExtensions
     {
+        public static void ShouldHaveUnit(this Entity entity, int squadNumber)
+        {
+            entity.hasUnit.Should().BeTrue("entity should have a unit component");
+            entity.unit.SquadNumber.Should().Be(squadNumber);
+        }
+
+        public static void ShouldHaveMovement(this Entity entity, float moveSpeed)
+        {
+            entity.hasMovement.Should().BeTrue("entity should have movement component");
+            entity.movement.ShouldBeEquivalentTo(new MovementComponent() { MoveSpeed = moveSpeed });
+        }
+
         public static void ShouldHavePosition(this Entity entity, float x, float y, float z)
         {
             entity.hasPosition.Should().BeTrue("the entity should have a position component");

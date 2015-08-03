@@ -101,9 +101,11 @@
     <Compile Include="Assets\Features\Move\AiMoveOrderSystem.cs" />
     <Compile Include="Assets\Features\Move\MoveOrderComponent.cs" />
     <Compile Include="Assets\Features\Move\MoveSystem.cs" />
+    <Compile Include="Assets\Features\Move\MovementComponent.cs" />
     <Compile Include="Assets\Features\Move\SquadMoveOrderSystem.cs" />
     <Compile Include="Assets\Features\Move\UnitInSquadPositioner.cs" />
     <Compile Include="Assets\Features\RenderPositionSystem.cs" />
+    <Compile Include="Assets\Features\SquadCenterPositionSystem.cs" />
     <Compile Include="Assets\FloatExtensions.cs" />
     <Compile Include="Assets\Generated\AddUnitViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AiComponentGeneratedExtension.cs" />
@@ -116,10 +118,12 @@
     <Compile Include="Assets\Generated\LinkViewsStartSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MoveOrderComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MoveSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\MovementComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Pools.cs" />
     <Compile Include="Assets\Generated\PositionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RemoveViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RenderPositionSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\SquadCenterPositionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadCreationSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadMoveOrderSystemGeneratedExtension.cs" />
@@ -181,6 +185,7 @@
     <Compile Include="Assets\Maybe.cs" />
     <Compile Include="Assets\ObjectExtensions.cs" />
     <Compile Include="Assets\RotateTestCode.cs" />
+    <Compile Include="Assets\SetFrameRate.cs" />
     <Compile Include="Assets\Squad\AttackOrderSound.cs" />
     <Compile Include="Assets\Squad\Formation.cs" />
     <Compile Include="Assets\Squad\GameObjectExtensions.cs" />

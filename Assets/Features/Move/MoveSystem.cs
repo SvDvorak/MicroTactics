@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using UnityEngine;
 
 public class MoveSystem : IExecuteSystem, ISetPool
 {
@@ -6,16 +7,15 @@ public class MoveSystem : IExecuteSystem, ISetPool
 
     public void SetPool(Pool pool)
     {
-        _entitiesWithOrder = pool.GetGroup(Matcher.AllOf(Matcher.Position, Matcher.MoveOrder));
+        _entitiesWithOrder = pool.GetGroup(Matcher.AllOf(Matcher.Position, Matcher.Movement, Matcher.MoveOrder));
     }
 
     public void Execute()
     {
         foreach (var entity in _entitiesWithOrder.GetEntities())
         {
-            var order = entity.moveOrder;
-            entity.ReplacePosition(order.x, order.y, order.z);
-            entity.RemoveMoveOrder();
+            var newPosition = Vector3.MoveTowards(entity.position.ToV3(), entity.moveOrder.ToV3(), entity.movement.MoveSpeed);
+            entity.ReplacePosition(newPosition.x, newPosition.y, newPosition.z);
         }
     }
 }

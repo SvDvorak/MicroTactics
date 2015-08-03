@@ -37,8 +37,7 @@ public class AiMoveOrderSystem : IExecuteSystem, ISetPool
 
                 var move = squadPosition + moveDirection;
 
-
-                squad.AddMoveOrder(move.x, move.y, move.z);
+                squad.ReplaceMoveOrder(move.x, move.y, move.z);
             }
         }
     }

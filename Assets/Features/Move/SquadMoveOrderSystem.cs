@@ -38,12 +38,7 @@ public class SquadMoveOrderSystem : IReactiveSystem, ISetPool
             var unit = unitsInSquad.ElementAt(i);
             var squadPosition = UnitInSquadPositioner.GetPosition(squadEntity.boxFormation, i);
 
-            if (unit.hasMoveOrder)
-            {
-                unit.RemoveMoveOrder();
-            }
-
-            unit.AddMoveOrder(
+            unit.ReplaceMoveOrder(
                 squadPosition.x + squadEntity.moveOrder.x,
                 squadPosition.y + squadEntity.moveOrder.y,
                 squadPosition.z + squadEntity.moveOrder.z);
