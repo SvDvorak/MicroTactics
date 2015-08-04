@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 public static class ObjectExtensions
 {
-    public static Maybe<T> ToMaybe<T>(this T element)
+    public static StructMaybe<T> ToStructMaybe<T>(this T element) where T : struct 
     {
-        return new Maybe<T>(element);
+        return new StructMaybe<T>(element);
     }
 
     public static List<T> AsList<T>(this T element)

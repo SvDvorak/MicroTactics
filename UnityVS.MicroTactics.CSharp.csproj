@@ -82,6 +82,8 @@
     <Compile Include="Assets\ConvexHullCalculator.cs" />
     <Compile Include="Assets\EntitasSetup.cs" />
     <Compile Include="Assets\Events.cs" />
+    <Compile Include="Assets\Features\Attack\AiAttackOrderSystem.cs" />
+    <Compile Include="Assets\Features\Attack\AttackOrderComponent.cs" />
     <Compile Include="Assets\Features\AudioComponent.cs" />
     <Compile Include="Assets\Features\ComponentContainer.cs" />
     <Compile Include="Assets\Features\CreateSquad\AddUnitViewSystem.cs" />
@@ -113,12 +115,14 @@
     <Compile Include="Assets\Features\SquadCenterPositionSystem.cs" />
     <Compile Include="Assets\FloatExtensions.cs" />
     <Compile Include="Assets\Generated\AddUnitViewSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\AiAttackOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AiComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AiMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AnimateComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AnimateUnitSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Move.RemoveMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.SquadAudioSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\AttackOrderComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AudioComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\BoxFormationComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ComponentIds.cs" />
@@ -192,7 +196,6 @@
     <Compile Include="Assets\Libraries\Entitas\Pool.cs" />
     <Compile Include="Assets\Libraries\Entitas\ReactiveSystem.cs" />
     <Compile Include="Assets\Libraries\Entitas\Systems.cs" />
-    <Compile Include="Assets\Maybe.cs" />
     <Compile Include="Assets\ObjectExtensions.cs" />
     <Compile Include="Assets\RotateTestCode.cs" />
     <Compile Include="Assets\SetFrameRate.cs" />
@@ -217,6 +220,7 @@
     <Compile Include="Assets\Squad\SquadSelection.cs" />
     <Compile Include="Assets\Squad\SquadState.cs" />
     <Compile Include="Assets\Squad\WalkSound.cs" />
+    <Compile Include="Assets\StructMaybe.cs" />
     <Compile Include="Assets\TestHelpers\SimulateClick.cs" />
     <Compile Include="Assets\TimedDestroy.cs" />
     <Compile Include="Assets\Triangulator.cs" />

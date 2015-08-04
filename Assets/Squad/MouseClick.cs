@@ -66,15 +66,17 @@ public class MouseClick : MonoBehaviour
         }
     }
 
-    private Maybe<RaycastHit> RaycastUsingCamera(int layersToUse)
+    private StructMaybe<RaycastHit> RaycastUsingCamera(int layersToUse)
     {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layersToUse))
         {
-            return hit.ToMaybe();
+            return hit.ToStructMaybe();
         }
 
-        return Maybe<RaycastHit>.Nothing;
+        return StructMaybe<RaycastHit>.Nothing;
     }
+
+
 }
