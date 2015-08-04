@@ -33,7 +33,9 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateMoveSystem())
             .Add(pool.CreateRenderPositionSystem())
             .Add(pool.CreateAnimateUnitSystem())
+            .Add(pool.CreateSquadAudioSystem())
             .Add(pool.CreateRemoveViewSystem())
+            .Add(pool.CreateRemoveMoveOrderSystem())
             .Add(pool.CreateDestroySystem());
     }
 }

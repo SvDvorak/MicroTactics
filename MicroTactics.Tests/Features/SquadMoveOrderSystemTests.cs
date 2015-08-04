@@ -48,10 +48,10 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute(_squad1.AsList());
 
-            unit1.HasMoveOrderTo(new Vector(0, 1, 0));
-            unit2.HasMoveOrderTo(new Vector(2, 1, 0));
-            unit3.HasMoveOrderTo(new Vector(0, 1, 2));
-            unit4.HasMoveOrderTo(new Vector(2, 1, 2));
+            unit1.HasMoveOrderTo(new Vector(-1, 1, -1));
+            unit2.HasMoveOrderTo(new Vector(1, 1, -1));
+            unit3.HasMoveOrderTo(new Vector(-1, 1, 1));
+            unit4.HasMoveOrderTo(new Vector(1, 1, 1));
         }
 
         [Fact]

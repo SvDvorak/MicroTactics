@@ -82,6 +82,7 @@
     <Compile Include="Assets\ConvexHullCalculator.cs" />
     <Compile Include="Assets\EntitasSetup.cs" />
     <Compile Include="Assets\Events.cs" />
+    <Compile Include="Assets\Features\AudioComponent.cs" />
     <Compile Include="Assets\Features\ComponentContainer.cs" />
     <Compile Include="Assets\Features\CreateSquad\AddUnitViewSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\BoxFormationComponent.cs" />
@@ -104,9 +105,11 @@
     <Compile Include="Assets\Features\Move\MoveOrderComponent.cs" />
     <Compile Include="Assets\Features\Move\MoveSystem.cs" />
     <Compile Include="Assets\Features\Move\MovementComponent.cs" />
+    <Compile Include="Assets\Features\Move\RemoveMoveOrderSystem.cs" />
     <Compile Include="Assets\Features\Move\SquadMoveOrderSystem.cs" />
     <Compile Include="Assets\Features\Move\UnitInSquadPositioner.cs" />
     <Compile Include="Assets\Features\RenderPositionSystem.cs" />
+    <Compile Include="Assets\Features\SquadAudioSystem.cs" />
     <Compile Include="Assets\Features\SquadCenterPositionSystem.cs" />
     <Compile Include="Assets\FloatExtensions.cs" />
     <Compile Include="Assets\Generated\AddUnitViewSystemGeneratedExtension.cs" />
@@ -114,6 +117,9 @@
     <Compile Include="Assets\Generated\AiMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AnimateComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AnimateUnitSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\Assets.Features.Move.RemoveMoveOrderSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\Assets.Features.SquadAudioSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\AudioComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\BoxFormationComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ComponentIds.cs" />
     <Compile Include="Assets\Generated\DestroyComponentGeneratedExtension.cs" />

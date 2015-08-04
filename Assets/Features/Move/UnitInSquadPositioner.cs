@@ -4,8 +4,8 @@ public class UnitInSquadPositioner
 {
     public static Vector GetPosition(BoxFormationComponent formation, int unitNumber)
     {
-        var squadPositionX = unitNumber%formation.Columns;
-        var squadPositionZ = unitNumber/formation.Columns;
+        var squadPositionX = unitNumber%formation.Columns - (formation.Columns-1)/2f;
+        var squadPositionZ = unitNumber/formation.Columns - (formation.Rows-1)/2f;
 
         return new Vector(squadPositionX*formation.Spacing, 0, squadPositionZ*formation.Spacing);
     }

@@ -33,14 +33,13 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void StopsAndRemovesMoveOrderWhenReachedPosition()
+        public void StopsWhenHavingReachedPosition()
         {
             _entity.ReplaceMovement(float.PositiveInfinity);
 
             _sut.Execute();
 
             _entity.position.ShouldBeEquivalentTo(_entity.moveOrder);
-            _entity.hasMoveOrder.Should().BeFalse("move order should have been removed when having reached target");
         }
     }
 }

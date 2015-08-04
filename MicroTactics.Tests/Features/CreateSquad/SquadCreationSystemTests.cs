@@ -95,10 +95,10 @@ namespace MicroTactics.Tests.Features.CreateSquad
             var unit2 = _pool.GetEntities().Second();
             var unit3 = _pool.GetEntities().Third();
             var unit4 = _pool.GetEntities().Fourth();
-            unit1.ShouldHavePosition(0, 0, 0);
-            unit2.ShouldHavePosition(2, 0, 0);
-            unit3.ShouldHavePosition(0, 0, 2);
-            unit4.ShouldHavePosition(2, 0, 2);
+            unit1.ShouldHavePosition(-1, 0, -1);
+            unit2.ShouldHavePosition(1, 0, -1);
+            unit3.ShouldHavePosition(-1, 0, 1);
+            unit4.ShouldHavePosition(1, 0, 1);
         }
     }
 
