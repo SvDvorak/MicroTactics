@@ -20,7 +20,7 @@ namespace MicroTactics.Tests.Features
         public void GivesAttackOrderIfEnemyIsInRange()
         {
             CreateEnemyAt(1, 0, 0);
-            var ai = CreateAiAt(0, 0, 0);
+            var ai = CreateAiAt(2, new Vector(0, 0, 0));
 
             _sut.Execute();
 
@@ -34,7 +34,7 @@ namespace MicroTactics.Tests.Features
             CreateEnemyAt(0, 0, 3);
             CreateEnemyAt(0, 0, 2);
             CreateEnemyAt(0, 0, 1);
-            var ai = CreateAiAt(0, 0, 0);
+            var ai = CreateAiAt(5, new Vector(0, 0, 0));
 
             _sut.Execute();
 
@@ -44,7 +44,7 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void DoesNotGiveAttackOrderWhenNoEnemiesExist()
         {
-            var ai = CreateAiAt(0, 0, 0);
+            var ai = CreateAiAt(0, new Vector(0, 0, 0));
 
             _sut.Execute();
 
@@ -55,11 +55,22 @@ namespace MicroTactics.Tests.Features
         public void DoesNotGiveAttackOrderWhenEnemyIsTooFarAway()
         {
             CreateEnemyAt(float.PositiveInfinity, 0, 0);
-            var ai = CreateAiAt(0, 0, 0);
+            var ai = CreateAiAt(0, new Vector(0, 0, 0));
 
             _sut.Execute();
 
             ai.hasAttackOrder.Should().BeFalse("enemy is too far away so shouldn't have attack order");
+        }
+
+        [Fact]
+        public void RemovesPreviousAttackOrderIfNoEnemiesAreInRange()
+        {
+            CreateEnemyAt(float.PositiveInfinity, 0, 0);
+            var ai = CreateAiAt(0, new Vector(0, 0, 0)).AddAttackOrder(0, 0, 0);
+
+            _sut.Execute();
+
+            ai.hasAttackOrder.Should().BeFalse("enemy is no longer in range so shouldn't have attack order");
         }
 
         private Entity CreateEnemyAt(float x, float y, float z)
@@ -67,9 +78,9 @@ namespace MicroTactics.Tests.Features
             return _pool.CreateEntity().AddPosition(x, y, z).IsEnemy(true);
         }
 
-        private Entity CreateAiAt(int x, int y, int z)
+        private Entity CreateAiAt(float range, Vector vector)
         {
-            return _pool.CreateEntity().AddPosition(x, y, z).IsAi(true);
+            return _pool.CreateEntity().AddPosition(vector.x, vector.y, vector.z).AddAi(range);
         }
     }
 }

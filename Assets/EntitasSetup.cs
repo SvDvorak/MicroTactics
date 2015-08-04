@@ -27,13 +27,19 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateLinkViewsStartSystem())
             .Add(pool.CreateSquadCreationSystem())
             .Add(pool.CreateSquadCenterPositionSystem())
+
             .Add(pool.CreateAddUnitViewSystem())
+
             .Add(pool.CreateAiMoveOrderSystem())
+            .Add(pool.CreateAiAttackOrderSystem())
+
             .Add(pool.CreateSquadMoveOrderSystem())
             .Add(pool.CreateMoveSystem())
+
             .Add(pool.CreateRenderPositionSystem())
             .Add(pool.CreateAnimateUnitSystem())
             .Add(pool.CreateSquadAudioSystem())
+
             .Add(pool.CreateRemoveViewSystem())
             .Add(pool.CreateRemoveMoveOrderSystem())
             .Add(pool.CreateDestroySystem());

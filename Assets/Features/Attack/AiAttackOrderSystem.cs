@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Entitas;
 
 public class AiAttackOrderSystem : IExecuteSystem, ISetPool
@@ -17,30 +16,29 @@ public class AiAttackOrderSystem : IExecuteSystem, ISetPool
     {
         foreach (var ai in _ais.GetEntities())
         {
-            var closestEnemy = GetClosestEnemyTo(ai.position);
-            if(closestEnemy != null)
+            var closestEnemy = GetClosestEnemyTo(ai);
+            if(closestEnemy.HasValue)
             {
-                var enemyPos = closestEnemy.position;
-                ai.AddAttackOrder(enemyPos.x, enemyPos.y, enemyPos.z);
+                var enemyPos = closestEnemy.Value.position;
+                ai.ReplaceAttackOrder(enemyPos.x, enemyPos.y, enemyPos.z);
+            }
+            else if (ai.hasAttackOrder)
+            {
+                ai.RemoveAttackOrder();
             }
         }
     }
 
-    private Entity GetClosestEnemyTo(PositionComponent position)
+    private Maybe<Entity> GetClosestEnemyTo(Entity aiEntity)
     {
-        return _enemies.GetSingleEntity();
+        return _enemies.GetEntities()
+            .Select(x => new { Entity = x, Diff = GetDifference(x.position, aiEntity.position) })
+            .OrderBy(x => x.Diff)
+            .Where(x => x.Diff < aiEntity.ai.SeeingRange)
+            .Select(x => x.Entity)
+            .FirstOrDefault()
+            .ToMaybe();
     }
-
-    //private Maybe<Entity> GetClosestEnemyTo(Vector position)
-    //{
-    //    var enumerable = new List<int>().Select(x => x);
-    //    //var enumerable = _enemies.GetEntities().Select(x => x);
-
-    //    return _enemies.GetEntities()
-    //        .OrderBy(x => GetDifference(x.position, position))
-    //        .FirstOrDefault()
-    //        .ToMaybe();
-    //}
 
     public class EntityDistance
     {

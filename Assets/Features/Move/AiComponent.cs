@@ -2,5 +2,5 @@
 
 public class AiComponent : IComponent
 {
-
+    public float SeeingRange;
 }

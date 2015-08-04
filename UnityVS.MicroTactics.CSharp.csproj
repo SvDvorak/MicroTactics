@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -196,6 +198,7 @@
     <Compile Include="Assets\Libraries\Entitas\Pool.cs" />
     <Compile Include="Assets\Libraries\Entitas\ReactiveSystem.cs" />
     <Compile Include="Assets\Libraries\Entitas\Systems.cs" />
+    <Compile Include="Assets\Maybe.cs" />
     <Compile Include="Assets\ObjectExtensions.cs" />
     <Compile Include="Assets\RotateTestCode.cs" />
     <Compile Include="Assets\SetFrameRate.cs" />
