@@ -27,6 +27,12 @@ public static class IEnumerableExtensions
 
     public static Vector3 Sum<T>(this IEnumerable<T> source, Func<T, Vector3> selector)
     {
-        return source.Select(selector).Aggregate((x, y) => x + y);
+        var vectors = source.ToList();
+        if (!vectors.Any())
+        {
+            return new Vector3();
+        }
+
+        return vectors.Select(selector).Aggregate((x, y) => x + y);
     }
 }

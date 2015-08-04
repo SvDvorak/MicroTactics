@@ -1,26 +1,24 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 
-public class SquadAttackOrderSystem : IReactiveSystem, ISetPool
+public class SquadAttackOrderSystem : IReactiveSystem
 {
-    private Group _units;
-
-    public IMatcher trigger { get { return Matcher.Unit; } }
-    public GroupEventType eventType { get; set; }
-
-    public void SetPool(Pool pool)
-    {
-        _units = pool.GetGroup(Matcher.Unit);
-    }
+    public IMatcher trigger { get { return Matcher.AllOf(Matcher.UnitsCache, Matcher.BoxFormation, Matcher.AttackOrder); } }
+    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
     public void Execute(List<Entity> entities)
     {
-        var squadEntity = entities.SingleEntity();
-
-        for (var i = 0; i < _units.GetEntities().Length; i++)
+        foreach (var squadEntity in entities)
         {
-            var unit = _units.GetEntities()[i];
+            SetAttackRelativeToSquadPosition(squadEntity.unitsCache.Units, squadEntity);
+        }
+    }
 
+    private static void SetAttackRelativeToSquadPosition(IList<Entity> unitsInSquad, Entity squadEntity)
+    {
+        for (var i = 0; i < unitsInSquad.Count; i++)
+        {
+            var unit = unitsInSquad[i];
             var squadPosition = UnitInSquadPositioner.GetPosition(squadEntity.boxFormation, i);
 
             unit.ReplaceAttackOrder(

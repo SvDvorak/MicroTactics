@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using System.Linq;
+using Entitas;
 using FluentAssertions;
 using Xunit;
 
@@ -7,30 +8,32 @@ namespace MicroTactics.Tests.Features
     public class SquadAttackOrderSystemTests
     {
         private readonly SquadAttackOrderSystem _sut;
-        private readonly TestPool _pool;
 
         public SquadAttackOrderSystemTests()
         {
             _sut = new SquadAttackOrderSystem();
-            _pool = new TestPool();
-            _sut.SetPool(_pool);
         }
 
         [Fact]
         public void TriggersOnAddedAttackOrder()
         {
-            _sut.trigger.Should().Be(Matcher.Unit);
+            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.UnitsCache, Matcher.BoxFormation, Matcher.AttackOrder));
             _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
         }
 
         [Fact]
         public void GivesAttackOrderAccordingToFormation()
         {
-            var squad = _pool.CreateEntity().AddSquad(0).AddBoxFormation(2, 2, 2).AddAttackOrder(1, 0, 0);
-            var unit1 = _pool.CreateEntity().AddUnit(0);
-            var unit2 = _pool.CreateEntity().AddUnit(0);
-            var unit3 = _pool.CreateEntity().AddUnit(0);
-            var unit4 = _pool.CreateEntity().AddUnit(0);
+            var unit1 = CreateUnit();
+            var unit2 = CreateUnit();
+            var unit3 = CreateUnit();
+            var unit4 = CreateUnit();
+
+            var squad = new TestEntity()
+                .AddSquad(0)
+                .AddUnitsCache(new [] { unit1, unit2, unit3, unit4 }.ToList())
+                .AddBoxFormation(2, 2, 2)
+                .AddAttackOrder(1, 0, 0);
 
             _sut.Execute(squad.AsList());
 
@@ -38,6 +41,35 @@ namespace MicroTactics.Tests.Features
             unit2.HasAttackOrderTo(new Vector(2, 0, -1));
             unit3.HasAttackOrderTo(new Vector(0, 0, 1));
             unit4.HasAttackOrderTo(new Vector(2, 0, 1));
+        }
+
+        [Fact]
+        public void HandlesMultipleSquads()
+        {
+            var unit1 = CreateUnit(0);
+            var unit2 = CreateUnit(1);
+
+            var squad1 = new TestEntity()
+                .AddSquad(0)
+                .AddUnitsCache(unit1.AsList())
+                .AddBoxFormation(1, 1, 1)
+                .AddAttackOrder(1, 0, 0);
+
+            var squad2 = new TestEntity()
+                .AddSquad(1)
+                .AddUnitsCache(unit2.AsList())
+                .AddBoxFormation(1, 1, 1)
+                .AddAttackOrder(0, 1, 0);
+
+            _sut.Execute(new [] { squad1, squad2 }.ToList());
+
+            unit1.HasAttackOrderTo(new Vector(1, 0, 0));
+            unit2.HasAttackOrderTo(new Vector(0, 1, 0));
+        }
+
+        private static Entity CreateUnit(int squadNumber = 0)
+        {
+            return new TestEntity().AddUnit(squadNumber);
         }
     }
 }

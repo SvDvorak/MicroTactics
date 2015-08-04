@@ -9,22 +9,19 @@ namespace MicroTactics.Tests.Features
     public class SquadMoveOrderSystemTests
     {
         private readonly SquadMoveOrderSystem _sut;
-        private readonly TestPool _testPool;
         private readonly Entity _squad1;
         private readonly Entity _squad2;
 
         public SquadMoveOrderSystemTests()
         {
             _sut = new SquadMoveOrderSystem();
-            _testPool = new TestPool();
-            _sut.SetPool(_testPool);
 
-            _squad1 = _testPool.CreateEntity()
+            _squad1 = new TestEntity()
                 .AddSquad(0)
                 .AddBoxFormation(1, 1, 0)
                 .AddMoveOrder(0, 1, 0);
 
-            _squad2 = _testPool.CreateEntity()
+            _squad2 = new TestEntity()
                 .AddSquad(1)
                 .AddBoxFormation(1, 1, 0)
                 .AddMoveOrder(0, 2, 0);
@@ -33,18 +30,21 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void TriggersOnAddedMoveOrder()
         {
-            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.Squad, Matcher.MoveOrder));
+            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.UnitsCache, Matcher.BoxFormation, Matcher.MoveOrder));
             _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
         }
 
         [Fact]
         public void OrdersUnitsAccordingToFormation()
         {
-            _squad1.ReplaceBoxFormation(2, 2, 2);
-            var unit1 = CreateUnitWithSquadNumber(0);
-            var unit2 = CreateUnitWithSquadNumber(0);
-            var unit3 = CreateUnitWithSquadNumber(0);
-            var unit4 = CreateUnitWithSquadNumber(0);
+            var unit1 = CreateUnit(0);
+            var unit2 = CreateUnit(0);
+            var unit3 = CreateUnit(0);
+            var unit4 = CreateUnit(0);
+
+            _squad1
+                .ReplaceBoxFormation(2, 2, 2)
+                .ReplaceUnitsCache(new [] { unit1, unit2, unit3, unit4 }.ToList());
 
             _sut.Execute(_squad1.AsList());
 
@@ -57,8 +57,10 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void GivesUnitOrdersFromMultipleSquads()
         {
-            var unit1 = CreateUnitWithSquadNumber(0);
-            var unit2 = CreateUnitWithSquadNumber(1);
+            var unit1 = CreateUnit(0);
+            var unit2 = CreateUnit(1);
+            _squad1.ReplaceUnitsCache(unit1.AsList());
+            _squad2.ReplaceUnitsCache(unit2.AsList());
 
             _sut.Execute(new List<Entity>() { _squad1, _squad2});
 
@@ -69,35 +71,17 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void ReplacesOrderIfOneAlreadyExistsOnUnit()
         {
-            var unit = CreateUnitWithSquadNumber(0).AddMoveOrder(1, 1, 1);
+            var unit = CreateUnit(0).AddMoveOrder(1, 1, 1);
+            _squad1.ReplaceUnitsCache(unit.AsList());
 
             _sut.Execute(_squad1.AsList());
 
             unit.HasMoveOrderTo(new Vector(0, 1, 0));
         }
 
-        [Fact]
-        public void DoesNotCrashWhenSquadDimensionIsZero()
+        private Entity CreateUnit(int squadNumber)
         {
-            CreateUnitWithSquadNumber(0).AddMoveOrder(1, 1, 1);
-            _squad1.ReplaceBoxFormation(0, 0, 0);
-
-            _sut.Execute(_squad1.AsList());
-        }
-
-        [Fact]
-        public void IgnoresDestroyedUnits()
-        {
-            var unit = CreateUnitWithSquadNumber(0).IsDestroy(true);
-
-            _sut.Execute(_squad1.AsList());
-
-            unit.hasMoveOrder.Should().BeFalse("destroyed unit should not get order");
-        }
-
-        private Entity CreateUnitWithSquadNumber(int squadNumber)
-        {
-            return _testPool.CreateEntity().AddUnit(squadNumber).AddPosition(0, 0, 0);
+            return new TestEntity().AddUnit(squadNumber).AddPosition(0, 0, 0);
         }
     }
 }

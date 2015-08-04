@@ -36,5 +36,12 @@ namespace MicroTactics.Tests
             vectors.Sum().Should().Be(new Vector3(3, 5, 7));
             vectors.Sum(x => x).Should().Be(new Vector3(3, 5, 7));
         }
+
+        [Fact]
+        public void ReturnsEmptyVectorWhenNoElementsAreInList()
+        {
+            var emptyList = new List<Vector3>();
+            emptyList.Sum(x => x).Should().Be(new Vector3(0, 0, 0));
+        }
     }
 }

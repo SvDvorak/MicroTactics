@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -116,6 +114,8 @@
     <Compile Include="Assets\Features\RenderPositionSystem.cs" />
     <Compile Include="Assets\Features\SquadAudioSystem.cs" />
     <Compile Include="Assets\Features\SquadCenterPositionSystem.cs" />
+    <Compile Include="Assets\Features\UnitsCacheComponent.cs" />
+    <Compile Include="Assets\Features\UnitsCacheSystem.cs" />
     <Compile Include="Assets\FloatExtensions.cs" />
     <Compile Include="Assets\Generated\AddUnitViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AiAttackOrderSystemGeneratedExtension.cs" />
@@ -140,12 +140,15 @@
     <Compile Include="Assets\Generated\PositionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RemoveViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RenderPositionSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\SquadAttackOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadCenterPositionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadCreationSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\UnitComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\UnitTemplateComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\UnitsCacheComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\UnitsCacheSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ViewComponentGeneratedExtension.cs" />
     <Compile Include="Assets\GroundCollision.cs" />
     <Compile Include="Assets\IEnumerableExtensions.cs" />
