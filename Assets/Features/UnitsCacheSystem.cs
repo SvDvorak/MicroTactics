@@ -2,12 +2,33 @@
 using System.Linq;
 using Entitas;
 
-public class UnitsCacheSystem : IReactiveSystem, ISetPool
+public class UnitsCacheSystem : IMultiReactiveSystem, ISetPool
 {
     private Group _squads;
 
-    public IMatcher trigger { get { return Matcher.Unit; } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAddedOrRemoved; } }
+    public IMatcher[] triggers
+    {
+        get
+        {
+            return new IMatcher[]
+                {
+                    Matcher.Unit,
+                    Matcher.AllOf(Matcher.Unit, Matcher.Destroy)
+                };
+        }
+    }
+
+    public GroupEventType[] eventTypes
+    {
+        get
+        {
+            return new[]
+                {
+                    GroupEventType.OnEntityAddedOrRemoved,
+                    GroupEventType.OnEntityAdded
+                };
+        }
+    }
 
     public void SetPool(Pool pool)
     {

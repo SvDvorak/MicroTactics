@@ -26,8 +26,8 @@ public class EntitasSetup : MonoBehaviour
 #endif
             .Add(pool.CreateLinkViewsStartSystem())
             .Add(pool.CreateSquadCreationSystem())
-            .Add(pool.CreateSquadCenterPositionSystem())
             .Add(pool.CreateUnitsCacheSystem())
+            .Add(pool.CreateSquadCenterPositionSystem())
 
             .Add(pool.CreateAddUnitViewSystem())
 
