@@ -13,25 +13,18 @@ namespace Assets.Features
         {
             foreach (var entity in entities)
             {
-                //_pauseDelay += Time.deltaTime;
-
-                //if (_pauseDelay > MaxPauseDelay)
-                //{
-                //_audioSource.clip = WalkSounds[Random.Range(0, WalkSounds.Count())];
-                //_audioSource.pitch = Random.Range(0.8f, 1.1f);
-                //_audioSource.Play();
                 var audioSource = entity.audio.AudioSource;
 
                 if (!audioSource.isPlaying && entity.hasMoveOrder)
                 {
+                    audioSource.clip = entity.audio.SoundOptions[Random.Range(0, entity.audio.SoundOptions.Count)];
+                    audioSource.pitch = Random.Range(0.8f, 1.1f);
                     audioSource.Play();
                 }
-                if (!entity.hasMoveOrder)
+                else if (!entity.hasMoveOrder)
                 {
                     audioSource.Stop();
                 }
-                //    _pauseDelay = 0;
-                //}
             }
         }
     }
