@@ -86,6 +86,7 @@
     <Compile Include="Assets\Events.cs" />
     <Compile Include="Assets\Features\Attack\AiAttackOrderSystem.cs" />
     <Compile Include="Assets\Features\Attack\AttackOrderComponent.cs" />
+    <Compile Include="Assets\Features\Attack\SquadAttackOrderSystem.cs" />
     <Compile Include="Assets\Features\AudioComponent.cs" />
     <Compile Include="Assets\Features\ComponentContainer.cs" />
     <Compile Include="Assets\Features\CreateSquad\AddUnitViewSystem.cs" />

@@ -85,6 +85,7 @@
     <Compile Include="Features\EntityExtensions.cs" />
     <Compile Include="Features\MoveSystemTests.cs" />
     <Compile Include="Features\RemoveMoveOrderSystemTests.cs" />
+    <Compile Include="Features\SquadAttackOrderSystemTests.cs" />
     <Compile Include="Features\SquadCenterPositionSystemTests.cs" />
     <Compile Include="Features\SquadMoveOrderSystemTests.cs" />
     <Compile Include="FloatExtensionsTests.cs" />
