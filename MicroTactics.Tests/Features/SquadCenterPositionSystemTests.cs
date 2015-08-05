@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using System.Collections.Generic;
+using Entitas;
 using FluentAssertions;
 using Xunit;
 
@@ -46,12 +47,13 @@ namespace MicroTactics.Tests.Features
 
         private Entity CreateSquadAt(float x, float y, float z)
         {
-            return _pool.CreateEntity().AddSquad(_squadCounter++).AddPosition(x, y, z);
+            return _pool.CreateEntity().AddSquad(_squadCounter++).AddPosition(x, y, z).AddUnitsCache(new List<Entity>());
         }
 
         private void CreateUnitForSquadAt(Entity squadEntity, int x, int y, int z)
         {
-            _pool.CreateEntity().AddUnit(squadEntity.squad.Number).AddPosition(x, y, z);
+            var unit = _pool.CreateEntity().AddUnit(squadEntity.squad.Number).AddPosition(x, y, z);
+            squadEntity.unitsCache.Units.Add(unit);
         }
     }
 }
