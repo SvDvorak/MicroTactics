@@ -1,5 +1,5 @@
 ﻿using Entitas;
 
-public class AttackOrderComponent : Vector, IComponent
+public class AttackOrderComponent : VectorClass, IComponent
 {
 }

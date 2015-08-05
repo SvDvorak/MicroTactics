@@ -1,5 +1,5 @@
 ﻿using Entitas;
 
-public class PositionComponent : Vector, IComponent
+public class PositionComponent : VectorClass, IComponent
 {
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Assets;
 using Entitas;
 using UnityEngine;
 
@@ -27,15 +28,15 @@ public class AiMoveOrderSystem : IExecuteSystem, ISetPool
             var squadPosition = squad.position.ToV3();
             var toEnemy = squadPosition - enemy.position.ToV3();
 
-            if (toEnemy.magnitude < 1)
+            if (toEnemy.Length() < 1)
             {
-                var moveDirection = Vector3.ClampMagnitude(toEnemy, 1);
+                var moveDirection = Vector3.ClampMagnitude(toEnemy.ToUnityV3(), 1);
                 if (moveDirection.magnitude.IsApproximately(0))
                 {
                     moveDirection = new Vector3(1, 0, 0);
                 }
 
-                var move = squadPosition + moveDirection;
+                var move = squadPosition.ToUnityV3() + moveDirection;
 
                 squad.ReplaceMoveOrder(move.x, move.y, move.z);
             }

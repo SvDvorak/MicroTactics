@@ -1,31 +1,24 @@
-﻿using UnityEngine;
+﻿using Mono.GameMath;
 
-public class Kuaternion
+public class VectorClass
 {
     public float x;
     public float y;
     public float z;
-    public float w;
 
-    public Kuaternion() : this(0, 0, 0, 0) { }
+    public VectorClass() : this(0, 0, 0) { }
 
-    public Kuaternion(float x, float y, float z, float w)
+    public VectorClass(float x, float y, float z)
     {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.w = w;
-    }
-
-    public Quaternion ToQ()
-    {
-        return new Quaternion(x, y, z, w);
     }
 
     #region Equality-methods
-    protected bool Equals(Kuaternion other)
+    protected bool Equals(VectorClass other)
     {
-        return x.Equals(other.x) && y.Equals(other.y) && z.Equals(other.z) && w.Equals(other.w);
+        return x.Equals(other.x) && y.Equals(other.y) && z.Equals(other.z);
     }
 
     public override bool Equals(object obj)
@@ -42,7 +35,7 @@ public class Kuaternion
         {
             return false;
         }
-        return Equals((Kuaternion)obj);
+        return Equals((VectorClass)obj);
     }
 
     public override int GetHashCode()
@@ -52,9 +45,8 @@ public class Kuaternion
             var hashCode = x.GetHashCode();
             hashCode = (hashCode * 397) ^ y.GetHashCode();
             hashCode = (hashCode * 397) ^ z.GetHashCode();
-            hashCode = (hashCode * 397) ^ w.GetHashCode();
             return hashCode;
         }
     }
-    #endregion
+    #endregion    
 }

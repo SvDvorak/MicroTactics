@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using Assets;
 using Entitas;
+using Mono.GameMath;
 
 public class AiAttackOrderSystem : IExecuteSystem, ISetPool
 {
@@ -32,7 +34,7 @@ public class AiAttackOrderSystem : IExecuteSystem, ISetPool
     private Maybe<Entity> GetClosestEnemyTo(Entity aiEntity)
     {
         return _enemies.GetEntities()
-            .Select(x => new { Entity = x, Diff = GetDifference(x.position, aiEntity.position) })
+            .Select(x => new { Entity = x, Diff = GetDifference(x.position.ToV3(), aiEntity.position.ToV3()) })
             .OrderBy(x => x.Diff)
             .Where(x => x.Diff < aiEntity.ai.SeeingRange)
             .Select(x => x.Entity)
@@ -52,8 +54,8 @@ public class AiAttackOrderSystem : IExecuteSystem, ISetPool
         }
     }
 
-    private static float GetDifference(Vector p1, Vector p2)
+    private static float GetDifference(Vector3 p1, Vector3 p2)
     {
-        return (p1.ToV3() - p2.ToV3()).magnitude;
+        return (p1 - p2).Length();
     }
 }

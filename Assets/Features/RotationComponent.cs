@@ -1,5 +1,5 @@
 ﻿using Entitas;
 
-public class RotationComponent : Kuaternion, IComponent
+public class RotationComponent : QuaternionClass, IComponent
 {
 }

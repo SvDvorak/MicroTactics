@@ -43,9 +43,9 @@ namespace MicroTactics.Tests.Features
 
             attackingEntity.hasFireArrow.Should().Be(true);
             var fireArrow = attackingEntity.fireArrow;
-            fireArrow.Position.ShouldBeEquivalentTo(new Vector(10, 0, 0));
-            fireArrow.Rotation.ShouldBeEquivalentTo(new Kuaternion(1, 2, 3, 4));
-            fireArrow.Force.ShouldBeEquivalentTo(new Vector(0, 0, 0));
+            fireArrow.Position.ShouldBeEquivalentTo(new VectorClass(10, 0, 0));
+            fireArrow.Rotation.ShouldBeEquivalentTo(new QuaternionClass(1, 2, 3, 4));
+            fireArrow.Force.ShouldBeEquivalentTo(new VectorClass(0, 0, 0));
         }
 
         private static Entity CreateAttackingEntity()

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Assets;
 using Entitas;
 using UnityEngine;
 
@@ -47,7 +48,7 @@ public class AddUnitViewSystem : IReactiveSystem, ISetPool
     private GameObject InstantiateGameObject(Entity entity, GameObject unitTemplate)
     {
         var gameObject =
-            (GameObject) Object.Instantiate(unitTemplate, entity.position.ToV3(), new Quaternion());
+            (GameObject) Object.Instantiate(unitTemplate, entity.position.ToUnityV3(), new Quaternion());
         gameObject.transform.SetParent(_unitContainer);
 
         return gameObject;

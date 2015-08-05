@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using Assets;
+using Entitas;
 using UnityEngine;
 
 public class MoveSystem : IExecuteSystem, ISetPool
@@ -14,9 +15,9 @@ public class MoveSystem : IExecuteSystem, ISetPool
     {
         foreach (var entity in _entitiesWithOrder.GetEntities())
         {
-            var newPosition = Vector3.MoveTowards(entity.position.ToV3(), entity.moveOrder.ToV3(), entity.movement.MoveSpeed);
+            var newPosition = Vector3.MoveTowards(entity.position.ToUnityV3(), entity.moveOrder.ToUnityV3(), entity.movement.MoveSpeed);
 
-            if (entity.position.ToV3() == newPosition)
+            if (entity.position.ToUnityV3() == newPosition)
             {
                 entity.RemoveMoveOrder();
             }

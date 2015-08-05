@@ -66,7 +66,7 @@ namespace Vexe.Editor
                     .Add<Color32, Color32Drawer>()
                     .Add<Vector2, Vector2Drawer>()
                     .Add<Vector3, Vector3Drawer>()
-                    .Add<Kuaternion, QuaternionDrawer>()
+                    .Add<QuaternionClass, QuaternionDrawer>()
                     .Add<Gradient, GradientDrawer>()
                     .Add<AnimationCurve, AnimationCurveDrawer>()
                     .Add<LayerMask, LayerMaskDrawer>()

@@ -48,10 +48,10 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute(_squad1.AsList());
 
-            unit1.HasMoveOrderTo(new Vector(-1, 1, -1));
-            unit2.HasMoveOrderTo(new Vector(1, 1, -1));
-            unit3.HasMoveOrderTo(new Vector(-1, 1, 1));
-            unit4.HasMoveOrderTo(new Vector(1, 1, 1));
+            unit1.HasMoveOrderTo(new VectorClass(-1, 1, -1));
+            unit2.HasMoveOrderTo(new VectorClass(1, 1, -1));
+            unit3.HasMoveOrderTo(new VectorClass(-1, 1, 1));
+            unit4.HasMoveOrderTo(new VectorClass(1, 1, 1));
         }
 
         [Fact]
@@ -64,8 +64,8 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute(new List<Entity>() { _squad1, _squad2});
 
-            unit1.HasMoveOrderTo(new Vector(0, 1, 0));
-            unit2.HasMoveOrderTo(new Vector(0, 2, 0));
+            unit1.HasMoveOrderTo(new VectorClass(0, 1, 0));
+            unit2.HasMoveOrderTo(new VectorClass(0, 2, 0));
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute(_squad1.AsList());
 
-            unit.HasMoveOrderTo(new Vector(0, 1, 0));
+            unit.HasMoveOrderTo(new VectorClass(0, 1, 0));
         }
 
         private Entity CreateUnit(int squadNumber)

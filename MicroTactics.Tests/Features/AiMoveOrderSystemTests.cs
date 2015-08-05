@@ -48,7 +48,7 @@ public class AiMoveOrderSystemTests
 
         _sut.Execute();
 
-        _squad.HasMoveOrderTo(new Vector(1, 0, 0));
+        _squad.HasMoveOrderTo(new VectorClass(1, 0, 0));
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public class AiMoveOrderSystemTests
 
         _sut.Execute();
 
-        _squad.HasMoveOrderTo(new Vector(-1f, 0, 0));
-        squad2.HasMoveOrderTo(new Vector(0, 0, 1));
+        _squad.HasMoveOrderTo(new VectorClass(-1f, 0, 0));
+        squad2.HasMoveOrderTo(new VectorClass(0, 0, 1));
     }
 }

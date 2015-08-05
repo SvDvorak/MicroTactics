@@ -1,5 +1,5 @@
 ﻿using Entitas;
 
-public class MoveOrderComponent : Vector, IComponent
+public class MoveOrderComponent : VectorClass, IComponent
 {
 }

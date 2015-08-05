@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Assets;
 using Entitas;
 using UnityEngine;
 
@@ -24,6 +25,6 @@ public class SquadCenterPositionSystem : IExecuteSystem, ISetPool
     private Vector3 GetCenterPositionFromUnits(Entity unitCacheEntity)
     {
         var unitsInSquad = unitCacheEntity.unitsCache.Units;
-        return unitsInSquad.Sum(x => x.position.ToV3())/unitsInSquad.Count();
+        return unitsInSquad.Sum(x => x.position.ToV3().ToUnityV3())/unitsInSquad.Count();
     }
 }

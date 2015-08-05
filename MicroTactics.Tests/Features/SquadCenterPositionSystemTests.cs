@@ -27,7 +27,7 @@ namespace MicroTactics.Tests.Features
             _sut.SetPool(_pool);
             _sut.Execute();
 
-            squad.position.ShouldBeEquivalentTo(new Vector(1.5f, 0, 0));
+            squad.position.ShouldBeEquivalentTo(new VectorClass(1.5f, 0, 0));
         }
 
         [Fact]
@@ -41,8 +41,8 @@ namespace MicroTactics.Tests.Features
             _sut.SetPool(_pool);
             _sut.Execute();
 
-            squad1.position.ShouldBeEquivalentTo(new Vector(1, 0, 0));
-            squad2.position.ShouldBeEquivalentTo(new Vector(2, 0, 0));
+            squad1.position.ShouldBeEquivalentTo(new VectorClass(1, 0, 0));
+            squad2.position.ShouldBeEquivalentTo(new VectorClass(2, 0, 0));
         }
 
         private Entity CreateSquadAt(float x, float y, float z)

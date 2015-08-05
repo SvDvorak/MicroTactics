@@ -2,7 +2,7 @@
 
 public class FireArrowComponent : IComponent
 {
-    public Vector Position;
-    public Kuaternion Rotation;
-    public Vector Force;
+    public VectorClass Position;
+    public QuaternionClass Rotation;
+    public VectorClass Force;
 }

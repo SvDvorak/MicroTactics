@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets;
 using Entitas;
 using UnityEngine;
 
@@ -11,9 +12,9 @@ public class AttackSystem : IReactiveSystem
     {
         foreach (var entity in entities)
         {
-            var distance = (entity.position.ToV3() - entity.attackOrder.ToV3()).magnitude;
+            var distance = (entity.position.ToV3() - entity.attackOrder.ToV3()).Length();
             var force = CalculateForce(entity.rotation, distance, 1);
-            entity.AddFireArrow(entity.position, entity.rotation, new Vector(force.x, force.y, force.z));
+            entity.AddFireArrow(entity.position, entity.rotation, new VectorClass(force.x, force.y, force.z));
         }
 
         //var arrow = (Rigidbody)Instantiate(ArrowTemplate, ArrowSpawnPoint.position, transform.rotation);
@@ -22,7 +23,7 @@ public class AttackSystem : IReactiveSystem
         //arrow.AddForce(requiredForce);
     }
 
-    private Vector3 CalculateForce(Kuaternion targetRotation, float targetDistance, float mass)
+    private Vector3 CalculateForce(QuaternionClass targetRotation, float targetDistance, float mass)
     {
         // Algorithm taken from http://en.wikipedia.org/wiki/Trajectory_of_a_projectile
         const int fireAngle = 45;
