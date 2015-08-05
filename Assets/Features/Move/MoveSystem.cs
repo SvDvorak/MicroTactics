@@ -1,6 +1,6 @@
 ﻿using Assets;
 using Entitas;
-using UnityEngine;
+using Mono.GameMath;
 
 public class MoveSystem : IExecuteSystem, ISetPool
 {
@@ -15,14 +15,14 @@ public class MoveSystem : IExecuteSystem, ISetPool
     {
         foreach (var entity in _entitiesWithOrder.GetEntities())
         {
-            var newPosition = Vector3.MoveTowards(entity.position.ToUnityV3(), entity.moveOrder.ToUnityV3(), entity.movement.MoveSpeed);
+            var newPosition = entity.position.ToV3().MoveTowards(entity.moveOrder.ToV3(), entity.movement.MoveSpeed);
 
-            if (entity.position.ToUnityV3() == newPosition)
+            if (entity.position.ToV3() == newPosition)
             {
                 entity.RemoveMoveOrder();
             }
 
-            entity.ReplacePosition(newPosition.x, newPosition.y, newPosition.z);
+            entity.ReplacePosition(newPosition);
         }
     }
 }

@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Assets;
 using Entitas;
-using UnityEngine;
+using Mono.GameMath;
 
 public class SquadCenterPositionSystem : IExecuteSystem, ISetPool
 {
@@ -18,13 +17,13 @@ public class SquadCenterPositionSystem : IExecuteSystem, ISetPool
         foreach (var unitCacheEntity in _squads.GetEntities())
         {
             var centerPosition = GetCenterPositionFromUnits(unitCacheEntity);
-            unitCacheEntity.ReplacePosition(centerPosition.x, centerPosition.y, centerPosition.z);
+            unitCacheEntity.ReplacePosition(centerPosition);
         }
     }
 
     private Vector3 GetCenterPositionFromUnits(Entity unitCacheEntity)
     {
         var unitsInSquad = unitCacheEntity.unitsCache.Units;
-        return unitsInSquad.Sum(x => x.position.ToV3().ToUnityV3())/unitsInSquad.Count();
+        return unitsInSquad.Sum(x => x.position.ToV3())/unitsInSquad.Count();
     }
 }

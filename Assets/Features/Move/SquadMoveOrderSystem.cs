@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Assets;
 using Entitas;
 
 public class SquadMoveOrderSystem : IReactiveSystem
@@ -22,10 +23,7 @@ public class SquadMoveOrderSystem : IReactiveSystem
             var unit = unitsInSquad[i];
             var squadPosition = UnitInSquadPositioner.GetPosition(squadEntity.boxFormation, i);
 
-            unit.ReplaceMoveOrder(
-                squadPosition.x + squadEntity.moveOrder.x,
-                squadPosition.y + squadEntity.moveOrder.y,
-                squadPosition.z + squadEntity.moveOrder.z);
+            unit.ReplaceMoveOrder(squadPosition + squadEntity.moveOrder.ToV3());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Mono.GameMath;
+﻿using Entitas;
+using Mono.GameMath;
 
 public class VectorClass
 {

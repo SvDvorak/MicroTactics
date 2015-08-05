@@ -29,7 +29,7 @@ namespace MicroTactics.Tests.Features
             _sut.Execute();
             _sut.Execute();
 
-            _entity.position.ShouldBeEquivalentTo(new VectorClass(0.6f, 0, 0));
+            _entity.position.ShouldBeEquivalentTo(new Vector3(0.6f, 0, 0));
         }
 
         [Fact]
