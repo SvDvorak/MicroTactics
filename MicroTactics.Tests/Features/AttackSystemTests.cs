@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Entitas;
 using FluentAssertions;
-using UnityEngine;
+using Mono.GameMath;
 using Xunit;
 
 namespace MicroTactics.Tests.Features
@@ -43,9 +43,9 @@ namespace MicroTactics.Tests.Features
 
             attackingEntity.hasFireArrow.Should().Be(true);
             var fireArrow = attackingEntity.fireArrow;
-            fireArrow.Position.ShouldBeEquivalentTo(new VectorClass(10, 0, 0));
-            fireArrow.Rotation.ShouldBeEquivalentTo(new QuaternionClass(1, 2, 3, 4));
-            fireArrow.Force.ShouldBeEquivalentTo(new VectorClass(0, 0, 0));
+            fireArrow.Position.Should().Be(new Vector3(10, 0, 0));
+            fireArrow.Rotation.Should().Be(new Quaternion(1, 2, 3, 4));
+            fireArrow.Force.Should().Be(new Vector3(0, 0, 0));
         }
 
         private static Entity CreateAttackingEntity()

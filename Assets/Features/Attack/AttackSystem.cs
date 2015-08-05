@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets;
 using Entitas;
+using Mono.GameMath;
 using UnityEngine;
+using Quaternion = Mono.GameMath.Quaternion;
+using Vector3 = Mono.GameMath.Vector3;
 
 public class AttackSystem : IReactiveSystem
 {
@@ -14,7 +18,7 @@ public class AttackSystem : IReactiveSystem
         {
             var distance = (entity.position.ToV3() - entity.attackOrder.ToV3()).Length();
             var force = CalculateForce(entity.rotation, distance, 1);
-            entity.AddFireArrow(entity.position, entity.rotation, new VectorClass(force.x, force.y, force.z));
+            entity.AddFireArrow(entity.position.ToV3(), entity.rotation.ToQ(), force);
         }
 
         //var arrow = (Rigidbody)Instantiate(ArrowTemplate, ArrowSpawnPoint.position, transform.rotation);
@@ -27,11 +31,10 @@ public class AttackSystem : IReactiveSystem
     {
         // Algorithm taken from http://en.wikipedia.org/wiki/Trajectory_of_a_projectile
         const int fireAngle = 45;
-        //var verticalAimRotation = Quaternion.AngleAxis(fireAngle, Vector3.left);
-        //var fireDirection = targetRotation.ToQ() * verticalAimRotation * Vector3.forward;
-        //var requiredVelocity = Mathf.Sqrt((targetDistance * Physics.gravity.magnitude) / Mathf.Sin(Mathf.Deg2Rad * fireAngle * 2));
-        //var requiredForce = fireDirection * requiredVelocity * (1 / Time.fixedDeltaTime) * mass;
-        //return requiredForce;
-        return new Vector3();
+        var verticalAimRotation = Quaternion.CreateFromAxisAngle(Vector3.Left, fireAngle);
+        var fireDirection = targetRotation.ToQ() * verticalAimRotation * Vector3.Forward;
+        var requiredVelocity = Mathf.Sqrt((targetDistance * Simulation.Gravity) / Mathf.Sin(MathHelper.ToRadians(fireAngle * 2)));
+        var requiredForce = fireDirection * requiredVelocity * (1f / Simulation.FrameRate) * mass;
+        return requiredForce;
     }
 }
