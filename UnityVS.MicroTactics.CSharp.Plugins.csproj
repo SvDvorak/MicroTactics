@@ -69,6 +69,9 @@
     <Reference Include="BasicSerializer">
       <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.GameMath">
+      <HintPath>Assets\Libraries\Mono.GameMath.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Plugins\Vexe\Runtime\FastSave\Core\FSCommon.cs" />

@@ -69,6 +69,9 @@
     <Reference Include="BasicSerializer">
       <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.GameMath">
+      <HintPath>Assets\Libraries\Mono.GameMath.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UnityVS.MicroTactics.CSharp.Plugins.csproj">
@@ -84,11 +87,14 @@
     <Compile Include="Assets\Events.cs" />
     <Compile Include="Assets\Features\Attack\AiAttackOrderSystem.cs" />
     <Compile Include="Assets\Features\Attack\AttackOrderComponent.cs" />
+    <Compile Include="Assets\Features\Attack\AttackSystem.cs" />
+    <Compile Include="Assets\Features\Attack\FireArrowComponent.cs" />
     <Compile Include="Assets\Features\Attack\SquadAttackOrderSystem.cs" />
     <Compile Include="Assets\Features\AudioComponent.cs" />
     <Compile Include="Assets\Features\ComponentContainer.cs" />
     <Compile Include="Assets\Features\CreateSquad\AddUnitViewSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\BoxFormationComponent.cs" />
+    <Compile Include="Assets\Features\CreateSquad\Kuaternion.cs" />
     <Compile Include="Assets\Features\CreateSquad\PositionComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadCreationSystem.cs" />
@@ -112,6 +118,7 @@
     <Compile Include="Assets\Features\Move\SquadMoveOrderSystem.cs" />
     <Compile Include="Assets\Features\Move\UnitInSquadPositioner.cs" />
     <Compile Include="Assets\Features\RenderPositionSystem.cs" />
+    <Compile Include="Assets\Features\RotationComponent.cs" />
     <Compile Include="Assets\Features\SquadAudioSystem.cs" />
     <Compile Include="Assets\Features\SquadCenterPositionSystem.cs" />
     <Compile Include="Assets\Features\UnitsCacheComponent.cs" />
@@ -126,12 +133,14 @@
     <Compile Include="Assets\Generated\Assets.Features.Move.RemoveMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.SquadAudioSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AttackOrderComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\AttackSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AudioComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\BoxFormationComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ComponentIds.cs" />
     <Compile Include="Assets\Generated\DestroyComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\DestroySystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\EnemyComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\FireArrowComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\LinkViewsStartSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MoveOrderComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MoveSystemGeneratedExtension.cs" />
@@ -140,6 +149,7 @@
     <Compile Include="Assets\Generated\PositionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RemoveViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RenderPositionSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\RotationComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadAttackOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadCenterPositionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadComponentGeneratedExtension.cs" />

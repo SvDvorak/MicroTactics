@@ -135,6 +135,9 @@
     <Reference Include="UnityVS.VersionSpecific">
       <HintPath>Assets\UnityVS\Editor\UnityVS.VersionSpecific.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.GameMath">
+      <HintPath>Assets\Libraries\Mono.GameMath.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UnityVS.MicroTactics.CSharp.Plugins.csproj">

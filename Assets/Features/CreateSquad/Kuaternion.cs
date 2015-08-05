@@ -1,29 +1,31 @@
 ﻿using UnityEngine;
 
-public class Vector
+public class Kuaternion
 {
     public float x;
     public float y;
     public float z;
+    public float w;
 
-    public Vector() : this(0, 0, 0) { }
+    public Kuaternion() : this(0, 0, 0, 0) { }
 
-    public Vector(float x, float y, float z)
+    public Kuaternion(float x, float y, float z, float w)
     {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.w = w;
     }
 
-    public Vector3 ToV3()
+    public Quaternion ToQ()
     {
-        return new Vector3(x, y, z);
+        return new Quaternion(x, y, z, w);
     }
 
     #region Equality-methods
-    protected bool Equals(Vector other)
+    protected bool Equals(Kuaternion other)
     {
-        return x.Equals(other.x) && y.Equals(other.y) && z.Equals(other.z);
+        return x.Equals(other.x) && y.Equals(other.y) && z.Equals(other.z) && w.Equals(other.w);
     }
 
     public override bool Equals(object obj)
@@ -40,7 +42,7 @@ public class Vector
         {
             return false;
         }
-        return Equals((Vector)obj);
+        return Equals((Kuaternion)obj);
     }
 
     public override int GetHashCode()
@@ -50,8 +52,9 @@ public class Vector
             var hashCode = x.GetHashCode();
             hashCode = (hashCode * 397) ^ y.GetHashCode();
             hashCode = (hashCode * 397) ^ z.GetHashCode();
+            hashCode = (hashCode * 397) ^ w.GetHashCode();
             return hashCode;
         }
     }
-    #endregion    
+    #endregion
 }
