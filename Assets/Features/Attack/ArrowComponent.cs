@@ -1,7 +1,7 @@
 ﻿using Entitas;
 using Mono.GameMath;
 
-public class FireArrowComponent : IComponent
+public class ArrowComponent : IComponent
 {
     public Vector3 Position;
     public Quaternion Rotation;

@@ -85,12 +85,12 @@
     <Compile Include="Assets\ConvexHullCalculator.cs" />
     <Compile Include="Assets\EntitasSetup.cs" />
     <Compile Include="Assets\Events.cs" />
+    <Compile Include="Assets\Features\Attack\AddArrowViewSystem.cs" />
     <Compile Include="Assets\Features\Attack\AiAttackOrderSystem.cs" />
+    <Compile Include="Assets\Features\Attack\ArrowComponent.cs" />
     <Compile Include="Assets\Features\Attack\ArrowTemplateComponent.cs" />
     <Compile Include="Assets\Features\Attack\AttackOrderComponent.cs" />
     <Compile Include="Assets\Features\Attack\AttackSystem.cs" />
-    <Compile Include="Assets\Features\Attack\FireArrowComponent.cs" />
-    <Compile Include="Assets\Features\Attack\SpawnArrowSystem.cs" />
     <Compile Include="Assets\Features\Attack\SquadAttackOrderSystem.cs" />
     <Compile Include="Assets\Features\AudioComponent.cs" />
     <Compile Include="Assets\Features\ComponentContainer.cs" />
@@ -126,12 +126,14 @@
     <Compile Include="Assets\Features\UnitsCacheComponent.cs" />
     <Compile Include="Assets\Features\UnitsCacheSystem.cs" />
     <Compile Include="Assets\FloatExtensions.cs" />
+    <Compile Include="Assets\Generated\AddArrowViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AddUnitViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AiAttackOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AiComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AiMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AnimateComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AnimateUnitSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\ArrowComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ArrowTemplateComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Move.RemoveMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.SquadAudioSystemGeneratedExtension.cs" />
@@ -143,7 +145,6 @@
     <Compile Include="Assets\Generated\DestroyComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\DestroySystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\EnemyComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\FireArrowComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\LinkViewsStartSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MoveOrderComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MoveSystemGeneratedExtension.cs" />
@@ -153,7 +154,6 @@
     <Compile Include="Assets\Generated\RemoveViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RenderPositionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RotationComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\SpawnArrowSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadAttackOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadCenterPositionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadComponentGeneratedExtension.cs" />
