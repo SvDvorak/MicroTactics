@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -68,11 +66,11 @@
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
-    <Reference Include="BasicSerializer">
-      <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.GameMath">
       <HintPath>Assets\Libraries\Mono.GameMath.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicSerializer">
+      <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -88,16 +86,18 @@
     <Compile Include="Assets\EntitasSetup.cs" />
     <Compile Include="Assets\Events.cs" />
     <Compile Include="Assets\Features\Attack\AiAttackOrderSystem.cs" />
+    <Compile Include="Assets\Features\Attack\ArrowTemplateComponent.cs" />
     <Compile Include="Assets\Features\Attack\AttackOrderComponent.cs" />
     <Compile Include="Assets\Features\Attack\AttackSystem.cs" />
     <Compile Include="Assets\Features\Attack\FireArrowComponent.cs" />
+    <Compile Include="Assets\Features\Attack\SpawnArrowSystem.cs" />
     <Compile Include="Assets\Features\Attack\SquadAttackOrderSystem.cs" />
     <Compile Include="Assets\Features\AudioComponent.cs" />
     <Compile Include="Assets\Features\ComponentContainer.cs" />
     <Compile Include="Assets\Features\CreateSquad\AddUnitViewSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\BoxFormationComponent.cs" />
-    <Compile Include="Assets\Features\CreateSquad\QuaternionClass.cs" />
     <Compile Include="Assets\Features\CreateSquad\PositionComponent.cs" />
+    <Compile Include="Assets\Features\CreateSquad\QuaternionClass.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadCreationSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\UnitComponent.cs" />
@@ -132,6 +132,7 @@
     <Compile Include="Assets\Generated\AiMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AnimateComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AnimateUnitSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\ArrowTemplateComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Move.RemoveMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.SquadAudioSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AttackOrderComponentGeneratedExtension.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Assets\Generated\RemoveViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RenderPositionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RotationComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\SpawnArrowSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadAttackOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadCenterPositionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadComponentGeneratedExtension.cs" />

@@ -37,6 +37,7 @@ public class AddUnitViewSystem : IReactiveSystem, ISetPool
 
         entity
             .AddView(gameObject)
+            .AddArrowTemplate(squad.arrowTemplate.Template)
             .AddAnimate(animator);
     }
 

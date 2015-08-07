@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Entitas;
+using Mono.GameMath;
 using Vexe.Runtime.Extensions;
 
 public class SquadCreationSystem : IReactiveSystem, ISetPool
@@ -35,6 +34,7 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
             _pool.CreateEntity()
                  .AddUnit(squad.Number)
                  .AddPosition(position)
+                 .AddRotation(new Quaternion())
                  .AddMovement(0.06f);
         }
     }

@@ -43,9 +43,20 @@ namespace MicroTactics.Tests.Features
 
             attackingEntity.hasFireArrow.Should().Be(true);
             var fireArrow = attackingEntity.fireArrow;
-            fireArrow.Position.Should().Be(new Vector3(10, 0, 0));
+            fireArrow.Position.Should().Be(new Vector3(10, 2, 0));
             fireArrow.Rotation.Should().Be(new Quaternion(1, 2, 3, 4));
             fireArrow.Force.Should().Be(new Vector3(0, 0, 0));
+        }
+
+        [Fact]
+        public void DoesNotFireArrowWhenOneIsAlreadyInProgress()
+        {
+            var attackingEntity = CreateAttackingEntity();
+            attackingEntity.AddFireArrow(new Vector3(10, 10, 10), new Quaternion(), new Vector3());
+
+            _sut.Execute(attackingEntity.AsList());
+
+            attackingEntity.fireArrow.Position.Should().Be(new Vector3(10, 10, 10));
         }
 
         private static Entity CreateAttackingEntity()

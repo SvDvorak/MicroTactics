@@ -16,15 +16,15 @@ public class AttackSystem : IReactiveSystem
     {
         foreach (var entity in entities)
         {
+            if (entity.hasFireArrow)
+            {
+                continue;
+            }
+
             var distance = (entity.position.ToV3() - entity.attackOrder.ToV3()).Length();
             var force = CalculateForce(entity.rotation, distance, 1);
-            entity.AddFireArrow(entity.position.ToV3(), entity.rotation.ToQ(), force);
+            entity.AddFireArrow(entity.position.ToV3() + new Vector3(0, 4, 0), entity.rotation.ToQ(), force);
         }
-
-        //var arrow = (Rigidbody)Instantiate(ArrowTemplate, ArrowSpawnPoint.position, transform.rotation);
-
-        //var requiredForce = CalculateForce(transform.rotation, _aimTarget.magnitude, arrow.mass);
-        //arrow.AddForce(requiredForce);
     }
 
     private Vector3 CalculateForce(QuaternionClass targetRotation, float targetDistance, float mass)
@@ -34,7 +34,7 @@ public class AttackSystem : IReactiveSystem
         var verticalAimRotation = Quaternion.CreateFromAxisAngle(Vector3.Left, fireAngle);
         var fireDirection = targetRotation.ToQ() * verticalAimRotation * Vector3.Forward;
         var requiredVelocity = Mathf.Sqrt((targetDistance * Simulation.Gravity) / Mathf.Sin(MathHelper.ToRadians(fireAngle * 2)));
-        var requiredForce = fireDirection * requiredVelocity * (1f / Simulation.FrameRate) * mass;
+        var requiredForce = fireDirection * requiredVelocity * (1f/Simulation.FrameRate) * mass;
         return requiredForce;
     }
 }
