@@ -19,11 +19,16 @@ public class AddArrowViewSystem : IReactiveSystem
                 entity.arrow.Position.ToUnityV3(),
                 entity.arrow.Rotation.ToUnityQ());
 
-            arrowGameObject
-                .GetComponent<Rigidbody>()
-                .AddForce(entity.arrow.Force.ToUnityV3());
+            var rigidBody = arrowGameObject.GetComponent<Rigidbody>();
+            rigidBody.AddForce(entity.arrow.Force.ToUnityV3());
 
             arrowGameObject.transform.SetParent(_arrowContainer);
+
+            entity.AddView(arrowGameObject);
+            if (entity.hasPhysics)
+            {
+                entity.ReplacePhysics(rigidBody);
+            }
         }
     }
 }

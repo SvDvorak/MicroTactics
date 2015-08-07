@@ -81,21 +81,4 @@ namespace MicroTactics.Tests.Features
             return new TestEntity().AddPosition(0, 0, 0).AddRotation(0, 0, 0, 0).AddAttackOrder(0, 0, 0).AddArrowTemplate(null);
         }
     }
-
-    public static class Vector3CloseToExtensions
-    {
-        private static float _minimumDifference = 0.0001f;
-
-        public static void ShouldBeCloseTo(this Vector3 actual, Vector3 expected)
-        {
-            BeInRange(actual.X, expected.X);
-            BeInRange(actual.Y, expected.Y);
-            BeInRange(actual.Z, expected.Z);
-        }
-
-        private static void BeInRange(float actual, float expected)
-        {
-            actual.Should().BeInRange(expected - _minimumDifference, expected + _minimumDifference);
-        }
-    }
 }

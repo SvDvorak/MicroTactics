@@ -42,5 +42,10 @@ namespace Assets
         {
             return new Mono.GameMath.Vector3(vector.x, vector.y, vector.z);
         }
+
+        public static Mono.GameMath.Vector3 ToV3(this Vector3 vector)
+        {
+            return new Mono.GameMath.Vector3(vector.x, vector.y, vector.z);
+        }
     }
 }

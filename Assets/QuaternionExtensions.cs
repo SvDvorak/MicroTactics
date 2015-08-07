@@ -13,5 +13,10 @@ namespace Assets
         {
             return new UnityEngine.Quaternion(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W);
         }
+
+        public static UnityEngine.Quaternion ToUnityQ(this QuaternionClass quaternion)
+        {
+            return new UnityEngine.Quaternion(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
+        }
     }
 }

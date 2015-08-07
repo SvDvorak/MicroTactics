@@ -40,7 +40,11 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateAttackSystem())
 
             .Add(pool.CreateAddArrowViewSystem())
+            .Add(pool.CreateArrowTipRotationSystem())
+
+            .Add(pool.CreateReadVelocitySystem())
             .Add(pool.CreateRenderPositionSystem())
+            .Add(pool.CreateRenderRotationSystem())
             .Add(pool.CreateAnimateUnitSystem())
             .Add(pool.CreateSquadAudioSystem())
 

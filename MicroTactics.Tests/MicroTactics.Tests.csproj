@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Features\AiAttackOrderSystemTests.cs" />
     <Compile Include="Features\AiMoveOrderSystemTests.cs" />
+    <Compile Include="Features\ArrowTipRotationSystemTests.cs" />
     <Compile Include="Features\AttackSystemTests.cs" />
     <Compile Include="Features\CreateSquad\SquadCreationSystemTests.cs" />
     <Compile Include="Features\CreateSquad\TestEntity.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Features\SquadCenterPositionSystemTests.cs" />
     <Compile Include="Features\SquadMoveOrderSystemTests.cs" />
     <Compile Include="Features\UnitsCacheSystemTests.cs" />
+    <Compile Include="Features\QuaternionCloseToExtensions.cs" />
     <Compile Include="FloatExtensionsTests.cs" />
     <Compile Include="FormationTests.cs" />
     <Compile Include="IEnumerableExtensionsTests.cs" />
