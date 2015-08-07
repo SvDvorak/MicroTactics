@@ -8,6 +8,8 @@ public class SpawnArrowSystem : IReactiveSystem
     public IMatcher trigger { get { return Matcher.AllOf(Matcher.FireArrow, Matcher.ArrowTemplate); } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
+    private readonly Transform _arrowContainer = new GameObject("Arrows").transform;
+
     public void Execute(List<Entity> entities)
     {
         foreach (var entity in entities)
@@ -15,6 +17,7 @@ public class SpawnArrowSystem : IReactiveSystem
             var spawnInfo = entity.fireArrow;
             var arrow = (GameObject)Object.Instantiate(entity.arrowTemplate.Template, spawnInfo.Position.ToUnityV3(), spawnInfo.Rotation.ToUnityQ());
             arrow.GetComponent<Rigidbody>().AddForce(spawnInfo.Force.ToUnityV3());
+            arrow.transform.SetParent(_arrowContainer);
         }
     }
 }

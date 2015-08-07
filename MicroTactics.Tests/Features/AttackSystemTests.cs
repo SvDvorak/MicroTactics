@@ -37,15 +37,17 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void CalculatesPositionRotationAndForceToFire()
         {
-            var attackingEntity = new TestEntity().AddPosition(10, 0, 0).AddRotation(1, 2, 3, 4).AddAttackOrder(3, 3, 3);
+            var lookingToTheRight = Quaternion.CreateFromAxisAngle(new Vector3(0, 1, 0), MathHelper.PiOver2);
+            var positionToTheRight = new Vector3(20, 0, 0);
+            var attackingEntity = new TestEntity().AddPosition(10, 0, 0).AddRotation(lookingToTheRight).AddAttackOrder(positionToTheRight);
 
             _sut.Execute(attackingEntity.AsList());
 
             attackingEntity.hasFireArrow.Should().Be(true);
             var fireArrow = attackingEntity.fireArrow;
-            fireArrow.Position.Should().Be(new Vector3(10, 2, 0));
-            fireArrow.Rotation.Should().Be(new Quaternion(1, 2, 3, 4));
-            fireArrow.Force.Should().Be(new Vector3(0, 0, 0));
+            fireArrow.Position.Should().Be(new Vector3(10, 4, 0));
+            fireArrow.Rotation.Should().Be(lookingToTheRight);
+            fireArrow.Force.ShouldBeCloseTo(new Vector3(-263.8441f, 427.368f, 0));
         }
 
         [Fact]
@@ -62,6 +64,23 @@ namespace MicroTactics.Tests.Features
         private static Entity CreateAttackingEntity()
         {
             return new TestEntity().AddPosition(0, 0, 0).AddRotation(0, 0, 0, 0).AddAttackOrder(0, 0, 0);
+        }
+    }
+
+    public static class Vector3CloseToExtensions
+    {
+        private static float _minimumDifference = 0.0001f;
+
+        public static void ShouldBeCloseTo(this Vector3 actual, Vector3 expected)
+        {
+            BeInRange(actual.X, expected.X);
+            BeInRange(actual.Y, expected.Y);
+            BeInRange(actual.Z, expected.Z);
+        }
+
+        private static void BeInRange(float actual, float expected)
+        {
+            actual.Should().BeInRange(expected - _minimumDifference, expected + _minimumDifference);
         }
     }
 }

@@ -34,7 +34,7 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
             _pool.CreateEntity()
                  .AddUnit(squad.Number)
                  .AddPosition(position)
-                 .AddRotation(new Quaternion())
+                 .AddRotation(Quaternion.Identity)
                  .AddMovement(0.06f);
         }
     }

@@ -21,20 +21,25 @@ public class AttackSystem : IReactiveSystem
                 continue;
             }
 
-            var distance = (entity.position.ToV3() - entity.attackOrder.ToV3()).Length();
-            var force = CalculateForce(entity.rotation, distance, 1);
-            entity.AddFireArrow(entity.position.ToV3() + new Vector3(0, 4, 0), entity.rotation.ToQ(), force);
+            var firePosition = entity.position.ToV3() + new Vector3(0, 4, 0);
+            var distance = (entity.attackOrder.ToV3() - entity.position.ToV3()).Length();
+            var force = CalculateForce(firePosition.Y, entity.rotation, distance, 1);
+            entity.AddFireArrow(firePosition, entity.rotation.ToQ(), force);
         }
     }
 
-    private Vector3 CalculateForce(QuaternionClass targetRotation, float targetDistance, float mass)
+    private Vector3 CalculateForce(float elevation, QuaternionClass targetRotation, float targetDistance, float mass)
     {
-        // Algorithm taken from http://en.wikipedia.org/wiki/Trajectory_of_a_projectile
-        const int fireAngle = 45;
-        var verticalAimRotation = Quaternion.CreateFromAxisAngle(Vector3.Left, fireAngle);
+        // Algorithm taken from http://physics.stackexchange.com/questions/27992/solving-for-initial-velocity-required-to-launch-a-projectile-to-a-given-destinat
+        int fireAngle = 45;
+        var verticalAimRotation = Quaternion.CreateFromAxisAngle(Vector3.Left, -fireAngle);
         var fireDirection = targetRotation.ToQ() * verticalAimRotation * Vector3.Forward;
-        var requiredVelocity = Mathf.Sqrt((targetDistance * Simulation.Gravity) / Mathf.Sin(MathHelper.ToRadians(fireAngle * 2)));
-        var requiredForce = fireDirection * requiredVelocity * (1f/Simulation.FrameRate) * mass;
+        var inRadians = MathHelper.ToRadians(fireAngle);
+        var requiredVelocity = 1 / Mathf.Cos(inRadians) *
+                               Mathf.Sqrt(
+                                   (0.5f * Simulation.Gravity * targetDistance * targetDistance) /
+                                   (targetDistance * Mathf.Tan(inRadians) + elevation));
+        var requiredForce = fireDirection * requiredVelocity * Simulation.FrameRate * mass;
         return requiredForce;
     }
 }
