@@ -78,6 +78,22 @@ namespace MicroTactics.Tests.Features
             unit2.HasAttackOrderTo(new Vector3(0, 1, 0));
         }
 
+        [Fact]
+        public void ReplacesExistingOrder()
+        {
+            var unit = CreateUnit().AddAttackOrder(0, 0, 1);
+
+            var squad = new TestEntity()
+                .AddSquad(0)
+                .AddUnitsCache(unit.AsList())
+                .AddBoxFormation(2, 2, 2)
+                .AddAttackOrder(1, 0, 0);
+
+            _sut.Execute(squad.AsList());
+
+            unit.HasAttackOrderTo(new Vector3(1, 0, 0));
+        }
+
         private static Entity CreateUnit(int squadNumber = 0)
         {
             return new TestEntity().AddUnit(squadNumber);
