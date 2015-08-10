@@ -1,7 +1,7 @@
-namespace Entitas {
-    public partial class Pool {
-        public ISystem CreateRenderPositionSystem() {
-            return this.CreateSystem<RenderPositionSystem>();
-        }
-    }
+namespace Entitas {
+    public partial class Pool {
+        public ISystem CreateRenderPositionSystem() {
+            return this.CreateSystem<RenderPositionSystem>();
+        }
+    }
 }

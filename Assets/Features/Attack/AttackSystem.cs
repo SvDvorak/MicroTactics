@@ -21,11 +21,6 @@ public class AttackSystem : IReactiveSystem, ISetPool
     {
         foreach (var entity in entities)
         {
-            if (entity.hasAi)
-            {
-                continue;
-            }
-
             var firePosition = entity.position.ToV3() + new Vector3(0, 4, 0);
             var attackDirection = entity.attackOrder.ToV3() - entity.position.ToV3();
             var force = CalculateForce(firePosition.Y, entity.rotation, attackDirection.Length(), 1);
@@ -34,10 +29,9 @@ public class AttackSystem : IReactiveSystem, ISetPool
                 .AddArrow(firePosition, entity.rotation.ToQ(), force)
                 .AddArrowTemplate(entity.arrowTemplate.Template)
                 .AddRotation(entity.rotation.ToQ())
-                .AddVelocity(attackDirection)
-                .AddPhysics(null);
+                .AddVelocity(attackDirection);
 
-            entity.RemoveAttackOrder();
+            //entity.RemoveAttackOrder();
         }
     }
 

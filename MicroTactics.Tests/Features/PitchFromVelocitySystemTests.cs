@@ -7,12 +7,12 @@ using Xunit;
 
 namespace MicroTactics.Tests.Features
 {
-    public class ArrowTipRotationSystemTests
+    public class PitchFromVelocitySystemTests
     {
         private readonly TestPool _pool;
         private readonly PitchFromVelocitySystem _sut;
 
-        public ArrowTipRotationSystemTests()
+        public PitchFromVelocitySystemTests()
         {
             _sut = new PitchFromVelocitySystem();
 

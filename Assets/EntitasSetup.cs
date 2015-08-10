@@ -40,7 +40,8 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateAttackSystem())
 
             .Add(pool.CreateAddArrowViewSystem())
-            .Add(pool.CreateArrowTipRotationSystem())
+            .Add(pool.CreateArrowStickToCollidedSystem())
+            .Add(pool.CreatePitchFromVelocitySystem())
 
             .Add(pool.CreateReadVelocitySystem())
             .Add(pool.CreateRenderPositionSystem())
@@ -50,6 +51,7 @@ public class EntitasSetup : MonoBehaviour
 
             .Add(pool.CreateRemoveViewSystem())
             .Add(pool.CreateRemoveMoveOrderSystem())
+            .Add(pool.CreateRemovePhysicsSystem())
             .Add(pool.CreateDestroySystem());
     }
 }

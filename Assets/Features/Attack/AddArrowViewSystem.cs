@@ -22,13 +22,12 @@ public class AddArrowViewSystem : IReactiveSystem
             var rigidBody = arrowGameObject.GetComponent<Rigidbody>();
             rigidBody.AddForce(entity.arrow.Force.ToUnityV3());
 
+            arrowGameObject.AddComponent<CollisionPublisher>().SetEntity(entity);
+
             arrowGameObject.transform.SetParent(_arrowContainer);
 
             entity.AddView(arrowGameObject);
-            if (entity.hasPhysics)
-            {
-                entity.ReplacePhysics(rigidBody);
-            }
+            entity.AddPhysics(rigidBody);
         }
     }
 }

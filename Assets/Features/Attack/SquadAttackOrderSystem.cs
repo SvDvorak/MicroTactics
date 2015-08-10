@@ -21,6 +21,11 @@ public class SquadAttackOrderSystem : IReactiveSystem
             var unit = unitsInSquad[i];
             var squadPosition = UnitInSquadPositioner.GetPosition(squadEntity.boxFormation, i);
 
+            if (unit.hasAttackOrder)
+            {
+                continue;
+            }
+
             unit.ReplaceAttackOrder(
                 squadPosition.X + squadEntity.attackOrder.x,
                 squadPosition.Y + squadEntity.attackOrder.y,

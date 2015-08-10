@@ -10,21 +10,22 @@ public static class ComponentIds {
     public const int AttackOrder = 4;
     public const int Audio = 5;
     public const int BoxFormation = 6;
-    public const int Destroy = 7;
-    public const int Enemy = 8;
-    public const int Movement = 9;
-    public const int MoveOrder = 10;
-    public const int Physics = 11;
-    public const int Position = 12;
-    public const int Rotation = 13;
-    public const int Squad = 14;
-    public const int Unit = 15;
-    public const int UnitsCache = 16;
-    public const int UnitTemplate = 17;
-    public const int Velocity = 18;
-    public const int View = 19;
+    public const int Collision = 7;
+    public const int Destroy = 8;
+    public const int Enemy = 9;
+    public const int Movement = 10;
+    public const int MoveOrder = 11;
+    public const int Physics = 12;
+    public const int Position = 13;
+    public const int Rotation = 14;
+    public const int Squad = 15;
+    public const int Unit = 16;
+    public const int UnitsCache = 17;
+    public const int UnitTemplate = 18;
+    public const int Velocity = 19;
+    public const int View = 20;
 
-    public const int TotalComponents = 20;
+    public const int TotalComponents = 21;
 
     static readonly string[] components = {
         "Ai",
@@ -34,6 +35,7 @@ public static class ComponentIds {
         "AttackOrder",
         "Audio",
         "BoxFormation",
+        "Collision",
         "Destroy",
         "Enemy",
         "Movement",
@@ -61,6 +63,7 @@ public static class ComponentIds {
         { typeof (AttackOrderComponent), AttackOrder },
         { typeof (AudioComponent), Audio },
         { typeof (BoxFormationComponent), BoxFormation },
+        { typeof (CollisionComponent), Collision },
         { typeof (DestroyComponent), Destroy },
         { typeof (EnemyComponent), Enemy },
         { typeof (MovementComponent), Movement },
