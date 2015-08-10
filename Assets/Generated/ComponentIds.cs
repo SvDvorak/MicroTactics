@@ -13,19 +13,22 @@ public static class ComponentIds {
     public const int Collision = 7;
     public const int Destroy = 8;
     public const int Enemy = 9;
-    public const int Movement = 10;
-    public const int MoveOrder = 11;
-    public const int Physics = 12;
-    public const int Position = 13;
-    public const int Rotation = 14;
-    public const int Squad = 15;
-    public const int Unit = 16;
-    public const int UnitsCache = 17;
-    public const int UnitTemplate = 18;
-    public const int Velocity = 19;
-    public const int View = 20;
+    public const int InputPositionChanged = 10;
+    public const int InputPress = 11;
+    public const int InputRelease = 12;
+    public const int Movement = 13;
+    public const int MoveOrder = 14;
+    public const int Physics = 15;
+    public const int Position = 16;
+    public const int Rotation = 17;
+    public const int Squad = 18;
+    public const int Unit = 19;
+    public const int UnitsCache = 20;
+    public const int UnitTemplate = 21;
+    public const int Velocity = 22;
+    public const int View = 23;
 
-    public const int TotalComponents = 21;
+    public const int TotalComponents = 24;
 
     static readonly string[] components = {
         "Ai",
@@ -38,6 +41,9 @@ public static class ComponentIds {
         "Collision",
         "Destroy",
         "Enemy",
+        "InputPositionChanged",
+        "InputPress",
+        "InputRelease",
         "Movement",
         "MoveOrder",
         "Physics",
@@ -66,6 +72,9 @@ public static class ComponentIds {
         { typeof (CollisionComponent), Collision },
         { typeof (DestroyComponent), Destroy },
         { typeof (EnemyComponent), Enemy },
+        { typeof (InputPositionChangedComponent), InputPositionChanged },
+        { typeof (InputPressComponent), InputPress },
+        { typeof (InputReleaseComponent), InputRelease },
         { typeof (MovementComponent), Movement },
         { typeof (MoveOrderComponent), MoveOrder },
         { typeof (PhysicsComponent), Physics },
