@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Assets;
 using Entitas;
 using UnityEngine;
 
@@ -26,6 +27,12 @@ public class LinkViewsStartSystem : IStartSystem, ISetPool
         foreach (var component in componentContainer.Components)
         {
             entity.AddComponent(ComponentIds.ComponentToId(component), component);
+
+            if (component is PositionComponent)
+            {
+                var objectPosition = componentContainer.transform.position;
+                entity.ReplacePosition(objectPosition.ToV3());
+            }
         }
     }
 }
