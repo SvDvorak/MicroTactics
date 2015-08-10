@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Entitas;
 using FluentAssertions;
 using Xunit;
@@ -40,7 +41,6 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void AddsNewUnitsToMatchingSquad()
         {
-            _pool.CreateEntity().AddUnit(0);
             var unit = _pool.CreateEntity().AddUnit(0);
 
             _sut.Execute(unit.AsList());
@@ -48,6 +48,22 @@ namespace MicroTactics.Tests.Features
             var cachedUnits = _squad.unitsCache.Units;
             cachedUnits.Should().HaveCount(1);
             cachedUnits[0].Should().Be(unit);
+        }
+
+        [Fact]
+        public void HandlesMultipleSquads()
+        {
+            var squad2 = _pool.CreateEntity().AddSquad(1);
+            var unit1 = _pool.CreateEntity().AddUnit(0);
+            var unit2 = _pool.CreateEntity().AddUnit(1);
+
+            _sut.Execute(new [] { unit1, unit2 }.ToList());
+
+            _squad.unitsCache.Units.Should().HaveCount(1);
+            _squad.unitsCache.Units[0].Should().Be(unit1);
+
+            squad2.unitsCache.Units.Should().HaveCount(1);
+            squad2.unitsCache.Units[0].Should().Be(unit2);
         }
 
         [Fact]

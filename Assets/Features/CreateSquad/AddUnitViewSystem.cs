@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assets;
 using Entitas;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class AddUnitViewSystem : IReactiveSystem, ISetPool
 {
@@ -43,7 +45,12 @@ public class AddUnitViewSystem : IReactiveSystem, ISetPool
 
     private Entity GetMatchingSquad(Entity entity)
     {
-        return _squads.GetEntities().Single(x => x.squad.Number == entity.unit.SquadNumber);
+        var matchingSquad = _squads.GetEntities().SingleOrDefault(x => x.squad.Number == entity.unit.SquadNumber);
+        if (matchingSquad == null)
+        {
+            throw new Exception("Multiple squads with same id number found");
+        }
+        return matchingSquad;
     }
 
     private GameObject InstantiateGameObject(Entity entity, GameObject unitTemplate)

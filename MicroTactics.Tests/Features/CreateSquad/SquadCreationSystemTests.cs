@@ -68,6 +68,17 @@ namespace MicroTactics.Tests.Features.CreateSquad
         }
 
         [Fact]
+        public void HandlesMultipleSquads()
+        {
+            _squad1.ReplaceBoxFormation(1, 1, 1);
+            _squad2.ReplaceBoxFormation(1, 1, 1);
+
+            _sut.Execute(new [] { _squad1, _squad2 }.ToList());
+
+            _pool.Count.Should().Be(2);
+        }
+
+        [Fact]
         public void DoesNotTouchUnitsInOtherSquadsWhenRecreatingSquad()
         {
             _sut.Execute(_squad1.ReplaceBoxFormation(1, 1, 0).AsList());

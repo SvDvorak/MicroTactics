@@ -20,10 +20,11 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
 
     public void Execute(List<Entity> entities)
     {
-        var squadEntity = entities.SingleEntity();
-
-        RemoveExistingUnitsFromSquad(squadEntity.squad.Number);
-        CreateUnitsForSquad(squadEntity.squad, squadEntity.boxFormation);
+        foreach (var squadEntity in entities)
+        {
+            RemoveExistingUnitsFromSquad(squadEntity.squad.Number);
+            CreateUnitsForSquad(squadEntity.squad, squadEntity.boxFormation);
+        }
     }
 
     private void CreateUnitsForSquad(SquadComponent squad, BoxFormationComponent formation)

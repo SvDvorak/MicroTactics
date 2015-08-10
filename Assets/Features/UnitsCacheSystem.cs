@@ -37,17 +37,19 @@ public class UnitsCacheSystem : IMultiReactiveSystem, ISetPool
 
     public void Execute(List<Entity> entities)
     {
-        var unitsToRemove = entities.Where(x => !x.hasUnit || x.isDestroy);
-        var unitsToAdd = entities.Where(x => x.hasUnit);
-        var squad = _squads.GetSingleEntity();
-
-        var existingUnits = new List<Entity>();
-        if (squad.hasUnitsCache)
+        foreach (var squadEntity in _squads.GetEntities())
         {
-            existingUnits = squad.unitsCache.Units;
-        }
+            var unitsToRemove = entities.Where(x => !x.hasUnit || x.isDestroy);
+            var unitsToAdd = entities.Where(x => x.hasUnit && x.unit.SquadNumber == squadEntity.squad.Number);
 
-        var updatedUnits = existingUnits.Union(unitsToAdd).Except(unitsToRemove).ToList();
-        squad.ReplaceUnitsCache(updatedUnits);
+            var existingUnits = new List<Entity>();
+            if (squadEntity.hasUnitsCache)
+            {
+                existingUnits = squadEntity.unitsCache.Units;
+            }
+
+            var updatedUnits = existingUnits.Union(unitsToAdd).Except(unitsToRemove).ToList();
+            squadEntity.ReplaceUnitsCache(updatedUnits);
+        }
     }
 }
