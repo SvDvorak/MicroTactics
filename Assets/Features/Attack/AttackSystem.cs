@@ -9,7 +9,7 @@ public class AttackSystem : IReactiveSystem, ISetPool
 {
     private Pool _pool;
 
-    public IMatcher trigger { get { return Matcher.AllOf(Matcher.Position, Matcher.Rotation, Matcher.AttackOrder, Matcher.ArrowTemplate); } }
+    public IMatcher trigger { get { return Matcher.AllOf(Matcher.AttackOrder); } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
     public void SetPool(Pool pool)
@@ -21,6 +21,11 @@ public class AttackSystem : IReactiveSystem, ISetPool
     {
         foreach (var entity in entities)
         {
+            if (!entity.hasPosition || !entity.hasRotation || !entity.hasArrowTemplate)
+            {
+                continue;
+            }
+
             var firePosition = entity.position.ToV3() + new Vector3(0, 4, 0);
             var attackDirection = entity.attackOrder.ToV3() - entity.position.ToV3();
             var force = CalculateForce(firePosition.Y, entity.rotation, attackDirection.Length(), 1);

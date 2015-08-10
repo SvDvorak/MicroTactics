@@ -3,13 +3,18 @@ using Entitas;
 
 public class SquadAttackOrderSystem : IReactiveSystem
 {
-    public IMatcher trigger { get { return Matcher.AllOf(Matcher.UnitsCache, Matcher.BoxFormation, Matcher.AttackOrder); } }
+    public IMatcher trigger { get { return Matcher.AttackOrder; } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
     public void Execute(List<Entity> entities)
     {
         foreach (var squadEntity in entities)
         {
+            if (!squadEntity.hasUnitsCache || !squadEntity.hasBoxFormation)
+            {
+                continue;
+            }
+
             SetAttackRelativeToSquadPosition(squadEntity.unitsCache.Units, squadEntity);
         }
     }
@@ -21,6 +26,7 @@ public class SquadAttackOrderSystem : IReactiveSystem
             var unit = unitsInSquad[i];
             var squadPosition = UnitInSquadPositioner.GetPosition(squadEntity.boxFormation, i);
 
+            // TODO: Remove!
             if (unit.hasAttackOrder)
             {
                 continue;

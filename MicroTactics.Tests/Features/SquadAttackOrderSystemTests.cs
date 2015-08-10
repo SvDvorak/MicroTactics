@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Entitas;
 using FluentAssertions;
+using Mono.GameMath;
 using Xunit;
 
 namespace MicroTactics.Tests.Features
@@ -17,8 +18,18 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void TriggersOnAddedAttackOrder()
         {
-            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.UnitsCache, Matcher.BoxFormation, Matcher.AttackOrder));
+            _sut.trigger.Should().Be(Matcher.AttackOrder);
             _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
+        }
+
+        [Fact]
+        public void DoesNothingToSquadsWithoutCacheAndFormation()
+        {
+            Entity entity = new TestEntity();
+
+            _sut.Execute(entity.AsList());
+
+            entity.hasAttackOrder.Should().BeFalse("should not add order when missing components");
         }
 
         [Fact]
@@ -37,10 +48,10 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute(squad.AsList());
 
-            unit1.HasAttackOrderTo(new VectorClass(0, 0, -1));
-            unit2.HasAttackOrderTo(new VectorClass(2, 0, -1));
-            unit3.HasAttackOrderTo(new VectorClass(0, 0, 1));
-            unit4.HasAttackOrderTo(new VectorClass(2, 0, 1));
+            unit1.HasAttackOrderTo(new Vector3(0, 0, -1));
+            unit2.HasAttackOrderTo(new Vector3(2, 0, -1));
+            unit3.HasAttackOrderTo(new Vector3(0, 0, 1));
+            unit4.HasAttackOrderTo(new Vector3(2, 0, 1));
         }
 
         [Fact]
@@ -63,8 +74,8 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute(new [] { squad1, squad2 }.ToList());
 
-            unit1.HasAttackOrderTo(new VectorClass(1, 0, 0));
-            unit2.HasAttackOrderTo(new VectorClass(0, 1, 0));
+            unit1.HasAttackOrderTo(new Vector3(1, 0, 0));
+            unit2.HasAttackOrderTo(new Vector3(0, 1, 0));
         }
 
         private static Entity CreateUnit(int squadNumber = 0)

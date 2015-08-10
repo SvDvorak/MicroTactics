@@ -9,7 +9,7 @@ namespace MicroTactics.Tests.Features
     public class AttackSystemTests
     {
         private readonly AttackSystem _sut;
-        private TestPool _pool;
+        private readonly TestPool _pool;
 
         public AttackSystemTests()
         {
@@ -19,10 +19,18 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void TriggersOnAddedPositionAndAttackOrder()
+        public void TriggersOnAddedAttackOrder()
         {
-            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.Position, Matcher.Rotation, Matcher.AttackOrder, Matcher.ArrowTemplate));
+            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.AttackOrder));
             _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
+        }
+
+        [Fact]
+        public void DoesNothingToEntitiesWithoutPositionRotationAndArrowTemplate()
+        {
+            var entity = new TestEntity().AddAttackOrder(0, 0, 0);
+
+            _sut.Execute(entity.AsList());
         }
 
         [Fact]
