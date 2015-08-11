@@ -99,6 +99,19 @@ namespace MicroTactics.Tests.Features
                 });
         }
 
+        [Fact]
+        public void HandlesMultipleSelectionAreas()
+        {
+            var selectionArea1 = CreateSelectionArea(CreateSquad());
+            var selectionArea2 = CreateSelectionArea(CreateSquad());
+
+            _sut.Execute();
+
+            (selectionArea1.hasBoundingMesh && selectionArea2.hasBoundingMesh)
+                .Should()
+                .BeTrue("both selection areas should have a bounding mesh");
+        }
+
         private Entity CreateUnitAt(int x, int z)
         {
             return _pool.CreateEntity().AddPosition(x, 0, z);

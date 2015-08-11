@@ -21,18 +21,20 @@ public class SelectionAreaUpdateSystem : IExecuteSystem, ISetPool
 
     public void Execute()
     {
-        var entity = _selectionAreasGroup.GetSingleEntity();
-        var squad = entity.selectionArea.Parent;
-        var unitPositions = squad.unitsCache.Units
-            .Select(unit => new Vector2(unit.position.x, unit.position.z))
-            .ToList();
+        foreach (var entity in _selectionAreasGroup.GetEntities())
+        {
+            var squad = entity.selectionArea.Parent;
+            var unitPositions = squad.unitsCache.Units
+                .Select(unit => new Vector2(unit.position.x, unit.position.z))
+                .ToList();
 
-        var hullPoints = ConvexHullCalculator
-            .Calculate(unitPositions)
-            .Select(x => AddPadding(x))
-            .ToList();
+            var hullPoints = ConvexHullCalculator
+                .Calculate(unitPositions)
+                .Select(x => AddPadding(x))
+                .ToList();
 
-        entity.ReplaceBoundingMesh(hullPoints);
+            entity.ReplaceBoundingMesh(hullPoints);
+        }
     }
 
     private Vector2 AddPadding(Vector2 position)

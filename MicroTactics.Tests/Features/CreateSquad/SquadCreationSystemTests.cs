@@ -118,6 +118,17 @@ namespace MicroTactics.Tests.Features.CreateSquad
             selectionAreaEntity.selectionArea.Parent.Should().Be(_squad1);
             selectionAreaEntity.resource.Name.Should().Be(Res.SelectionArea);
         }
+
+        [Fact]
+        public void RemovesExistingSelectionAreaWhenRecreating()
+        {
+            _sut.Execute(_squad1.AsList());
+            _sut.Execute(_squad1.AsList());
+
+            var nonDestroyedEntities = _pool.GetEntities().Where(x => !x.isDestroy);
+            nonDestroyedEntities.Should().HaveCount(1);
+            nonDestroyedEntities.Single().hasSelectionArea.Should().BeTrue("new selection area should have been created");
+        }
     }
 
     public static class EntityExtensions
