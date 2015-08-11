@@ -9,29 +9,30 @@ public static class ComponentIds {
     public const int ArrowTemplate = 3;
     public const int AttackOrder = 4;
     public const int Audio = 5;
-    public const int BoxFormation = 6;
-    public const int Collision = 7;
-    public const int Destroy = 8;
-    public const int Enemy = 9;
-    public const int InputPositionChanged = 10;
-    public const int InputPress = 11;
-    public const int InputRelease = 12;
-    public const int Movement = 13;
-    public const int MoveOrder = 14;
-    public const int Physics = 15;
-    public const int Position = 16;
-    public const int Resource = 17;
-    public const int Rotation = 18;
-    public const int Selected = 19;
-    public const int SelectionArea = 20;
-    public const int Squad = 21;
-    public const int Unit = 22;
-    public const int UnitsCache = 23;
-    public const int UnitTemplate = 24;
-    public const int Velocity = 25;
-    public const int View = 26;
+    public const int BoundingMesh = 6;
+    public const int BoxFormation = 7;
+    public const int Collision = 8;
+    public const int Destroy = 9;
+    public const int Enemy = 10;
+    public const int InputPositionChanged = 11;
+    public const int InputPress = 12;
+    public const int InputRelease = 13;
+    public const int Movement = 14;
+    public const int MoveOrder = 15;
+    public const int Physics = 16;
+    public const int Position = 17;
+    public const int Resource = 18;
+    public const int Rotation = 19;
+    public const int Selected = 20;
+    public const int SelectionArea = 21;
+    public const int Squad = 22;
+    public const int Unit = 23;
+    public const int UnitsCache = 24;
+    public const int UnitTemplate = 25;
+    public const int Velocity = 26;
+    public const int View = 27;
 
-    public const int TotalComponents = 27;
+    public const int TotalComponents = 28;
 
     static readonly string[] components = {
         "Ai",
@@ -40,6 +41,7 @@ public static class ComponentIds {
         "ArrowTemplate",
         "AttackOrder",
         "Audio",
+        "BoundingMesh",
         "BoxFormation",
         "Collision",
         "Destroy",
@@ -74,6 +76,7 @@ public static class ComponentIds {
         { typeof (ArrowTemplateComponent), ArrowTemplate },
         { typeof (AttackOrderComponent), AttackOrder },
         { typeof (AudioComponent), Audio },
+        { typeof (BoundingMeshComponent), BoundingMesh },
         { typeof (BoxFormationComponent), BoxFormation },
         { typeof (CollisionComponent), Collision },
         { typeof (DestroyComponent), Destroy },

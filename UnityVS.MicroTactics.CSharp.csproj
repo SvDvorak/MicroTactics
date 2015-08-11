@@ -100,6 +100,7 @@
     <Compile Include="Assets\Features\AudioComponent.cs" />
     <Compile Include="Assets\Features\ClickComponent.cs" />
     <Compile Include="Assets\Features\ComponentContainer.cs" />
+    <Compile Include="Assets\Features\ConvexHullCalculator.cs" />
     <Compile Include="Assets\Features\CreateSquad\AddUnitViewSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\BoxFormationComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\PositionComponent.cs" />
@@ -130,11 +131,15 @@
     <Compile Include="Assets\Features\ReadVelocitySystem.cs" />
     <Compile Include="Assets\Features\RemovePhysicsSystem.cs" />
     <Compile Include="Assets\Features\RotationComponent.cs" />
+    <Compile Include="Assets\Features\Selection\BoundingMeshComponent.cs" />
     <Compile Include="Assets\Features\Selection\SelectSquadSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectedComponent.cs" />
     <Compile Include="Assets\Features\Selection\SelectionAreaComponent.cs" />
+    <Compile Include="Assets\Features\Selection\SelectionAreaUpdateSystem.cs" />
+    <Compile Include="Assets\Features\Selection\SelectionMeshUpdateSystem.cs" />
     <Compile Include="Assets\Features\SquadAudioSystem.cs" />
     <Compile Include="Assets\Features\SquadCenterPositionSystem.cs" />
+    <Compile Include="Assets\Features\Triangulator.cs" />
     <Compile Include="Assets\Features\UnitsCacheComponent.cs" />
     <Compile Include="Assets\Features\UnitsCacheSystem.cs" />
     <Compile Include="Assets\Features\View\AddViewSystem.cs" />
@@ -159,6 +164,7 @@
     <Compile Include="Assets\Generated\AttackOrderComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AttackSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AudioComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\BoundingMeshComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\BoxFormationComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\CollisionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ComponentIds.cs" />
@@ -186,6 +192,8 @@
     <Compile Include="Assets\Generated\SelectSquadSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SelectedComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SelectionAreaComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\SelectionAreaUpdateSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\SelectionMeshUpdateSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadAttackOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadCenterPositionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadComponentGeneratedExtension.cs" />

@@ -91,6 +91,7 @@
     <Compile Include="Features\EntityExtensions.cs" />
     <Compile Include="Features\MoveSystemTests.cs" />
     <Compile Include="Features\RemoveMoveOrderSystemTests.cs" />
+    <Compile Include="Features\SelectionAreaUpdateSystemTests.cs" />
     <Compile Include="Features\SelectSquadSystemTests.cs" />
     <Compile Include="Features\SquadAttackOrderSystemTests.cs" />
     <Compile Include="Features\SquadCenterPositionSystemTests.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Features\QuaternionCloseToExtensions.cs" />
     <Compile Include="FloatExtensionsTests.cs" />
     <Compile Include="FormationTests.cs" />
+    <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="IEnumerableExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VectorExtensionsTests.cs" />
