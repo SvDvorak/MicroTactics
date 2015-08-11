@@ -49,6 +49,9 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
 
     private void CreateSelectionArea(Entity squadEntity)
     {
-        _pool.CreateEntity().AddSelectionArea(squadEntity);
+        _pool
+            .CreateEntity()
+            .AddSelectionArea(squadEntity)
+            .AddResource(Res.SelectionArea);
     }
 }

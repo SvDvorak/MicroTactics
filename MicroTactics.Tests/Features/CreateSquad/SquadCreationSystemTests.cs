@@ -14,6 +14,8 @@ namespace MicroTactics.Tests.Features.CreateSquad
         private readonly Entity _squad1 = new TestEntity().AddSquad(0).AddBoxFormation(0, 0, 0);
         private readonly Entity _squad2 = new TestEntity().AddSquad(0).AddBoxFormation(0, 0, 0);
 
+        private List<Entity> UnitsInPool { get { return _pool.GetEntities().Where(x => x.hasUnit).ToList(); } }
+
         public SquadCreationSystemTests()
         {
             _sut = new SquadCreationSystem();
@@ -107,8 +109,6 @@ namespace MicroTactics.Tests.Features.CreateSquad
             UnitsInPool.Fourth().ShouldHavePosition(1, 0, 1);
         }
 
-        private List<Entity> UnitsInPool { get { return _pool.GetEntities().Where(x => x.hasUnit).ToList(); } }
-
         [Fact]
         public void CreatesASelectionAreaForSquad()
         {
@@ -116,6 +116,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
 
             var selectionAreaEntity = _pool.GetEntities().SingleEntity();
             selectionAreaEntity.selectionArea.Parent.Should().Be(_squad1);
+            selectionAreaEntity.resource.Name.Should().Be(Res.SelectionArea);
         }
     }
 

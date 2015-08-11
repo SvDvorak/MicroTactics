@@ -20,17 +20,18 @@ public static class ComponentIds {
     public const int MoveOrder = 14;
     public const int Physics = 15;
     public const int Position = 16;
-    public const int Rotation = 17;
-    public const int Selected = 18;
-    public const int SelectionArea = 19;
-    public const int Squad = 20;
-    public const int Unit = 21;
-    public const int UnitsCache = 22;
-    public const int UnitTemplate = 23;
-    public const int Velocity = 24;
-    public const int View = 25;
+    public const int Resource = 17;
+    public const int Rotation = 18;
+    public const int Selected = 19;
+    public const int SelectionArea = 20;
+    public const int Squad = 21;
+    public const int Unit = 22;
+    public const int UnitsCache = 23;
+    public const int UnitTemplate = 24;
+    public const int Velocity = 25;
+    public const int View = 26;
 
-    public const int TotalComponents = 26;
+    public const int TotalComponents = 27;
 
     static readonly string[] components = {
         "Ai",
@@ -50,6 +51,7 @@ public static class ComponentIds {
         "MoveOrder",
         "Physics",
         "Position",
+        "Resource",
         "Rotation",
         "Selected",
         "SelectionArea",
@@ -83,6 +85,7 @@ public static class ComponentIds {
         { typeof (MoveOrderComponent), MoveOrder },
         { typeof (PhysicsComponent), Physics },
         { typeof (PositionComponent), Position },
+        { typeof (ResourceComponent), Resource },
         { typeof (RotationComponent), Rotation },
         { typeof (SelectedComponent), Selected },
         { typeof (SelectionAreaComponent), SelectionArea },

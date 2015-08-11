@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -106,6 +104,7 @@
     <Compile Include="Assets\Features\CreateSquad\BoxFormationComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\PositionComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\QuaternionClass.cs" />
+    <Compile Include="Assets\Features\CreateSquad\ResourceComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadCreationSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\UnitComponent.cs" />
@@ -116,12 +115,11 @@
     <Compile Include="Assets\Features\Destruction\DestroySystem.cs" />
     <Compile Include="Assets\Features\Destruction\RemoveViewSystem.cs" />
     <Compile Include="Assets\Features\EnemyComponent.cs" />
-    <Compile Include="Assets\Features\LinkViewsStartSystem.cs" />
+    <Compile Include="Assets\Features\MouseInput.cs" />
     <Compile Include="Assets\Features\Move\AiComponent.cs" />
     <Compile Include="Assets\Features\Move\AiMoveOrderSystem.cs" />
     <Compile Include="Assets\Features\Move\AnimateComponent.cs" />
     <Compile Include="Assets\Features\Move\AnimateUnitSystem.cs" />
-    <Compile Include="Assets\Features\MouseInput.cs" />
     <Compile Include="Assets\Features\Move\MoveOrderComponent.cs" />
     <Compile Include="Assets\Features\Move\MoveSystem.cs" />
     <Compile Include="Assets\Features\Move\MovementComponent.cs" />
@@ -131,8 +129,6 @@
     <Compile Include="Assets\Features\PhysicsComponent.cs" />
     <Compile Include="Assets\Features\ReadVelocitySystem.cs" />
     <Compile Include="Assets\Features\RemovePhysicsSystem.cs" />
-    <Compile Include="Assets\Features\RenderPositionSystem.cs" />
-    <Compile Include="Assets\Features\RenderRotationSystem.cs" />
     <Compile Include="Assets\Features\RotationComponent.cs" />
     <Compile Include="Assets\Features\Selection\SelectSquadSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectedComponent.cs" />
@@ -141,9 +137,15 @@
     <Compile Include="Assets\Features\SquadCenterPositionSystem.cs" />
     <Compile Include="Assets\Features\UnitsCacheComponent.cs" />
     <Compile Include="Assets\Features\UnitsCacheSystem.cs" />
+    <Compile Include="Assets\Features\View\AddViewSystem.cs" />
+    <Compile Include="Assets\Features\View\LinkViewsStartSystem.cs" />
+    <Compile Include="Assets\Features\View\RenderPositionSystem.cs" />
+    <Compile Include="Assets\Features\View\RenderRotationSystem.cs" />
+    <Compile Include="Assets\Features\View\Resources.cs" />
     <Compile Include="Assets\FloatExtensions.cs" />
     <Compile Include="Assets\Generated\AddArrowViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AddUnitViewSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\AddViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AiAttackOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AiComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AiMoveOrderSystemGeneratedExtension.cs" />
@@ -179,10 +181,11 @@
     <Compile Include="Assets\Generated\RemoveViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RenderPositionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RenderRotationSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\ResourceComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RotationComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SelectSquadSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SelectedComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\SelectionAreaGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\SelectionAreaComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadAttackOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadCenterPositionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadComponentGeneratedExtension.cs" />
