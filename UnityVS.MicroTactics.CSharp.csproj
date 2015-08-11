@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -119,7 +121,7 @@
     <Compile Include="Assets\Features\Move\AiMoveOrderSystem.cs" />
     <Compile Include="Assets\Features\Move\AnimateComponent.cs" />
     <Compile Include="Assets\Features\Move\AnimateUnitSystem.cs" />
-    <Compile Include="Assets\Features\Move\MouseInput.cs" />
+    <Compile Include="Assets\Features\MouseInput.cs" />
     <Compile Include="Assets\Features\Move\MoveOrderComponent.cs" />
     <Compile Include="Assets\Features\Move\MoveSystem.cs" />
     <Compile Include="Assets\Features\Move\MovementComponent.cs" />

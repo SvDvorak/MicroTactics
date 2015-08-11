@@ -40,7 +40,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         {
             _sut.Execute(_squad1.AsList());
 
-            _pool.Count.Should().Be(0);
+            UnitsInPool.Should().HaveCount(0);
         }
 
         [Fact]
@@ -50,7 +50,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
 
             _sut.Execute(_squad1.AsList());
 
-            _pool.Count.Should().Be(4);
+            UnitsInPool.Should().HaveCount(4);
         }
 
         [Fact]
@@ -62,9 +62,8 @@ namespace MicroTactics.Tests.Features.CreateSquad
             _squad1.ReplaceBoxFormation(1, 1, 0);
             _sut.Execute(_squad1.AsList());
 
-            var currentEntities = _pool.GetEntities();
-            currentEntities.Should().HaveCount(5);
-            currentEntities.Where(x => x.isDestroy).Should().HaveCount(4, "all units from first squad should be destroyed");
+            UnitsInPool.Should().HaveCount(5);
+            UnitsInPool.Where(x => x.isDestroy).Should().HaveCount(4, "all units from first squad should be destroyed");
         }
 
         [Fact]
@@ -75,7 +74,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
 
             _sut.Execute(new [] { _squad1, _squad2 }.ToList());
 
-            _pool.Count.Should().Be(2);
+            UnitsInPool.Should().HaveCount(2);
         }
 
         [Fact]
@@ -84,7 +83,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
             _sut.Execute(_squad1.ReplaceBoxFormation(1, 1, 0).AsList());
             _sut.Execute(_squad2.ReplaceBoxFormation(1, 1, 0).AsList());
 
-            _pool.Count.Should().Be(2);
+            UnitsInPool.Should().HaveCount(2);
         }
 
         [Fact]
@@ -92,7 +91,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         {
             _sut.Execute(_squad1.ReplaceBoxFormation(1, 1, 0).AsList());
 
-            var createdEntity = _pool.GetEntities().SingleEntity();
+            var createdEntity = UnitsInPool.SingleEntity();
             createdEntity.ShouldHaveUnit(0);
             createdEntity.ShouldHaveMovement(0.06f);
         }
@@ -102,14 +101,21 @@ namespace MicroTactics.Tests.Features.CreateSquad
         {
             _sut.Execute(_squad1.ReplaceBoxFormation(2, 2, 2).AsList());
 
-            var unit1 = _pool.GetEntities().First();
-            var unit2 = _pool.GetEntities().Second();
-            var unit3 = _pool.GetEntities().Third();
-            var unit4 = _pool.GetEntities().Fourth();
-            unit1.ShouldHavePosition(-1, 0, -1);
-            unit2.ShouldHavePosition(1, 0, -1);
-            unit3.ShouldHavePosition(-1, 0, 1);
-            unit4.ShouldHavePosition(1, 0, 1);
+            UnitsInPool.First().ShouldHavePosition(-1, 0, -1);
+            UnitsInPool.Second().ShouldHavePosition(1, 0, -1);
+            UnitsInPool.Third().ShouldHavePosition(-1, 0, 1);
+            UnitsInPool.Fourth().ShouldHavePosition(1, 0, 1);
+        }
+
+        private List<Entity> UnitsInPool { get { return _pool.GetEntities().Where(x => x.hasUnit).ToList(); } }
+
+        [Fact]
+        public void CreatesASelectionAreaForSquad()
+        {
+            _sut.Execute(_squad1.AsList());
+
+            var selectionAreaEntity = _pool.GetEntities().SingleEntity();
+            selectionAreaEntity.selectionArea.Parent.Should().Be(_squad1);
         }
     }
 

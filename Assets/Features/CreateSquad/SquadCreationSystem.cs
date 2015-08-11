@@ -24,6 +24,7 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
         {
             RemoveExistingUnitsFromSquad(squadEntity.squad.Number);
             CreateUnitsForSquad(squadEntity.squad, squadEntity.boxFormation);
+            CreateSelectionArea(squadEntity);
         }
     }
 
@@ -44,5 +45,10 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
     {
         var unitsInSquad = _unitsGroup.GetEntities().Where(x => x.unit.SquadNumber == squadNumber);
         unitsInSquad.Foreach(x => x.IsDestroy(true));
+    }
+
+    private void CreateSelectionArea(Entity squadEntity)
+    {
+        _pool.CreateEntity().AddSelectionArea(squadEntity);
     }
 }
