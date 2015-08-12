@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Assets;
 using Assets.Features;
 using Entitas;
 using Mono.GameMath;
@@ -25,20 +26,25 @@ public class SelectionAreaUpdateSystem : IExecuteSystem, ISetPool
         {
             var squad = entity.selectionArea.Parent;
             var unitPositions = squad.unitsCache.Units
-                .Select(unit => new Vector2(unit.position.x, unit.position.z))
+                .Select(unit => ToVector2(unit.position))
                 .ToList();
 
             var hullPoints = ConvexHullCalculator
                 .Calculate(unitPositions)
-                .Select(x => AddPadding(x))
+                .Select(x => AddPadding(x, ToVector2(squad.position)))
                 .ToList();
 
             entity.ReplaceBoundingMesh(hullPoints);
         }
     }
 
-    private Vector2 AddPadding(Vector2 position)
+    private static Vector2 ToVector2(PositionComponent position)
     {
-        return position + position.Normalized() * Padding;
+        return new Vector2(position.x, position.z);
+    }
+
+    private Vector2 AddPadding(Vector2 position, Vector2 centerPosition)
+    {
+        return position + (position - centerPosition).Normalized() * Padding;
     }
 }

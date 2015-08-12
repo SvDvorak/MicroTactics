@@ -82,20 +82,21 @@ namespace MicroTactics.Tests.Features
 
             var units = new List<Entity>()
                 {
-                    CreateUnitAt(-2, -2),
-                    CreateUnitAt(2, -2),
-                    CreateUnitAt(-2, 2)
+                    CreateUnitAt(0, -2),
+                    CreateUnitAt(4, -2),
+                    CreateUnitAt(0, 2)
                 };
 
-            var selectionArea = CreateSelectionArea(CreateSquad(units));
+            var squad = CreateSquad(units).ReplacePosition(2, 0, 0);
+            var selectionArea = CreateSelectionArea(squad);
 
             _sut.Execute();
 
             selectionArea.boundingMesh.Points.ShouldAllBeEquivalentTo(new[]
                 {
-                    new Vector2(-2.707107f, -2.707107f),
-                    new Vector2(2.707107f, -2.707107f),
-                    new Vector2(-2.707107f, 2.707107f)
+                    new Vector2(-0.707107f, -2.707107f),
+                    new Vector2(4.707107f, -2.707107f),
+                    new Vector2(-0.707107f, 2.707107f)
                 });
         }
 
@@ -119,7 +120,7 @@ namespace MicroTactics.Tests.Features
 
         private Entity CreateSquad(List<Entity> units = null)
         {
-            return _pool.CreateEntity().AddUnitsCache(units ?? new List<Entity>());
+            return _pool.CreateEntity().AddPosition(0, 0, 0).AddUnitsCache(units ?? new List<Entity>());
         }
 
         private Entity CreateSelectionArea(Entity squad)

@@ -20,7 +20,21 @@ namespace MicroTactics.Tests
         }
 
         [Fact]
-        public void SumsVectors()
+        public void SumsVector2s()
+        {
+            var vectors = new List<Vector2>()
+                {
+                    new Vector2(0, 0),
+                    new Vector2(1, 2),
+                    new Vector2(2, 3)
+                };
+
+            vectors.Sum().Should().Be(new Vector2(3, 5));
+            vectors.Sum(x => x).Should().Be(new Vector2(3, 5));
+        }
+
+        [Fact]
+        public void SumsVector3s()
         {
             var vectors = new List<Vector3>()
                 {
@@ -34,10 +48,17 @@ namespace MicroTactics.Tests
         }
 
         [Fact]
-        public void ReturnsEmptyVectorWhenNoElementsAreInList()
+        public void ReturnsEmptyVector3WhenNoElementsAreInList()
         {
             var emptyList = new List<Vector3>();
             emptyList.Sum(x => x).Should().Be(new Vector3(0, 0, 0));
+        }
+
+        [Fact]
+        public void ReturnsEmptyVector2WhenNoElementsAreInList()
+        {
+            var emptyList = new List<Vector2>();
+            emptyList.Sum(x => x).Should().Be(new Vector2(0, 0));
         }
     }
 }
