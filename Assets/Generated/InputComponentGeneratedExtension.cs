@@ -12,18 +12,18 @@ namespace Entitas {
             _inputComponentPool.Clear();
         }
 
-        public Entity AddInput(InputState newState, System.Collections.Generic.List<Entitas.Entity> newEntities) {
+        public Entity AddInput(InputState newState, System.Collections.Generic.List<EntityHit> newEntities) {
             var component = _inputComponentPool.Count > 0 ? _inputComponentPool.Pop() : new InputComponent();
             component.State = newState;
-            component.Entities = newEntities;
+            component.EntitiesHit = newEntities;
             return AddComponent(ComponentIds.Input, component);
         }
 
-        public Entity ReplaceInput(InputState newState, System.Collections.Generic.List<Entitas.Entity> newEntities) {
+        public Entity ReplaceInput(InputState newState, System.Collections.Generic.List<EntityHit> newEntities) {
             var previousComponent = hasInput ? input : null;
             var component = _inputComponentPool.Count > 0 ? _inputComponentPool.Pop() : new InputComponent();
             component.State = newState;
-            component.Entities = newEntities;
+            component.EntitiesHit = newEntities;
             ReplaceComponent(ComponentIds.Input, component);
             if (previousComponent != null) {
                 _inputComponentPool.Push(previousComponent);

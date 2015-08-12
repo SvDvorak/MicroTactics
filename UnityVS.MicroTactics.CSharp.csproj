@@ -100,7 +100,7 @@
     <Compile Include="Assets\Features\Attack\SquadAttackOrderSystem.cs" />
     <Compile Include="Assets\Features\Attack\VelocityComponent.cs" />
     <Compile Include="Assets\Features\AudioComponent.cs" />
-    <Compile Include="Assets\Features\ClickComponent.cs" />
+    <Compile Include="Assets\Features\InputComponent.cs" />
     <Compile Include="Assets\Features\ComponentContainer.cs" />
     <Compile Include="Assets\Features\ConvexHullCalculator.cs" />
     <Compile Include="Assets\Features\CreateSquad\AddUnitViewSystem.cs" />
@@ -162,6 +162,7 @@
     <Compile Include="Assets\Generated\ArrowComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ArrowStickToCollidedSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ArrowTemplateComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\Assets.Features.Move.GroundComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Move.RemoveMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.SquadAudioSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AttackOrderComponentGeneratedExtension.cs" />

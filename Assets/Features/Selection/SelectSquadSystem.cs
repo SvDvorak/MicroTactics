@@ -5,6 +5,7 @@ using Vexe.Runtime.Extensions;
 
 public class SelectSquadSystem : IReactiveSystem, ISetPool
 {
+    private bool _isMoving;
     private Group _selectedGroup;
     public IMatcher trigger { get { return Matcher.Input; } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
@@ -18,20 +19,28 @@ public class SelectSquadSystem : IReactiveSystem, ISetPool
     {
         var input = entities.SingleEntity().input;
 
-        var selectionEntity = input.Entities.LastOrDefault(x => x.hasSelectionArea);
+        var selectionEntityHit = input.EntitiesHit.LastOrDefault(x => x.Entity.hasSelectionArea);
         if (input.State == InputState.Press)
         {
-            if (selectionEntity != null)
+            if (selectionEntityHit != null)
             {
                 DeselectAllSquads();
-                selectionEntity.selectionArea.Parent.IsSelected(true);
+                selectionEntityHit.Entity.selectionArea.Parent.IsSelected(true);
+            }
+            else
+            {
+                _isMoving = true;
             }
         }
         else if (input.State == InputState.Release)
         {
-            if (selectionEntity == null)
+            if (selectionEntityHit == null && !_isMoving)
             {
                 DeselectAllSquads();
+            }
+            else if (_isMoving)
+            {
+                _selectedGroup.GetSingleEntity().AddMoveOrder(input.EntitiesHit.First().Position);
             }
         }
     }

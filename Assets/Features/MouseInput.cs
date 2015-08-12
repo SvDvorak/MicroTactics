@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Assets;
 using Entitas;
 
 public class MouseInput : MonoBehaviour
@@ -27,7 +28,7 @@ public class MouseInput : MonoBehaviour
             return;
         }
 
-        var hitEntities = GetMatchingEntitiesForHits(possibleHits);
+        var hitEntities = GetMatchingEntitiesForHits(possibleHits).ToList();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -43,13 +44,18 @@ public class MouseInput : MonoBehaviour
         }
     }
 
-    private List<Entity> GetMatchingEntitiesForHits(RaycastHit[] possibleHits)
+    private List<EntityHit> GetMatchingEntitiesForHits(RaycastHit[] possibleHits)
     {
         var viewables = _viewableGroup.GetEntities();
         return possibleHits
-            .Select(hit => viewables.SingleOrDefault(x => x.view.GameObject == hit.transform.gameObject))
-            .Where(hitEntity => hitEntity != null)
+            .Select(hit => new EntityHit(GetMatchingEntity(viewables, hit), hit.point.ToV3()))
+            .Where(hit => hit.Entity != null)
             .ToList();
+    }
+
+    private static Entity GetMatchingEntity(Entity[] viewables, RaycastHit hit)
+    {
+        return viewables.SingleOrDefault(x => x.view.GameObject == hit.transform.gameObject);
     }
 
     private RaycastHit[] RaycastUsingCamera()
