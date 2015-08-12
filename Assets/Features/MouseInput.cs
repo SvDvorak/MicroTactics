@@ -29,16 +29,17 @@ public class MouseInput : MonoBehaviour
 
         var hitEntities = GetMatchingEntitiesForHits(possibleHits);
 
-        InputEntity.ReplaceInputPositionChanged(hitEntities);
-
         if (Input.GetMouseButtonDown(0))
         {
-            InputEntity.ReplaceInputPress(hitEntities);
+            InputEntity.ReplaceInput(InputState.Press, hitEntities);
         }
-
-        if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))
         {
-            InputEntity.ReplaceInputRelease(hitEntities);
+            InputEntity.ReplaceInput(InputState.Release, hitEntities);
+        }
+        else
+        {
+            InputEntity.ReplaceInput(InputState.Hover, hitEntities);
         }
     }
 

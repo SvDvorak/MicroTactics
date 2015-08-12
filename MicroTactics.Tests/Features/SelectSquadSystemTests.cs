@@ -19,19 +19,20 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void TriggersOnAddedInputDown()
         {
-            _sut.trigger.Should().Be(Matcher.InputPress);
+            _sut.trigger.Should().Be(Matcher.Input);
             _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
         }
 
         [Fact]
-        public void SetsSelectedOnFirstSquadInInput()
+        public void SetsSelectedOnClosestSquadInInputWhenPressingAndReleasing()
         {
             var squad1 = CreateSquad();
             var squad2 = CreateSquad();
             var selectionArea1 = CreateSelectionArea(squad1);
             var selectionArea2 = CreateSelectionArea(squad2);
 
-            _sut.Execute(CreateInputPress(selectionArea1, selectionArea2).AsList());
+            _sut.Execute(CreateInputPress(selectionArea2, selectionArea1).AsList());
+            _sut.Execute(CreateInputRelease(selectionArea2, selectionArea1).AsList());
 
             squad1.isSelected.Should().BeTrue("first squad should have been selected");
             squad2.isSelected.Should().BeFalse("second squad shouldn't have been selected");
@@ -48,7 +49,7 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void DeselectsAllOtherSquadsWhenSelectingANewSquad()
+        public void DeselectsAllOtherSquadsWhenPressingANewSquad()
         {
             var squad1 = CreateSquad().IsSelected(true);
             var squad2 = CreateSquad().IsSelected(false);
@@ -56,6 +57,16 @@ namespace MicroTactics.Tests.Features
             _sut.Execute(CreateInputPress(CreateSelectionArea(squad2)).AsList());
 
             squad1.isSelected.Should().BeFalse("first squad should have been deselected");
+        }
+
+        [Fact]
+        public void DeselectsAllSquadsWhenReleasingOnNotASquad()
+        {
+            var squad1 = CreateSquad().IsSelected(true);
+
+            _sut.Execute(CreateInputRelease(_pool.CreateEntity()).AsList());
+
+            squad1.isSelected.Should().BeFalse("squad should have been deselected");
         }
 
         private Entity CreateSquad()
@@ -70,7 +81,12 @@ namespace MicroTactics.Tests.Features
 
         private Entity CreateInputPress(params Entity[] hitEntities)
         {
-            return _pool.CreateEntity().AddInputPress(hitEntities.ToList());
+            return _pool.CreateEntity().AddInput(InputState.Press, hitEntities.ToList());
+        }
+
+        private Entity CreateInputRelease(params Entity[] hitEntities)
+        {
+            return _pool.CreateEntity().AddInput(InputState.Release, hitEntities.ToList());
         }
     }
 }

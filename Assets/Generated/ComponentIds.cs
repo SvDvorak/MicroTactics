@@ -14,25 +14,23 @@ public static class ComponentIds {
     public const int Collision = 8;
     public const int Destroy = 9;
     public const int Enemy = 10;
-    public const int InputPositionChanged = 11;
-    public const int InputPress = 12;
-    public const int InputRelease = 13;
-    public const int Movement = 14;
-    public const int MoveOrder = 15;
-    public const int Physics = 16;
-    public const int Position = 17;
-    public const int Resource = 18;
-    public const int Rotation = 19;
-    public const int Selected = 20;
-    public const int SelectionArea = 21;
-    public const int Squad = 22;
-    public const int Unit = 23;
-    public const int UnitsCache = 24;
-    public const int UnitTemplate = 25;
-    public const int Velocity = 26;
-    public const int View = 27;
+    public const int Input = 11;
+    public const int Movement = 12;
+    public const int MoveOrder = 13;
+    public const int Physics = 14;
+    public const int Position = 15;
+    public const int Resource = 16;
+    public const int Rotation = 17;
+    public const int Selected = 18;
+    public const int SelectionArea = 19;
+    public const int Squad = 20;
+    public const int Unit = 21;
+    public const int UnitsCache = 22;
+    public const int UnitTemplate = 23;
+    public const int Velocity = 24;
+    public const int View = 25;
 
-    public const int TotalComponents = 28;
+    public const int TotalComponents = 26;
 
     static readonly string[] components = {
         "Ai",
@@ -46,9 +44,7 @@ public static class ComponentIds {
         "Collision",
         "Destroy",
         "Enemy",
-        "InputPositionChanged",
-        "InputPress",
-        "InputRelease",
+        "Input",
         "Movement",
         "MoveOrder",
         "Physics",
@@ -81,9 +77,7 @@ public static class ComponentIds {
         { typeof (CollisionComponent), Collision },
         { typeof (DestroyComponent), Destroy },
         { typeof (EnemyComponent), Enemy },
-        { typeof (InputPositionChangedComponent), InputPositionChanged },
-        { typeof (InputPressComponent), InputPress },
-        { typeof (InputReleaseComponent), InputRelease },
+        { typeof (InputComponent), Input },
         { typeof (MovementComponent), Movement },
         { typeof (MoveOrderComponent), MoveOrder },
         { typeof (PhysicsComponent), Physics },
