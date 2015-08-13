@@ -15,7 +15,7 @@ public class MoveSystem : IExecuteSystem, ISetPool
     {
         foreach (var entity in _entitiesWithOrder.GetEntities())
         {
-            var newPosition = entity.position.ToV3().MoveTowards(entity.moveOrder.ToV3(), entity.movement.MoveSpeed);
+            var newPosition = entity.position.ToV3().MoveTowards(entity.moveOrder.Position, entity.movement.MoveSpeed);
             entity.ReplacePosition(newPosition);
         }
     }

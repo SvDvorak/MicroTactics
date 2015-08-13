@@ -81,22 +81,22 @@ namespace MicroTactics.Tests.Features
             [Fact]
             public void DeselectsAllSquadsWhenReleasingOnNotASquad()
             {
-                var squad1 = CreateSquad().IsSelected(true);
+                var squad = CreateSquad().IsSelected(true);
 
                 var notSquad = _pool.CreateEntity();
                 _sut.Execute(CreateInput(InputState.Press, notSquad).AsList());
                 _sut.Execute(CreateInput(InputState.Release, notSquad).AsList());
 
-                squad1.isSelected.Should().BeFalse("squad should have been deselected");
+                squad.isSelected.Should().BeFalse("squad should have been deselected");
             }
         }
 
         public class SquadInteractionMove : SquadInteractionSystemTests
         {
             [Fact]
-            public void GivesMoveOrderWhenPressingAndReleasingWithDistanceOnGround()
+            public void GivesMoveOrderWhenPressingOnGroundAndReleasingFurtherAway()
             {
-                var squad1 = CreateSquad().IsSelected(true);
+                var squad = CreateSquad().IsSelected(true);
 
                 var ground = _pool.CreateEntity();
                 var hit1 = new EntityHit(ground, Vector3.Zero);
@@ -105,8 +105,7 @@ namespace MicroTactics.Tests.Features
                 _sut.Execute(CreateInput(InputState.Press, hit1).AsList());
                 _sut.Execute(CreateInput(InputState.Release, hit2).AsList());
 
-                squad1.hasMoveOrder.Should().BeTrue("attack order should have been given to squad");
-                squad1.moveOrder.ToV3().ShouldBeEquivalentTo(hit1.Position);
+                squad.HasMoveOrderTo(hit1.Position);
             }
 
             [Fact]
@@ -118,6 +117,40 @@ namespace MicroTactics.Tests.Features
 
                 _sut.Execute(CreateInput(InputState.Press, hit1).AsList());
                 _sut.Execute(CreateInput(InputState.Release, hit2).AsList());
+            }
+        }
+
+        public class SquadInteractionAttack : SquadInteractionSystemTests
+        {
+            [Fact]
+            public void GivesAttackOrderWhenPressingOnSquadAndReleasingOnGround()
+            {
+                var squad = CreateSquad();
+
+                var ground = _pool.CreateEntity();
+                var hit1 = new EntityHit(CreateSelectionArea(squad), Vector3.Zero);
+                var hit2 = new EntityHit(ground, new Vector3(100, 0, 0));
+
+                _sut.Execute(CreateInput(InputState.Press, hit1).AsList());
+                _sut.Execute(CreateInput(InputState.Release, hit2).AsList());
+
+                squad.HasAttackOrderTo(hit2.Position);
+            }
+
+            [Fact]
+            public void GivesAttackOrderWhenPressingOnSquadAndReleasingOnOtherSquad()
+            {
+                var squad1 = CreateSquad();
+                var squad2 = CreateSquad();
+
+                var selectedSquadHit = new EntityHit(CreateSelectionArea(squad1), Vector3.Zero);
+                var attackedSquadHit = new EntityHit(CreateSelectionArea(squad2), new Vector3(10, 0, 0));
+
+                _sut.Execute(CreateInput(InputState.Press, selectedSquadHit).AsList());
+                _sut.Execute(CreateInput(InputState.Release, attackedSquadHit).AsList());
+
+                squad1.hasAttackOrder.Should().BeTrue("attack order should have been given to squad");
+                squad1.attackOrder.ToV3().ShouldBeEquivalentTo(attackedSquadHit.Position);
             }
         }
 

@@ -6,9 +6,9 @@ using Vexe.Runtime.Extensions;
 
 public class SquadInteractionSystem : IReactiveSystem, ISetPool
 {
-    private bool _isMoving;
     private Group _selectedGroup;
     private Vector3 _moveStartPosition;
+    private bool _isAttacking;
 
     public IMatcher trigger { get { return Matcher.Input; } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
@@ -27,19 +27,23 @@ public class SquadInteractionSystem : IReactiveSystem, ISetPool
             return;
         }
 
-        var firstEntityHit = input.EntitiesHit.First();
         var selectionEntityHit = input.EntitiesHit.LastOrDefault(x => x.Entity.hasSelectionArea);
 
         if (selectionEntityHit != null)
         {
             if (input.State == InputState.Press)
             {
-                DeselectAllSquads();
-                selectionEntityHit.Entity.selectionArea.Parent.IsSelected(true);
+                _isAttacking = true;
+                SetSelected(selectionEntityHit.Entity.selectionArea.Parent);
+            }
+            else if(input.State == InputState.Release)
+            {
+                Attack(selectionEntityHit.Position);
             }
         }
         else
         {
+            var firstEntityHit = input.EntitiesHit.First();
             if (input.State == InputState.Press)
             {
                 _moveStartPosition = firstEntityHit.Position;
@@ -53,10 +57,34 @@ public class SquadInteractionSystem : IReactiveSystem, ISetPool
                 }
                 else if (_selectedGroup.Count > 0)
                 {
-                    _selectedGroup.GetSingleEntity().ReplaceMoveOrder(_moveStartPosition);
+                    if (_isAttacking)
+                    {
+                        Attack(firstEntityHit.Position);
+                    }
+                    else
+                    {
+                        MoveTo(_moveStartPosition);
+                    }
                 }
             }
         }
+    }
+
+    private void SetSelected(Entity squad)
+    {
+        DeselectAllSquads();
+        squad.IsSelected(true);
+    }
+
+    private void MoveTo(Vector3 position)
+    {
+        _selectedGroup.GetSingleEntity().ReplaceMoveOrder(position, Quaternion.Identity);
+    }
+
+    private void Attack(Vector3 position)
+    {
+        _selectedGroup.GetSingleEntity().ReplaceAttackOrder(position);
+        _isAttacking = false;
     }
 
     private void DeselectAllSquads()

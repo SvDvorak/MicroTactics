@@ -1,6 +1,7 @@
-﻿using Entitas;
+﻿using Assets;
+using Entitas;
 using FluentAssertions;
-using UnityEngine;
+using Mono.GameMath;
 using Xunit;
 
 namespace MicroTactics.Tests.Features
@@ -15,7 +16,7 @@ namespace MicroTactics.Tests.Features
             var pool = new TestPool();
             _entity = pool.CreateEntity()
                 .AddPosition(0, 0, 0)
-                .AddMoveOrder(1, 0, 0)
+                .AddMoveOrder(new Vector3(1, 0, 0), Quaternion.Identity)
                 .AddMovement(0.2f);
 
             _sut = new MoveSystem();
@@ -29,7 +30,7 @@ namespace MicroTactics.Tests.Features
             _sut.Execute();
             _sut.Execute();
 
-            _entity.position.ShouldBeEquivalentTo(new Vector3(0.6f, 0, 0));
+            _entity.position.ToV3().ShouldBeEquivalentTo(new Vector3(0.6f, 0, 0));
         }
 
         [Fact]
@@ -39,7 +40,7 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute();
 
-            _entity.position.ShouldBeEquivalentTo(_entity.moveOrder);
+            _entity.position.ToV3().ShouldBeEquivalentTo(_entity.moveOrder.Position);
         }
     }
 }

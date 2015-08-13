@@ -7,14 +7,14 @@ public static class ComponentIds {
     public const int Animate = 1;
     public const int Arrow = 2;
     public const int ArrowTemplate = 3;
-    public const int Ground = 4;
-    public const int AttackOrder = 5;
-    public const int Audio = 6;
-    public const int BoundingMesh = 7;
-    public const int BoxFormation = 8;
-    public const int Collision = 9;
-    public const int Destroy = 10;
-    public const int Enemy = 11;
+    public const int AttackOrder = 4;
+    public const int Audio = 5;
+    public const int BoundingMesh = 6;
+    public const int BoxFormation = 7;
+    public const int Collision = 8;
+    public const int Destroy = 9;
+    public const int Enemy = 10;
+    public const int Ground = 11;
     public const int Input = 12;
     public const int Movement = 13;
     public const int MoveOrder = 14;
@@ -38,7 +38,6 @@ public static class ComponentIds {
         "Animate",
         "Arrow",
         "ArrowTemplate",
-        "Ground",
         "AttackOrder",
         "Audio",
         "BoundingMesh",
@@ -46,6 +45,7 @@ public static class ComponentIds {
         "Collision",
         "Destroy",
         "Enemy",
+        "Ground",
         "Input",
         "Movement",
         "MoveOrder",
@@ -72,7 +72,6 @@ public static class ComponentIds {
         { typeof (AnimateComponent), Animate },
         { typeof (ArrowComponent), Arrow },
         { typeof (ArrowTemplateComponent), ArrowTemplate },
-        { typeof (GroundComponent), Ground },
         { typeof (AttackOrderComponent), AttackOrder },
         { typeof (AudioComponent), Audio },
         { typeof (BoundingMeshComponent), BoundingMesh },
@@ -80,6 +79,7 @@ public static class ComponentIds {
         { typeof (CollisionComponent), Collision },
         { typeof (DestroyComponent), Destroy },
         { typeof (EnemyComponent), Enemy },
+        { typeof (GroundComponent), Ground },
         { typeof (InputComponent), Input },
         { typeof (MovementComponent), Movement },
         { typeof (MoveOrderComponent), MoveOrder },

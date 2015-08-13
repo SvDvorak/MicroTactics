@@ -1,6 +1,7 @@
 ﻿using Assets.Features.Move;
 using Entitas;
 using FluentAssertions;
+using Mono.GameMath;
 using Xunit;
 
 namespace MicroTactics.Tests.Features
@@ -26,7 +27,7 @@ namespace MicroTactics.Tests.Features
         {
             var entity = new TestEntity()
                 .AddPosition(1, 1, 1)
-                .AddMoveOrder(1, 1, 1);
+                .AddMoveOrder(new Vector3(1, 1, 1), Quaternion.Identity);
 
             _sut.Execute(entity.AsList());
 
@@ -38,7 +39,7 @@ namespace MicroTactics.Tests.Features
         {
             var entity = new TestEntity()
                 .AddPosition(0, 0, 0)
-                .AddMoveOrder(1, 1, 1);
+                .AddMoveOrder(new Vector3(1, 1, 1), Quaternion.Identity);
 
             _sut.Execute(entity.AsList());
 

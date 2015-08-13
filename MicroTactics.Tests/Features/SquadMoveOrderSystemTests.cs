@@ -20,12 +20,12 @@ namespace MicroTactics.Tests.Features
             _squad1 = new TestEntity()
                 .AddSquad(0)
                 .AddBoxFormation(1, 1, 0)
-                .AddMoveOrder(0, 1, 0);
+                .AddMoveOrder(new Vector3(0, 1, 0), Quaternion.Identity);
 
             _squad2 = new TestEntity()
                 .AddSquad(1)
                 .AddBoxFormation(1, 1, 0)
-                .AddMoveOrder(0, 2, 0);
+                .AddMoveOrder(new Vector3(0, 2, 0), Quaternion.Identity);
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void ReplacesOrderIfOneAlreadyExistsOnUnit()
         {
-            var unit = CreateUnit(0).AddMoveOrder(1, 1, 1);
+            var unit = CreateUnit(0).AddMoveOrder(new Vector3(1, 1, 1), Quaternion.Identity);
             _squad1.ReplaceUnitsCache(unit.AsList());
 
             _sut.Execute(_squad1.AsList());

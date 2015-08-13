@@ -12,20 +12,18 @@ namespace Entitas {
             _moveOrderComponentPool.Clear();
         }
 
-        public Entity AddMoveOrder(float newX, float newY, float newZ) {
+        public Entity AddMoveOrder(Mono.GameMath.Vector3 newPosition, Mono.GameMath.Quaternion newOrientation) {
             var component = _moveOrderComponentPool.Count > 0 ? _moveOrderComponentPool.Pop() : new MoveOrderComponent();
-            component.x = newX;
-            component.y = newY;
-            component.z = newZ;
+            component.Position = newPosition;
+            component.Orientation = newOrientation;
             return AddComponent(ComponentIds.MoveOrder, component);
         }
 
-        public Entity ReplaceMoveOrder(float newX, float newY, float newZ) {
+        public Entity ReplaceMoveOrder(Mono.GameMath.Vector3 newPosition, Mono.GameMath.Quaternion newOrientation) {
             var previousComponent = hasMoveOrder ? moveOrder : null;
             var component = _moveOrderComponentPool.Count > 0 ? _moveOrderComponentPool.Pop() : new MoveOrderComponent();
-            component.x = newX;
-            component.y = newY;
-            component.z = newZ;
+            component.Position = newPosition;
+            component.Orientation = newOrientation;
             ReplaceComponent(ComponentIds.MoveOrder, component);
             if (previousComponent != null) {
                 _moveOrderComponentPool.Push(previousComponent);

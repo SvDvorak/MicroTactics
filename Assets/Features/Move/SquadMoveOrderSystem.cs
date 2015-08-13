@@ -2,6 +2,7 @@
 using System.Linq;
 using Assets;
 using Entitas;
+using Mono.GameMath;
 
 public class SquadMoveOrderSystem : IReactiveSystem
 {
@@ -23,7 +24,7 @@ public class SquadMoveOrderSystem : IReactiveSystem
             var unit = unitsInSquad[i];
             var squadPosition = UnitInSquadPositioner.GetPosition(squadEntity.boxFormation, i);
 
-            unit.ReplaceMoveOrder(squadPosition + squadEntity.moveOrder.ToV3());
+            unit.ReplaceMoveOrder(squadPosition + squadEntity.moveOrder.Position, Quaternion.Identity);
         }
     }
 }

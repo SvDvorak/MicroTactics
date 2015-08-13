@@ -11,7 +11,7 @@ namespace Assets.Features.Move
 
         public void Execute(List<Entity> entities)
         {
-            foreach (var entity in entities.Where(entity => entity.position.ToV3() == entity.moveOrder.ToV3()))
+            foreach (var entity in entities.Where(entity => entity.position.ToV3() == entity.moveOrder.Position))
             {
                 entity.RemoveMoveOrder();
             }

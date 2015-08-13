@@ -36,7 +36,7 @@ public class AiMoveOrderSystem : IExecuteSystem, ISetPool
                     moveDirection = new Vector3(1, 0, 0);
                 }
 
-                squad.ReplaceMoveOrder(squadPosition + moveDirection);
+                squad.ReplaceMoveOrder(squadPosition + moveDirection, Quaternion.Identity);
             }
         }
     }
