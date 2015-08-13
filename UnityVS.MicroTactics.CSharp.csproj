@@ -135,7 +135,7 @@
     <Compile Include="Assets\Features\RemovePhysicsSystem.cs" />
     <Compile Include="Assets\Features\RotationComponent.cs" />
     <Compile Include="Assets\Features\Selection\BoundingMeshComponent.cs" />
-    <Compile Include="Assets\Features\Selection\SelectSquadSystem.cs" />
+    <Compile Include="Assets\Features\Selection\SquadInteractionSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectedComponent.cs" />
     <Compile Include="Assets\Features\Selection\SelectionAreaComponent.cs" />
     <Compile Include="Assets\Features\Selection\SelectionAreaUpdateSystem.cs" />

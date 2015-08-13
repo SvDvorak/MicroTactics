@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Entitas;
+using Mono.GameMath;
 using Vexe.Runtime.Extensions;
 
-public class SelectSquadSystem : IReactiveSystem, ISetPool
+public class SquadInteractionSystem : IReactiveSystem, ISetPool
 {
     private bool _isMoving;
     private Group _selectedGroup;
+    private Vector3 _moveStartPosition;
+
     public IMatcher trigger { get { return Matcher.Input; } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
@@ -19,6 +22,12 @@ public class SelectSquadSystem : IReactiveSystem, ISetPool
     {
         var input = entities.SingleEntity().input;
 
+        if (input.EntitiesHit.IsEmpty())
+        {
+            return;
+        }
+
+        var firstEntityHit = input.EntitiesHit.First();
         var selectionEntityHit = input.EntitiesHit.LastOrDefault(x => x.Entity.hasSelectionArea);
         if (input.State == InputState.Press)
         {
@@ -29,18 +38,22 @@ public class SelectSquadSystem : IReactiveSystem, ISetPool
             }
             else
             {
-                _isMoving = true;
+                _moveStartPosition = firstEntityHit.Position;
             }
         }
         else if (input.State == InputState.Release)
         {
-            if (selectionEntityHit == null && !_isMoving)
+            var inputMoveDistance = (firstEntityHit.Position - _moveStartPosition).Length();
+            if (selectionEntityHit == null)
             {
-                DeselectAllSquads();
-            }
-            else if (_isMoving)
-            {
-                _selectedGroup.GetSingleEntity().AddMoveOrder(input.EntitiesHit.First().Position);
+                if (inputMoveDistance < 1)
+                {
+                    DeselectAllSquads();
+                }
+                else if(_selectedGroup.Count > 0)
+                {
+                    _selectedGroup.GetSingleEntity().ReplaceMoveOrder(_moveStartPosition);
+                }
             }
         }
     }

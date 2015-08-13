@@ -92,7 +92,7 @@
     <Compile Include="Features\MoveSystemTests.cs" />
     <Compile Include="Features\RemoveMoveOrderSystemTests.cs" />
     <Compile Include="Features\SelectionAreaUpdateSystemTests.cs" />
-    <Compile Include="Features\SelectSquadSystemTests.cs" />
+    <Compile Include="Features\SquadInteractionSystemTests.cs" />
     <Compile Include="Features\SquadAttackOrderSystemTests.cs" />
     <Compile Include="Features\SquadCenterPositionSystemTests.cs" />
     <Compile Include="Features\SquadMoveOrderSystemTests.cs" />
