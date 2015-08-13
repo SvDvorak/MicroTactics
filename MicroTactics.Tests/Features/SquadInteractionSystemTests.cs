@@ -32,7 +32,7 @@ namespace MicroTactics.Tests.Features
         public class SquadInteractionSelect : SquadInteractionSystemTests
         {
             [Fact]
-            public void SetsSelectedOnClosestSquadInInputWhenPressingAndReleasing()
+            public void SetsSelectedOnClosestSquadInInputWhenPressing()
             {
                 var squad1 = CreateSquad();
                 var squad2 = CreateSquad();
@@ -40,7 +40,6 @@ namespace MicroTactics.Tests.Features
                 var selectionArea2 = CreateSelectionArea(squad2);
 
                 _sut.Execute(CreateInput(InputState.Press, selectionArea2, selectionArea1).AsList());
-                _sut.Execute(CreateInput(InputState.Release, selectionArea2, selectionArea1).AsList());
 
                 squad1.isSelected.Should().BeTrue("first squad should have been selected");
                 squad2.isSelected.Should().BeFalse("second squad shouldn't have been selected");

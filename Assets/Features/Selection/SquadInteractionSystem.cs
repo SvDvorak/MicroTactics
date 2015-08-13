@@ -29,28 +29,29 @@ public class SquadInteractionSystem : IReactiveSystem, ISetPool
 
         var firstEntityHit = input.EntitiesHit.First();
         var selectionEntityHit = input.EntitiesHit.LastOrDefault(x => x.Entity.hasSelectionArea);
-        if (input.State == InputState.Press)
+
+        if (selectionEntityHit != null)
         {
-            if (selectionEntityHit != null)
+            if (input.State == InputState.Press)
             {
                 DeselectAllSquads();
                 selectionEntityHit.Entity.selectionArea.Parent.IsSelected(true);
             }
-            else
+        }
+        else
+        {
+            if (input.State == InputState.Press)
             {
                 _moveStartPosition = firstEntityHit.Position;
             }
-        }
-        else if (input.State == InputState.Release)
-        {
-            var inputMoveDistance = (firstEntityHit.Position - _moveStartPosition).Length();
-            if (selectionEntityHit == null)
+            else if (input.State == InputState.Release)
             {
+                var inputMoveDistance = (firstEntityHit.Position - _moveStartPosition).Length();
                 if (inputMoveDistance < 1)
                 {
                     DeselectAllSquads();
                 }
-                else if(_selectedGroup.Count > 0)
+                else if (_selectedGroup.Count > 0)
                 {
                     _selectedGroup.GetSingleEntity().ReplaceMoveOrder(_moveStartPosition);
                 }
