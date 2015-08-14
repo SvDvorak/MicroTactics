@@ -10,23 +10,15 @@ namespace MicroTactics.Tests.Features
 {
     public class SquadInteractionSystemTests
     {
-        private readonly SquadInteractionSystem _sut = new SquadInteractionSystem();
+        private readonly SquadInteractionSystem _sut;
         private readonly Pool _pool = new TestPool();
         private readonly Entity[] _empty = new Entity[0];
+        private readonly Systems _systemsSut;
 
         public SquadInteractionSystemTests()
         {
-            _sut.SetPool(_pool);
-        }
-
-        public class SquadInteractionTrigger : SquadInteractionSystemTests
-        {
-            [Fact]
-            public void TriggersOnAddedInput()
-            {
-                _sut.trigger.Should().Be(Matcher.Input);
-                _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
-            }
+            var system = _pool.CreateSquadInteractionSystem();
+            _systemsSut = new Systems().Add(system);
         }
 
         public class SquadInteractionSelect : SquadInteractionSystemTests
@@ -39,7 +31,10 @@ namespace MicroTactics.Tests.Features
                 var selectionArea1 = CreateSelectionArea(squad1);
                 var selectionArea2 = CreateSelectionArea(squad2);
 
-                _sut.Execute(CreateInput(InputState.Press, selectionArea2, selectionArea1).AsList());
+                Execute(CreateInput(InputState.Press, selectionArea2, selectionArea1));
+                Execute(CreateInput(InputState.Release, selectionArea2, selectionArea1));
+
+                _systemsSut.Execute();
 
                 squad1.isSelected.Should().BeTrue("first squad should have been selected");
                 squad2.isSelected.Should().BeFalse("second squad shouldn't have been selected");
@@ -51,8 +46,8 @@ namespace MicroTactics.Tests.Features
                 var squad = CreateSquad();
                 var selectionArea = CreateSelectionArea(squad);
 
-                _sut.Execute(CreateInput(InputState.Press, selectionArea).AsList());
-                _sut.Execute(CreateInput(InputState.Release, selectionArea).AsList());
+                Execute(CreateInput(InputState.Press, selectionArea));
+                Execute(CreateInput(InputState.Release, selectionArea));
 
                 squad.hasMoveOrder.Should().BeFalse("should only have been selected, not moved");
             }
@@ -62,7 +57,7 @@ namespace MicroTactics.Tests.Features
             {
                 var squad = CreateSquad();
 
-                _sut.Execute(CreateInput(InputState.Press, _empty).AsList());
+                Execute(CreateInput(InputState.Press, _empty));
 
                 squad.isSelected.Should().BeFalse("squad is not in selection so shouldn't become selected");
             }
@@ -73,7 +68,7 @@ namespace MicroTactics.Tests.Features
                 var squad1 = CreateSquad().IsSelected(true);
                 var squad2 = CreateSquad().IsSelected(false);
 
-                _sut.Execute(CreateInput(InputState.Press, CreateSelectionArea(squad2)).AsList());
+                Execute(CreateInput(InputState.Press, CreateSelectionArea(squad2)));
 
                 squad1.isSelected.Should().BeFalse("first squad should have been deselected");
             }
@@ -81,11 +76,12 @@ namespace MicroTactics.Tests.Features
             [Fact]
             public void DeselectsAllSquadsWhenReleasingOnNotASquad()
             {
-                var squad = CreateSquad().IsSelected(true);
+                var squad = CreateSquad();
+                SelectSquad(squad);
 
                 var notSquad = _pool.CreateEntity();
-                _sut.Execute(CreateInput(InputState.Press, notSquad).AsList());
-                _sut.Execute(CreateInput(InputState.Release, notSquad).AsList());
+                Execute(CreateInput(InputState.Press, notSquad));
+                Execute(CreateInput(InputState.Release, notSquad));
 
                 squad.isSelected.Should().BeFalse("squad should have been deselected");
             }
@@ -96,34 +92,35 @@ namespace MicroTactics.Tests.Features
             [Fact]
             public void GivesMoveOrderWhenPressingOnGroundAndReleasingFurtherAway()
             {
-                var squad = CreateSquad().IsSelected(true);
+                var squad = CreateSquad();
+                SelectSquad(squad);
 
                 var ground = _pool.CreateEntity();
-                var hit1 = new EntityHit(ground, Vector3.Zero);
-                var hit2 = new EntityHit(ground, new Vector3(100, 0, 0));
+                var hit1 = new EntityHit(ground, new Vector3(0, 0, 0));
+                var hit2 = new EntityHit(ground, new Vector3(100, 0, 100));
 
-                _sut.Execute(CreateInput(InputState.Press, hit1).AsList());
-                _sut.Execute(CreateInput(InputState.Release, hit2).AsList());
+                Execute(CreateInput(InputState.Press, hit1));
+                Execute(CreateInput(InputState.Release, hit2));
 
-                squad.HasMoveOrderTo(hit1.Position);
+                squad.HasMoveOrderTo(hit1.Position, Quaternion.LookAt(hit2.Position.Normalized()));
             }
 
             [Fact]
-            public void DoesNothingWhenNoSquadIsSelected()
+            public void DoesNotCrashWhenInteractingAndNoSquadIsSelected()
             {
                 var ground = _pool.CreateEntity();
                 var hit1 = new EntityHit(ground, Vector3.Zero);
                 var hit2 = new EntityHit(ground, new Vector3(100, 0, 0));
 
-                _sut.Execute(CreateInput(InputState.Press, hit1).AsList());
-                _sut.Execute(CreateInput(InputState.Release, hit2).AsList());
+                Execute(CreateInput(InputState.Press, hit1));
+                Execute(CreateInput(InputState.Release, hit2));
             }
         }
 
         public class SquadInteractionAttack : SquadInteractionSystemTests
         {
             [Fact]
-            public void GivesAttackOrderWhenPressingOnSquadAndReleasingOnGround()
+            public void GivesAttackOrderWhenPressingOnUnselectedSquadAndReleasingOnGround()
             {
                 var squad = CreateSquad();
 
@@ -131,8 +128,8 @@ namespace MicroTactics.Tests.Features
                 var hit1 = new EntityHit(CreateSelectionArea(squad), Vector3.Zero);
                 var hit2 = new EntityHit(ground, new Vector3(100, 0, 0));
 
-                _sut.Execute(CreateInput(InputState.Press, hit1).AsList());
-                _sut.Execute(CreateInput(InputState.Release, hit2).AsList());
+                Execute(CreateInput(InputState.Press, hit1));
+                Execute(CreateInput(InputState.Release, hit2));
 
                 squad.HasAttackOrderTo(hit2.Position);
             }
@@ -142,12 +139,13 @@ namespace MicroTactics.Tests.Features
             {
                 var squad1 = CreateSquad();
                 var squad2 = CreateSquad();
+                SelectSquad(squad1);
 
                 var selectedSquadHit = new EntityHit(CreateSelectionArea(squad1), Vector3.Zero);
                 var attackedSquadHit = new EntityHit(CreateSelectionArea(squad2), new Vector3(10, 0, 0));
 
-                _sut.Execute(CreateInput(InputState.Press, selectedSquadHit).AsList());
-                _sut.Execute(CreateInput(InputState.Release, attackedSquadHit).AsList());
+                Execute(CreateInput(InputState.Press, selectedSquadHit));
+                Execute(CreateInput(InputState.Release, attackedSquadHit));
 
                 squad1.hasAttackOrder.Should().BeTrue("attack order should have been given to squad");
                 squad1.attackOrder.ToV3().ShouldBeEquivalentTo(attackedSquadHit.Position);
@@ -157,6 +155,13 @@ namespace MicroTactics.Tests.Features
         private Entity CreateSquad()
         {
             return _pool.CreateEntity().AddSquad(0);
+        }
+
+        private void SelectSquad(Entity squad)
+        {
+            var selectionArea = CreateSelectionArea(squad);
+            Execute(CreateInput(InputState.Press, selectionArea));
+            squad.isSelected.Should().BeTrue("should have become selected after running selection input");
         }
 
         private Entity CreateSelectionArea(Entity squad)
@@ -177,6 +182,11 @@ namespace MicroTactics.Tests.Features
         private static EntityHit[] ToEntityHits(Entity[] hitEntities)
         {
             return hitEntities.Select(x => new EntityHit(x, new Vector3())).ToArray();
+        }
+
+        private void Execute(Entity input)
+        {
+            _systemsSut.Execute();
         }
     }
 }
