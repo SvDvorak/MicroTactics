@@ -22,13 +22,12 @@ public class MouseInput : MonoBehaviour
     void Update ()
 	{
         var possibleHits = RaycastUsingCamera();
+        var hitEntities = GetMatchingEntitiesForHits(possibleHits).ToList();
 
-        if (!possibleHits.Any())
+        if (!hitEntities.Any())
         {
             return;
         }
-
-        var hitEntities = GetMatchingEntitiesForHits(possibleHits).ToList();
 
         if (Input.GetMouseButtonDown(0))
         {

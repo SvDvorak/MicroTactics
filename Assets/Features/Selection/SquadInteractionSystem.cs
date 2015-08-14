@@ -9,7 +9,7 @@ public class SquadInteractionSystem : IReactiveSystem, ISetPool
     private Group _selectedGroup;
     private Interaction _interaction;
 
-    public IMatcher trigger { get { return Matcher.Input; } }
+    public IMatcher trigger { get { return Matcher.AllOf(Matcher.Input); } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
     public void SetPool(Pool pool)

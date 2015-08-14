@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Entitas;
+using Entitas.CodeGenerator;
 using Mono.GameMath;
 
+[SingleEntity]
 public class InputComponent : IComponent
 {
     public InputState State;

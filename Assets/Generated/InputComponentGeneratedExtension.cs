@@ -38,6 +38,38 @@ namespace Entitas {
             return this;
         }
     }
+
+    public partial class Pool {
+        public Entity inputEntity { get { return GetGroup(Matcher.Input).GetSingleEntity(); } }
+
+        public InputComponent input { get { return inputEntity.input; } }
+
+        public bool hasInput { get { return inputEntity != null; } }
+
+        public Entity SetInput(InputState newState, System.Collections.Generic.List<EntityHit> newEntitiesHit) {
+            if (hasInput) {
+                throw new SingleEntityException(Matcher.Input);
+            }
+            var entity = CreateEntity();
+            entity.AddInput(newState, newEntitiesHit);
+            return entity;
+        }
+
+        public Entity ReplaceInput(InputState newState, System.Collections.Generic.List<EntityHit> newEntitiesHit) {
+            var entity = inputEntity;
+            if (entity == null) {
+                entity = SetInput(newState, newEntitiesHit);
+            } else {
+                entity.ReplaceInput(newState, newEntitiesHit);
+            }
+
+            return entity;
+        }
+
+        public void RemoveInput() {
+            DestroyEntity(inputEntity);
+        }
+    }
 
     public partial class Matcher {
         static AllOfMatcher _matcherInput;

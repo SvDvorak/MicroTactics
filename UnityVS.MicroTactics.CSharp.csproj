@@ -132,8 +132,12 @@
     <Compile Include="Assets\Features\ReadVelocitySystem.cs" />
     <Compile Include="Assets\Features\RemovePhysicsSystem.cs" />
     <Compile Include="Assets\Features\RotationComponent.cs" />
+    <Compile Include="Assets\Features\Selection\AttackInteractionSystem.cs" />
     <Compile Include="Assets\Features\Selection\BoundingMeshComponent.cs" />
+    <Compile Include="Assets\Features\Selection\MoveInteractionSystem.cs" />
+    <Compile Include="Assets\Features\Selection\SelectInteractionSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectedComponent.cs" />
+    <Compile Include="Assets\Features\Selection\SelectedInteractionSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectionAreaComponent.cs" />
     <Compile Include="Assets\Features\Selection\SelectionAreaUpdateSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectionMeshUpdateSystem.cs" />
@@ -161,7 +165,11 @@
     <Compile Include="Assets\Generated\ArrowStickToCollidedSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ArrowTemplateComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Move.RemoveMoveOrderSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\Assets.Features.Selection.MoveInteractionSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\Assets.Features.Selection.SelectInteractionSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\Assets.Features.Selection.SelectedInteractionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.SquadAudioSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\AttackInteractionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AttackOrderComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AttackSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AudioComponentGeneratedExtension.cs" />
