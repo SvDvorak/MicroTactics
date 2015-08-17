@@ -97,6 +97,7 @@
     <Compile Include="Assets\Features\Attack\CollisionComponent.cs" />
     <Compile Include="Assets\Features\Attack\CollisionPublisher.cs" />
     <Compile Include="Assets\Features\Attack\PitchFromVelocitySystem.cs" />
+    <Compile Include="Assets\Features\Attack\RenderAttackArrowSystem.cs" />
     <Compile Include="Assets\Features\Attack\SquadAttackOrderSystem.cs" />
     <Compile Include="Assets\Features\Attack\VelocityComponent.cs" />
     <Compile Include="Assets\Features\AudioComponent.cs" />
@@ -130,7 +131,7 @@
     <Compile Include="Assets\Features\Move\MoveSystem.cs" />
     <Compile Include="Assets\Features\Move\MovementComponent.cs" />
     <Compile Include="Assets\Features\Move\RemoveMoveOrderSystem.cs" />
-    <Compile Include="Assets\Features\Move\RenderAttackArrowSystem.cs" />
+    <Compile Include="Assets\Features\Move\RenderMoveArrowSystem.cs" />
     <Compile Include="Assets\Features\Move\SquadMoveOrderSystem.cs" />
     <Compile Include="Assets\Features\Move\UnitInSquadPositioner.cs" />
     <Compile Include="Assets\Features\PhysicsComponent.cs" />
@@ -167,7 +168,6 @@
     <Compile Include="Assets\Generated\ArrowStickToCollidedSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ArrowTemplateComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Move.RemoveMoveOrderSystemGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\Assets.Features.Move.RenderAttackArrowSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Selection.MoveInteractionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Selection.SelectInteractionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Selection.SelectedInteractionSystemGeneratedExtension.cs" />
@@ -199,6 +199,8 @@
     <Compile Include="Assets\Generated\ReadVelocitySystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RemovePhysicsSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RemoveViewSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\RenderAttackArrowSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\RenderMoveArrowSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RenderPositionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RenderRotationSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ResourceComponentGeneratedExtension.cs" />

@@ -42,6 +42,7 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateMoveInteractionSystem())
             .Add(pool.CreateAttackInteractionSystem())
             .Add(pool.CreateRenderAttackArrowSystem())
+            .Add(pool.CreateRenderMoveArrowSystem())
 
             .Add(pool.CreateSquadMoveOrderSystem())
             .Add(pool.CreateSquadAttackOrderSystem())
