@@ -3,13 +3,13 @@ using System.Linq;
 using Entitas;
 using UnityEngine;
 
-public class SelectionMeshUpdateSystem : IReactiveSystem
+public class MeshUpdateSystem : IReactiveSystem
 {
     private readonly Assets.Features.Triangulator _triangulator;
     public IMatcher trigger { get { return Matcher.AllOf(Matcher.BoundingMesh, Matcher.View); } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
-    public SelectionMeshUpdateSystem()
+    public MeshUpdateSystem()
     {
         _triangulator = new Assets.Features.Triangulator();
     }

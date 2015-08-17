@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -132,16 +134,16 @@
     <Compile Include="Assets\Features\ReadVelocitySystem.cs" />
     <Compile Include="Assets\Features\RemovePhysicsSystem.cs" />
     <Compile Include="Assets\Features\RotationComponent.cs" />
-    <Compile Include="Assets\Features\Selection\AttackInteractionSystem.cs" />
+    <Compile Include="Assets\Features\Attack\AttackInteractionSystem.cs" />
     <Compile Include="Assets\Features\Selection\BoundingMeshComponent.cs" />
-    <Compile Include="Assets\Features\Selection\MoveInputComponent.cs" />
-    <Compile Include="Assets\Features\Selection\MoveInteractionSystem.cs" />
+    <Compile Include="Assets\Features\Move\MoveInputComponent.cs" />
+    <Compile Include="Assets\Features\Move\MoveInteractionSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectInteractionSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectedComponent.cs" />
     <Compile Include="Assets\Features\Selection\SelectedInteractionSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectionAreaComponent.cs" />
     <Compile Include="Assets\Features\Selection\SelectionAreaUpdateSystem.cs" />
-    <Compile Include="Assets\Features\Selection\SelectionMeshUpdateSystem.cs" />
+    <Compile Include="Assets\Features\Selection\MeshUpdateSystem.cs" />
     <Compile Include="Assets\Features\SquadAudioSystem.cs" />
     <Compile Include="Assets\Features\SquadCenterPositionSystem.cs" />
     <Compile Include="Assets\Features\Triangulator.cs" />
