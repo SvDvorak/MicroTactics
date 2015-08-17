@@ -159,9 +159,16 @@ namespace MicroTactics.Tests.Features
                 squad1.isSelected.Should().BeFalse("should have been deselected when pressing after attack");
             }
 
-            private void HoverTo(Vector3 position, Entity entity)
+            [Fact]
+            public void UpdatesAttackOrderWhenMovingTarget()
             {
-                Execute(SetInput(InputState.Hover, new EntityHit(entity, position)));
+                var squad = CreateSquad();
+                SelectSquad(squad);
+
+                Execute(SetInput(InputState.Press, new EntityHit(CreateSelectionArea(squad), new Vector3())));
+                Execute(SetInput(InputState.Hover, new EntityHit(_empty, new Vector3(10, 0, 0))));
+
+                _input.attackOrder.ToV3().Should().Be(new Vector3(10, 0, 0));
             }
         }
 
@@ -207,8 +214,13 @@ namespace MicroTactics.Tests.Features
         {
             Execute(SetInput(InputState.Press, pressEntityHit));
             var halfwayToRelease = (releaseEntityHit.Position - pressEntityHit.Position)/2 + pressEntityHit.Position;
-            Execute(SetInput(InputState.Hover, new EntityHit(_empty, halfwayToRelease)));
+            HoverTo(halfwayToRelease, _empty);
             Execute(SetInput(InputState.Release, releaseEntityHit));
+        }
+
+        private void HoverTo(Vector3 position, Entity entity)
+        {
+            Execute(SetInput(InputState.Hover, new EntityHit(entity, position)));
         }
 
         private void Execute(Entity input = null)

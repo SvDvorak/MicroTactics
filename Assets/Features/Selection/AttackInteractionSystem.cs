@@ -25,5 +25,9 @@ public class AttackInteractionSystem : IReactiveSystem, ISetPool
             _selectedGroup.GetSingleEntity().ReplaceAttackOrder(firstEntityHit.Position);
             inputEntity.RemoveAttackOrder();
         }
+        else
+        {
+            inputEntity.ReplaceAttackOrder(firstEntityHit.Position);
+        }
     }
 }
