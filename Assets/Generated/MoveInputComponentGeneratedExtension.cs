@@ -12,18 +12,18 @@ namespace Entitas {
             _moveInputComponentPool.Clear();
         }
 
-        public Entity AddMoveInput(Mono.GameMath.Vector3 newStartPosition, Mono.GameMath.Vector3 newTargetPosition) {
+        public Entity AddMoveInput(Mono.GameMath.Vector3 newStart, Mono.GameMath.Vector3 newTarget) {
             var component = _moveInputComponentPool.Count > 0 ? _moveInputComponentPool.Pop() : new MoveInputComponent();
-            component.StartPosition = newStartPosition;
-            component.TargetPosition = newTargetPosition;
+            component.Start = newStart;
+            component.Target = newTarget;
             return AddComponent(ComponentIds.MoveInput, component);
         }
 
-        public Entity ReplaceMoveInput(Mono.GameMath.Vector3 newStartPosition, Mono.GameMath.Vector3 newTargetPosition) {
+        public Entity ReplaceMoveInput(Mono.GameMath.Vector3 newStart, Mono.GameMath.Vector3 newTarget) {
             var previousComponent = hasMoveInput ? moveInput : null;
             var component = _moveInputComponentPool.Count > 0 ? _moveInputComponentPool.Pop() : new MoveInputComponent();
-            component.StartPosition = newStartPosition;
-            component.TargetPosition = newTargetPosition;
+            component.Start = newStart;
+            component.Target = newTarget;
             ReplaceComponent(ComponentIds.MoveInput, component);
             if (previousComponent != null) {
                 _moveInputComponentPool.Push(previousComponent);

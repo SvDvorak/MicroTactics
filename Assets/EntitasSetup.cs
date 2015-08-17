@@ -29,7 +29,7 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateUnitsCacheSystem())
             .Add(pool.CreateSquadCenterPositionSystem())
             .Add(pool.CreateSelectionAreaUpdateSystem())
-            .Add(pool.CreateSelectionMeshUpdateSystem())
+            .Add(pool.CreateMeshUpdateSystem())
 
             .Add(pool.CreateAddUnitViewSystem())
             .Add(pool.CreateAddViewSystem())
@@ -41,6 +41,7 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateSelectedInteractionSystem())
             .Add(pool.CreateMoveInteractionSystem())
             .Add(pool.CreateAttackInteractionSystem())
+            .Add(pool.CreateRenderAttackArrowSystem())
 
             .Add(pool.CreateSquadMoveOrderSystem())
             .Add(pool.CreateSquadAttackOrderSystem())

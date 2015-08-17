@@ -7,38 +7,40 @@ public static class ComponentIds {
     public const int Animate = 1;
     public const int Arrow = 2;
     public const int ArrowTemplate = 3;
-    public const int AttackOrder = 4;
-    public const int Audio = 5;
-    public const int BoundingMesh = 6;
-    public const int BoxFormation = 7;
-    public const int Collision = 8;
-    public const int Destroy = 9;
-    public const int Enemy = 10;
-    public const int Ground = 11;
-    public const int Input = 12;
-    public const int MoveInput = 13;
-    public const int Movement = 14;
-    public const int MoveOrder = 15;
-    public const int Physics = 16;
-    public const int Position = 17;
-    public const int Resource = 18;
-    public const int Rotation = 19;
-    public const int Selected = 20;
-    public const int SelectionArea = 21;
-    public const int Squad = 22;
-    public const int Unit = 23;
-    public const int UnitsCache = 24;
-    public const int UnitTemplate = 25;
-    public const int Velocity = 26;
-    public const int View = 27;
+    public const int AttackInput = 4;
+    public const int AttackOrder = 5;
+    public const int Audio = 6;
+    public const int BoundingMesh = 7;
+    public const int BoxFormation = 8;
+    public const int Collision = 9;
+    public const int Destroy = 10;
+    public const int Enemy = 11;
+    public const int Ground = 12;
+    public const int Input = 13;
+    public const int MoveInput = 14;
+    public const int Movement = 15;
+    public const int MoveOrder = 16;
+    public const int Physics = 17;
+    public const int Position = 18;
+    public const int Resource = 19;
+    public const int Rotation = 20;
+    public const int Selected = 21;
+    public const int SelectionArea = 22;
+    public const int Squad = 23;
+    public const int Unit = 24;
+    public const int UnitsCache = 25;
+    public const int UnitTemplate = 26;
+    public const int Velocity = 27;
+    public const int View = 28;
 
-    public const int TotalComponents = 28;
+    public const int TotalComponents = 29;
 
     static readonly string[] components = {
         "Ai",
         "Animate",
         "Arrow",
         "ArrowTemplate",
+        "AttackInput",
         "AttackOrder",
         "Audio",
         "BoundingMesh",
@@ -74,6 +76,7 @@ public static class ComponentIds {
         { typeof (AnimateComponent), Animate },
         { typeof (ArrowComponent), Arrow },
         { typeof (ArrowTemplateComponent), ArrowTemplate },
+        { typeof (AttackInputComponent), AttackInput },
         { typeof (AttackOrderComponent), AttackOrder },
         { typeof (AudioComponent), Audio },
         { typeof (BoundingMeshComponent), BoundingMesh },

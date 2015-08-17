@@ -15,7 +15,7 @@ namespace Assets.Features.Selection
         private bool _leftState;
 
         public IMatcher trigger { get { return Matcher.Input; } }
-    public IMatcher ensureComponents { get { return Matcher.Selected; } }
+        public IMatcher ensureComponents { get { return Matcher.Selected; } }
         public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
         public void SetPool(Pool pool)
@@ -28,7 +28,7 @@ namespace Assets.Features.Selection
             var inputEntity = entities.SingleEntity();
             var input = inputEntity.input;
 
-            if (inputEntity.hasMoveInput || inputEntity.hasAttackOrder)
+            if (inputEntity.hasMoveInput || inputEntity.hasAttackInput)
             {
                 return;
             }
@@ -75,7 +75,7 @@ namespace Assets.Features.Selection
         {
             if (_isAttacking)
             {
-                inputEntity.AddAttackOrder(firstEntityHit.Position);
+                inputEntity.AddAttackInput(Vector3.Zero, firstEntityHit.Position);
             }
             else
             {

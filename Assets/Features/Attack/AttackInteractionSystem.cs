@@ -1,5 +1,6 @@
 ﻿    using System.Collections.Generic;
     using System.Linq;
+    using Assets;
     using Entitas;
 
 public class AttackInteractionSystem : IReactiveSystem, ISetPool, IEnsureComponents
@@ -7,12 +8,12 @@ public class AttackInteractionSystem : IReactiveSystem, ISetPool, IEnsureCompone
     private Group _selectedGroup;
 
     public IMatcher trigger { get { return Matcher.Input; } }
-    public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.Selected, Matcher.AttackOrder); } }
+    public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.Selected, Matcher.AttackInput); } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
     public void SetPool(Pool pool)
     {
-        _selectedGroup = pool.GetGroup(Matcher.AllOf(Matcher.Squad, Matcher.Selected));
+        _selectedGroup = pool.GetGroup(Matcher.AllOf(Matcher.Position, Matcher.Selected));
     }
 
     public void Execute(List<Entity> entities)
@@ -20,15 +21,16 @@ public class AttackInteractionSystem : IReactiveSystem, ISetPool, IEnsureCompone
         var inputEntity = entities.SingleEntity();
         var input = inputEntity.input;
 
+        var selectedGroup = _selectedGroup.GetSingleEntity();
         var firstEntityHit = input.EntitiesHit.First();
         if (input.State == InputState.Release)
         {
-            _selectedGroup.GetSingleEntity().ReplaceAttackOrder(firstEntityHit.Position);
-            inputEntity.RemoveAttackOrder();
+            selectedGroup.ReplaceAttackOrder(firstEntityHit.Position);
+            inputEntity.RemoveAttackInput();
         }
         else
         {
-            inputEntity.ReplaceAttackOrder(firstEntityHit.Position);
+            inputEntity.ReplaceAttackInput(selectedGroup.position.ToV3(), firstEntityHit.Position);
         }
     }
 }

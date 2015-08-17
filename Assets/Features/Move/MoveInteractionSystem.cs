@@ -24,7 +24,7 @@ namespace Assets.Features.Selection
             var input = inputEntity.input;
 
             var firstEntityHit = input.EntitiesHit.First();
-            inputEntity.ReplaceMoveInput(inputEntity.moveInput.StartPosition, firstEntityHit.Position);
+            inputEntity.ReplaceMoveInput(inputEntity.moveInput.Start, firstEntityHit.Position);
 
             if (input.State == InputState.Release)
             {
@@ -35,8 +35,8 @@ namespace Assets.Features.Selection
 
         private void MoveTo(MoveInputComponent moveInput)
         {
-            var orientation = Quaternion.LookAt((moveInput.TargetPosition - moveInput.StartPosition).Normalized());
-            _selectedGroup.GetSingleEntity().ReplaceMoveOrder(moveInput.StartPosition, orientation);
+            var orientation = Quaternion.LookAt((moveInput.Target - moveInput.Start).Normalized());
+            _selectedGroup.GetSingleEntity().ReplaceMoveOrder(moveInput.Start, orientation);
         }
     }
 }

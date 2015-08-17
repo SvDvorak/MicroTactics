@@ -118,7 +118,7 @@ namespace MicroTactics.Tests.Features
                 Execute(SetInput(InputState.Press, new EntityHit(_empty, new Vector3())));
                 Execute(SetInput(InputState.Hover, new EntityHit(_empty, new Vector3(10, 0, 0))));
 
-                _input.moveInput.TargetPosition.Should().Be(new Vector3(10, 0, 0));
+                _input.moveInput.Target.Should().Be(new Vector3(10, 0, 0));
             }
         }
 
@@ -174,19 +174,20 @@ namespace MicroTactics.Tests.Features
             [Fact]
             public void UpdatesAttackOrderWhenMovingTarget()
             {
-                var squad = CreateSquad();
+                var squad = CreateSquad().ReplacePosition(Vector3.One);
                 SelectSquad(squad);
 
                 Execute(SetInput(InputState.Press, new EntityHit(CreateSelectionArea(squad), new Vector3())));
                 Execute(SetInput(InputState.Hover, new EntityHit(_empty, new Vector3(10, 0, 0))));
 
-                _input.attackOrder.ToV3().Should().Be(new Vector3(10, 0, 0));
+                _input.attackInput.Start.Should().Be(Vector3.One);
+                _input.attackInput.Target.Should().Be(new Vector3(10, 0, 0));
             }
         }
 
         private Entity CreateSquad()
         {
-            return _pool.CreateEntity().AddSquad(0);
+            return _pool.CreateEntity().AddSquad(0).AddPosition(Vector3.Zero);
         }
 
         private void SelectSquad(Entity squad)
@@ -194,7 +195,6 @@ namespace MicroTactics.Tests.Features
             var selectionArea = CreateSelectionArea(squad);
             PerformPressAndReleaseOn(selectionArea);
         }
-
 
         private void PerformPressAndReleaseOn(params Entity[] entities)
         {
