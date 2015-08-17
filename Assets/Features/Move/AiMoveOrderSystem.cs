@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Assets;
 using Entitas;
 using Mono.GameMath;
@@ -8,6 +7,7 @@ public class AiMoveOrderSystem : IExecuteSystem, ISetPool
 {
     private Group _aiSquads;
     private Group _enemies;
+    private int _minimumDistanceWanted = 10;
 
     public void SetPool(Pool pool)
     {
@@ -26,12 +26,13 @@ public class AiMoveOrderSystem : IExecuteSystem, ISetPool
         foreach (var squad in _aiSquads.GetEntities().ToList())
         {
             var squadPosition = squad.position.ToV3();
-            var toEnemy = squadPosition - enemy.position.ToV3();
+            var fromEnemyToSquad = squadPosition - enemy.position.ToV3();
 
-            if (toEnemy.Length() < 1)
+            var enemyDistance = fromEnemyToSquad.Length();
+            if (enemyDistance < _minimumDistanceWanted)
             {
-                var moveDirection = toEnemy.ClampLength(1);
-                if (moveDirection.Length().IsApproximately(0))
+                var moveDirection = fromEnemyToSquad.Normalized() * (_minimumDistanceWanted - enemyDistance);
+                if (enemyDistance.IsApproximately(0))
                 {
                     moveDirection = new Vector3(1, 0, 0);
                 }

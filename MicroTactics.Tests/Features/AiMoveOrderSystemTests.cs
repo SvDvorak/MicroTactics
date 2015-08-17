@@ -3,71 +3,75 @@ using FluentAssertions;
 using Mono.GameMath;
 using Xunit;
 
-public class AiMoveOrderSystemTests
+namespace MicroTactics.Tests.Features
 {
-    private readonly AiMoveOrderSystem _sut;
-    private readonly TestPool _testPool;
-    private readonly Entity _squad;
-
-    public AiMoveOrderSystemTests()
+    public class AiMoveOrderSystemTests
     {
-        _sut = new AiMoveOrderSystem();
-        _testPool = new TestPool();
-        _sut.SetPool(_testPool);
-        _squad = _testPool.CreateEntity()
-            .AddPosition(0, 0, 0)
-            .AddSquad(0)
-            .AddAi(0);
-    }
+        private readonly AiMoveOrderSystem _sut;
+        private readonly TestPool _testPool;
+        private readonly Entity _squad;
 
-    [Fact]
-    public void DoesGiveAddMoveOrderIfNoEnemiesArePresent()
-    {
-        _sut.Execute();
+        public AiMoveOrderSystemTests()
+        {
+            _sut = new AiMoveOrderSystem();
+            _testPool = new TestPool();
+            _sut.SetPool(_testPool);
+            _squad = _testPool.CreateEntity()
+                .AddPosition(0, 0, 0)
+                .AddSquad(0)
+                .AddAi(0);
+        }
 
-        _squad.hasMoveOrder.Should().BeFalse("no enemy is present so no move order should be given");
-    }
+        [Fact]
+        public void DoesGiveAddMoveOrderIfNoEnemiesArePresent()
+        {
+            _sut.Execute();
 
-    [Fact]
-    public void DoesNotGiveMoveOrderIfEnemyIsFarAway()
-    {
-        _testPool.CreateEntity()
-            .AddPosition(float.PositiveInfinity, 0, 0)
-            .IsEnemy(true);
+            _squad.hasMoveOrder.Should().BeFalse("no enemy is present so no move order should be given");
+        }
 
-        _sut.Execute();
+        [Fact]
+        public void DoesNotGiveMoveOrderIfEnemyIsFarAway()
+        {
+            _testPool.CreateEntity()
+                .AddPosition(float.PositiveInfinity, 0, 0)
+                .IsEnemy(true);
 
-        _squad.hasMoveOrder.Should().BeFalse("enemy is far away so no move order should be given");
-    }
+            _sut.Execute();
 
-    [Fact]
-    public void GivesDefaultMoveOrderWhenEnemyIsOnSamePosition()
-    {
-        _testPool.CreateEntity()
-            .AddPosition(0, 0, 0)
-            .IsEnemy(true);
+            _squad.hasMoveOrder.Should().BeFalse("enemy is far away so no move order should be given");
+        }
 
-        _sut.Execute();
+        [Fact]
+        public void GivesDefaultMoveOrderWhenEnemyIsOnSamePosition()
+        {
+            _testPool.CreateEntity()
+                .AddPosition(0, 0, 0)
+                .IsEnemy(true);
 
-        _squad.HasMoveOrderTo(new Vector3(1, 0, 0));
-    }
+            _sut.Execute();
 
-    [Fact]
-    public void GivesMoveOrdersToMoveAwayFromEnemy()
-    {
-        _squad.ReplacePosition(-0.5f, 0, 0);
-        var squad2 = _testPool.CreateEntity()
-            .AddPosition(0, 0, 0.5f)
-            .AddSquad(1)
-            .AddAi(0);
+            _squad.HasMoveOrderTo(new Vector3(1, 0, 0));
+        }
 
-        _testPool.CreateEntity()
-            .AddPosition(0, 0, 0)
-            .IsEnemy(true);
+        [Fact]
+        public void MovesRemainingDistanceToMinimumEnemyDistance()
+        {
+            _squad.ReplacePosition(4, 0, 0);
 
-        _sut.Execute();
+            var squad2 = _testPool.CreateEntity()
+                .AddPosition(5, 0, 3)
+                .AddSquad(1)
+                .AddAi(0);
 
-        _squad.HasMoveOrderTo(new Vector3(-1f, 0, 0));
-        squad2.HasMoveOrderTo(new Vector3(0, 0, 1));
+            _testPool.CreateEntity()
+                .AddPosition(5, 0, 0)
+                .IsEnemy(true);
+
+            _sut.Execute();
+
+            _squad.HasMoveOrderTo(new Vector3(-5, 0, 0));
+            squad2.HasMoveOrderTo(new Vector3(5, 0, 10));
+        }
     }
 }
