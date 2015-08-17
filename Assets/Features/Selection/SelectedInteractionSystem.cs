@@ -29,33 +29,45 @@ namespace Assets.Features.Selection
             var firstEntityHit = input.EntitiesHit.First();
             if (input.State == InputState.Press)
             {
-                _pressStartPosition = firstEntityHit.Position;
-
-                _isAttacking = selectionEntityHit != null;
+                ReadyAttackOrMove(firstEntityHit, selectionEntityHit);
             }
-
-            var inputMoveDistance = (firstEntityHit.Position - _pressStartPosition).Length();
-            if (inputMoveDistance > 1 && input.State != InputState.Hover)
+            else if (input.State == InputState.Release)
             {
-                if (_isAttacking)
+                var inputMoveDistance = (firstEntityHit.Position - _pressStartPosition).Length();
+                if (inputMoveDistance > 1)
                 {
-                    inputEntity.AddAttackOrder(firstEntityHit.Position);
+                    DoAttackOrMove(inputEntity, firstEntityHit);
                 }
-                else
+                else if (selectionEntityHit == null)
                 {
-                    inputEntity.AddMoveOrder(_pressStartPosition, Quaternion.Identity);
+                    DeselectAllSquads(inputEntity);
                 }
-            }
-            else if (selectionEntityHit == null && input.State == InputState.Release)
-            {
-                DeselectAllSquads();
-                inputEntity.IsSelected(false);
             }
         }
 
-        private void DeselectAllSquads()
+        private void ReadyAttackOrMove(EntityHit firstEntityHit, EntityHit selectionEntityHit)
+        {
+            _pressStartPosition = firstEntityHit.Position;
+
+            _isAttacking = selectionEntityHit != null;
+        }
+
+        private void DoAttackOrMove(Entity inputEntity, EntityHit firstEntityHit)
+        {
+            if (_isAttacking)
+            {
+                inputEntity.AddAttackOrder(firstEntityHit.Position);
+            }
+            else
+            {
+                inputEntity.AddMoveOrder(_pressStartPosition, Quaternion.Identity);
+            }
+        }
+
+        private void DeselectAllSquads(Entity inputEntity)
         {
             _selectedGroup.GetEntities().Foreach(x => x.IsSelected(false));
+            inputEntity.IsSelected(false);
         }
     }
 }
