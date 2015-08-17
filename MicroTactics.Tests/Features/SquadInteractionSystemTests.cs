@@ -35,7 +35,7 @@ namespace MicroTactics.Tests.Features
                 var squad1 = CreateSquad();
                 var squad2 = CreateSquad();
 
-                PerformPressOn(CreateSelectionArea(squad2), CreateSelectionArea(squad1));
+                PerformPressAndReleaseOn(CreateSelectionArea(squad2), CreateSelectionArea(squad1));
 
                 squad1.isSelected.Should().BeTrue("first squad should have been selected");
                 squad2.isSelected.Should().BeFalse("second squad shouldn't have been selected");
@@ -56,7 +56,7 @@ namespace MicroTactics.Tests.Features
             {
                 var squad = CreateSquad();
 
-                PerformPressOn(_empty);
+                PerformPressAndReleaseOn(_empty);
 
                 squad.isSelected.Should().BeFalse("squad is not in selection so shouldn't become selected");
             }
@@ -78,7 +78,7 @@ namespace MicroTactics.Tests.Features
                 var squad = CreateSquad();
                 SelectSquad(squad);
 
-                PerformPressOn(_empty);
+                PerformPressAndReleaseOn(_empty);
 
                 squad.isSelected.Should().BeFalse("squad should have been deselected");
             }
@@ -140,6 +140,29 @@ namespace MicroTactics.Tests.Features
 
                 squad1.HasAttackOrderTo(releasePosition);
             }
+
+            [Fact]
+            public void DeselectWorksAfterAttack()
+            {
+                var squad1 = CreateSquad();
+                var squad2 = CreateSquad();
+                SelectSquad(squad1);
+
+                var releasePosition = new Vector3(10, 0, 0);
+
+                PerformDragInput(
+                    new EntityHit(CreateSelectionArea(squad1), Vector3.Zero),
+                    new EntityHit(CreateSelectionArea(squad2), releasePosition));
+                HoverTo(new Vector3(100, 0, 0), _empty);
+                PerformPressAndReleaseOn(new Vector3(100, 0, 0), _empty);
+
+                squad1.isSelected.Should().BeFalse("should have been deselected when pressing after attack");
+            }
+
+            private void HoverTo(Vector3 position, Entity entity)
+            {
+                Execute(SetInput(InputState.Hover, new EntityHit(entity, position)));
+            }
         }
 
         private Entity CreateSquad()
@@ -150,13 +173,19 @@ namespace MicroTactics.Tests.Features
         private void SelectSquad(Entity squad)
         {
             var selectionArea = CreateSelectionArea(squad);
-            PerformPressOn(selectionArea);
+            PerformPressAndReleaseOn(selectionArea);
         }
 
-        private void PerformPressOn(params Entity[] entities)
+
+        private void PerformPressAndReleaseOn(params Entity[] entities)
         {
-            Execute(SetInput(InputState.Press, entities));
-            Execute(SetInput(InputState.Release, entities));
+            PerformPressAndReleaseOn(new Vector3(), entities);
+        }
+
+        private void PerformPressAndReleaseOn(Vector3 position, params Entity[] entities)
+        {
+            Execute(SetInput(InputState.Press, ToEntityHits(position, entities)));
+            Execute(SetInput(InputState.Release, ToEntityHits(position, entities)));
         }
 
         private Entity CreateSelectionArea(Entity squad)
@@ -164,14 +193,9 @@ namespace MicroTactics.Tests.Features
             return _pool.CreateEntity().AddSelectionArea(squad);
         }
 
-        private Entity SetInput(InputState state, params Entity[] hitEntities)
+        private static EntityHit[] ToEntityHits(Vector3 position, Entity[] hitEntities)
         {
-            return SetInput(state, ToEntityHits(hitEntities));
-        }
-
-        private static EntityHit[] ToEntityHits(Entity[] hitEntities)
-        {
-            return hitEntities.Select(x => new EntityHit(x, new Vector3())).ToArray();
+            return hitEntities.Select(x => new EntityHit(x, position)).ToArray();
         }
 
         private Entity SetInput(InputState state, params EntityHit[] entityHits)
@@ -182,6 +206,8 @@ namespace MicroTactics.Tests.Features
         private void PerformDragInput(EntityHit pressEntityHit, EntityHit releaseEntityHit)
         {
             Execute(SetInput(InputState.Press, pressEntityHit));
+            var halfwayToRelease = (releaseEntityHit.Position - pressEntityHit.Position)/2 + pressEntityHit.Position;
+            Execute(SetInput(InputState.Hover, new EntityHit(_empty, halfwayToRelease)));
             Execute(SetInput(InputState.Release, releaseEntityHit));
         }
 

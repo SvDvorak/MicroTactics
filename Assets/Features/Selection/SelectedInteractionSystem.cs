@@ -35,7 +35,7 @@ namespace Assets.Features.Selection
             }
 
             var inputMoveDistance = (firstEntityHit.Position - _pressStartPosition).Length();
-            if (inputMoveDistance > 1)
+            if (inputMoveDistance > 1 && input.State != InputState.Hover)
             {
                 if (_isAttacking)
                 {
