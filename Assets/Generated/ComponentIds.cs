@@ -16,22 +16,23 @@ public static class ComponentIds {
     public const int Enemy = 10;
     public const int Ground = 11;
     public const int Input = 12;
-    public const int Movement = 13;
-    public const int MoveOrder = 14;
-    public const int Physics = 15;
-    public const int Position = 16;
-    public const int Resource = 17;
-    public const int Rotation = 18;
-    public const int Selected = 19;
-    public const int SelectionArea = 20;
-    public const int Squad = 21;
-    public const int Unit = 22;
-    public const int UnitsCache = 23;
-    public const int UnitTemplate = 24;
-    public const int Velocity = 25;
-    public const int View = 26;
+    public const int MoveInput = 13;
+    public const int Movement = 14;
+    public const int MoveOrder = 15;
+    public const int Physics = 16;
+    public const int Position = 17;
+    public const int Resource = 18;
+    public const int Rotation = 19;
+    public const int Selected = 20;
+    public const int SelectionArea = 21;
+    public const int Squad = 22;
+    public const int Unit = 23;
+    public const int UnitsCache = 24;
+    public const int UnitTemplate = 25;
+    public const int Velocity = 26;
+    public const int View = 27;
 
-    public const int TotalComponents = 27;
+    public const int TotalComponents = 28;
 
     static readonly string[] components = {
         "Ai",
@@ -47,6 +48,7 @@ public static class ComponentIds {
         "Enemy",
         "Ground",
         "Input",
+        "MoveInput",
         "Movement",
         "MoveOrder",
         "Physics",
@@ -81,6 +83,7 @@ public static class ComponentIds {
         { typeof (EnemyComponent), Enemy },
         { typeof (GroundComponent), Ground },
         { typeof (InputComponent), Input },
+        { typeof (MoveInputComponent), MoveInput },
         { typeof (MovementComponent), Movement },
         { typeof (MoveOrderComponent), MoveOrder },
         { typeof (PhysicsComponent), Physics },

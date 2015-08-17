@@ -108,6 +108,18 @@ namespace MicroTactics.Tests.Features
                     new EntityHit(_empty, Vector3.Zero),
                     new EntityHit(_empty, new Vector3(100, 0, 0)));
             }
+
+            [Fact]
+            public void UpdatesAttackOrderWhenMovingTarget()
+            {
+                var squad = CreateSquad();
+                SelectSquad(squad);
+
+                Execute(SetInput(InputState.Press, new EntityHit(_empty, new Vector3())));
+                Execute(SetInput(InputState.Hover, new EntityHit(_empty, new Vector3(10, 0, 0))));
+
+                _input.moveInput.TargetPosition.Should().Be(new Vector3(10, 0, 0));
+            }
         }
 
         public class SquadInteractionAttack : SquadInteractionSystemTests

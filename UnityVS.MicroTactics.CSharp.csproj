@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -136,6 +134,7 @@
     <Compile Include="Assets\Features\RotationComponent.cs" />
     <Compile Include="Assets\Features\Selection\AttackInteractionSystem.cs" />
     <Compile Include="Assets\Features\Selection\BoundingMeshComponent.cs" />
+    <Compile Include="Assets\Features\Selection\MoveInputComponent.cs" />
     <Compile Include="Assets\Features\Selection\MoveInteractionSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectInteractionSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectedComponent.cs" />
@@ -184,6 +183,7 @@
     <Compile Include="Assets\Generated\GroundComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\InputComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\LinkViewsStartSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\MoveInputComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MoveOrderComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MoveSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MovementComponentGeneratedExtension.cs" />

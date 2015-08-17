@@ -14,7 +14,7 @@ namespace Assets.Features.Selection
         private bool _isDoingDrag;
         private bool _leftState;
 
-        public IMatcher trigger { get { return Matcher.AllOf(Matcher.Input, Matcher.Selected, Matcher.NoneOf(Matcher.AttackOrder, Matcher.MoveOrder)); } }
+        public IMatcher trigger { get { return Matcher.AllOf(Matcher.Input, Matcher.Selected, Matcher.NoneOf(Matcher.AttackOrder, Matcher.MoveInput)); } }
         public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
         public void SetPool(Pool pool)
@@ -73,7 +73,7 @@ namespace Assets.Features.Selection
             }
             else
             {
-                inputEntity.AddMoveOrder(_pressStartPosition, Quaternion.Identity);
+                inputEntity.AddMoveInput(_pressStartPosition, firstEntityHit.Position);
             }
             _leftState = true;
         }
