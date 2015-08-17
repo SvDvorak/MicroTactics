@@ -247,6 +247,8 @@
     <Compile Include="Assets\Libraries\Entitas\Group.cs" />
     <Compile Include="Assets\Libraries\Entitas\GroupObserver.cs" />
     <Compile Include="Assets\Libraries\Entitas\Interfaces\IComponent.cs" />
+    <Compile Include="Assets\Libraries\Entitas\Interfaces\IEnsureComponents.cs" />
+    <Compile Include="Assets\Libraries\Entitas\Interfaces\IExcludeComponents.cs" />
     <Compile Include="Assets\Libraries\Entitas\Interfaces\IExecuteSystem.cs" />
     <Compile Include="Assets\Libraries\Entitas\Interfaces\IMatcher.cs" />
     <Compile Include="Assets\Libraries\Entitas\Interfaces\IMultiReactiveSystem.cs" />
@@ -254,14 +256,8 @@
     <Compile Include="Assets\Libraries\Entitas\Interfaces\IReactiveSystem.cs" />
     <Compile Include="Assets\Libraries\Entitas\Interfaces\IStartSystem.cs" />
     <Compile Include="Assets\Libraries\Entitas\Interfaces\ISystem.cs" />
-    <Compile Include="Assets\Libraries\Entitas\Matcher\AbstractCompoundMatcher.cs" />
     <Compile Include="Assets\Libraries\Entitas\Matcher\AbstractMatcher.cs" />
-    <Compile Include="Assets\Libraries\Entitas\Matcher\AllOfCompoundMatcher.cs" />
     <Compile Include="Assets\Libraries\Entitas\Matcher\AllOfMatcher.cs" />
-    <Compile Include="Assets\Libraries\Entitas\Matcher\AnyOfCompoundMatcher.cs" />
-    <Compile Include="Assets\Libraries\Entitas\Matcher\AnyOfMatcher.cs" />
-    <Compile Include="Assets\Libraries\Entitas\Matcher\NoneOfCompoundMatcher.cs" />
-    <Compile Include="Assets\Libraries\Entitas\Matcher\NoneOfMatcher.cs" />
     <Compile Include="Assets\Libraries\Entitas\Pool.cs" />
     <Compile Include="Assets\Libraries\Entitas\ReactiveSystem.cs" />
     <Compile Include="Assets\Libraries\Entitas\Systems.cs" />

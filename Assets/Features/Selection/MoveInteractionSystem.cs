@@ -5,11 +5,12 @@ using Mono.GameMath;
 
 namespace Assets.Features.Selection
 {
-    public class MoveInteractionSystem : IReactiveSystem, ISetPool
+    public class MoveInteractionSystem : IReactiveSystem, ISetPool, IEnsureComponents
     {
         private Group _selectedGroup;
 
-        public IMatcher trigger { get { return Matcher.AllOf(Matcher.Input, Matcher.Selected, Matcher.MoveInput); } }
+        public IMatcher trigger { get { return Matcher.Input; } }
+        public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.Selected, Matcher.MoveInput); } }
         public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
         public void SetPool(Pool pool)

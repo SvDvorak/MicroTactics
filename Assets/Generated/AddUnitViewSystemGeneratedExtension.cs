@@ -1,7 +1,7 @@
-namespace Entitas {
-    public partial class Pool {
-        public ISystem CreateAddUnitViewSystem() {
-            return this.CreateSystem<AddUnitViewSystem>();
-        }
-    }
+namespace Entitas {
+    public partial class Pool {
+        public ISystem CreateAddUnitViewSystem() {
+            return this.CreateSystem<AddUnitViewSystem>();
+        }
+    }
 }

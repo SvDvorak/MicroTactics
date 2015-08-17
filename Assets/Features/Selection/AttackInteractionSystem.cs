@@ -2,11 +2,12 @@
     using System.Linq;
     using Entitas;
 
-public class AttackInteractionSystem : IReactiveSystem, ISetPool
+public class AttackInteractionSystem : IReactiveSystem, ISetPool, IEnsureComponents
 {
     private Group _selectedGroup;
 
-    public IMatcher trigger { get { return Matcher.AllOf(Matcher.Input, Matcher.Selected, Matcher.AttackOrder); } }
+    public IMatcher trigger { get { return Matcher.Input; } }
+    public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.Selected, Matcher.AttackOrder); } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
     public void SetPool(Pool pool)

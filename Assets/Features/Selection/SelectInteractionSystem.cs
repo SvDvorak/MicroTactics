@@ -5,11 +5,12 @@ using Vexe.Runtime.Extensions;
 
 namespace Assets.Features.Selection
 {
-    public class SelectInteractionSystem : IReactiveSystem, ISetPool
+    public class SelectInteractionSystem : IReactiveSystem, ISetPool, IExcludeComponents
     {
         private Group _selectedGroup;
 
-        public IMatcher trigger { get { return Matcher.AllOf(Matcher.Input, Matcher.NoneOf(Matcher.Selected)); } }
+        public IMatcher trigger { get { return Matcher.Input; } }
+        public IMatcher excludeComponents { get { return Matcher.Selected; } }
         public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
         public void SetPool(Pool pool)

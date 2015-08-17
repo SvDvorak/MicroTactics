@@ -1,7 +1,7 @@
-namespace Entitas {
-    public partial class Pool {
-        public ISystem CreateAiAttackOrderSystem() {
-            return this.CreateSystem<AiAttackOrderSystem>();
-        }
-    }
+namespace Entitas {
+    public partial class Pool {
+        public ISystem CreateAiAttackOrderSystem() {
+            return this.CreateSystem<AiAttackOrderSystem>();
+        }
+    }
 }

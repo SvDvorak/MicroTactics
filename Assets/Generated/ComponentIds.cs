@@ -32,9 +32,9 @@ public static class ComponentIds {
     public const int Velocity = 26;
     public const int View = 27;
 
-    public const int TotalComponents = 28;
-
-    static readonly string[] components = {
+    public const int TotalComponents = 28;
+
+    static readonly string[] components = {
         "Ai",
         "Animate",
         "Arrow",
@@ -63,10 +63,10 @@ public static class ComponentIds {
         "UnitTemplate",
         "Velocity",
         "View"
-    };
-
-    public static string IdToString(int componentId) {
-        return components[componentId];
+    };
+
+    public static string IdToString(int componentId) {
+        return components[componentId];
     }
 
     private static readonly IDictionary<Type, int> componentIds = new Dictionary<Type, int>() {
@@ -103,15 +103,15 @@ public static class ComponentIds {
     public static int ComponentToId(IComponent component) {
         return componentIds[component.GetType()];
     }
-}
-
-namespace Entitas {
-    public partial class Matcher : AllOfMatcher {
-        public Matcher(int index) : base(new [] { index }) {
-        }
-
-        public override string ToString() {
-            return ComponentIds.IdToString(indices[0]);
-        }
-    }
+}
+
+namespace Entitas {
+    public partial class Matcher : AllOfMatcher {
+        public Matcher(int index) : base(new [] { index }) {
+        }
+
+        public override string ToString() {
+            return ComponentIds.IdToString(indices[0]);
+        }
+    }
 }

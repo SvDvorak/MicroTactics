@@ -6,7 +6,7 @@ using Vexe.Runtime.Extensions;
 
 namespace Assets.Features.Selection
 {
-    public class SelectedInteractionSystem : IReactiveSystem, ISetPool
+    public class SelectedInteractionSystem : IReactiveSystem, ISetPool, IEnsureComponents
     {
         private Group _selectedGroup;
         private Vector3 _pressStartPosition;
@@ -14,7 +14,8 @@ namespace Assets.Features.Selection
         private bool _isDoingDrag;
         private bool _leftState;
 
-        public IMatcher trigger { get { return Matcher.AllOf(Matcher.Input, Matcher.Selected, Matcher.NoneOf(Matcher.AttackOrder, Matcher.MoveInput)); } }
+        public IMatcher trigger { get { return Matcher.Input; } }
+    public IMatcher ensureComponents { get { return Matcher.Selected; } }
         public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
         public void SetPool(Pool pool)
@@ -26,6 +27,11 @@ namespace Assets.Features.Selection
         {
             var inputEntity = entities.SingleEntity();
             var input = inputEntity.input;
+
+            if (inputEntity.hasMoveInput || inputEntity.hasAttackOrder)
+            {
+                return;
+            }
 
             if (_leftState)
             {
