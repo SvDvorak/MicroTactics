@@ -37,10 +37,11 @@ namespace MicroTactics.Tests.Features
         public void StopsWhenHavingReachedPosition()
         {
             _entity.ReplaceMovement(float.PositiveInfinity);
+            var orderPosition = _entity.moveOrder.Position;
 
             _sut.Execute();
 
-            _entity.position.ToV3().Should().Be(_entity.moveOrder.Position);
+            _entity.position.ToV3().Should().Be(orderPosition);
         }
 
         [Fact]
@@ -49,6 +50,16 @@ namespace MicroTactics.Tests.Features
             _sut.Execute();
 
             _entity.rotation.ToQ().ShouldBeCloseTo(Quaternion.LookAt(Vector3.Right));
+        }
+
+        [Fact]
+        public void RemovesMoveOrderWhenHavingReachedPosition()
+        {
+            _entity.ReplaceMoveOrder(Vector3.Zero, Quaternion.Identity);
+
+            _sut.Execute();
+
+            _entity.hasMoveOrder.Should().BeFalse("move order should have been removed");
         }
     }
 }

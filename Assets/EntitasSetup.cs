@@ -60,7 +60,7 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateSquadAudioSystem())
 
             .Add(pool.CreateRemoveViewSystem())
-            .Add(pool.CreateRemoveMoveOrderSystem())
+            //.Add(pool.CreateRemoveMoveOrderSystem())
             .Add(pool.CreateRemovePhysicsSystem())
             .Add(pool.CreateDestroySystem());
     }
