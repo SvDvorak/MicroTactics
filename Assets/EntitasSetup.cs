@@ -31,7 +31,6 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateSelectionAreaUpdateSystem())
             .Add(pool.CreateMeshUpdateSystem())
 
-            .Add(pool.CreateAddUnitViewSystem())
             .Add(pool.CreateAddViewSystem())
 
             .Add(pool.CreateAiMoveOrderSystem())
@@ -49,18 +48,17 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateMoveSystem())
             .Add(pool.CreateAttackSystem())
 
-            .Add(pool.CreateAddArrowViewSystem())
             .Add(pool.CreateArrowStickToCollidedSystem())
             .Add(pool.CreatePitchFromVelocitySystem())
 
             .Add(pool.CreateReadVelocitySystem())
+            .Add(pool.CreateApplyForceSystem())
             .Add(pool.CreateRenderPositionSystem())
             .Add(pool.CreateRenderRotationSystem())
             .Add(pool.CreateAnimateUnitSystem())
             .Add(pool.CreateSquadAudioSystem())
 
             .Add(pool.CreateRemoveViewSystem())
-            //.Add(pool.CreateRemoveMoveOrderSystem())
             .Add(pool.CreateRemovePhysicsSystem())
             .Add(pool.CreateDestroySystem());
     }

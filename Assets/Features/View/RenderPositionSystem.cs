@@ -1,18 +1,15 @@
-﻿using Assets;
+﻿using System.Collections.Generic;
+using Assets;
 using Entitas;
 
-public class RenderPositionSystem : IExecuteSystem, ISetPool
+public class RenderPositionSystem : IReactiveSystem
 {
-    private Group _renderables;
+    public IMatcher trigger { get { return Matcher.AllOf(Matcher.Position, Matcher.View); } }
+    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
-    public void SetPool(Pool pool)
+    public void Execute(List<Entity> entities)
     {
-        _renderables = pool.GetGroup(Matcher.AllOf(Matcher.Position, Matcher.View));
-    }
-
-    public void Execute()
-    {
-        foreach (var e in _renderables.GetEntities())
+        foreach (var e in entities)
         {
             var transform = e.view.GameObject.transform;
             transform.position = e.position.ToUnityV3();

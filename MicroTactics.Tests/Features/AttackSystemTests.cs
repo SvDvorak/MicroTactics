@@ -20,11 +20,11 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void TriggersOnAddedAttackOrderWithPositionRotationAndArrowTemplate()
+        public void TriggersOnAddedAttackOrderWithPositionAndRotation()
         {
             _sut.trigger.Should().Be(Matcher.AllOf(Matcher.AttackOrder));
             _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
-            _sut.ensureComponents.Should().Be(Matcher.AllOf(Matcher.Unit, Matcher.Position, Matcher.Rotation, Matcher.ArrowTemplate));
+            _sut.ensureComponents.Should().Be(Matcher.AllOf(Matcher.Unit, Matcher.Position, Matcher.Rotation));
         }
 
         [Fact]
@@ -45,28 +45,30 @@ namespace MicroTactics.Tests.Features
             var attackingEntity = new TestEntity()
                 .AddPosition(10, 0, 0)
                 .AddRotation(lookingToTheRight)
-                .AddAttackOrder(positionToTheRight)
-                .AddArrowTemplate(null);
+                .AddAttackOrder(positionToTheRight);
 
             _sut.Execute(attackingEntity.AsList());
 
-            var arrowEntity = _pool.GetEntities().SingleEntity();
-            arrowEntity.hasArrow.Should().Be(true);
+            var arrowEntity = GetSingleArrow();
+            var expectedPosition = new Vector3(10, 4, 0);
+            var expectedForce = new Vector3(263.8441f, 427.368f, 0);
+            arrowEntity.arrow.Position.ShouldBeCloseTo(expectedPosition);
+            arrowEntity.arrow.Rotation.ShouldBeCloseTo(lookingToTheRight);
+            arrowEntity.arrow.Force.ShouldBeCloseTo(expectedForce);
 
-            var arrow = arrowEntity.arrow;
-            arrow.Position.ShouldBeCloseTo(new Vector3(10, 4, 0));
-            arrow.Rotation.ShouldBeCloseTo(lookingToTheRight);
-            arrow.Force.ShouldBeCloseTo(new Vector3(263.8441f, 427.368f, 0));
+            arrowEntity.position.ToV3().ShouldBeCloseTo(expectedPosition);
+            arrowEntity.rotation.ToQ().ShouldBeCloseTo(lookingToTheRight);
         }
 
         [Fact]
-        public void AddsViewTemplateToArrow()
+        public void AddsResourceToArrow()
         {
             var attackingEntity = CreateAttackingEntity();
 
             _sut.Execute(attackingEntity.AsList());
 
-            attackingEntity.hasArrowTemplate.Should().BeTrue("arrow should have arrow template");
+            GetSingleArrow().hasResource.Should().BeTrue("arrow should have resource");
+            GetSingleArrow().resource.Name.Should().Be("Arrow");
         }
 
         [Fact]
@@ -87,9 +89,16 @@ namespace MicroTactics.Tests.Features
             attackingEntity.rotation.ToQ().ShouldBeCloseTo(Quaternion.LookAt(Vector3.Right));
         }
 
+        private Entity GetSingleArrow()
+        {
+            var arrowEntity = _pool.GetEntities().SingleEntity();
+            arrowEntity.hasArrow.Should().Be(true);
+            return arrowEntity;
+        }
+
         private static Entity CreateAttackingEntity()
         {
-            return new TestEntity().AddPosition(0, 0, 0).AddRotation(0, 0, 0, 0).AddAttackOrder(0, 0, 0).AddArrowTemplate(null);
+            return new TestEntity().AddPosition(0, 0, 0).AddRotation(0, 0, 0, 0).AddAttackOrder(0, 0, 0);
         }
     }
 }

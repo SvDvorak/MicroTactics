@@ -10,7 +10,7 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
     private Pool _pool;
 
     public IMatcher trigger { get { return Matcher.AllOf(Matcher.AttackOrder); } }
-    public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.Unit, Matcher.Position, Matcher.Rotation, Matcher.ArrowTemplate); } }
+    public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.Unit, Matcher.Position, Matcher.Rotation); } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
     public void SetPool(Pool pool)
@@ -42,8 +42,10 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
 
         _pool.CreateEntity()
             .AddArrow(firePosition, entity.rotation.ToQ(), force)
-            .AddArrowTemplate(entity.arrowTemplate.Template)
+            .AddResource(Res.Arrow)
+            .AddPosition(firePosition)
             .AddRotation(entity.rotation.ToQ())
+            .AddForce(force)
             .AddVelocity(attackDirection);
     }
 

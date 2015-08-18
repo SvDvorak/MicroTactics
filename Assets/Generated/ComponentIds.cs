@@ -6,15 +6,15 @@ public static class ComponentIds {
     public const int Ai = 0;
     public const int Animate = 1;
     public const int Arrow = 2;
-    public const int ArrowTemplate = 3;
-    public const int AttackInput = 4;
-    public const int AttackOrder = 5;
-    public const int Audio = 6;
-    public const int BoundingMesh = 7;
-    public const int BoxFormation = 8;
-    public const int Collision = 9;
-    public const int Destroy = 10;
-    public const int Enemy = 11;
+    public const int AttackInput = 3;
+    public const int AttackOrder = 4;
+    public const int Audio = 5;
+    public const int BoundingMesh = 6;
+    public const int BoxFormation = 7;
+    public const int Collision = 8;
+    public const int Destroy = 9;
+    public const int Enemy = 10;
+    public const int Force = 11;
     public const int Ground = 12;
     public const int Input = 13;
     public const int MoveInput = 14;
@@ -29,17 +29,15 @@ public static class ComponentIds {
     public const int Squad = 23;
     public const int Unit = 24;
     public const int UnitsCache = 25;
-    public const int UnitTemplate = 26;
-    public const int Velocity = 27;
-    public const int View = 28;
+    public const int Velocity = 26;
+    public const int View = 27;
 
-    public const int TotalComponents = 29;
+    public const int TotalComponents = 28;
 
     static readonly string[] components = {
         "Ai",
         "Animate",
         "Arrow",
-        "ArrowTemplate",
         "AttackInput",
         "AttackOrder",
         "Audio",
@@ -48,6 +46,7 @@ public static class ComponentIds {
         "Collision",
         "Destroy",
         "Enemy",
+        "Force",
         "Ground",
         "Input",
         "MoveInput",
@@ -62,7 +61,6 @@ public static class ComponentIds {
         "Squad",
         "Unit",
         "UnitsCache",
-        "UnitTemplate",
         "Velocity",
         "View"
     };
@@ -75,7 +73,6 @@ public static class ComponentIds {
         { typeof (AiComponent), Ai },
         { typeof (AnimateComponent), Animate },
         { typeof (ArrowComponent), Arrow },
-        { typeof (ArrowTemplateComponent), ArrowTemplate },
         { typeof (AttackInputComponent), AttackInput },
         { typeof (AttackOrderComponent), AttackOrder },
         { typeof (AudioComponent), Audio },
@@ -84,6 +81,7 @@ public static class ComponentIds {
         { typeof (CollisionComponent), Collision },
         { typeof (DestroyComponent), Destroy },
         { typeof (EnemyComponent), Enemy },
+        { typeof (ForceComponent), Force },
         { typeof (GroundComponent), Ground },
         { typeof (InputComponent), Input },
         { typeof (MoveInputComponent), MoveInput },
@@ -98,7 +96,6 @@ public static class ComponentIds {
         { typeof (SquadComponent), Squad },
         { typeof (UnitComponent), Unit },
         { typeof (UnitsCacheComponent), UnitsCache },
-        { typeof (UnitTemplateComponent), UnitTemplate },
         { typeof (VelocityComponent), Velocity },
         { typeof (ViewComponent), View }
     };

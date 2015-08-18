@@ -89,13 +89,14 @@ namespace MicroTactics.Tests.Features.CreateSquad
         }
 
         [Fact]
-        public void AddsUnitAndMovementComponentToEachUnit()
+        public void AddsUnitMovementAndResourceComponentToEachUnit()
         {
             _sut.Execute(_squad1.ReplaceBoxFormation(1, 1, 0).AsList());
 
             var createdEntity = UnitsInPool.SingleEntity();
             createdEntity.ShouldHaveUnit(0);
             createdEntity.ShouldHaveMovement(0.06f);
+            createdEntity.ShouldHaveResource("Unit");
         }
 
         [Fact]
@@ -149,6 +150,12 @@ namespace MicroTactics.Tests.Features.CreateSquad
         {
             entity.hasPosition.Should().BeTrue("the entity should have a position component");
             entity.position.ShouldBeEquivalentTo(new VectorClass(x, y, z));
+        }
+
+        public static void ShouldHaveResource(this Entity entity, string resource)
+        {
+            entity.hasResource.Should().BeTrue("the entity should have a resource component");
+            entity.resource.Name.Should().Be(resource);
         }
     }
 }
