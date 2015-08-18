@@ -53,6 +53,18 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
+        public void DoesNotSetRotationWhenAlreadyStandingOnTarget()
+        {
+            _entity
+                .ReplaceMoveOrder(Vector3.Zero, new Quaternion())
+                .ReplacePosition(Vector3.Zero);
+
+            _sut.Execute();
+
+            _entity.rotation.ToQ().Should().Be(Quaternion.Identity);
+        }
+
+        [Fact]
         public void RemovesMoveOrderWhenHavingReachedPosition()
         {
             _entity.ReplaceMoveOrder(Vector3.Zero, Quaternion.Identity);

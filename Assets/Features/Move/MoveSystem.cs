@@ -16,9 +16,14 @@ public class MoveSystem : IExecuteSystem, ISetPool
         foreach (var entity in _entitiesWithOrder.GetEntities())
         {
             var newPosition = entity.position.ToV3().MoveTowards(entity.moveOrder.Position, entity.movement.MoveSpeed);
-            var newRotation = Quaternion.LookAt((entity.moveOrder.Position - entity.position.ToV3()).Normalized());
             entity.ReplacePosition(newPosition);
-            entity.ReplaceRotation(newRotation);
+
+            var moveDirection = entity.moveOrder.Position - entity.position.ToV3();
+            if(!moveDirection.Length().IsApproximately(0))
+            {
+                var newRotation = Quaternion.LookAt(moveDirection.Normalized());
+                entity.ReplaceRotation(newRotation);
+            }
 
             if(entity.position.ToV3() == entity.moveOrder.Position)
             {

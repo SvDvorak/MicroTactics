@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using System;
+using Entitas;
 using Mono.GameMath;
 
 public class RotationComponent : QuaternionClass, IComponent

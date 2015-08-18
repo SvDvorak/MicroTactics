@@ -22,7 +22,7 @@ public class AiAttackOrderSystem : IExecuteSystem, ISetPool
             if(closestEnemy.HasValue)
             {
                 var enemyPos = closestEnemy.Value.position;
-                ai.ReplaceAttackOrder(enemyPos.x, enemyPos.y, enemyPos.z);
+                //ai.ReplaceAttackOrder(enemyPos.x, enemyPos.y, enemyPos.z);
             }
             else if (ai.hasAttackOrder)
             {
