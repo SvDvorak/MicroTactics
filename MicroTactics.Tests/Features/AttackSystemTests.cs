@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Assets;
 using Entitas;
 using FluentAssertions;
 using Mono.GameMath;
@@ -19,18 +20,11 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void TriggersOnAddedAttackOrder()
+        public void TriggersOnAddedAttackOrderWithPositionRotationAndArrowTemplate()
         {
             _sut.trigger.Should().Be(Matcher.AllOf(Matcher.AttackOrder));
             _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
-        }
-
-        [Fact]
-        public void DoesNothingToEntitiesWithoutPositionRotationAndArrowTemplate()
-        {
-            var entity = new TestEntity().AddAttackOrder(0, 0, 0);
-
-            _sut.Execute(entity.AsList());
+            _sut.ensureComponents.Should().Be(Matcher.AllOf(Matcher.Unit, Matcher.Position, Matcher.Rotation, Matcher.ArrowTemplate));
         }
 
         [Fact]
@@ -46,7 +40,7 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void CalculatesPositionRotationAndForceToFire()
         {
-            var lookingToTheRight = Quaternion.CreateFromAxisAngle(new Vector3(0, 1, 0), MathHelper.PiOver2);
+            var lookingToTheRight = Quaternion.LookAt(Vector3.Right);
             var positionToTheRight = new Vector3(20, 0, 0);
             var attackingEntity = new TestEntity()
                 .AddPosition(10, 0, 0)
@@ -60,9 +54,9 @@ namespace MicroTactics.Tests.Features
             arrowEntity.hasArrow.Should().Be(true);
 
             var arrow = arrowEntity.arrow;
-            arrow.Position.Should().Be(new Vector3(10, 4, 0));
-            arrow.Rotation.Should().Be(lookingToTheRight);
-            arrow.Force.ShouldBeCloseTo(new Vector3(-263.8441f, 427.368f, 0));
+            arrow.Position.ShouldBeCloseTo(new Vector3(10, 4, 0));
+            arrow.Rotation.ShouldBeCloseTo(lookingToTheRight);
+            arrow.Force.ShouldBeCloseTo(new Vector3(263.8441f, 427.368f, 0));
         }
 
         [Fact]
@@ -82,6 +76,15 @@ namespace MicroTactics.Tests.Features
             _sut.Execute(attackingEntity.AsList());
 
             attackingEntity.hasAttackOrder.Should().BeFalse("should not have attack order after firing");
+        }
+
+        [Fact]
+        public void RotatesTowardsTarget()
+        {
+            var attackingEntity = CreateAttackingEntity().ReplaceAttackOrder(10, 0, 0);
+            _sut.Execute(attackingEntity.AsList());
+
+            attackingEntity.rotation.ToQ().ShouldBeCloseTo(Quaternion.LookAt(Vector3.Right));
         }
 
         private static Entity CreateAttackingEntity()

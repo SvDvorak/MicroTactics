@@ -8,7 +8,7 @@ public class MoveSystem : IExecuteSystem, ISetPool
 
     public void SetPool(Pool pool)
     {
-        _entitiesWithOrder = pool.GetGroup(Matcher.AllOf(Matcher.Position, Matcher.Movement, Matcher.MoveOrder));
+        _entitiesWithOrder = pool.GetGroup(Matcher.AllOf(Matcher.Position, Matcher.Rotation, Matcher.Movement, Matcher.MoveOrder));
     }
 
     public void Execute()
@@ -16,7 +16,9 @@ public class MoveSystem : IExecuteSystem, ISetPool
         foreach (var entity in _entitiesWithOrder.GetEntities())
         {
             var newPosition = entity.position.ToV3().MoveTowards(entity.moveOrder.Position, entity.movement.MoveSpeed);
+            var newRotation = Quaternion.LookAt((entity.moveOrder.Position - entity.position.ToV3()).Normalized());
             entity.ReplacePosition(newPosition);
+            entity.ReplaceRotation(newRotation);
         }
     }
 }
