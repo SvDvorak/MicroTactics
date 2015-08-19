@@ -3,6 +3,7 @@ using System.Linq;
 using Assets;
 using Entitas;
 using FluentAssertions;
+using Mono.GameMath;
 using Xunit;
 
 namespace MicroTactics.Tests.Features.CreateSquad
@@ -12,17 +13,34 @@ namespace MicroTactics.Tests.Features.CreateSquad
         private readonly SquadCreationSystem _sut;
         private readonly TestPool _pool;
         private readonly Entity _squad1 = new TestEntity().AddSquad(0).AddBoxFormation(0, 0, 0);
-        private readonly Entity _squad2 = new TestEntity().AddSquad(0).AddBoxFormation(0, 0, 0);
+        private readonly Entity _squad2 = new TestEntity().AddSquad(1).AddBoxFormation(0, 0, 0);
+        private readonly SpawnUnitCommandTest _spawnUnitCommand;
 
-        private List<Entity> UnitsInPool { get { return _pool.GetEntities().Where(x => x.hasUnit).ToList(); } }
+        private List<Entity> Units { get { return _spawnUnitCommand.Entities.ToList(); } }
 
         public SquadCreationSystemTests()
         {
-            _sut = new SquadCreationSystem();
+            _spawnUnitCommand = new SpawnUnitCommandTest();
+            _sut = new SquadCreationSystem { SpawnUnitCommand = _spawnUnitCommand };
             _pool = new TestPool();
             _sut.SetPool(_pool);
 
             _pool.Count.Should().Be(0);
+        }
+
+        public class SpawnUnitCommandTest : ISpawnUnitCommand
+        {
+            public List<Entity> Entities = new List<Entity>();
+
+            public void Spawn(Entity unit)
+            {
+                Entities.Add(unit);
+            }
+
+            public void Despawn(Entity unit)
+            {
+                Entities.Remove(unit);
+            }
         }
 
         [Fact]
@@ -42,7 +60,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         {
             Execute(_squad1);
 
-            UnitsInPool.Should().HaveCount(0);
+            Units.Should().HaveCount(0);
         }
 
         [Fact]
@@ -52,11 +70,11 @@ namespace MicroTactics.Tests.Features.CreateSquad
 
             Execute(_squad1);
 
-            UnitsInPool.Should().HaveCount(4);
+            Units.Should().HaveCount(4);
         }
 
         [Fact]
-        public void SetsDestroyOnExistingUnitsWhenRecreatingSquad()
+        public void DespawnsExistingUnitsWhenRecreatingSquad()
         {
             _squad1.ReplaceBoxFormation(2, 2, 0);
             Execute(_squad1);
@@ -64,8 +82,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
             _squad1.ReplaceBoxFormation(1, 1, 0);
             Execute(_squad1);
 
-            UnitsInPool.Should().HaveCount(5);
-            UnitsInPool.Where(x => x.isDestroy && x.child.Value.isDestroy).Should().HaveCount(4, "all units from first squad should be destroyed");
+            Units.Should().HaveCount(1);
         }
 
         [Fact]
@@ -76,7 +93,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
 
             Execute(_squad1, _squad2);
 
-            UnitsInPool.Should().HaveCount(2);
+            Units.Should().HaveCount(2);
         }
 
         [Fact]
@@ -85,18 +102,15 @@ namespace MicroTactics.Tests.Features.CreateSquad
             Execute(_squad1.ReplaceBoxFormation(1, 1, 0));
             Execute(_squad2.ReplaceBoxFormation(1, 1, 0));
 
-            UnitsInPool.Should().HaveCount(2);
+            Units.Should().HaveCount(2);
         }
 
         [Fact]
-        public void AddsUnitMovementAndResourceComponentToEachUnit()
+        public void AddsUnitComponentToEachUnit()
         {
             Execute(_squad1.ReplaceBoxFormation(1, 1, 0));
 
-            var createdEntity = UnitsInPool.SingleEntity();
-            createdEntity.ShouldHaveUnit(0);
-            createdEntity.ShouldHaveMovement(0.06f);
-            createdEntity.ShouldHaveResource("Unit");
+            Units.SingleEntity().ShouldHaveUnit(0);
         }
 
         [Fact]
@@ -104,20 +118,10 @@ namespace MicroTactics.Tests.Features.CreateSquad
         {
             Execute(_squad1.ReplaceBoxFormation(2, 2, 2));
 
-            UnitsInPool.First().ShouldHavePosition(-1, 0, -1);
-            UnitsInPool.Second().ShouldHavePosition(1, 0, -1);
-            UnitsInPool.Third().ShouldHavePosition(-1, 0, 1);
-            UnitsInPool.Fourth().ShouldHavePosition(1, 0, 1);
-        }
-
-        [Fact]
-        public void AddsSelectedIndicatorForUnit()
-        {
-            Execute(_squad1.ReplaceBoxFormation(1, 1, 0));
-
-            var unit = UnitsInPool.SingleEntity();
-            unit.hasChild.Should().BeTrue("unit should have selection indicator");
-            unit.child.Value.resource.Name.Should().Be(Res.SelectedIndicator);
+            Units.First().ShouldHavePosition(-1, 0, -1);
+            Units.Second().ShouldHavePosition(1, 0, -1);
+            Units.Third().ShouldHavePosition(-1, 0, 1);
+            Units.Fourth().ShouldHavePosition(1, 0, 1);
         }
 
         [Fact]
@@ -136,7 +140,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
             Execute(_squad1);
             Execute(_squad1);
 
-            var nonDestroyedEntities = _pool.GetEntities().Where(x => !x.isDestroy);
+            var nonDestroyedEntities = _pool.GetEntities().Where(x => !x.isDestroy).ToList();
             nonDestroyedEntities.Should().HaveCount(1);
             nonDestroyedEntities.Single().hasSelectionArea.Should().BeTrue("new selection area should have been created");
         }

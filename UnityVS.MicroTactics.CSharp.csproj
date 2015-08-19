@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -117,6 +119,7 @@
     <Compile Include="Assets\Features\Destruction\DestroySystem.cs" />
     <Compile Include="Assets\Features\Destruction\RemoveViewSystem.cs" />
     <Compile Include="Assets\Features\EnemyComponent.cs" />
+    <Compile Include="Assets\Features\GameObjectConfigure.cs" />
     <Compile Include="Assets\Features\InputComponent.cs" />
     <Compile Include="Assets\Features\MouseInput.cs" />
     <Compile Include="Assets\Features\Move\AiComponent.cs" />
@@ -147,6 +150,7 @@
     <Compile Include="Assets\Features\SquadAudioSystem.cs" />
     <Compile Include="Assets\Features\SquadCenterPositionSystem.cs" />
     <Compile Include="Assets\Features\Triangulator.cs" />
+    <Compile Include="Assets\Features\CreateSquad\UnitBehaviourConfiguration.cs" />
     <Compile Include="Assets\Features\UnitsCacheComponent.cs" />
     <Compile Include="Assets\Features\UnitsCacheSystem.cs" />
     <Compile Include="Assets\Features\View\AddViewSystem.cs" />
