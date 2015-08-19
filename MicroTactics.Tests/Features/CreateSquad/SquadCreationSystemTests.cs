@@ -40,7 +40,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void EmptySquadProducesNoUnits()
         {
-            _sut.Execute(_squad1.AsList());
+            Execute(_squad1);
 
             UnitsInPool.Should().HaveCount(0);
         }
@@ -50,7 +50,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         {
             _squad1.ReplaceBoxFormation(2, 2, 0);
 
-            _sut.Execute(_squad1.AsList());
+            Execute(_squad1);
 
             UnitsInPool.Should().HaveCount(4);
         }
@@ -59,13 +59,13 @@ namespace MicroTactics.Tests.Features.CreateSquad
         public void SetsDestroyOnExistingUnitsWhenRecreatingSquad()
         {
             _squad1.ReplaceBoxFormation(2, 2, 0);
-            _sut.Execute(_squad1.AsList());
+            Execute(_squad1);
 
             _squad1.ReplaceBoxFormation(1, 1, 0);
-            _sut.Execute(_squad1.AsList());
+            Execute(_squad1);
 
             UnitsInPool.Should().HaveCount(5);
-            UnitsInPool.Where(x => x.isDestroy).Should().HaveCount(4, "all units from first squad should be destroyed");
+            UnitsInPool.Where(x => x.isDestroy && x.child.Value.isDestroy).Should().HaveCount(4, "all units from first squad should be destroyed");
         }
 
         [Fact]
@@ -74,7 +74,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
             _squad1.ReplaceBoxFormation(1, 1, 1);
             _squad2.ReplaceBoxFormation(1, 1, 1);
 
-            _sut.Execute(new [] { _squad1, _squad2 }.ToList());
+            Execute(_squad1, _squad2);
 
             UnitsInPool.Should().HaveCount(2);
         }
@@ -82,8 +82,8 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void DoesNotTouchUnitsInOtherSquadsWhenRecreatingSquad()
         {
-            _sut.Execute(_squad1.ReplaceBoxFormation(1, 1, 0).AsList());
-            _sut.Execute(_squad2.ReplaceBoxFormation(1, 1, 0).AsList());
+            Execute(_squad1.ReplaceBoxFormation(1, 1, 0));
+            Execute(_squad2.ReplaceBoxFormation(1, 1, 0));
 
             UnitsInPool.Should().HaveCount(2);
         }
@@ -91,7 +91,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void AddsUnitMovementAndResourceComponentToEachUnit()
         {
-            _sut.Execute(_squad1.ReplaceBoxFormation(1, 1, 0).AsList());
+            Execute(_squad1.ReplaceBoxFormation(1, 1, 0));
 
             var createdEntity = UnitsInPool.SingleEntity();
             createdEntity.ShouldHaveUnit(0);
@@ -102,7 +102,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void AddsPositionAndPlacesEachUnit()
         {
-            _sut.Execute(_squad1.ReplaceBoxFormation(2, 2, 2).AsList());
+            Execute(_squad1.ReplaceBoxFormation(2, 2, 2));
 
             UnitsInPool.First().ShouldHavePosition(-1, 0, -1);
             UnitsInPool.Second().ShouldHavePosition(1, 0, -1);
@@ -111,9 +111,19 @@ namespace MicroTactics.Tests.Features.CreateSquad
         }
 
         [Fact]
+        public void AddsSelectedIndicatorForUnit()
+        {
+            Execute(_squad1.ReplaceBoxFormation(1, 1, 0));
+
+            var unit = UnitsInPool.SingleEntity();
+            unit.hasChild.Should().BeTrue("unit should have selection indicator");
+            unit.child.Value.resource.Name.Should().Be(Res.SelectedIndicator);
+        }
+
+        [Fact]
         public void CreatesASelectionAreaForSquad()
         {
-            _sut.Execute(_squad1.AsList());
+            Execute(_squad1);
 
             var selectionAreaEntity = _pool.GetEntities().SingleEntity();
             selectionAreaEntity.selectionArea.Parent.Should().Be(_squad1);
@@ -123,12 +133,17 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void RemovesExistingSelectionAreaWhenRecreating()
         {
-            _sut.Execute(_squad1.AsList());
-            _sut.Execute(_squad1.AsList());
+            Execute(_squad1);
+            Execute(_squad1);
 
             var nonDestroyedEntities = _pool.GetEntities().Where(x => !x.isDestroy);
             nonDestroyedEntities.Should().HaveCount(1);
             nonDestroyedEntities.Single().hasSelectionArea.Should().BeTrue("new selection area should have been created");
+        }
+
+        private void Execute(params Entity[] squads)
+        {
+            _sut.Execute(squads.ToList());
         }
     }
 

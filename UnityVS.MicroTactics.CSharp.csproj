@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -106,6 +104,7 @@
     <Compile Include="Assets\Features\ComponentContainer.cs" />
     <Compile Include="Assets\Features\ConvexHullCalculator.cs" />
     <Compile Include="Assets\Features\CreateSquad\BoxFormationComponent.cs" />
+    <Compile Include="Assets\Features\CreateSquad\ChildComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\PositionComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\QuaternionClass.cs" />
     <Compile Include="Assets\Features\CreateSquad\ResourceComponent.cs" />
@@ -177,6 +176,7 @@
     <Compile Include="Assets\Generated\AudioComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\BoundingMeshComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\BoxFormationComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\ChildComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\CollisionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ComponentIds.cs" />
     <Compile Include="Assets\Generated\DestroyComponentGeneratedExtension.cs" />

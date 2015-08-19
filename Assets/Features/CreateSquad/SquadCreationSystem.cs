@@ -36,12 +36,14 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
         for (var i = 0; i < formation.Columns*formation.Rows; i++)
         {
             var position = UnitInSquadPositioner.GetPosition(formation, i);
+            var selectionIndicator = _pool.CreateEntity().AddResource(Res.SelectedIndicator);
             _pool.CreateEntity()
-                 .AddUnit(squad.Number)
-                 .AddResource(Res.Unit)
-                 .AddPosition(position)
-                 .AddRotation(Quaternion.Identity)
-                 .AddMovement(0.06f);
+                .AddUnit(squad.Number)
+                .AddResource(Res.Unit)
+                .AddPosition(position)
+                .AddRotation(Quaternion.Identity)
+                .AddMovement(0.06f)
+                .AddChild(selectionIndicator);
         }
     }
 
@@ -56,7 +58,11 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
     private void RemoveExistingUnitsFromSquad(int squadNumber)
     {
         var unitsInSquad = _unitsGroup.GetEntities().Where(x => x.unit.SquadNumber == squadNumber);
-        unitsInSquad.Foreach(x => x.IsDestroy(true));
+        unitsInSquad.Foreach(x =>
+            {
+                x.IsDestroy(true);
+                x.child.Value.IsDestroy(true);
+            });
     }
 
     private void RemoveExistingSelectionArea(Entity squadEntity)

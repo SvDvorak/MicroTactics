@@ -11,28 +11,29 @@ public static class ComponentIds {
     public const int Audio = 5;
     public const int BoundingMesh = 6;
     public const int BoxFormation = 7;
-    public const int Collision = 8;
-    public const int Destroy = 9;
-    public const int Enemy = 10;
-    public const int Force = 11;
-    public const int Ground = 12;
-    public const int Input = 13;
-    public const int MoveInput = 14;
-    public const int Movement = 15;
-    public const int MoveOrder = 16;
-    public const int Physics = 17;
-    public const int Position = 18;
-    public const int Resource = 19;
-    public const int Rotation = 20;
-    public const int Selected = 21;
-    public const int SelectionArea = 22;
-    public const int Squad = 23;
-    public const int Unit = 24;
-    public const int UnitsCache = 25;
-    public const int Velocity = 26;
-    public const int View = 27;
+    public const int Child = 8;
+    public const int Collision = 9;
+    public const int Destroy = 10;
+    public const int Enemy = 11;
+    public const int Force = 12;
+    public const int Ground = 13;
+    public const int Input = 14;
+    public const int MoveInput = 15;
+    public const int Movement = 16;
+    public const int MoveOrder = 17;
+    public const int Physics = 18;
+    public const int Position = 19;
+    public const int Resource = 20;
+    public const int Rotation = 21;
+    public const int Selected = 22;
+    public const int SelectionArea = 23;
+    public const int Squad = 24;
+    public const int Unit = 25;
+    public const int UnitsCache = 26;
+    public const int Velocity = 27;
+    public const int View = 28;
 
-    public const int TotalComponents = 28;
+    public const int TotalComponents = 29;
 
     static readonly string[] components = {
         "Ai",
@@ -43,6 +44,7 @@ public static class ComponentIds {
         "Audio",
         "BoundingMesh",
         "BoxFormation",
+        "Child",
         "Collision",
         "Destroy",
         "Enemy",
@@ -78,6 +80,7 @@ public static class ComponentIds {
         { typeof (AudioComponent), Audio },
         { typeof (BoundingMeshComponent), BoundingMesh },
         { typeof (BoxFormationComponent), BoxFormation },
+        { typeof (ChildComponent), Child },
         { typeof (CollisionComponent), Collision },
         { typeof (DestroyComponent), Destroy },
         { typeof (EnemyComponent), Enemy },
