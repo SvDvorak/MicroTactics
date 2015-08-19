@@ -98,7 +98,7 @@ namespace MicroTactics.Tests.Features
                     new EntityHit(_empty, pressPosition),
                     new EntityHit(_empty, releasePosition));
 
-                squad.HasMoveOrderTo(pressPosition, Quaternion.LookAt(releasePosition.Normalized()));
+                squad.ShouldHaveMoveOrderTo(pressPosition, Quaternion.LookAt(releasePosition.Normalized()));
             }
 
             [Fact]
@@ -134,7 +134,7 @@ namespace MicroTactics.Tests.Features
                     new EntityHit(CreateSelectionArea(squad), Vector3.Zero),
                     new EntityHit(_empty, releasePosition));
 
-                squad.HasAttackOrderTo(releasePosition);
+                squad.ShouldHaveAttackOrderTo(releasePosition);
             }
 
             [Fact]
@@ -150,7 +150,7 @@ namespace MicroTactics.Tests.Features
                     new EntityHit(CreateSelectionArea(squad1), Vector3.Zero),
                     new EntityHit(CreateSelectionArea(squad2), releasePosition));
 
-                squad1.HasAttackOrderTo(releasePosition);
+                squad1.ShouldHaveAttackOrderTo(releasePosition);
             }
 
             [Fact]

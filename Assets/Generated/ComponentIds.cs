@@ -17,24 +17,25 @@ public static class ComponentIds {
     public const int Enemy = 11;
     public const int Force = 12;
     public const int Ground = 13;
-    public const int Input = 14;
-    public const int MoveInput = 15;
-    public const int Movement = 16;
-    public const int MoveOrder = 17;
-    public const int Parent = 18;
-    public const int Physics = 19;
-    public const int Position = 20;
-    public const int Resource = 21;
-    public const int Rotation = 22;
-    public const int Selected = 23;
-    public const int SelectionArea = 24;
-    public const int Squad = 25;
-    public const int Unit = 26;
-    public const int UnitsCache = 27;
-    public const int Velocity = 28;
-    public const int View = 29;
+    public const int Hidden = 14;
+    public const int Input = 15;
+    public const int MoveInput = 16;
+    public const int Movement = 17;
+    public const int MoveOrder = 18;
+    public const int Parent = 19;
+    public const int Physics = 20;
+    public const int Position = 21;
+    public const int Resource = 22;
+    public const int Rotation = 23;
+    public const int Selected = 24;
+    public const int SelectionArea = 25;
+    public const int Squad = 26;
+    public const int Unit = 27;
+    public const int UnitsCache = 28;
+    public const int Velocity = 29;
+    public const int View = 30;
 
-    public const int TotalComponents = 30;
+    public const int TotalComponents = 31;
 
     static readonly string[] components = {
         "Ai",
@@ -51,6 +52,7 @@ public static class ComponentIds {
         "Enemy",
         "Force",
         "Ground",
+        "Hidden",
         "Input",
         "MoveInput",
         "Movement",
@@ -88,6 +90,7 @@ public static class ComponentIds {
         { typeof (EnemyComponent), Enemy },
         { typeof (ForceComponent), Force },
         { typeof (GroundComponent), Ground },
+        { typeof (HiddenComponent), Hidden },
         { typeof (InputComponent), Input },
         { typeof (MoveInputComponent), MoveInput },
         { typeof (MovementComponent), Movement },

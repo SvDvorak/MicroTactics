@@ -51,7 +51,7 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute();
 
-            _squad.HasMoveOrderTo(new Vector3(1, 0, 0));
+            _squad.ShouldHaveMoveOrderTo(new Vector3(1, 0, 0));
         }
 
         [Fact]
@@ -70,8 +70,8 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute();
 
-            _squad.HasMoveOrderTo(new Vector3(-5, 0, 0));
-            squad2.HasMoveOrderTo(new Vector3(5, 0, 10));
+            _squad.ShouldHaveMoveOrderTo(new Vector3(-5, 0, 0));
+            squad2.ShouldHaveMoveOrderTo(new Vector3(5, 0, 10));
         }
     }
 }

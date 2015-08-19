@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -141,18 +143,21 @@
     <Compile Include="Assets\Features\RemovePhysicsSystem.cs" />
     <Compile Include="Assets\Features\RotationComponent.cs" />
     <Compile Include="Assets\Features\Selection\BoundingMeshComponent.cs" />
+    <Compile Include="Assets\Features\Selection\HiddenComponent.cs" />
     <Compile Include="Assets\Features\Selection\MeshUpdateSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectInteractionSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectedComponent.cs" />
     <Compile Include="Assets\Features\Selection\SelectedInteractionSystem.cs" />
     <Compile Include="Assets\Features\Selection\SelectionAreaComponent.cs" />
     <Compile Include="Assets\Features\Selection\SelectionAreaUpdateSystem.cs" />
+    <Compile Include="Assets\Features\Selection\ShowSelectedIndicatorForSquadSystem.cs" />
     <Compile Include="Assets\Features\SquadAudioSystem.cs" />
     <Compile Include="Assets\Features\SquadCenterPositionSystem.cs" />
     <Compile Include="Assets\Features\Triangulator.cs" />
     <Compile Include="Assets\Features\UnitsCacheComponent.cs" />
     <Compile Include="Assets\Features\UnitsCacheSystem.cs" />
     <Compile Include="Assets\Features\View\AddViewSystem.cs" />
+    <Compile Include="Assets\Features\View\HideHiddenSystem.cs" />
     <Compile Include="Assets\Features\View\LinkViewsStartSystem.cs" />
     <Compile Include="Assets\Features\View\RenderPositionSystem.cs" />
     <Compile Include="Assets\Features\View\RenderRotationSystem.cs" />
@@ -187,6 +192,8 @@
     <Compile Include="Assets\Generated\EnemyComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ForceComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\GroundComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\HiddenComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\HideHiddenSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\InputComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\LinkViewsStartSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MeshUpdateSystemGeneratedExtension.cs" />
@@ -211,6 +218,7 @@
     <Compile Include="Assets\Generated\SelectedComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SelectionAreaComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SelectionAreaUpdateSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\ShowSelectedIndicatorForSquadSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadAttackOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadCenterPositionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\SquadComponentGeneratedExtension.cs" />
