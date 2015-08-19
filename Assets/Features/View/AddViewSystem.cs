@@ -24,10 +24,12 @@ public class AddViewSystem : IReactiveSystem
             view.transform.SetParent(_viewsContainer);
 
             SetTransformIfAvailable(view, entity);
+            AddParentIfAvailable(view, entity);
             AddAnimatorIfAvailable(view, entity);
             AddPhysicsIfAvailable(view, entity);
 
             entity.AddView(view);
+            GameObjectConfigure.ConfigureGameObject(view, entity);
         }
     }
 
@@ -40,6 +42,15 @@ public class AddViewSystem : IReactiveSystem
         if (entity.hasRotation)
         {
             view.transform.rotation = entity.rotation.ToUnityQ();
+        }
+    }
+
+    private static void AddParentIfAvailable(GameObject view, Entity entity)
+    {
+        if (entity.hasParent && entity.parent.Value.hasView)
+        {
+            var parentView = entity.parent.Value.view;
+            view.transform.SetParent(parentView.GameObject.transform, false);
         }
     }
 

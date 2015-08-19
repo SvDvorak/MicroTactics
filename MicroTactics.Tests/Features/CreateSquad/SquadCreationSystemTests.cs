@@ -14,33 +14,16 @@ namespace MicroTactics.Tests.Features.CreateSquad
         private readonly TestPool _pool;
         private readonly Entity _squad1 = new TestEntity().AddSquad(0).AddBoxFormation(0, 0, 0);
         private readonly Entity _squad2 = new TestEntity().AddSquad(1).AddBoxFormation(0, 0, 0);
-        private readonly SpawnUnitCommandTest _spawnUnitCommand;
 
-        private List<Entity> Units { get { return _spawnUnitCommand.Entities.ToList(); } }
+        private List<Entity> Units { get { return _pool.GetEntities(Matcher.Unit).ToList(); } }
 
         public SquadCreationSystemTests()
         {
-            _spawnUnitCommand = new SpawnUnitCommandTest();
-            _sut = new SquadCreationSystem { SpawnUnitCommand = _spawnUnitCommand };
+            _sut = new SquadCreationSystem();
             _pool = new TestPool();
             _sut.SetPool(_pool);
 
             _pool.Count.Should().Be(0);
-        }
-
-        public class SpawnUnitCommandTest : ISpawnUnitCommand
-        {
-            public List<Entity> Entities = new List<Entity>();
-
-            public void Spawn(Entity unit)
-            {
-                Entities.Add(unit);
-            }
-
-            public void Despawn(Entity unit)
-            {
-                Entities.Remove(unit);
-            }
         }
 
         [Fact]
@@ -74,7 +57,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         }
 
         [Fact]
-        public void DespawnsExistingUnitsWhenRecreatingSquad()
+        public void SetsDestroyOnExistingUnitsWhenRecreatingSquad()
         {
             _squad1.ReplaceBoxFormation(2, 2, 0);
             Execute(_squad1);
@@ -82,7 +65,10 @@ namespace MicroTactics.Tests.Features.CreateSquad
             _squad1.ReplaceBoxFormation(1, 1, 0);
             Execute(_squad1);
 
-            Units.Should().HaveCount(1);
+            Units.Should().HaveCount(5);
+            Units.Where(x => x.isDestroy && x.child.Value.isDestroy)
+                .Should()
+                .HaveCount(4, "all but one squad member should have been destroyed");
         }
 
         [Fact]
@@ -106,11 +92,13 @@ namespace MicroTactics.Tests.Features.CreateSquad
         }
 
         [Fact]
-        public void AddsUnitComponentToEachUnit()
+        public void AddsUnitAndResourceComponentToEachUnit()
         {
             Execute(_squad1.ReplaceBoxFormation(1, 1, 0));
 
-            Units.SingleEntity().ShouldHaveUnit(0);
+            var unit = Units.SingleEntity();
+            unit.ShouldHaveUnit(0);
+            unit.ShouldHaveResource(Res.Unit);
         }
 
         [Fact]
@@ -122,6 +110,16 @@ namespace MicroTactics.Tests.Features.CreateSquad
             Units.Second().ShouldHavePosition(1, 0, -1);
             Units.Third().ShouldHavePosition(-1, 0, 1);
             Units.Fourth().ShouldHavePosition(1, 0, 1);
+        }
+
+        [Fact]
+        public void CreatesSelectedIndicatorForEachUnit()
+        {
+            Execute(_squad1.ReplaceBoxFormation(1, 1, 0));
+
+            var selectedIndicator = _pool.GetEntities(Matcher.Parent).SingleEntity();
+            selectedIndicator.ShouldHaveParent(Units.SingleEntity());
+            selectedIndicator.ShouldHaveResource(Res.SelectedIndicator);
         }
 
         [Fact]
@@ -157,6 +155,12 @@ namespace MicroTactics.Tests.Features.CreateSquad
         {
             entity.hasUnit.Should().BeTrue("entity should have a unit component");
             entity.unit.SquadNumber.Should().Be(squadNumber);
+        }
+
+        public static void ShouldHaveParent(this Entity child, Entity parent)
+        {
+            child.parent.Value.Should().Be(parent);
+            parent.child.Value.Should().Be(child);
         }
 
         public static void ShouldHaveMovement(this Entity entity, float moveSpeed)

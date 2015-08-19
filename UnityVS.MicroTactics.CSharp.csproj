@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -107,11 +105,13 @@
     <Compile Include="Assets\Features\ConvexHullCalculator.cs" />
     <Compile Include="Assets\Features\CreateSquad\BoxFormationComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\ChildComponent.cs" />
+    <Compile Include="Assets\Features\CreateSquad\ParentComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\PositionComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\QuaternionClass.cs" />
     <Compile Include="Assets\Features\CreateSquad\ResourceComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadCreationSystem.cs" />
+    <Compile Include="Assets\Features\CreateSquad\UnitBehaviourConfiguration.cs" />
     <Compile Include="Assets\Features\CreateSquad\UnitComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\VectorClass.cs" />
     <Compile Include="Assets\Features\CreateSquad\ViewComponent.cs" />
@@ -150,7 +150,6 @@
     <Compile Include="Assets\Features\SquadAudioSystem.cs" />
     <Compile Include="Assets\Features\SquadCenterPositionSystem.cs" />
     <Compile Include="Assets\Features\Triangulator.cs" />
-    <Compile Include="Assets\Features\CreateSquad\UnitBehaviourConfiguration.cs" />
     <Compile Include="Assets\Features\UnitsCacheComponent.cs" />
     <Compile Include="Assets\Features\UnitsCacheSystem.cs" />
     <Compile Include="Assets\Features\View\AddViewSystem.cs" />
@@ -195,6 +194,7 @@
     <Compile Include="Assets\Generated\MoveOrderComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MoveSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MovementComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\ParentComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\PhysicsComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\PitchFromVelocitySystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Pools.cs" />

@@ -13,13 +13,6 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
     public IMatcher trigger { get { return Matcher.AllOf(Matcher.Squad, Matcher.BoxFormation); } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
-    private ISpawnUnitCommand _spawnUnitCommand;
-    public ISpawnUnitCommand SpawnUnitCommand
-    {
-        get { return _spawnUnitCommand ?? (_spawnUnitCommand = new SpawnUnitCommand()); }
-        set { _spawnUnitCommand = value; }
-    }
-
     public void SetPool(Pool pool)
     {
         _pool = pool;
@@ -46,9 +39,14 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
             var unit = _pool.CreateEntity()
                 .AddUnit(squad.Number)
                 .AddPosition(position)
-                .AddRotation(Quaternion.Identity);
+                .AddRotation(Quaternion.Identity)
+                .AddResource(Res.Unit);
 
-            SpawnUnitCommand.Spawn(unit);
+            var selectedIndicator = _pool.CreateEntity()
+                .AddResource(Res.SelectedIndicator);
+
+            unit.AddChild(selectedIndicator);
+            selectedIndicator.AddParent(unit);
         }
     }
 
@@ -63,7 +61,11 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
     private void RemoveExistingUnitsFromSquad(int squadNumber)
     {
         var unitsInSquad = _unitsGroup.GetEntities().Where(x => x.unit.SquadNumber == squadNumber);
-        unitsInSquad.Foreach(x => SpawnUnitCommand.Despawn(x));
+        unitsInSquad.Foreach(x =>
+            {
+                x.IsDestroy(true);
+                x.child.Value.IsDestroy(true);
+            });
     }
 
     private void RemoveExistingSelectionArea(Entity squadEntity)
