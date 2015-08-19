@@ -16,20 +16,11 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void TriggersOnAddedAttackOrder()
+        public void TriggersOnAddedAttackOrderWithUnitsCacheAndFormation()
         {
             _sut.trigger.Should().Be(Matcher.AttackOrder);
+            _sut.ensureComponents.Should().Be(Matcher.AllOf(Matcher.UnitsCache, Matcher.BoxFormation));
             _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
-        }
-
-        [Fact]
-        public void DoesNothingToSquadsWithoutCacheAndFormation()
-        {
-            Entity entity = new TestEntity();
-
-            _sut.Execute(entity.AsList());
-
-            entity.hasAttackOrder.Should().BeFalse("should not add order when missing components");
         }
 
         [Fact]
@@ -86,7 +77,7 @@ namespace MicroTactics.Tests.Features
             var squad = new TestEntity()
                 .AddSquad(0)
                 .AddUnitsCache(unit.AsList())
-                .AddBoxFormation(2, 2, 2)
+                .AddBoxFormation(1, 1, 1)
                 .AddAttackOrder(1, 0, 0);
 
             _sut.Execute(squad.AsList());
