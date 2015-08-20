@@ -8,7 +8,6 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
 {
     private Group _unitsGroup;
     private Pool _pool;
-    private Group _selectionAreasGroup;
 
     public IMatcher trigger { get { return Matcher.AllOf(Matcher.Squad, Matcher.BoxFormation); } }
     public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
@@ -17,7 +16,6 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
     {
         _pool = pool;
         _unitsGroup = pool.GetGroup(Matcher.Unit);
-        _selectionAreasGroup = pool.GetGroup(Matcher.SelectionArea);
     }
 
     public void Execute(List<Entity> entities)
@@ -25,9 +23,7 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
         foreach (var squadEntity in entities)
         {
             RemoveExistingUnitsFromSquad(squadEntity.squad.Number);
-            RemoveExistingSelectionArea(squadEntity);
             CreateUnitsForSquad(squadEntity.squad, squadEntity.boxFormation);
-            CreateSelectionArea(squadEntity);
         }
     }
 
@@ -43,19 +39,12 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
                 .AddResource(Res.Unit);
 
             var selectedIndicator = _pool.CreateEntity()
-                .AddResource(Res.SelectedIndicator);
+                .AddResource(Res.SelectedIndicator)
+                .IsHidden(true);
 
             unit.AddChild(selectedIndicator);
             selectedIndicator.AddParent(unit);
         }
-    }
-
-    private void CreateSelectionArea(Entity squadEntity)
-    {
-        _pool
-            .CreateEntity()
-            .AddSelectionArea(squadEntity)
-            .AddResource(Res.SelectionArea);
     }
 
     private void RemoveExistingUnitsFromSquad(int squadNumber)
@@ -66,13 +55,5 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
                 x.IsDestroy(true);
                 x.child.Value.IsDestroy(true);
             });
-    }
-
-    private void RemoveExistingSelectionArea(Entity squadEntity)
-    {
-        _selectionAreasGroup
-            .GetEntities()
-            .Where(x => x.selectionArea.Parent == squadEntity)
-            .Foreach(x => x.IsDestroy(true));
     }
 }

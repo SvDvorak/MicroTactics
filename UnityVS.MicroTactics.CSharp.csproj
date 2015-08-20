@@ -111,6 +111,7 @@
     <Compile Include="Assets\Features\CreateSquad\PositionComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\QuaternionClass.cs" />
     <Compile Include="Assets\Features\CreateSquad\ResourceComponent.cs" />
+    <Compile Include="Assets\Features\CreateSquad\SelectionAreaDecoratorSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadCreationSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\UnitBehaviourConfiguration.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Assets\Features\Move\MoveOrderComponent.cs" />
     <Compile Include="Assets\Features\Move\MoveSystem.cs" />
     <Compile Include="Assets\Features\Move\MovementComponent.cs" />
+    <Compile Include="Assets\Features\Move\PlayerComponent.cs" />
     <Compile Include="Assets\Features\Move\RemoveMoveOrderSystem.cs" />
     <Compile Include="Assets\Features\Move\RenderMoveArrowSystem.cs" />
     <Compile Include="Assets\Features\Move\SquadMoveOrderSystem.cs" />
@@ -172,6 +174,8 @@
     <Compile Include="Assets\Generated\ApplyForceSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ArrowComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ArrowStickToCollidedSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\Assets.Features.CreateSquad.SelectionAreaAddDecoratorSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\Assets.Features.CreateSquad.SelectionAreaRemoveDecoratorSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Move.RemoveMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Selection.MoveInteractionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Selection.SelectInteractionSystemGeneratedExtension.cs" />
@@ -204,6 +208,7 @@
     <Compile Include="Assets\Generated\ParentComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\PhysicsComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\PitchFromVelocitySystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\PlayerComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Pools.cs" />
     <Compile Include="Assets\Generated\PositionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ReadVelocitySystemGeneratedExtension.cs" />

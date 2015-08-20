@@ -26,6 +26,7 @@ public class EntitasSetup : MonoBehaviour
 #endif
             .Add(pool.CreateLinkViewsStartSystem())
             .Add(pool.CreateSquadCreationSystem())
+            .Add(pool.CreateSelectionAreaAddDecoratorSystem())
             .Add(pool.CreateUnitsCacheSystem())
             .Add(pool.CreateSquadCenterPositionSystem())
             .Add(pool.CreateSelectionAreaUpdateSystem())
@@ -60,6 +61,7 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateAnimateUnitSystem())
             .Add(pool.CreateSquadAudioSystem())
 
+            .Add(pool.CreateSelectionAreaRemoveDecoratorSystem())
             .Add(pool.CreateRemoveViewSystem())
             .Add(pool.CreateRemovePhysicsSystem())
             .Add(pool.CreateDestroySystem());

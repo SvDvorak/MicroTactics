@@ -52,4 +52,14 @@ public static class EntityExtensions
         entity.hasAttackOrder.Should().BeTrue("entity should have received order");
         entity.attackOrder.ToV3().Should().Be(position);
     }
+
+    public static void ShouldBeDestroyed(this Entity entity, bool expected)
+    {
+        entity.isDestroy.Should().Be(expected, "entity " + entity + " should " + (expected ? "" : "not ") + "be destroyed");
+    }
+
+    public static void ShouldBeHidden(this Entity entity, bool expected)
+    {
+        entity.isDestroy.Should().Be(expected, "entity " + entity + " should " + (expected ? "" : "not ") + "be hidden");
+    }
 }

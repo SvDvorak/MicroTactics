@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Assets;
 using Entitas;
 using FluentAssertions;
-using Mono.GameMath;
 using Xunit;
 
 namespace MicroTactics.Tests.Features.CreateSquad
@@ -120,27 +118,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
             var selectedIndicator = _pool.GetEntities(Matcher.Parent).SingleEntity();
             selectedIndicator.ShouldHaveParent(Units.SingleEntity());
             selectedIndicator.ShouldHaveResource(Res.SelectedIndicator);
-        }
-
-        [Fact]
-        public void CreatesASelectionAreaForSquad()
-        {
-            Execute(_squad1);
-
-            var selectionAreaEntity = _pool.GetEntities().SingleEntity();
-            selectionAreaEntity.selectionArea.Parent.Should().Be(_squad1);
-            selectionAreaEntity.resource.Name.Should().Be(Res.SelectionArea);
-        }
-
-        [Fact]
-        public void RemovesExistingSelectionAreaWhenRecreating()
-        {
-            Execute(_squad1);
-            Execute(_squad1);
-
-            var nonDestroyedEntities = _pool.GetEntities().Where(x => !x.isDestroy).ToList();
-            nonDestroyedEntities.Should().HaveCount(1);
-            nonDestroyedEntities.Single().hasSelectionArea.Should().BeTrue("new selection area should have been created");
+            selectedIndicator.ShouldBeHidden(true);
         }
 
         private void Execute(params Entity[] squads)
