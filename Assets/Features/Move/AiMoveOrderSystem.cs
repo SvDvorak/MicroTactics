@@ -7,7 +7,6 @@ public class AiMoveOrderSystem : IExecuteSystem, ISetPool
 {
     private Group _aiSquads;
     private Group _enemies;
-    private int _minimumDistanceWanted = 10;
 
     public void SetPool(Pool pool)
     {
@@ -29,9 +28,10 @@ public class AiMoveOrderSystem : IExecuteSystem, ISetPool
             var fromEnemyToSquad = squadPosition - enemy.position.ToV3();
 
             var enemyDistance = fromEnemyToSquad.Length();
-            if (enemyDistance < _minimumDistanceWanted)
+            var minimumDistanceWanted = squad.ai.SeeingRange/2;
+            if (enemyDistance < minimumDistanceWanted)
             {
-                var moveDirection = fromEnemyToSquad.Normalized() * (_minimumDistanceWanted - enemyDistance);
+                var moveDirection = fromEnemyToSquad.Normalized() * (minimumDistanceWanted - enemyDistance);
                 if (enemyDistance.IsApproximately(0))
                 {
                     moveDirection = new Vector3(1, 0, 0);
