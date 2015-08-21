@@ -22,9 +22,15 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
     {
         foreach (var entity in entities)
         {
+            if (entity.hasReload)
+            {
+                continue;
+            }
+
             var attackDirection = entity.attackOrder.ToV3() - entity.position.ToV3();
             LookAtTarget(entity, attackDirection);
             SpawnArrow(entity, attackDirection);
+            entity.AddReload(5 * Simulation.FrameRate);
 
             entity.RemoveAttackOrder();
         }

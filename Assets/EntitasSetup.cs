@@ -49,6 +49,7 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateSquadAttackOrderSystem())
             .Add(pool.CreateMoveSystem())
             .Add(pool.CreateAttackSystem())
+            .Add(pool.CreateReloadSystem())
 
             .Add(pool.CreateArrowStickToCollidedSystem())
             .Add(pool.CreatePitchFromVelocitySystem())

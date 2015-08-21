@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -99,6 +97,8 @@
     <Compile Include="Assets\Features\Attack\CollisionPublisher.cs" />
     <Compile Include="Assets\Features\Attack\ForceComponent.cs" />
     <Compile Include="Assets\Features\Attack\PitchFromVelocitySystem.cs" />
+    <Compile Include="Assets\Features\Attack\ReloadComponent.cs" />
+    <Compile Include="Assets\Features\Attack\ReloadSystem.cs" />
     <Compile Include="Assets\Features\Attack\RenderAttackArrowSystem.cs" />
     <Compile Include="Assets\Features\Attack\SquadAttackOrderSystem.cs" />
     <Compile Include="Assets\Features\Attack\VelocityComponent.cs" />
@@ -174,6 +174,7 @@
     <Compile Include="Assets\Generated\ApplyForceSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ArrowComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ArrowStickToCollidedSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\Assets.Features.Attack.ReloadSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.CreateSquad.SelectionAreaAddDecoratorSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.CreateSquad.SelectionAreaRemoveDecoratorSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Move.RemoveMoveOrderSystemGeneratedExtension.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Assets\Generated\Pools.cs" />
     <Compile Include="Assets\Generated\PositionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ReadVelocitySystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\ReloadComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RemovePhysicsSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RemoveViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\RenderAttackArrowSystemGeneratedExtension.cs" />

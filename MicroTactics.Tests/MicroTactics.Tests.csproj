@@ -83,6 +83,7 @@
     <Compile Include="Features\AiAttackOrderSystemTests.cs" />
     <Compile Include="Features\AiMoveOrderSystemTests.cs" />
     <Compile Include="Features\CreateSquad\SelectionAreaDecoratorSystemTests.cs" />
+    <Compile Include="Features\ReloadSystemTests.cs" />
     <Compile Include="Features\ShowSelectedIndicatorForSquadSystemTests.cs" />
     <Compile Include="Features\PitchFromVelocitySystemTests.cs" />
     <Compile Include="Features\AttackSystemTests.cs" />

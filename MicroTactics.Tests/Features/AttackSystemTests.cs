@@ -11,6 +11,7 @@ namespace MicroTactics.Tests.Features
     {
         private readonly AttackSystem _sut;
         private readonly TestPool _pool;
+        private readonly Entity _attackingEntity = CreateAttackingEntity();
 
         public AttackSystemTests()
         {
@@ -42,12 +43,12 @@ namespace MicroTactics.Tests.Features
         {
             var lookingToTheRight = Quaternion.LookAt(Vector3.Right);
             var positionToTheRight = new Vector3(20, 0, 0);
-            var attackingEntity = new TestEntity()
-                .AddPosition(10, 0, 0)
-                .AddRotation(lookingToTheRight)
-                .AddAttackOrder(positionToTheRight);
+            _attackingEntity
+                .ReplacePosition(10, 0, 0)
+                .ReplaceRotation(lookingToTheRight)
+                .ReplaceAttackOrder(positionToTheRight);
 
-            _sut.Execute(attackingEntity.AsList());
+            _sut.Execute(_attackingEntity.AsList());
 
             var arrowEntity = GetSingleArrow();
             var expectedPosition = new Vector3(10, 4, 0);
@@ -63,9 +64,7 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void AddsResourceToArrow()
         {
-            var attackingEntity = CreateAttackingEntity();
-
-            _sut.Execute(attackingEntity.AsList());
+            _sut.Execute(_attackingEntity.AsList());
 
             GetSingleArrow().hasResource.Should().BeTrue("arrow should have resource");
             GetSingleArrow().resource.Name.Should().Be("Arrow");
@@ -74,19 +73,38 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void RemovesAttackOrderAfterHavingFired()
         {
-            var attackingEntity = CreateAttackingEntity();
-            _sut.Execute(attackingEntity.AsList());
+            _sut.Execute(_attackingEntity.AsList());
 
-            attackingEntity.hasAttackOrder.Should().BeFalse("should not have attack order after firing");
+            _attackingEntity.hasAttackOrder.Should().BeFalse("should not have attack order after firing");
         }
 
         [Fact]
         public void RotatesTowardsTarget()
         {
-            var attackingEntity = CreateAttackingEntity().ReplaceAttackOrder(10, 0, 0);
-            _sut.Execute(attackingEntity.AsList());
+            _attackingEntity.ReplaceAttackOrder(10, 0, 0);
 
-            attackingEntity.rotation.ToQ().ShouldBeCloseTo(Quaternion.LookAt(Vector3.Right));
+            _sut.Execute(_attackingEntity.AsList());
+
+            _attackingEntity.rotation.ToQ().ShouldBeCloseTo(Quaternion.LookAt(Vector3.Right));
+        }
+
+        [Fact]
+        public void StartsReloadingAfterFiring()
+        {
+            _sut.Execute(_attackingEntity.AsList());
+
+            _attackingEntity.hasReload.Should().BeTrue();
+            _attackingEntity.reload.FramesLeft.Should().Be(5 * Simulation.FrameRate);
+        }
+
+        [Fact]
+        public void DoesNotFireIfAlreadyReloading()
+        {
+            _attackingEntity.AddReload(0);
+
+            _sut.Execute(_attackingEntity.AsList());
+
+            _pool.GetEntities().Should().HaveCount(0);
         }
 
         private Entity GetSingleArrow()

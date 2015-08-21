@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets;
 using Entitas;
 
 public class SquadAttackOrderSystem : IReactiveSystem, IEnsureComponents
@@ -22,10 +23,7 @@ public class SquadAttackOrderSystem : IReactiveSystem, IEnsureComponents
             var unit = unitsInSquad[i];
             var squadPosition = UnitInSquadPositioner.GetPosition(squadEntity.boxFormation, i);
 
-            unit.ReplaceAttackOrder(
-                squadPosition.X + squadEntity.attackOrder.x,
-                squadPosition.Y + squadEntity.attackOrder.y,
-                squadPosition.Z + squadEntity.attackOrder.z);
+            unit.ReplaceAttackOrder(squadPosition + squadEntity.attackOrder.ToV3());
         }
     }
 }
