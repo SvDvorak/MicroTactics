@@ -1,15 +1,32 @@
-﻿using Entitas;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Entitas;
 
 public class ChildComponent : IComponent
 {
-    public Entity Value;
+    public List<Entity> Value;
 }
 
 public static class EntityChildExtensions
 {
-    public static void SetChildTwoWay(this Entity entity, Entity child)
+    private static Entity AddChild(this Entity parent, Entity child)
     {
-        entity.AddChild(child);
-        child.AddParent(entity);
+        if (parent.hasChild)
+        {
+            parent.ReplaceChild(parent.child.Value.Concat(child.AsList()).ToList());
+        }
+        else
+        {
+            parent.AddChild(child.AsList());
+        }
+
+        return parent;
+    }
+
+    public static Entity AddChildTwoWay(this Entity parent, Entity child)
+    {
+        parent.AddChild(child);
+        child.AddParent(parent);
+        return parent;
     }
 }

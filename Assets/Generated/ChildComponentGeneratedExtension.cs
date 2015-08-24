@@ -12,13 +12,13 @@ namespace Entitas {
             _childComponentPool.Clear();
         }
 
-        public Entity AddChild(Entitas.Entity newValue) {
+        public Entity AddChild(System.Collections.Generic.List<Entitas.Entity> newValue) {
             var component = _childComponentPool.Count > 0 ? _childComponentPool.Pop() : new ChildComponent();
             component.Value = newValue;
             return AddComponent(ComponentIds.Child, component);
         }
 
-        public Entity ReplaceChild(Entitas.Entity newValue) {
+        public Entity ReplaceChild(System.Collections.Generic.List<Entitas.Entity> newValue) {
             var previousComponent = hasChild ? child : null;
             var component = _childComponentPool.Count > 0 ? _childComponentPool.Pop() : new ChildComponent();
             component.Value = newValue;

@@ -49,7 +49,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
     {
         public static void ShouldBeSelectionAreaFor(this Entity selectionAreaEntity, Entity entity)
         {
-            entity.child.Value.Should().Be(selectionAreaEntity);
+            entity.child.Value.ShouldAllBeEquivalentTo(selectionAreaEntity.AsList());
             selectionAreaEntity.selectionArea.Parent.Should().Be(entity);
         }
     }
@@ -57,8 +57,8 @@ namespace MicroTactics.Tests.Features.CreateSquad
     public class SelectionAreaRemoveDecoratorSystemTests
     {
         private readonly SelectionAreaRemoveDecoratorSystem _sut = new SelectionAreaRemoveDecoratorSystem();
-        private readonly Entity _squad1 = new TestEntity().AddSquad(0).AddChild(new TestEntity());
-        private readonly Entity _squad2 = new TestEntity().AddSquad(1).AddChild(new TestEntity());
+        private readonly Entity _squad1 = CreateSquadWithSelectionArea();
+        private readonly Entity _squad2 = CreateSquadWithSelectionArea();
 
         [Fact]
         public void TriggersOnRemovedSquadOrPlayer()
@@ -74,8 +74,14 @@ namespace MicroTactics.Tests.Features.CreateSquad
         {
             Execute(_squad1, _squad2);
 
-            _squad1.child.Value.ShouldBeDestroyed(true);
-            _squad2.child.Value.ShouldBeDestroyed(true);
+            _squad1.child.Value.First().ShouldBeDestroyed(true);
+            _squad2.child.Value.First().ShouldBeDestroyed(true);
+        }
+
+        private static Entity CreateSquadWithSelectionArea()
+        {
+            Entity selectionArea = new TestEntity();
+            return new TestEntity().AddSquad(0).AddChildTwoWay(selectionArea);
         }
 
         private void Execute(params Entity[] squads)

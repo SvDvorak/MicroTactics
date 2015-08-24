@@ -30,7 +30,7 @@ namespace Assets.Features.CreateSquad
                 .AddSelectionArea(entity)
                 .AddResource(Res.SelectionArea);
 
-            entity.SetChildTwoWay(selectionArea);
+            entity.AddChildTwoWay(selectionArea);
         }
     }
 
@@ -43,7 +43,10 @@ namespace Assets.Features.CreateSquad
         {
             foreach (var entity in entities)
             {
-                entity.child.Value.IsDestroy(true);
+                foreach (var child in entity.child.Value)
+                {
+                    child.IsDestroy(true);
+                }
             }
         }
     }

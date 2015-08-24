@@ -1,18 +1,17 @@
-﻿using Assets;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Assets;
 using Entitas;
 
-public class RenderRotationSystem : IExecuteSystem, ISetPool
+public class RenderRotationSystem : IReactiveSystem, IEnsureComponents
 {
-    private Group _renderables;
+    public IMatcher trigger { get { return Matcher.Rotation; } }
+    public IMatcher ensureComponents { get { return Matcher.View; } }
+    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
 
-    public void SetPool(Pool pool)
+    public void Execute(List<Entity> entities)
     {
-        _renderables = pool.GetGroup(Matcher.AllOf(Matcher.Rotation, Matcher.View));
-    }
-
-    public void Execute()
-    {
-        foreach (var e in _renderables.GetEntities())
+        foreach (var e in entities)
         {
             var transform = e.view.GameObject.transform;
             transform.rotation = e.rotation.ToUnityQ();

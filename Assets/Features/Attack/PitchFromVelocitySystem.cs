@@ -1,4 +1,5 @@
-﻿using Assets;
+﻿using System.Linq;
+using Assets;
 using Entitas;
 using Mono.GameMath;
 
@@ -13,7 +14,7 @@ public class PitchFromVelocitySystem : IExecuteSystem, ISetPool
 
     public void Execute()
     {
-        foreach (var arrow in _arrowGroup.GetEntities())
+        foreach (var arrow in _arrowGroup.GetEntities().Where(x => !x.hasCollision))
         {
             var velocity = arrow.velocity.ToV3();
             if (!velocity.LengthSquared().IsApproximately(0))

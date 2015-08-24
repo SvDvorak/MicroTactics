@@ -42,8 +42,7 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
                 .AddResource(Res.SelectedIndicator)
                 .IsHidden(true);
 
-            unit.AddChild(selectedIndicator);
-            selectedIndicator.AddParent(unit);
+            unit.AddChildTwoWay(selectedIndicator);
         }
     }
 
@@ -53,7 +52,10 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
         unitsInSquad.Foreach(x =>
             {
                 x.IsDestroy(true);
-                x.child.Value.IsDestroy(true);
+                foreach (var child in x.child.Value)
+                {
+                    child.IsDestroy(true);
+                }
             });
     }
 }

@@ -12,16 +12,18 @@ namespace Entitas {
             _collisionComponentPool.Clear();
         }
 
-        public Entity AddCollision(Entitas.Entity newCollidedWith) {
+        public Entity AddCollision(Entitas.Entity newCollidedWith, Mono.GameMath.Vector3 newRelativeVelocity) {
             var component = _collisionComponentPool.Count > 0 ? _collisionComponentPool.Pop() : new CollisionComponent();
             component.CollidedWith = newCollidedWith;
+            component.RelativeVelocity = newRelativeVelocity;
             return AddComponent(ComponentIds.Collision, component);
         }
 
-        public Entity ReplaceCollision(Entitas.Entity newCollidedWith) {
+        public Entity ReplaceCollision(Entitas.Entity newCollidedWith, Mono.GameMath.Vector3 newRelativeVelocity) {
             var previousComponent = hasCollision ? collision : null;
             var component = _collisionComponentPool.Count > 0 ? _collisionComponentPool.Pop() : new CollisionComponent();
             component.CollidedWith = newCollidedWith;
+            component.RelativeVelocity = newRelativeVelocity;
             ReplaceComponent(ComponentIds.Collision, component);
             if (previousComponent != null) {
                 _collisionComponentPool.Push(previousComponent);

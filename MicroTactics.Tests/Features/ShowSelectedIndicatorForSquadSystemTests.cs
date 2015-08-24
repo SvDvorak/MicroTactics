@@ -69,7 +69,7 @@ namespace MicroTactics.Tests.Features
 
         private static Entity CreateUnitsAndCacheFor(params Entity[] selectedIndicators)
         {
-            var units = selectedIndicators.Select(x => new TestEntity().AddChild(x)).ToList();
+            var units = selectedIndicators.Select(x => new TestEntity().AddChildTwoWay(x)).ToList();
             return new TestEntity().AddUnitsCache(units);
         }
     }

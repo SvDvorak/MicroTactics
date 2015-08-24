@@ -14,7 +14,7 @@ public static class EntityExtensions
     public static void ShouldHaveParent(this Entity child, Entity parent)
     {
         child.parent.Value.Should().Be(parent);
-        parent.child.Value.Should().Be(child);
+        parent.child.Value.ShouldAllBeEquivalentTo(child.AsList());
     }
 
     public static void ShouldHaveMovement(this Entity entity, float moveSpeed)

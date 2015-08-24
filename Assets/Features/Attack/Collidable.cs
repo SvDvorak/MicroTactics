@@ -1,4 +1,6 @@
-﻿using Entitas;
+﻿using System.Linq;
+using Assets;
+using Entitas;
 using UnityEngine;
 
 public class Collidable : MonoBehaviour
@@ -18,6 +20,6 @@ public class Collidable : MonoBehaviour
             return;
         }
 
-        Entity.AddCollision(otherPublisher.Entity);
+        Entity.AddCollision(otherPublisher.Entity, collision.relativeVelocity.ToV3());
     }
 }
