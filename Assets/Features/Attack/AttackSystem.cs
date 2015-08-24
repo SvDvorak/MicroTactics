@@ -4,6 +4,7 @@ using Assets;
 using Entitas;
 using Mono.GameMath;
 using Mathf = UnityEngine.Mathf;
+using Random = Assets.Random;
 
 public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
 {
@@ -30,7 +31,7 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
             var attackDirection = entity.attackOrder.ToV3() - entity.position.ToV3();
             LookAtTarget(entity, attackDirection);
             SpawnArrow(entity, attackDirection);
-            entity.AddReload(5 * Simulation.FrameRate);
+            entity.AddReload(5*Simulation.FrameRate);
 
             entity.RemoveAttackOrder();
         }
@@ -45,6 +46,7 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
     {
         var firePosition = entity.position.ToV3() + new Vector3(0, 4, 0);
         var force = CalculateForce(firePosition.Y, entity.rotation, attackDirection.Length(), 1);
+        force = AddRandomAimingVariation(force);
 
         _pool.CreateEntity()
             .AddArrow(firePosition, entity.rotation.ToQ(), force)
@@ -55,17 +57,37 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
             .AddVelocity(attackDirection);
     }
 
-    private static Vector3 CalculateForce(float elevation, QuaternionClass targetRotation, float targetDistance, float mass)
+    private static Vector3 CalculateForce(
+        float elevation,
+        QuaternionClass targetRotation,
+        float targetDistance,
+        float mass)
     {
         // Algorithm taken from http://physics.stackexchange.com/questions/27992/solving-for-initial-velocity-required-to-launch-a-projectile-to-a-given-destinat
         const int fireAngle = 45;
         var verticalAimRotation = Quaternion.CreateFromAxisAngle(Vector3.Left, -fireAngle);
-        var fireDirection = targetRotation.ToQ() * verticalAimRotation * Vector3.Forward;
+        var fireDirection = targetRotation.ToQ()*verticalAimRotation*Vector3.Forward;
         var inRadians = MathHelper.ToRadians(fireAngle);
-        var requiredVelocity = 1 / Mathf.Cos(inRadians) *
+        var requiredVelocity = 1/Mathf.Cos(inRadians)*
                                Mathf.Sqrt(
-                                   (0.5f * Simulation.Gravity * targetDistance * targetDistance) /
-                                   (targetDistance * Mathf.Tan(inRadians) + elevation));
-        return fireDirection * requiredVelocity * Simulation.FrameRate * mass;
+                                   (0.5f*Simulation.Gravity*targetDistance*targetDistance)/
+                                   (targetDistance*Mathf.Tan(inRadians) + elevation));
+        return fireDirection*requiredVelocity*Simulation.FrameRate*mass;
+    }
+
+    private Vector3 AddRandomAimingVariation(Vector3 force)
+    {
+        var normalizedForce = force.Normalized();
+        var side = normalizedForce.Cross(Vector3.Up);
+        var up = side.Cross(normalizedForce);
+
+        var x = (Random.Instance.Value - 0.5f)*Mathf.Deg2Rad*5;
+        var y = (Random.Instance.Value - 0.5f)*Mathf.Deg2Rad*5;
+        var perturbedDirection = Mathf.Sin(y)*(Mathf.Cos(x)*side + Mathf.Sin(x)*up) + Mathf.Cos(y)*normalizedForce;
+        return perturbedDirection*force.Length();
+        //Quaternion.CreateFromAxisAngle(side, 10);
+        //var angle = Mathf.Cos(Mathf.PI/4);
+        //var sinT = Mathf.Sqrt(1-0.5f*0.5f);
+        //return new Vector3(sinT*Mathf.Cos(angle), sinT*Mathf.Sin(angle), 0.5f);
     }
 }

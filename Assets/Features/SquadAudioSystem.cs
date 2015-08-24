@@ -17,8 +17,8 @@ namespace Assets.Features
 
                 if (!audioSource.isPlaying && entity.hasMoveOrder)
                 {
-                    audioSource.clip = entity.audio.SoundOptions[Random.Range(0, entity.audio.SoundOptions.Count)];
-                    audioSource.pitch = Random.Range(0.8f, 1.1f);
+                    audioSource.clip = entity.audio.SoundOptions[UnityEngine.Random.Range(0, entity.audio.SoundOptions.Count)];
+                    audioSource.pitch = UnityEngine.Random.Range(0.8f, 1.1f);
                     audioSource.Play();
                 }
                 else if (!entity.hasMoveOrder)

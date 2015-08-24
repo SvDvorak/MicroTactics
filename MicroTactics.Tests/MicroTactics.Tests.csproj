@@ -100,6 +100,7 @@
     <Compile Include="Features\SquadCenterPositionSystemTests.cs" />
     <Compile Include="Features\SquadMoveOrderSystemTests.cs" />
     <Compile Include="Features\ArrowStickToCollidedSystemTests.cs" />
+    <Compile Include="Features\TestRandom.cs" />
     <Compile Include="Features\UnitsCacheSystemTests.cs" />
     <Compile Include="Features\QuaternionCloseToExtensions.cs" />
     <Compile Include="FloatExtensionsTests.cs" />

@@ -2,8 +2,11 @@
 using Assets;
 using Entitas;
 using FluentAssertions;
-using Mono.GameMath;
+using UnityEngine;
 using Xunit;
+using Quaternion = Mono.GameMath.Quaternion;
+using Random = Assets.Random;
+using Vector3 = Mono.GameMath.Vector3;
 
 namespace MicroTactics.Tests.Features
 {
@@ -12,12 +15,14 @@ namespace MicroTactics.Tests.Features
         private readonly AttackSystem _sut;
         private readonly TestPool _pool;
         private readonly Entity _attackingEntity = CreateAttackingEntity();
+        private const float NoArrowVariationRandom = 0.5f;
 
         public AttackSystemTests()
         {
             _sut = new AttackSystem();
             _pool = new TestPool();
             _sut.SetPool(_pool);
+            SetRandom(NoArrowVariationRandom);
         }
 
         [Fact]
@@ -59,6 +64,21 @@ namespace MicroTactics.Tests.Features
 
             arrowEntity.position.ToV3().ShouldBeCloseTo(expectedPosition);
             arrowEntity.rotation.ToQ().ShouldBeCloseTo(lookingToTheRight);
+        }
+
+        [Fact]
+        public void AddsARandomVariationWhenFiringArrow()
+        {
+            SetRandom(1);
+            var positionToTheRight = new Vector3(10, 0, 0);
+            _attackingEntity
+                .ReplaceAttackOrder(positionToTheRight);
+
+            _sut.Execute(_attackingEntity.AsList());
+
+            var arrowEntity = GetSingleArrow();
+            var expectedForce = new Vector3(263.1658f, 427.225f, 11.49776f);
+            arrowEntity.arrow.Force.ShouldBeCloseTo(expectedForce);
         }
 
         [Fact]
@@ -105,6 +125,12 @@ namespace MicroTactics.Tests.Features
             _sut.Execute(_attackingEntity.AsList());
 
             _pool.GetEntities().Should().HaveCount(0);
+        }
+
+        private static void SetRandom(float value)
+        {
+            var random = new TestRandom { Value = value };
+            Random.Instance = random;
         }
 
         private Entity GetSingleArrow()
