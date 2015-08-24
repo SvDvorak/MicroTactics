@@ -19,7 +19,7 @@ namespace MicroTactics.Tests.Features
             _squad = _testPool.CreateEntity()
                 .AddPosition(0, 0, 0)
                 .AddSquad(0)
-                .AddAi(0);
+                .AddAi(1);
         }
 
         [Fact]
@@ -31,10 +31,12 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void DoesNotGiveMoveOrderIfEnemyIsFarAway()
+        public void DoesNotGiveMoveOrderIfEnemyIsOutsideHalfOfSeeingRange()
         {
+            _squad.ReplaceAi(1);
+
             _testPool.CreateEntity()
-                .AddPosition(float.PositiveInfinity, 0, 0)
+                .AddPosition(0.6f, 0, 0)
                 .IsEnemy(true);
 
             _sut.Execute();
@@ -57,12 +59,14 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void MovesRemainingDistanceToMinimumEnemyDistance()
         {
-            _squad.ReplacePosition(4, 0, 0);
+            _squad
+                .ReplaceAi(20)
+                .ReplacePosition(4, 0, 0);
 
             var squad2 = _testPool.CreateEntity()
                 .AddPosition(5, 0, 3)
                 .AddSquad(1)
-                .AddAi(0);
+                .AddAi(20);
 
             _testPool.CreateEntity()
                 .AddPosition(5, 0, 0)
