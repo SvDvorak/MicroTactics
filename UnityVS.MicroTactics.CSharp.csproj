@@ -96,7 +96,7 @@
     <Compile Include="Assets\Features\Attack\AttackOrderComponent.cs" />
     <Compile Include="Assets\Features\Attack\AttackSystem.cs" />
     <Compile Include="Assets\Features\Attack\CollisionComponent.cs" />
-    <Compile Include="Assets\Features\Attack\CollisionPublisher.cs" />
+    <Compile Include="Assets\Features\Attack\Collidable.cs" />
     <Compile Include="Assets\Features\Attack\ForceComponent.cs" />
     <Compile Include="Assets\Features\Attack\PitchFromVelocitySystem.cs" />
     <Compile Include="Assets\Features\Attack\ReloadComponent.cs" />

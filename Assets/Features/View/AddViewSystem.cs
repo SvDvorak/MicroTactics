@@ -70,7 +70,7 @@ public class AddViewSystem : IReactiveSystem
         {
             if (!rigidbody.isKinematic)
             {
-                view.AddComponent<CollisionPublisher>().SetEntity(entity);
+                view.AddComponent<Collidable>().SetEntity(entity);
             }
             entity.AddPhysics(rigidbody);
         }

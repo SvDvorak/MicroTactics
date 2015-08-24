@@ -56,29 +56,22 @@ namespace MicroTactics.Tests.Features
             _sut.Execute(_attackingEntity.AsList());
 
             var arrowEntity = GetSingleArrow();
-            var expectedPosition = new Vector3(10, 4, 0);
-            var expectedForce = new Vector3(263.8441f, 427.368f, 0);
-            arrowEntity.position.ToV3().ShouldBeCloseTo(expectedPosition);
+            arrowEntity.position.ToV3().ShouldBeCloseTo(new Vector3(10, 4, 0));
             arrowEntity.rotation.ToQ().ShouldBeCloseTo(lookingToTheRight);
-            arrowEntity.force.ToV3().ShouldBeCloseTo(expectedForce);
-
-            arrowEntity.position.ToV3().ShouldBeCloseTo(expectedPosition);
-            arrowEntity.rotation.ToQ().ShouldBeCloseTo(lookingToTheRight);
+            arrowEntity.force.ToV3().ShouldBeCloseTo(new Vector3(263.8441f, 427.368f, 0));
         }
 
         [Fact]
         public void AddsARandomVariationWhenFiringArrow()
         {
             SetRandom(1);
-            var positionToTheRight = new Vector3(10, 0, 0);
             _attackingEntity
-                .ReplaceAttackOrder(positionToTheRight);
+                .ReplaceAttackOrder(new Vector3(10, 0, 0));
 
             _sut.Execute(_attackingEntity.AsList());
 
             var arrowEntity = GetSingleArrow();
-            var expectedForce = new Vector3(263.1658f, 427.225f, 11.49776f);
-            arrowEntity.force.ToV3().ShouldBeCloseTo(expectedForce);
+            arrowEntity.force.ToV3().ShouldBeCloseTo(new Vector3(263.1658f, 427.225f, 11.49776f));
         }
 
         [Fact]

@@ -1,7 +1,7 @@
 ﻿using Entitas;
 using UnityEngine;
 
-public class CollisionPublisher : MonoBehaviour
+public class Collidable : MonoBehaviour
 {
     public Entity Entity { get; private set; }
 
@@ -12,7 +12,7 @@ public class CollisionPublisher : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        var otherPublisher = collision.collider.GetComponent<CollisionPublisher>();
+        var otherPublisher = collision.collider.GetComponent<Collidable>();
         if (otherPublisher == null || Entity == null || Entity.hasCollision)
         {
             return;
