@@ -24,7 +24,7 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void RemovesPhysicsFromCollidedEntities()
         {
-            var arrow = new TestEntity().AddArrow(new Vector3(), new Quaternion(), new Vector3()).AddPhysics(null);
+            var arrow = new TestEntity().IsArrow(true).AddPhysics(null);
             _sut.Execute(arrow.AsList());
 
             arrow.hasPhysics.Should().BeFalse("should have removed physics component");

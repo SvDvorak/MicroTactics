@@ -49,7 +49,7 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
         force = AddRandomAimingVariation(force);
 
         _pool.CreateEntity()
-            .AddArrow(firePosition, entity.rotation.ToQ(), force)
+            .IsArrow(true)
             .AddResource(Res.Arrow)
             .AddPosition(firePosition)
             .AddRotation(entity.rotation.ToQ())
@@ -77,6 +77,7 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
 
     private Vector3 AddRandomAimingVariation(Vector3 force)
     {
+        // Algorithm taken from http://math.stackexchange.com/questions/56784/generate-a-random-direction-within-a-cone
         var normalizedForce = force.Normalized();
         var side = normalizedForce.Cross(Vector3.Up);
         var up = side.Cross(normalizedForce);
@@ -85,9 +86,5 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
         var y = (Random.Instance.Value - 0.5f)*Mathf.Deg2Rad*5;
         var perturbedDirection = Mathf.Sin(y)*(Mathf.Cos(x)*side + Mathf.Sin(x)*up) + Mathf.Cos(y)*normalizedForce;
         return perturbedDirection*force.Length();
-        //Quaternion.CreateFromAxisAngle(side, 10);
-        //var angle = Mathf.Cos(Mathf.PI/4);
-        //var sinT = Mathf.Sqrt(1-0.5f*0.5f);
-        //return new Vector3(sinT*Mathf.Cos(angle), sinT*Mathf.Sin(angle), 0.5f);
     }
 }

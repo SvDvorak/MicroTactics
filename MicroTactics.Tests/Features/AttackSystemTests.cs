@@ -39,8 +39,8 @@ namespace MicroTactics.Tests.Features
             _sut.Execute(new [] { CreateAttackingEntity(), CreateAttackingEntity() }.ToList());
 
             var poolEntities = _pool.GetEntities();
-            poolEntities.First().hasArrow.Should().Be(true);
-            poolEntities.Second().hasArrow.Should().Be(true);
+            poolEntities.First().isArrow.Should().Be(true);
+            poolEntities.Second().isArrow.Should().Be(true);
         }
 
         [Fact]
@@ -58,9 +58,9 @@ namespace MicroTactics.Tests.Features
             var arrowEntity = GetSingleArrow();
             var expectedPosition = new Vector3(10, 4, 0);
             var expectedForce = new Vector3(263.8441f, 427.368f, 0);
-            arrowEntity.arrow.Position.ShouldBeCloseTo(expectedPosition);
-            arrowEntity.arrow.Rotation.ShouldBeCloseTo(lookingToTheRight);
-            arrowEntity.arrow.Force.ShouldBeCloseTo(expectedForce);
+            arrowEntity.position.ToV3().ShouldBeCloseTo(expectedPosition);
+            arrowEntity.rotation.ToQ().ShouldBeCloseTo(lookingToTheRight);
+            arrowEntity.force.ToV3().ShouldBeCloseTo(expectedForce);
 
             arrowEntity.position.ToV3().ShouldBeCloseTo(expectedPosition);
             arrowEntity.rotation.ToQ().ShouldBeCloseTo(lookingToTheRight);
@@ -78,7 +78,7 @@ namespace MicroTactics.Tests.Features
 
             var arrowEntity = GetSingleArrow();
             var expectedForce = new Vector3(263.1658f, 427.225f, 11.49776f);
-            arrowEntity.arrow.Force.ShouldBeCloseTo(expectedForce);
+            arrowEntity.force.ToV3().ShouldBeCloseTo(expectedForce);
         }
 
         [Fact]
@@ -136,7 +136,7 @@ namespace MicroTactics.Tests.Features
         private Entity GetSingleArrow()
         {
             var arrowEntity = _pool.GetEntities().SingleEntity();
-            arrowEntity.hasArrow.Should().Be(true);
+            arrowEntity.isArrow.Should().Be(true);
             return arrowEntity;
         }
 
