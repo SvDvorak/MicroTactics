@@ -13,31 +13,32 @@ public static class ComponentIds {
     public const int BoxFormation = 7;
     public const int Child = 8;
     public const int Collision = 9;
-    public const int Destroy = 10;
-    public const int Enemy = 11;
-    public const int Force = 12;
-    public const int Ground = 13;
-    public const int Hidden = 14;
-    public const int Input = 15;
-    public const int MoveInput = 16;
-    public const int Movement = 17;
-    public const int MoveOrder = 18;
-    public const int Parent = 19;
-    public const int Physics = 20;
-    public const int Player = 21;
-    public const int Position = 22;
-    public const int Reload = 23;
-    public const int Resource = 24;
-    public const int Rotation = 25;
-    public const int Selected = 26;
-    public const int SelectionArea = 27;
-    public const int Squad = 28;
-    public const int Unit = 29;
-    public const int UnitsCache = 30;
-    public const int Velocity = 31;
-    public const int View = 32;
+    public const int DelayedDestroy = 10;
+    public const int Destroy = 11;
+    public const int Enemy = 12;
+    public const int Force = 13;
+    public const int Ground = 14;
+    public const int Hidden = 15;
+    public const int Input = 16;
+    public const int MoveInput = 17;
+    public const int Movement = 18;
+    public const int MoveOrder = 19;
+    public const int Parent = 20;
+    public const int Physics = 21;
+    public const int Player = 22;
+    public const int Position = 23;
+    public const int Reload = 24;
+    public const int Resource = 25;
+    public const int Rotation = 26;
+    public const int Selected = 27;
+    public const int SelectionArea = 28;
+    public const int Squad = 29;
+    public const int Unit = 30;
+    public const int UnitsCache = 31;
+    public const int Velocity = 32;
+    public const int View = 33;
 
-    public const int TotalComponents = 33;
+    public const int TotalComponents = 34;
 
     static readonly string[] components = {
         "Ai",
@@ -50,6 +51,7 @@ public static class ComponentIds {
         "BoxFormation",
         "Child",
         "Collision",
+        "DelayedDestroy",
         "Destroy",
         "Enemy",
         "Force",
@@ -90,6 +92,7 @@ public static class ComponentIds {
         { typeof (BoxFormationComponent), BoxFormation },
         { typeof (ChildComponent), Child },
         { typeof (CollisionComponent), Collision },
+        { typeof (DelayedDestroyComponent), DelayedDestroy },
         { typeof (DestroyComponent), Destroy },
         { typeof (EnemyComponent), Enemy },
         { typeof (ForceComponent), Force },

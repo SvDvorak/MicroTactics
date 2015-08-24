@@ -62,6 +62,7 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateAnimateUnitSystem())
             .Add(pool.CreateSquadAudioSystem())
 
+            .Add(pool.CreateDelayedDestroySystem())
             .Add(pool.CreateSelectionAreaRemoveDecoratorSystem())
             .Add(pool.CreateRemoveViewSystem())
             .Add(pool.CreateRemovePhysicsSystem())

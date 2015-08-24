@@ -16,7 +16,7 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void CountsDownReloadTime()
+        public void CountsDownReloadFrames()
         {
             var reloadingEntity1 = _pool.CreateEntity().AddReload(2);
             var reloadingEntity2 = _pool.CreateEntity().AddReload(3);

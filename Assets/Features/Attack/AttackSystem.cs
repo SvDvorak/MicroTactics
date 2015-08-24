@@ -54,7 +54,8 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
             .AddPosition(firePosition)
             .AddRotation(entity.rotation.ToQ())
             .AddForce(force)
-            .AddVelocity(attackDirection);
+            .AddVelocity(attackDirection)
+            .AddDelayedDestroy(20*Simulation.FrameRate);
     }
 
     private static Vector3 CalculateForce(

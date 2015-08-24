@@ -79,8 +79,15 @@ namespace MicroTactics.Tests.Features
         {
             _sut.Execute(_attackingEntity.AsList());
 
-            GetSingleArrow().hasResource.Should().BeTrue("arrow should have resource");
-            GetSingleArrow().resource.Name.Should().Be("Arrow");
+            GetSingleArrow().ShouldHaveResource("Arrow");
+        }
+
+        [Fact]
+        public void AddsDelayedDestroyToArrow()
+        {
+            _sut.Execute(_attackingEntity.AsList());
+
+            GetSingleArrow().ShouldHaveDelayedDestroy(20*Simulation.FrameRate);
         }
 
         [Fact]

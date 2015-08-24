@@ -58,6 +58,12 @@ public static class EntityExtensions
         entity.isDestroy.Should().Be(expected, "entity " + entity + " should " + (expected ? "" : "not ") + "be destroyed");
     }
 
+    public static void ShouldHaveDelayedDestroy(this Entity entity, int frames)
+    {
+        entity.hasDelayedDestroy.Should().BeTrue("entity should have a delayed destroy");
+        entity.delayedDestroy.Frames.Should().Be(frames);
+    }
+
     public static void ShouldBeHidden(this Entity entity, bool expected)
     {
         entity.isDestroy.Should().Be(expected, "entity " + entity + " should " + (expected ? "" : "not ") + "be hidden");

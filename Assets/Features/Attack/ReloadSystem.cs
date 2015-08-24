@@ -15,14 +15,11 @@ namespace Assets.Features.Attack
         {
             foreach (var reloadable in _reloadables.GetEntities())
             {
-                var newFramesLeft = reloadable.reload.FramesLeft - 1;
-                if (newFramesLeft == 0)
+                reloadable.ReplaceReload(reloadable.reload.FramesLeft - 1);
+
+                if (reloadable.reload.FramesLeft == 0)
                 {
                     reloadable.RemoveReload();
-                }
-                else
-                {
-                    reloadable.ReplaceReload(newFramesLeft);
                 }
             }
         }
