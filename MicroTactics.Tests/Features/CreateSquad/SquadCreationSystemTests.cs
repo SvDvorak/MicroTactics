@@ -25,15 +25,9 @@ namespace MicroTactics.Tests.Features.CreateSquad
         }
 
         [Fact]
-        public void MatchesSquadComponents()
+        public void ListensForAddedSquadOrFormationComponents()
         {
-            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.Squad, Matcher.BoxFormation));
-        }
-
-        [Fact]
-        public void ListensForEntitiesAdded()
-        {
-            _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
+            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.Squad, Matcher.BoxFormation).OnEntityAdded());
         }
 
         [Fact]

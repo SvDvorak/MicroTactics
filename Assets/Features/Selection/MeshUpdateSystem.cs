@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Entitas;
 using UnityEngine;
@@ -6,8 +6,8 @@ using UnityEngine;
 public class MeshUpdateSystem : IReactiveSystem
 {
     private readonly Assets.Features.Triangulator _triangulator;
-    public IMatcher trigger { get { return Matcher.AllOf(Matcher.BoundingMesh, Matcher.View); } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+    public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.BoundingMesh, Matcher.View).OnEntityAdded(); } }
+
 
     public MeshUpdateSystem()
     {

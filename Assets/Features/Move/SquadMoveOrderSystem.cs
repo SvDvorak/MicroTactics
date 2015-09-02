@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Assets;
 using Entitas;
@@ -6,8 +6,8 @@ using Mono.GameMath;
 
 public class SquadMoveOrderSystem : IReactiveSystem
 {
-    public IMatcher trigger { get { return Matcher.AllOf(Matcher.UnitsCache, Matcher.BoxFormation, Matcher.MoveOrder); } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+    public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.UnitsCache, Matcher.BoxFormation, Matcher.MoveOrder).OnEntityAdded(); } }
+
 
     public void Execute(List<Entity> entities)
     {

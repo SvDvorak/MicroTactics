@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Entitas;
 using Mono.GameMath;
@@ -14,9 +14,9 @@ namespace Assets.Features.Selection
         private bool _isDoingDrag;
         private bool _leftState;
 
-        public IMatcher trigger { get { return Matcher.Input; } }
+        public TriggerOnEvent trigger { get { return Matcher.Input.OnEntityAdded(); } }
         public IMatcher ensureComponents { get { return Matcher.Selected; } }
-        public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+
 
         public void SetPool(Pool pool)
         {

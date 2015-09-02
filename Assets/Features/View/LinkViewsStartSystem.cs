@@ -3,7 +3,7 @@ using Assets;
 using Entitas;
 using UnityEngine;
 
-public class LinkViewsStartSystem : IStartSystem, ISetPool
+public class LinkViewsStartSystem : IInitializeSystem, ISetPool
 {
     private Pool _pool;
 
@@ -12,7 +12,7 @@ public class LinkViewsStartSystem : IStartSystem, ISetPool
         _pool = pool;
     }
 
-    public void Start()
+    public void Initialize()
     {
         var componentContainers = Object.FindObjectsOfType<ComponentContainer>();
         foreach (var componentContainer in componentContainers)

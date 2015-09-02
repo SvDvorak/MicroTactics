@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +8,8 @@ public class DestroySystem : IReactiveSystem, ISetPool
 {
     private Pool _pool;
 
-    public IMatcher trigger { get { return Matcher.Destroy; } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+    public TriggerOnEvent trigger { get { return Matcher.Destroy.OnEntityAdded(); } }
+
 
     public void SetPool(Pool pool)
     {

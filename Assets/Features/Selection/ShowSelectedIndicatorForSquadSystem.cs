@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Entitas;
 
 public class ShowSelectedIndicatorForSquadSystem : IReactiveSystem, IEnsureComponents
 {
-    public IMatcher trigger { get { return Matcher.Selected; } }
+    public TriggerOnEvent trigger { get { return Matcher.Selected.OnEntityAddedOrRemoved(); } }
     public IMatcher ensureComponents { get { return Matcher.UnitsCache; } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAddedOrRemoved; } }
+
 
     public void Execute(List<Entity> entities)
     {

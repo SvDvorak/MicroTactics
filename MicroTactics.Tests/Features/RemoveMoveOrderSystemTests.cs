@@ -16,10 +16,10 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void TriggersOnAddedPositionAndMoveOrder()
+        public void TriggersOnAddedPositionWithMoveOrder()
         {
-            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.Position, Matcher.MoveOrder));
-            _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
+            _sut.trigger.Should().Be(Matcher.Position.OnEntityAdded());
+            _sut.ensureComponents.Should().Be(Matcher.MoveOrder);
         }
 
         [Fact]

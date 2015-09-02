@@ -21,8 +21,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void TriggersOnAddedSquadOrPlayer()
         {
-            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.Squad, Matcher.Player));
-            _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
+            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.Squad, Matcher.Player).OnEntityAdded());
         }
 
         [Fact]
@@ -63,10 +62,8 @@ namespace MicroTactics.Tests.Features.CreateSquad
         [Fact]
         public void TriggersOnRemovedSquadOrPlayer()
         {
-            _sut.triggers[0].Should().Be(Matcher.AllOf(Matcher.Destroy, Matcher.Squad, Matcher.Player));
-            _sut.triggers[1].Should().Be(Matcher.AllOf(Matcher.Squad, Matcher.Player));
-            _sut.eventTypes[0].Should().Be(GroupEventType.OnEntityAdded);
-            _sut.eventTypes[1].Should().Be(GroupEventType.OnEntityRemoved);
+            _sut.triggers[0].Should().Be(Matcher.AllOf(Matcher.Destroy, Matcher.Squad, Matcher.Player).OnEntityAdded());
+            _sut.triggers[1].Should().Be(Matcher.AllOf(Matcher.Squad, Matcher.Player).OnEntityRemoved());
         }
 
         [Fact]

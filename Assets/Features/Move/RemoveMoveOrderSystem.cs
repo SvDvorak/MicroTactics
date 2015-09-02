@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Entitas;
 
 namespace Assets.Features.Move
 {
-    public class RemoveMoveOrderSystem : IReactiveSystem
+    public class RemoveMoveOrderSystem : IReactiveSystem, IEnsureComponents
     {
-        public IMatcher trigger { get { return Matcher.AllOf(Matcher.Position, Matcher.MoveOrder); } }
-        public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+        public TriggerOnEvent trigger { get { return Matcher.Position.OnEntityAdded(); } }
+        public IMatcher ensureComponents { get { return Matcher.MoveOrder; } }
+
 
         public void Execute(List<Entity> entities)
         {

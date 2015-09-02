@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Assets;
 using Entitas;
@@ -10,9 +10,9 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
 {
     private Pool _pool;
 
-    public IMatcher trigger { get { return Matcher.AllOf(Matcher.AttackOrder); } }
+    public TriggerOnEvent trigger { get { return Matcher.AttackOrder.OnEntityAdded(); } }
     public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.Unit, Matcher.Position, Matcher.Rotation); } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+
 
     public void SetPool(Pool pool)
     {

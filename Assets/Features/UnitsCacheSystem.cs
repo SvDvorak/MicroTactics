@@ -6,26 +6,14 @@ public class UnitsCacheSystem : IMultiReactiveSystem, ISetPool
 {
     private Group _squads;
 
-    public IMatcher[] triggers
-    {
-        get
-        {
-            return new IMatcher[]
-                {
-                    Matcher.Unit,
-                    Matcher.AllOf(Matcher.Unit, Matcher.Destroy)
-                };
-        }
-    }
-
-    public GroupEventType[] eventTypes
+    public TriggerOnEvent[] triggers
     {
         get
         {
             return new[]
                 {
-                    GroupEventType.OnEntityAddedOrRemoved,
-                    GroupEventType.OnEntityAdded
+                    Matcher.Unit.OnEntityAddedOrRemoved(),
+                    Matcher.AllOf(Matcher.Unit, Matcher.Destroy).OnEntityAdded()
                 };
         }
     }

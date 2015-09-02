@@ -1,4 +1,4 @@
-﻿    using System.Collections.Generic;
+    using System.Collections.Generic;
     using System.Linq;
     using Assets;
     using Entitas;
@@ -7,9 +7,9 @@ public class AttackInteractionSystem : IReactiveSystem, ISetPool, IEnsureCompone
 {
     private Group _selectedGroup;
 
-    public IMatcher trigger { get { return Matcher.Input; } }
+    public TriggerOnEvent trigger { get { return Matcher.Input.OnEntityAdded(); } }
     public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.Selected, Matcher.AttackInput); } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+
 
     public void SetPool(Pool pool)
     {

@@ -9,7 +9,7 @@ public class EntitasSetup : MonoBehaviour
     void Start()
     {
         _systems = CreateSystems(Pools.pool);
-        _systems.Start();
+        _systems.Initialize();
     }
 
     void Update()
@@ -45,6 +45,7 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateRenderMoveArrowSystem())
             .Add(pool.CreateShowSelectedIndicatorForSquadSystem())
 
+            .Add(pool.CreateRemoveMoveOrderSystem())
             .Add(pool.CreateSquadMoveOrderSystem())
             .Add(pool.CreateSquadAttackOrderSystem())
             .Add(pool.CreateMoveSystem())

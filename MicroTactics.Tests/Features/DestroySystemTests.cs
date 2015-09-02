@@ -16,8 +16,7 @@ namespace MicroTactics.Tests.Features
         {
             var sut = new DestroySystem();
 
-            sut.trigger.Should().Be(Matcher.Destroy);
-            sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
+            sut.trigger.Should().Be(Matcher.Destroy.OnEntityAdded());
         }
 
         [Fact]

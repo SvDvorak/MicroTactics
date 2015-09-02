@@ -28,8 +28,7 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void TriggersOnAddedAttackOrderWithPositionAndRotation()
         {
-            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.AttackOrder));
-            _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
+            _sut.trigger.Should().Be(Matcher.AttackOrder.OnEntityAdded());
             _sut.ensureComponents.Should().Be(Matcher.AllOf(Matcher.Unit, Matcher.Position, Matcher.Rotation));
         }
 

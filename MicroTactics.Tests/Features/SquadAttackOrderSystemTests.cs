@@ -18,9 +18,8 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void TriggersOnAddedAttackOrderWithUnitsCacheAndFormation()
         {
-            _sut.trigger.Should().Be(Matcher.AttackOrder);
+            _sut.trigger.Should().Be(Matcher.AttackOrder.OnEntityAdded());
             _sut.ensureComponents.Should().Be(Matcher.AllOf(Matcher.UnitsCache, Matcher.BoxFormation));
-            _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
         }
 
         [Fact]

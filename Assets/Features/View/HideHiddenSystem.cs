@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Entitas;
 
 public class HideHiddenSystem : IReactiveSystem, IEnsureComponents
 {
-    public IMatcher trigger { get { return Matcher.Hidden; } }
+    public TriggerOnEvent trigger { get { return Matcher.Hidden.OnEntityAddedOrRemoved(); } }
     public IMatcher ensureComponents { get { return Matcher.View; } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAddedOrRemoved; } }
+
 
     public void Execute(List<Entity> entities)
     {

@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Assets;
 using Entitas;
 
 public class ApplyForceSystem : IReactiveSystem
 {
-    public IMatcher trigger { get { return Matcher.AllOf(Matcher.Force, Matcher.Physics); } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+    public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Force, Matcher.Physics).OnEntityAdded(); } }
+
 
     public void Execute(List<Entity> entities)
     {

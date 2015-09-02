@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Assets;
 using Entitas;
 using UnityEngine;
 
 public class AddViewSystem : IReactiveSystem
 {
-    public IMatcher trigger { get { return Matcher.Resource; } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+    public TriggerOnEvent trigger { get { return Matcher.Resource.OnEntityAdded(); } }
+
 
     private readonly Transform _viewsContainer = new GameObject("Views").transform;
 

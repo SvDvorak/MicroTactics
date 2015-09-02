@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Entitas;
 using Mono.GameMath;
@@ -9,9 +9,9 @@ namespace Assets.Features.Selection
     {
         private Group _selectedGroup;
 
-        public IMatcher trigger { get { return Matcher.Input; } }
+        public TriggerOnEvent trigger { get { return Matcher.Input.OnEntityAdded(); } }
         public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.Selected, Matcher.MoveInput); } }
-        public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+
 
         public void SetPool(Pool pool)
         {

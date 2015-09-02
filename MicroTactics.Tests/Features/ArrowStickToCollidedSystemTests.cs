@@ -18,9 +18,8 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void TriggersOnAddedCollisionForPhysicalArrows()
         {
-            _sut.trigger.Should().Be(Matcher.Collision);
+            _sut.trigger.Should().Be(Matcher.Collision.OnEntityAdded());
             _sut.ensureComponents.Should().Be(Matcher.AllOf(Matcher.Arrow, Matcher.Physics));
-            _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
         }
 
         [Fact]

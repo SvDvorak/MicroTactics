@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
 public class RemovePhysicsSystem : IReactiveSystem
 {
-    public IMatcher trigger { get { return Matcher.Physics; } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityRemoved; } }
+    public TriggerOnEvent trigger { get { return Matcher.Physics.OnEntityRemoved(); } }
+
 
     public void Execute(List<Entity> entities)
     {

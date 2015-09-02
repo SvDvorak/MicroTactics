@@ -24,10 +24,8 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void TriggersOnAddedOrRemovedUnits()
         {
-            _sut.triggers[0].Should().Be(Matcher.Unit);
-            _sut.triggers[1].Should().Be(Matcher.AllOf(Matcher.Unit, Matcher.Destroy));
-            _sut.eventTypes[0].Should().Be(GroupEventType.OnEntityAddedOrRemoved);
-            _sut.eventTypes[1].Should().Be(GroupEventType.OnEntityAdded);
+            _sut.triggers[0].Should().Be(Matcher.Unit.OnEntityAddedOrRemoved());
+            _sut.triggers[1].Should().Be(Matcher.AllOf(Matcher.Unit, Matcher.Destroy).OnEntityAdded());
         }
 
         [Fact]

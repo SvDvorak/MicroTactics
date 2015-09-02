@@ -31,8 +31,7 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void TriggersOnAddedMoveOrder()
         {
-            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.UnitsCache, Matcher.BoxFormation, Matcher.MoveOrder));
-            _sut.eventType.Should().Be(GroupEventType.OnEntityAdded);
+            _sut.trigger.Should().Be(Matcher.AllOf(Matcher.UnitsCache, Matcher.BoxFormation, Matcher.MoveOrder).OnEntityAdded());
         }
 
         [Fact]

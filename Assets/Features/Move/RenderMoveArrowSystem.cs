@@ -1,21 +1,21 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Assets;
 using Entitas;
 using UnityEngine;
 using Vector3 = Mono.GameMath.Vector3;
 using Quaternion = Mono.GameMath.Quaternion;
 
-public class RenderMoveArrowSystem : IReactiveSystem, IStartSystem
+public class RenderMoveArrowSystem : IReactiveSystem, IInitializeSystem
 {
     private GameObject _arrow;
     private Transform _arrowBase;
     private Transform _arrowHead;
     private float _minLength;
 
-    public IMatcher trigger { get { return Matcher.MoveInput; } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAddedOrRemoved; } }
+    public TriggerOnEvent trigger { get { return Matcher.MoveInput.OnEntityAddedOrRemoved(); } }
 
-    public void Start()
+
+    public void Initialize()
     {
         _arrow = (GameObject)Object.Instantiate(Resources.Load("MoveArrow"));
         _arrowBase = _arrow.transform.GetChild(0);

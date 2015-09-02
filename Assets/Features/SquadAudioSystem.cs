@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
@@ -6,8 +6,8 @@ namespace Assets.Features
 {
     public class SquadAudioSystem : IReactiveSystem
     {
-        public IMatcher trigger { get { return Matcher.AllOf(Matcher.Audio, Matcher.MoveOrder); } }
-        public GroupEventType eventType { get { return GroupEventType.OnEntityAddedOrRemoved; } }
+        public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Audio, Matcher.MoveOrder).OnEntityAddedOrRemoved(); } }
+
 
         public void Execute(List<Entity> entities)
         {

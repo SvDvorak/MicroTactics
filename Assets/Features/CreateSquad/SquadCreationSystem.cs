@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Entitas;
 using Mono.GameMath;
@@ -9,8 +9,8 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
     private Group _unitsGroup;
     private Pool _pool;
 
-    public IMatcher trigger { get { return Matcher.AllOf(Matcher.Squad, Matcher.BoxFormation); } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+    public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Squad, Matcher.BoxFormation).OnEntityAdded(); } }
+
 
     public void SetPool(Pool pool)
     {

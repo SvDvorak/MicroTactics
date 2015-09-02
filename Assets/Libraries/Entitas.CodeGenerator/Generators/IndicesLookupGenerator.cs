@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Entitas.CodeGenerator
-{
-    public class IndicesLookupGenerator : IComponentCodeGenerator, IPoolCodeGenerator
-    {
+namespace Entitas.CodeGenerator {
+    public class IndicesLookupGenerator : IComponentCodeGenerator, IPoolCodeGenerator {
 
-        public CodeGenFile[] Generate(Type[] components)
-        {
+        public CodeGenFile[] Generate(Type[] components) {
             var sortedComponents = components.OrderBy(type => type.ToString()).ToArray();
             return getLookups(sortedComponents)
                 .Aggregate(new List<CodeGenFile>(), (files, lookup) => {
-                    files.Add(new CodeGenFile
-                    {
+                    files.Add(new CodeGenFile {
                         fileName = lookup.Key,
                         fileContent = generateIndicesLookup(lookup.Key, lookup.Value.ToArray())
                     });
@@ -21,18 +17,15 @@ namespace Entitas.CodeGenerator
                 }).ToArray();
         }
 
-        public CodeGenFile[] Generate(string[] poolNames)
-        {
+        public CodeGenFile[] Generate(string[] poolNames) {
             var noTypes = new Type[0];
-            if (poolNames.Length == 0)
-            {
-                poolNames = new[] { string.Empty };
+            if (poolNames.Length == 0) {
+                poolNames = new [] { string.Empty };
             }
             return poolNames
                 .Aggregate(new List<CodeGenFile>(), (files, poolName) => {
                     var lookupTag = poolName + CodeGenerator.defaultIndicesLookupTag;
-                    files.Add(new CodeGenFile
-                    {
+                    files.Add(new CodeGenFile {
                         fileName = lookupTag,
                         fileContent = generateIndicesLookup(lookupTag, noTypes)
                     });
@@ -40,8 +33,7 @@ namespace Entitas.CodeGenerator
                 }).ToArray();
         }
 
-        static Dictionary<string, Type[]> getLookups(Type[] components)
-        {
+        static Dictionary<string, Type[]> getLookups(Type[] components) {
             var currentIndex = 0;
             var orderedComponents = components
                 .Where(shouldGenerate)
@@ -56,84 +48,60 @@ namespace Entitas.CodeGenerator
                     var type = kv.Key;
                     var lookupTags = kv.Value;
                     var incrementIndex = false;
-                    foreach (var lookupTag in lookupTags)
-                    {
-                        if (!lookups.ContainsKey(lookupTag))
-                        {
+                    foreach (var lookupTag in lookupTags) {
+                        if (!lookups.ContainsKey(lookupTag)) {
                             lookups.Add(lookupTag, new Type[components.Length]);
                         }
 
                         var types = lookups[lookupTag];
-                        if (lookupTags.Length == 1)
-                        {
-                            for (int i = 0; i < types.Length; i++)
-                            {
-                                if (types[i] == null)
-                                {
+                        if (lookupTags.Length == 1) {
+                            for (int i = 0; i < types.Length; i++) {
+                                if (types[i] == null) {
                                     types[i] = type;
                                     break;
                                 }
                             }
-                        }
-                        else
-                        {
+                        } else {
                             types[currentIndex] = type;
                             incrementIndex = true;
                         }
                     }
-                    if (incrementIndex)
-                    {
+                    if (incrementIndex) {
                         currentIndex++;
                     }
                     return lookups;
                 });
         }
 
-        static bool shouldGenerate(Type type)
-        {
+        static bool shouldGenerate(Type type) {
             return Attribute.GetCustomAttributes(type)
                 .OfType<DontGenerateAttribute>()
                 .All(attr => attr.generateIndex);
         }
 
-        static string generateIndicesLookup(string tag, Type[] components)
-        {
-            return addIncludes()
-                    + addClassHeader(tag)
+        static string generateIndicesLookup(string tag, Type[] components) {
+            return addClassHeader(tag)
                     + addIndices(components)
                     + addIdToString(components)
-                    + addComponentToId(components)
                     + addCloseClass()
                     + addMatcher(tag);
         }
 
-        static string addIncludes()
-        {
-            return "using System;\n" +
-                   "using System.Collections.Generic;\n" +
-                   "using Entitas;\n\n";
-        }
-
-        static string addClassHeader(string lookupTag)
-        {
+        static string addClassHeader(string lookupTag) {
             var code = string.Format("public static class {0} {{\n", lookupTag);
-            if (stripDefaultTag(lookupTag) != string.Empty)
-            {
+            if (stripDefaultTag(lookupTag) != string.Empty) {
                 code = "using Entitas;\n\n" + code;
             }
             return code;
         }
 
-        static string addIndices(Type[] components)
-        {
+        static string addIndices(Type[] components) {
             const string fieldFormat = "    public const int {0} = {1};\n";
             const string totalFormat = "    public const int TotalComponents = {0};";
             var code = string.Empty;
-            for (int i = 0; i < components.Length; i++)
-            {
+            for (int i = 0; i < components.Length; i++) {
                 var type = components[i];
-                if (type != null)
-                {
+                if (type != null) {
                     code += string.Format(fieldFormat, type.RemoveComponentSuffix(), i);
                 }
             }
@@ -141,20 +109,16 @@ namespace Entitas.CodeGenerator
             return code + "\n" + string.Format(totalFormat, components.Count(type => type != null));
         }
 
-        static string addIdToString(Type[] components)
-        {
+        static string addIdToString(Type[] components) {
             const string format = "        \"{1}\",\n";
             var code = string.Empty;
-            for (int i = 0; i < components.Length; i++)
-            {
+            for (int i = 0; i < components.Length; i++) {
                 var type = components[i];
-                if (type != null)
-                {
+                if (type != null) {
                     code += string.Format(format, i, type.RemoveComponentSuffix());
                 }
             }
-            if (code.EndsWith(",\n"))
-            {
+            if (code.EndsWith(",\n")) {
                 code = code.Remove(code.Length - 2) + "\n";
             }
 
@@ -168,44 +132,13 @@ namespace Entitas.CodeGenerator
     }}", code);
         }
 
-        static string addComponentToId(Type[] components)
-        {
-
-            const string format = "        {{ typeof ({1}), {2} }},\n";
-            const string formatLast = "        {{ typeof ({1}), {2} }}\n";
-            var code = string.Empty;
-            for (int i = 0; i < components.Length; i++)
-            {
-                if (i < components.Length - 1)
-                {
-                    code += string.Format(format, i, components[i].Name, components[i].RemoveComponentSuffix());
-                }
-                else
-                {
-                    code += string.Format(formatLast, i, components[i].Name, components[i].RemoveComponentSuffix());
-                }
-            }
-
-            return string.Format(@"
-
-    private static readonly IDictionary<Type, int> componentIds = new Dictionary<Type, int>() {{
-{0}    }};
-
-    public static int ComponentToId(IComponent component) {{
-        return componentIds[component.GetType()];
-    }}", code);
-        }
-
-        static string addCloseClass()
-        {
+        static string addCloseClass() {
             return "\n}";
         }
 
-        static string addMatcher(string lookupTag)
-        {
+        static string addMatcher(string lookupTag) {
             var tag = stripDefaultTag(lookupTag);
-            if (tag == string.Empty)
-            {
+            if (tag == string.Empty) {
                 return @"
 
 namespace Entitas {
@@ -232,8 +165,7 @@ public partial class {0}Matcher : AllOfMatcher {{
 }}", tag);
         }
 
-        static string stripDefaultTag(string tag)
-        {
+        static string stripDefaultTag(string tag) {
             return tag.Replace(CodeGenerator.defaultIndicesLookupTag, string.Empty);
         }
     }

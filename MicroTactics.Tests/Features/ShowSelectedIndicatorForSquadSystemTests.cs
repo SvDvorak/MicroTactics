@@ -13,9 +13,8 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void TriggersOnAddedOrRemovedSelectedWithUnitsCache()
         {
-            _sut.trigger.Should().Be(Matcher.Selected);
+            _sut.trigger.Should().Be(Matcher.Selected.OnEntityAddedOrRemoved());
             _sut.ensureComponents.Should().Be(Matcher.UnitsCache);
-            _sut.eventType.Should().Be(GroupEventType.OnEntityAddedOrRemoved);
         }
 
         [Fact]

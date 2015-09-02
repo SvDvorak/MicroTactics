@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Assets;
 using Entitas;
 
 public class RenderRotationSystem : IReactiveSystem, IEnsureComponents
 {
-    public IMatcher trigger { get { return Matcher.Rotation; } }
+    public TriggerOnEvent trigger { get { return Matcher.Rotation.OnEntityAdded(); } }
     public IMatcher ensureComponents { get { return Matcher.View; } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+
 
     public void Execute(List<Entity> entities)
     {

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Entitas;
 
 namespace Assets.Features.CreateSquad
@@ -7,8 +7,8 @@ namespace Assets.Features.CreateSquad
     {
         private Pool _pool;
 
-        public IMatcher trigger { get { return Matcher.AllOf(Matcher.Squad, Matcher.Player); } }
-        public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+        public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Squad, Matcher.Player).OnEntityAdded(); } }
+
 
         public void SetPool(Pool pool)
         {
@@ -36,8 +36,7 @@ namespace Assets.Features.CreateSquad
 
     public class SelectionAreaRemoveDecoratorSystem : IMultiReactiveSystem
     {
-        public IMatcher[] triggers { get { return new IMatcher[] { Matcher.AllOf(Matcher.Destroy, Matcher.Squad, Matcher.Player), Matcher.AllOf(Matcher.Squad, Matcher.Player) }; } }
-        public GroupEventType[] eventTypes { get { return new[] { GroupEventType.OnEntityAdded, GroupEventType.OnEntityRemoved }; } }
+        public TriggerOnEvent[] triggers { get { return new[] { Matcher.AllOf(Matcher.Destroy, Matcher.Squad, Matcher.Player).OnEntityAdded(), Matcher.AllOf(Matcher.Squad, Matcher.Player).OnEntityRemoved() }; } }
 
         public void Execute(List<Entity> entities)
         {

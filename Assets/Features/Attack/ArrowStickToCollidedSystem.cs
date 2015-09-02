@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Entitas;
 
 public class ArrowStickToCollidedSystem : IReactiveSystem, IEnsureComponents
 {
-    public IMatcher trigger { get { return Matcher.Collision; } }
+    public TriggerOnEvent trigger { get { return Matcher.Collision.OnEntityAdded(); } }
     public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.Arrow, Matcher.Physics); } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+
 
     public void Execute(List<Entity> entities)
     {

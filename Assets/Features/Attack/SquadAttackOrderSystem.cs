@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Assets;
 using Entitas;
 
 public class SquadAttackOrderSystem : IReactiveSystem, IEnsureComponents
 {
-    public IMatcher trigger { get { return Matcher.AttackOrder; } }
+    public TriggerOnEvent trigger { get { return Matcher.AttackOrder.OnEntityAdded(); } }
     public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.UnitsCache, Matcher.BoxFormation); } }
-    public GroupEventType eventType { get { return GroupEventType.OnEntityAdded; } }
+
 
     public void Execute(List<Entity> entities)
     {

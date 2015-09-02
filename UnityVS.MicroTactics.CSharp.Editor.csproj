@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -107,6 +105,9 @@
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.GameMath">
+      <HintPath>Assets\Libraries\Mono.GameMath.dll</HintPath>
+    </Reference>
     <Reference Include="BasicSerializer">
       <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
     </Reference>
@@ -136,9 +137,6 @@
     </Reference>
     <Reference Include="UnityVS.VersionSpecific">
       <HintPath>Assets\UnityVS\Editor\UnityVS.VersionSpecific.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.GameMath">
-      <HintPath>Assets\Libraries\Mono.GameMath.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -256,7 +254,10 @@
     <Compile Include="Assets\Editor\Vexe\Windows\SelectionWindow.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.CodeGenerator\Editor\CodeGeneratorEditor.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.CodeGenerator\Editor\CodeGeneratorPreferencesDrawer.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\DebugSystems\Editor\DebugSystemsEditor.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\DebugSystems\Editor\SystemsMonitorEditor.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Editor\EntitasStats.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Editor\HierarchyIconEditor.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Editor\VisualDebuggingPreferencesDrawer.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\DefaultInstanceCreator\DefaultArrayCreator.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\DefaultInstanceCreator\DefaultStringCreator.cs" />
@@ -282,8 +283,6 @@
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\Vector3TypeDrawer.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\Vector4TypeDrawer.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\PoolObserver\Editor\PoolObserverEditor.cs" />
-    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\SystemsObserver\Editor\SystemMonitorEditor.cs" />
-    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\SystemsObserver\Editor\SystemsDebugEditor.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity\Editor\EntitasCheckForUpdates.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity\Editor\EntitasPreferencesEditor.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionComponentEditor.cs" />
