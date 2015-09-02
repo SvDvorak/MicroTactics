@@ -31,7 +31,7 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
             var attackDirection = entity.attackOrder.ToV3() - entity.position.ToV3();
             LookAtTarget(entity, attackDirection);
             SpawnArrow(entity, attackDirection);
-            entity.AddReload(1*Simulation.FrameRate);
+            entity.AddReload(5*Simulation.FrameRate);
 
             entity.RemoveAttackOrder();
         }

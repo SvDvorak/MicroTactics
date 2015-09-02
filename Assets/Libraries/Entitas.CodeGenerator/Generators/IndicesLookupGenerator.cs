@@ -80,11 +80,20 @@ namespace Entitas.CodeGenerator {
         }
 
         static string generateIndicesLookup(string tag, Type[] components) {
-            return addClassHeader(tag)
+            return addIncludes()
+                    + addClassHeader(tag)
                     + addIndices(components)
                     + addIdToString(components)
+                    + addComponentToId(components)
                     + addCloseClass()
                     + addMatcher(tag);
+        }
+
+        static string addIncludes()
+        {
+            return "using System;\n" +
+                   "using System.Collections.Generic;\n" +
+                   "using Entitas;\n\n";
         }
 
         static string addClassHeader(string lookupTag) {
@@ -129,6 +138,34 @@ namespace Entitas.CodeGenerator {
 
     public static string IdToString(int componentId) {{
         return components[componentId];
+    }}", code);
+        }
+
+        static string addComponentToId(Type[] components)
+        {
+
+            const string format = "        {{ typeof ({1}), {2} }},\n";
+            const string formatLast = "        {{ typeof ({1}), {2} }}\n";
+            var code = string.Empty;
+            for (int i = 0; i < components.Length; i++)
+            {
+                if (i < components.Length - 1)
+                {
+                    code += string.Format(format, i, components[i].Name, components[i].RemoveComponentSuffix());
+                }
+                else
+                {
+                    code += string.Format(formatLast, i, components[i].Name, components[i].RemoveComponentSuffix());
+                }
+            }
+
+            return string.Format(@"
+
+    private static readonly IDictionary<Type, int> componentIds = new Dictionary<Type, int>() {{
+{0}    }};
+
+    public static int ComponentToId(IComponent component) {{
+        return componentIds[component.GetType()];
     }}", code);
         }
 
