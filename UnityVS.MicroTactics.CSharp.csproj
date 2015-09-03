@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -143,7 +145,7 @@
     <Compile Include="Assets\Features\Move\SquadMoveOrderSystem.cs" />
     <Compile Include="Assets\Features\Move\UnitInSquadPositioner.cs" />
     <Compile Include="Assets\Features\PhysicsComponent.cs" />
-    <Compile Include="Assets\Features\ReadVelocitySystem.cs" />
+    <Compile Include="Assets\Features\ReadPhysicsSystem.cs" />
     <Compile Include="Assets\Features\RemovePhysicsSystem.cs" />
     <Compile Include="Assets\Features\RotationComponent.cs" />
     <Compile Include="Assets\Features\Selection\BoundingMeshComponent.cs" />

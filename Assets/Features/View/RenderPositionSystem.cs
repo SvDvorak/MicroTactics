@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Assets;
 using Entitas;
+using UnityEngine;
 
 public class RenderPositionSystem : IReactiveSystem
 {
@@ -12,7 +13,17 @@ public class RenderPositionSystem : IReactiveSystem
         foreach (var e in entities)
         {
             var transform = e.view.GameObject.transform;
-            transform.position = e.position.ToUnityV3();
+
+            var newPosition = e.position.ToUnityV3();
+            var rigidbody = transform.GetComponent<Rigidbody>();
+            if (rigidbody != null)
+            {
+                rigidbody.MovePosition(newPosition);
+            }
+            else
+            {
+                transform.position = newPosition;
+            }
         }
     }
 }

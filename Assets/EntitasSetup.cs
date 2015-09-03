@@ -24,6 +24,8 @@ public class EntitasSetup : MonoBehaviour
 #else
         return new Systems()
 #endif
+            .Add(pool.CreateReadVelocitySystem())
+
             .Add(pool.CreateLinkViewsStartSystem())
             .Add(pool.CreateSquadCreationSystem())
             .Add(pool.CreateSelectionAreaAddDecoratorSystem())
@@ -54,7 +56,6 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateArrowStickToCollidedSystem())
             .Add(pool.CreatePitchFromVelocitySystem())
 
-            .Add(pool.CreateReadVelocitySystem())
             .Add(pool.CreateApplyForceSystem())
             .Add(pool.CreateRenderPositionSystem())
             .Add(pool.CreateRenderRotationSystem())
