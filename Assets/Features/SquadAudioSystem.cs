@@ -1,17 +1,19 @@
-using System.Collections.Generic;
 using Entitas;
-using UnityEngine;
 
 namespace Assets.Features
 {
-    public class SquadAudioSystem : IReactiveSystem
+    public class SquadAudioSystem : IExecuteSystem, ISetPool
     {
-        public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Audio, Matcher.MoveOrder).OnEntityAddedOrRemoved(); } }
+        private Group _audioGroup;
 
-
-        public void Execute(List<Entity> entities)
+        public void SetPool(Pool pool)
         {
-            foreach (var entity in entities)
+            _audioGroup = pool.GetGroup(Matcher.Audio);
+        }
+
+        public void Execute()
+        {
+            foreach (var entity in _audioGroup.GetEntities())
             {
                 var audioSource = entity.audio.AudioSource;
 

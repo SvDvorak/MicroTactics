@@ -29,7 +29,7 @@ public class AiMoveOrderSystem : IExecuteSystem, ISetPool
 
             var enemyDistance = fromEnemyToSquad.Length();
             var minimumDistanceWanted = squad.ai.SeeingRange/2;
-            if (enemyDistance <= minimumDistanceWanted)
+            if (enemyDistance < minimumDistanceWanted)
             {
                 var moveDirection = fromEnemyToSquad.Normalized() * (minimumDistanceWanted - enemyDistance);
                 if (enemyDistance.IsApproximately(0))

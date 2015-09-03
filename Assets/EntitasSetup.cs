@@ -45,7 +45,6 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateRenderMoveArrowSystem())
             .Add(pool.CreateShowSelectedIndicatorForSquadSystem())
 
-            .Add(pool.CreateRemoveMoveOrderSystem())
             .Add(pool.CreateSquadMoveOrderSystem())
             .Add(pool.CreateSquadAttackOrderSystem())
             .Add(pool.CreateMoveSystem())
@@ -64,6 +63,7 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateSquadAudioSystem())
 
             .Add(pool.CreateDelayedDestroySystem())
+            .Add(pool.CreateRemoveMoveOrderSystem())
             .Add(pool.CreateSelectionAreaRemoveDecoratorSystem())
             .Add(pool.CreateRemoveViewSystem())
             .Add(pool.CreateRemovePhysicsSystem())

@@ -9,10 +9,9 @@ namespace Assets.Features.Move
         public TriggerOnEvent trigger { get { return Matcher.Position.OnEntityAdded(); } }
         public IMatcher ensureComponents { get { return Matcher.MoveOrder; } }
 
-
         public void Execute(List<Entity> entities)
         {
-            foreach (var entity in entities.Where(entity => entity.position.ToV3() == entity.moveOrder.Position))
+            foreach (var entity in entities.Where(entity => entity.position.ToV3().Equals(entity.moveOrder.Position, 0.01f)))
             {
                 entity.RemoveMoveOrder();
             }

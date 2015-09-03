@@ -24,11 +24,6 @@ public class MoveSystem : IExecuteSystem, ISetPool
                 var newRotation = Quaternion.LookAt(moveDirection.Normalized());
                 entity.ReplaceRotation(newRotation);
             }
-
-            if(entity.position.ToV3() == entity.moveOrder.Position)
-            {
-                entity.RemoveMoveOrder();
-            }
         }
     }
 }

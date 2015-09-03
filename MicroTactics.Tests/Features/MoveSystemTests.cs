@@ -63,15 +63,5 @@ namespace MicroTactics.Tests.Features
 
             _entity.rotation.ToQ().Should().Be(Quaternion.Identity);
         }
-
-        [Fact]
-        public void RemovesMoveOrderWhenHavingReachedPosition()
-        {
-            _entity.ReplaceMoveOrder(Vector3.Zero, Quaternion.Identity);
-
-            _sut.Execute();
-
-            _entity.hasMoveOrder.Should().BeFalse("move order should have been removed");
-        }
     }
 }

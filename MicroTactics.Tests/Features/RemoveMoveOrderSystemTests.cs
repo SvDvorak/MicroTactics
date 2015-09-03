@@ -35,6 +35,18 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
+        public void HasPrettyLargeErrorMarginForRemovingOrder()
+        {
+            var entity = new TestEntity()
+                .AddPosition(1, 1, 1.001f)
+                .AddMoveOrder(new Vector3(1, 1, 1), Quaternion.Identity);
+
+            _sut.Execute(entity.AsList());
+
+            entity.hasMoveOrder.Should().BeFalse("move order should have been removed");
+        }
+
+        [Fact]
         public void DoesNothingWhenNotHavingReachedPosition()
         {
             var entity = new TestEntity()
