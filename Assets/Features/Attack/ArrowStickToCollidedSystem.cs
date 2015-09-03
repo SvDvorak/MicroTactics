@@ -1,20 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using Assets;
 using Entitas;
+using UnityEngine;
 
 public class ArrowStickToCollidedSystem : IReactiveSystem, IEnsureComponents
 {
     public TriggerOnEvent trigger { get { return Matcher.Collision.OnEntityAdded(); } }
-    public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.Arrow, Matcher.Physics); } }
-
+    public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.Stickable, Matcher.Physics); } }
 
     public void Execute(List<Entity> entities)
     {
-        var enumerable = entities.Where(x => x.collision.CollidedWith != null && x.collision.CollidedWith.hasUnit);
-        if (enumerable.Any())
-        {
-            int i = 0;
-        }
         foreach (var entity in entities.Where(ShouldStick))
         {
             entity.RemovePhysics();
@@ -27,6 +23,6 @@ public class ArrowStickToCollidedSystem : IReactiveSystem, IEnsureComponents
 
     private static bool ShouldStick(Entity entity)
     {
-        return entity.collision.RelativeVelocity.Length() > 10;
+        return entity.collision.RelativeVelocity.Length() > entity.stickable.RequiredVelocity;
     }
 }

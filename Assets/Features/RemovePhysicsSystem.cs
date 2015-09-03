@@ -2,19 +2,16 @@ using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
-public class RemovePhysicsSystem : IReactiveSystem
+public class RemovePhysicsSystem : IReactiveSystem, IEnsureComponents
 {
     public TriggerOnEvent trigger { get { return Matcher.Physics.OnEntityRemoved(); } }
-
+    public IMatcher ensureComponents { get { return Matcher.View; } }
 
     public void Execute(List<Entity> entities)
     {
         foreach (var entity in entities)
         {
-            if (entity.hasView)
-            {
-                Object.Destroy(entity.view.GameObject.GetComponent<Rigidbody>());
-            }
+            Object.Destroy(entity.view.GameObject.GetComponent<Rigidbody>());
         }
     }
 }

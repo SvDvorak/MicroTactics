@@ -24,7 +24,7 @@ public class EntitasSetup : MonoBehaviour
 #else
         return new Systems()
 #endif
-            .Add(pool.CreateReadVelocitySystem())
+            .Add(pool.CreateReadPhysicsSystem())
 
             .Add(pool.CreateLinkViewsStartSystem())
             .Add(pool.CreateSquadCreationSystem())

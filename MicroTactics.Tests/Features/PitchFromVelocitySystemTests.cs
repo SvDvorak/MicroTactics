@@ -44,7 +44,6 @@ namespace MicroTactics.Tests.Features
         private Entity CreateArrowEntity()
         {
             return _pool.CreateEntity()
-                .IsArrow(true)
                 .AddRotation(Quaternion.Identity)
                 .AddPhysics(null)
                 .AddVelocity(0, 0, 0);

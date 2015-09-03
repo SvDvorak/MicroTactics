@@ -64,6 +64,12 @@ public static class EntityExtensions
         entity.delayedDestroy.Frames.Should().Be(frames);
     }
 
+    public static void ShouldBeStickable(this Entity entity, float requiredVelocity)
+    {
+        entity.hasStickable.Should().BeTrue("entity should be stickable");
+        entity.stickable.RequiredVelocity.Should().Be(requiredVelocity);
+    }
+
     public static void ShouldBeHidden(this Entity entity, bool expected)
     {
         entity.isDestroy.Should().Be(expected, "entity " + entity + " should " + (expected ? "" : "not ") + "be hidden");

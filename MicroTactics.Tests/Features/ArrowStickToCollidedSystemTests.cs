@@ -19,7 +19,7 @@ namespace MicroTactics.Tests.Features
         public void TriggersOnAddedCollisionForPhysicalArrows()
         {
             _sut.trigger.Should().Be(Matcher.Collision.OnEntityAdded());
-            _sut.ensureComponents.Should().Be(Matcher.AllOf(Matcher.Arrow, Matcher.Physics));
+            _sut.ensureComponents.Should().Be(Matcher.AllOf(Matcher.Stickable, Matcher.Physics));
         }
 
         [Fact]
@@ -49,8 +49,8 @@ namespace MicroTactics.Tests.Features
         private static Entity CreateCollidingArrow(TestEntity collidedWith, float velocityMagnitude)
         {
             return new TestEntity()
-                .IsArrow(true)
                 .AddCollision(collidedWith, new Vector3(velocityMagnitude, 0, 0))
+                .AddStickable(1)
                 .AddPhysics(null);
         }
     }

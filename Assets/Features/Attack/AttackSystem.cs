@@ -49,12 +49,12 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
         force = AddRandomAimingVariation(force);
 
         _pool.CreateEntity()
-            .IsArrow(true)
             .AddResource(Res.Arrow)
             .AddPosition(firePosition)
             .AddRotation(entity.rotation.ToQ())
             .AddForce(force)
             .AddVelocity(attackDirection)
+            .AddStickable(10)
             .AddDelayedDestroy(20*Simulation.FrameRate);
     }
 

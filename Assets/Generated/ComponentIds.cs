@@ -33,12 +33,13 @@ public static class ComponentIds {
     public const int Selected = 27;
     public const int SelectionArea = 28;
     public const int Squad = 29;
-    public const int Unit = 30;
-    public const int UnitsCache = 31;
-    public const int Velocity = 32;
-    public const int View = 33;
+    public const int Stickable = 30;
+    public const int Unit = 31;
+    public const int UnitsCache = 32;
+    public const int Velocity = 33;
+    public const int View = 34;
 
-    public const int TotalComponents = 34;
+    public const int TotalComponents = 35;
 
     static readonly string[] components = {
         "Ai",
@@ -71,6 +72,7 @@ public static class ComponentIds {
         "Selected",
         "SelectionArea",
         "Squad",
+        "Stickable",
         "Unit",
         "UnitsCache",
         "Velocity",
@@ -84,7 +86,6 @@ public static class ComponentIds {
     private static readonly IDictionary<Type, int> componentIds = new Dictionary<Type, int>() {
         { typeof (AiComponent), Ai },
         { typeof (AnimateComponent), Animate },
-        { typeof (ArrowComponent), Arrow },
         { typeof (AttackInputComponent), AttackInput },
         { typeof (AttackOrderComponent), AttackOrder },
         { typeof (AudioComponent), Audio },
@@ -112,6 +113,7 @@ public static class ComponentIds {
         { typeof (SelectedComponent), Selected },
         { typeof (SelectionAreaComponent), SelectionArea },
         { typeof (SquadComponent), Squad },
+        { typeof (StickableComponent), Stickable },
         { typeof (UnitComponent), Unit },
         { typeof (UnitsCacheComponent), UnitsCache },
         { typeof (VelocityComponent), Velocity },

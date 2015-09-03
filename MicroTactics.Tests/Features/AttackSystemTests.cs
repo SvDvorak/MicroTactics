@@ -33,13 +33,13 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void AllEntitiesFire()
+        public void AllEntitiesFireArrows()
         {
             _sut.Execute(new [] { CreateAttackingEntity(), CreateAttackingEntity() }.ToList());
 
             var poolEntities = _pool.GetEntities();
-            poolEntities.First().isArrow.Should().Be(true);
-            poolEntities.Second().isArrow.Should().Be(true);
+            poolEntities.First().ShouldHaveResource("Arrow");
+            poolEntities.Second().ShouldHaveResource("Arrow");
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute(_attackingEntity.AsList());
 
-            var arrowEntity = GetSingleArrow();
+            var arrowEntity = PoolEntity();
             arrowEntity.position.ToV3().ShouldBeCloseTo(new Vector3(10, 4, 0));
             arrowEntity.rotation.ToQ().ShouldBeCloseTo(lookingToTheRight);
             arrowEntity.force.ToV3().ShouldBeCloseTo(new Vector3(263.8441f, 427.368f, 0));
@@ -69,16 +69,7 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute(_attackingEntity.AsList());
 
-            var arrowEntity = GetSingleArrow();
-            arrowEntity.force.ToV3().ShouldBeCloseTo(new Vector3(263.1658f, 427.225f, 11.49776f));
-        }
-
-        [Fact]
-        public void AddsResourceToArrow()
-        {
-            _sut.Execute(_attackingEntity.AsList());
-
-            GetSingleArrow().ShouldHaveResource("Arrow");
+            PoolEntity().force.ToV3().ShouldBeCloseTo(new Vector3(263.1658f, 427.225f, 11.49776f));
         }
 
         [Fact]
@@ -86,7 +77,15 @@ namespace MicroTactics.Tests.Features
         {
             _sut.Execute(_attackingEntity.AsList());
 
-            GetSingleArrow().ShouldHaveDelayedDestroy(20*Simulation.FrameRate);
+            PoolEntity().ShouldHaveDelayedDestroy(20*Simulation.FrameRate);
+        }
+
+        [Fact]
+        public void ArrowShouldStickOnHit()
+        {
+            _sut.Execute(_attackingEntity.AsList());
+
+            PoolEntity().ShouldBeStickable(10);
         }
 
         [Fact]
@@ -132,11 +131,9 @@ namespace MicroTactics.Tests.Features
             Random.Instance = random;
         }
 
-        private Entity GetSingleArrow()
+        private Entity PoolEntity()
         {
-            var arrowEntity = _pool.GetEntities().SingleEntity();
-            arrowEntity.isArrow.Should().Be(true);
-            return arrowEntity;
+            return _pool.GetEntities().SingleEntity();
         }
 
         private static Entity CreateAttackingEntity()
