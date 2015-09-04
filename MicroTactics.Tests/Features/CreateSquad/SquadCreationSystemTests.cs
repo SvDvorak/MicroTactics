@@ -58,7 +58,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
             Execute(_squad1);
 
             Units.Should().HaveCount(5);
-            Units.Where(x => x.isDestroy && x.child.Value.First().isDestroy)
+            Units.Where(x => x.isDestroy && x.children.Value.First().isDestroy)
                 .Should()
                 .HaveCount(4, "all but one squad member should have been destroyed");
         }

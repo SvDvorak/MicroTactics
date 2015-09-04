@@ -2,22 +2,22 @@
 using System.Linq;
 using Entitas;
 
-public class ChildComponent : IComponent
+public class ChildrenComponent : IComponent
 {
     public List<Entity> Value;
 }
 
-public static class EntityChildExtensions
+public static class EntityChildrenExtensions
 {
     private static Entity AddChild(this Entity parent, Entity child)
     {
-        if (parent.hasChild)
+        if (parent.hasChildren)
         {
-            parent.ReplaceChild(parent.child.Value.Concat(child.AsList()).ToList());
+            parent.ReplaceChildren(parent.children.Value.Concat(child.AsList()).ToList());
         }
         else
         {
-            parent.AddChild(child.AsList());
+            parent.AddChildren(child.AsList());
         }
 
         return parent;

@@ -19,7 +19,7 @@ public class ShowSelectedIndicatorForSquadSystem : IReactiveSystem, IEnsureCompo
     {
         foreach (var unit in unitsCacheEntity.unitsCache.Units)
         {
-            foreach (var child in unit.child.Value)
+            foreach (var child in unit.children.Value)
             {
                 child.IsHidden(!unitsCacheEntity.isSelected);
             }

@@ -108,12 +108,12 @@
     <Compile Include="Assets\Features\ComponentContainer.cs" />
     <Compile Include="Assets\Features\ConvexHullCalculator.cs" />
     <Compile Include="Assets\Features\CreateSquad\BoxFormationComponent.cs" />
-    <Compile Include="Assets\Features\CreateSquad\ChildComponent.cs" />
+    <Compile Include="Assets\Features\CreateSquad\ChildrenComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\ParentComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\PositionComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\QuaternionClass.cs" />
     <Compile Include="Assets\Features\CreateSquad\ResourceComponent.cs" />
-    <Compile Include="Assets\Features\CreateSquad\SelectionAreaDecoratorSystem.cs" />
+    <Compile Include="Assets\Features\CreateSquad\SelectionAreaDecoratorSystems.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadCreationSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\UnitBehaviourConfiguration.cs" />
@@ -168,6 +168,7 @@
     <Compile Include="Assets\Features\View\RenderPositionSystem.cs" />
     <Compile Include="Assets\Features\View\RenderRotationSystem.cs" />
     <Compile Include="Assets\Features\View\Resources.cs" />
+    <Compile Include="Assets\Features\View\SetViewParentSystems.cs" />
     <Compile Include="Assets\FloatExtensions.cs" />
     <Compile Include="Assets\Generated\AddViewSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AiAttackOrderSystemGeneratedExtension.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Assets\Generated\Assets.Features.Selection.SelectInteractionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Selection.SelectedInteractionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.SquadAudioSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\Assets.Features.View.AddViewParentSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AttackInputComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AttackInteractionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AttackOrderComponentGeneratedExtension.cs" />
@@ -193,7 +195,7 @@
     <Compile Include="Assets\Generated\AudioComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\BoundingMeshComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\BoxFormationComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\ChildComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\ChildrenComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\CollisionComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ComponentIds.cs" />
     <Compile Include="Assets\Generated\DelayedDestroyComponentGeneratedExtension.cs" />

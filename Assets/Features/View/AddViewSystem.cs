@@ -27,6 +27,7 @@ public class AddViewSystem : IReactiveSystem
             AddParentIfAvailable(view, entity);
             AddAnimatorIfAvailable(view, entity);
             AddPhysicsIfAvailable(view, entity);
+            AddColliderIfAvailable(view, entity);
 
             entity.AddView(view);
             GameObjectConfigure.ConfigureGameObject(view, entity);
@@ -68,11 +69,16 @@ public class AddViewSystem : IReactiveSystem
         var rigidbody = view.GetComponent<Rigidbody>();
         if (rigidbody != null)
         {
-            if (!rigidbody.isKinematic)
-            {
-                view.AddComponent<Collidable>().SetEntity(entity);
-            }
             entity.AddPhysics(rigidbody);
+        }
+    }
+
+    private static void AddColliderIfAvailable(GameObject view, Entity entity)
+    {
+        var collider = view.GetComponent<Collider>();
+        if (collider != null)
+        {
+            view.AddComponent<Collidable>().SetEntity(entity);
         }
     }
 }

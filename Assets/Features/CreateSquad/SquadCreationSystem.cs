@@ -52,7 +52,7 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
         unitsInSquad.Foreach(x =>
             {
                 x.IsDestroy(true);
-                foreach (var child in x.child.Value)
+                foreach (var child in x.children.Value)
                 {
                     child.IsDestroy(true);
                 }

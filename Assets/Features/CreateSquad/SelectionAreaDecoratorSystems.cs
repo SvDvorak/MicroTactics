@@ -42,7 +42,7 @@ namespace Assets.Features.CreateSquad
         {
             foreach (var entity in entities)
             {
-                foreach (var child in entity.child.Value)
+                foreach (var child in entity.children.Value)
                 {
                     child.IsDestroy(true);
                 }

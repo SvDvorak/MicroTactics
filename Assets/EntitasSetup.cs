@@ -35,6 +35,7 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateMeshUpdateSystem())
 
             .Add(pool.CreateAddViewSystem())
+            .Add(pool.CreateAddViewParentSystem())
 
             .Add(pool.CreateAiMoveOrderSystem())
             .Add(pool.CreateAiAttackOrderSystem())

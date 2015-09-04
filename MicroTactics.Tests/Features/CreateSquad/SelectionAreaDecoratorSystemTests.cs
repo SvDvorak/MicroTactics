@@ -48,7 +48,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
     {
         public static void ShouldBeSelectionAreaFor(this Entity selectionAreaEntity, Entity entity)
         {
-            entity.child.Value.ShouldAllBeEquivalentTo(selectionAreaEntity.AsList());
+            entity.children.Value.ShouldAllBeEquivalentTo(selectionAreaEntity.AsList());
             selectionAreaEntity.selectionArea.Parent.Should().Be(entity);
         }
     }
@@ -71,8 +71,8 @@ namespace MicroTactics.Tests.Features.CreateSquad
         {
             Execute(_squad1, _squad2);
 
-            _squad1.child.Value.First().ShouldBeDestroyed(true);
-            _squad2.child.Value.First().ShouldBeDestroyed(true);
+            _squad1.children.Value.First().ShouldBeDestroyed(true);
+            _squad2.children.Value.First().ShouldBeDestroyed(true);
         }
 
         private static Entity CreateSquadWithSelectionArea()
