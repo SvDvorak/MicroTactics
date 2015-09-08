@@ -1,0 +1,24 @@
+# Blender MTL File: 'house.blend'
+# Material Count: 2
+
+newmtl House_material
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd base_occlusion.png
+map_Bump house_bump.png
+
+newmtl House_material_normals_house
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd house_normals.png
+map_Bump house_bump.png
