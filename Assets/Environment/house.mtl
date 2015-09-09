@@ -1,18 +1,18 @@
 # Blender MTL File: 'house.blend'
 # Material Count: 2
 
-newmtl House_material
+newmtl Chimneys_material
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
-Kd 1.000000 1.000000 1.000000
-Ks 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
-illum 1
-map_Kd base_occlusion.png
-map_Bump house_bump.png
+illum 2
+map_Kd chimneys_normals.png
+map_Bump chimneys_normals.png
 
-newmtl House_material_normals_house
+newmtl House_material
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 1.000000 1.000000 1.000000
