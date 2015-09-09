@@ -49,7 +49,8 @@ namespace MicroTactics.Tests.Features
         private static Entity CreateCollidingArrow(TestEntity collidedWith, float velocityMagnitude)
         {
             return new TestEntity()
-                .AddCollision(collidedWith, new Vector3(velocityMagnitude, 0, 0))
+                .AddView(null)
+                .AddCollision(collidedWith, null, new Vector3(velocityMagnitude, 0, 0))
                 .AddStickable(1)
                 .AddPhysics(null);
         }

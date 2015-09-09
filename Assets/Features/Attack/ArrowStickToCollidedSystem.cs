@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Assets;
 using Entitas;
-using UnityEngine;
 
 public class ArrowStickToCollidedSystem : IReactiveSystem, IEnsureComponents
 {
@@ -14,10 +12,13 @@ public class ArrowStickToCollidedSystem : IReactiveSystem, IEnsureComponents
         foreach (var entity in entities.Where(ShouldStick))
         {
             entity.RemovePhysics();
-            if (entity.collision.CollidedWith != null)
-            {
-                entity.collision.CollidedWith.AddChildTwoWay(entity);
-            }
+
+            entity.view.Value.transform.SetParent(entity.collision.View.transform);
+            //var otherEntity = entity.collision.Entity;
+            //if(otherEntity != null)
+            //{
+            //    otherEntity.AddChildTwoWay(entity);
+            //}
         }
     }
 

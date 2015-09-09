@@ -14,7 +14,7 @@ namespace Assets.Features.View
                 if (entity.parent.Value.hasView)
                 {
                     var parentView = entity.parent.Value.view;
-                    entity.view.GameObject.transform.SetParent(parentView.GameObject.transform, true);
+                    entity.view.Value.transform.SetParent(parentView.Value.transform, true);
                 }
             }
         }

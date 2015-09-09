@@ -13,7 +13,7 @@ public class RemoveViewSystem : IReactiveSystem
     {
         foreach (var entity in entities)
         {
-            UnityEngine.Object.Destroy(entity.view.GameObject);
+            UnityEngine.Object.Destroy(entity.view.Value);
         }
     }
 }

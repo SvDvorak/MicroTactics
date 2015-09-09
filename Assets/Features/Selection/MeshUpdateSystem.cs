@@ -29,7 +29,7 @@ public class MeshUpdateSystem : IReactiveSystem
 
             mesh.RecalculateNormals();
             mesh.RecalculateBounds();
-            entity.view.GameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
+            entity.view.Value.GetComponent<MeshCollider>().sharedMesh = mesh;
         }
     }
 }

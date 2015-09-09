@@ -12,7 +12,7 @@ public class RenderPositionSystem : IReactiveSystem
     {
         foreach (var e in entities)
         {
-            var transform = e.view.GameObject.transform;
+            var transform = e.view.Value.transform;
 
             var newPosition = e.position.ToUnityV3();
             var rigidbody = transform.GetComponent<Rigidbody>();

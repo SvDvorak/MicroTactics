@@ -11,7 +11,7 @@ public class RemovePhysicsSystem : IReactiveSystem, IEnsureComponents
     {
         foreach (var entity in entities)
         {
-            Object.Destroy(entity.view.GameObject.GetComponent<Rigidbody>());
+            Object.Destroy(entity.view.Value.GetComponent<Rigidbody>());
         }
     }
 }

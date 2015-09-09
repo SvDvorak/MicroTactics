@@ -14,12 +14,12 @@ public class Collidable : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        var otherCollidable = collision.collider.GetComponentInParent<Collidable>();
+        var otherCollidable = collision.gameObject.GetComponent<Collidable>();
         if (otherCollidable == null || Entity == null || Entity.hasCollision)
         {
             return;
         }
 
-        Entity.AddCollision(otherCollidable.Entity, collision.relativeVelocity.ToV3());
+        Entity.AddCollision(otherCollidable.Entity, collision.collider.gameObject, collision.relativeVelocity.ToV3());
     }
 }

@@ -12,16 +12,16 @@ namespace Entitas {
             _viewComponentPool.Clear();
         }
 
-        public Entity AddView(UnityEngine.GameObject newGameObject) {
+        public Entity AddView(UnityEngine.GameObject newValue) {
             var component = _viewComponentPool.Count > 0 ? _viewComponentPool.Pop() : new ViewComponent();
-            component.GameObject = newGameObject;
+            component.Value = newValue;
             return AddComponent(ComponentIds.View, component);
         }
 
-        public Entity ReplaceView(UnityEngine.GameObject newGameObject) {
+        public Entity ReplaceView(UnityEngine.GameObject newValue) {
             var previousComponent = hasView ? view : null;
             var component = _viewComponentPool.Count > 0 ? _viewComponentPool.Pop() : new ViewComponent();
-            component.GameObject = newGameObject;
+            component.Value = newValue;
             ReplaceComponent(ComponentIds.View, component);
             if (previousComponent != null) {
                 _viewComponentPool.Push(previousComponent);

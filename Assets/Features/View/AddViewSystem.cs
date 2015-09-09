@@ -51,7 +51,7 @@ public class AddViewSystem : IReactiveSystem
         if (entity.hasParent && entity.parent.Value.hasView)
         {
             var parentView = entity.parent.Value.view;
-            view.transform.SetParent(parentView.GameObject.transform, false);
+            view.transform.SetParent(parentView.Value.transform, false);
         }
     }
 

@@ -13,7 +13,7 @@ public class RenderRotationSystem : IReactiveSystem, IEnsureComponents
     {
         foreach (var e in entities)
         {
-            var transform = e.view.GameObject.transform;
+            var transform = e.view.Value.transform;
             transform.rotation = e.rotation.ToUnityQ();
         }
     }

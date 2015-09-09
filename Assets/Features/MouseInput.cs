@@ -54,7 +54,7 @@ public class MouseInput : MonoBehaviour
 
     private static Entity GetMatchingEntity(Entity[] viewables, RaycastHit hit)
     {
-        return viewables.SingleOrDefault(x => x.view.GameObject == hit.transform.gameObject);
+        return viewables.SingleOrDefault(x => x.view.Value == hit.transform.gameObject);
     }
 
     private RaycastHit[] RaycastUsingCamera()

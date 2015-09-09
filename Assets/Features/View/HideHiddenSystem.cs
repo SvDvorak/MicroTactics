@@ -11,7 +11,7 @@ public class HideHiddenSystem : IReactiveSystem, IEnsureComponents
     {
         foreach (var entity in entities)
         {
-            entity.view.GameObject.SetActive(!entity.isHidden);
+            entity.view.Value.SetActive(!entity.isHidden);
         }
     }
 }
