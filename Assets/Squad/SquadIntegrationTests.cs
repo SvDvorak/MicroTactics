@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Assertions.Must;
 
-[IntegrationTest.DynamicTest("IntegrationTests")]
-[IntegrationTest.SucceedWithAssertions]
-[IntegrationTest.Timeout(1)]
+//[IntegrationTest.DynamicTest("IntegrationTests")]
+//[IntegrationTest.SucceedWithAssertions]
+//[IntegrationTest.Timeout(1)]
 public class SquadIntegrationTests : MonoBehaviour
 {
 	private void Awake ()
