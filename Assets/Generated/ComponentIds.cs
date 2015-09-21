@@ -5,46 +5,48 @@ using Entitas;
 public static class ComponentIds {
     public const int Ai = 0;
     public const int Animate = 1;
-    public const int AttachView = 2;
-    public const int AttackInput = 3;
-    public const int AttackOrder = 4;
-    public const int Audio = 5;
-    public const int BoundingMesh = 6;
-    public const int BoxFormation = 7;
-    public const int Children = 8;
-    public const int Collision = 9;
-    public const int DelayedDestroy = 10;
-    public const int Destroy = 11;
-    public const int Enemy = 12;
-    public const int Force = 13;
-    public const int Ground = 14;
-    public const int Hidden = 15;
-    public const int Input = 16;
-    public const int MoveInput = 17;
-    public const int Movement = 18;
-    public const int MoveOrder = 19;
-    public const int Parent = 20;
-    public const int Physics = 21;
-    public const int Player = 22;
-    public const int Position = 23;
-    public const int Reload = 24;
-    public const int Resource = 25;
-    public const int Rotation = 26;
-    public const int Selected = 27;
-    public const int SelectionArea = 28;
-    public const int Squad = 29;
-    public const int Stickable = 30;
-    public const int Unit = 31;
-    public const int UnitsCache = 32;
-    public const int Velocity = 33;
-    public const int View = 34;
+    public const int AttachRoot = 2;
+    public const int AttachTo = 3;
+    public const int AttackInput = 4;
+    public const int AttackOrder = 5;
+    public const int Audio = 6;
+    public const int BoundingMesh = 7;
+    public const int BoxFormation = 8;
+    public const int Children = 9;
+    public const int Collision = 10;
+    public const int DelayedDestroy = 11;
+    public const int Destroy = 12;
+    public const int Enemy = 13;
+    public const int Force = 14;
+    public const int Ground = 15;
+    public const int Hidden = 16;
+    public const int Input = 17;
+    public const int MoveInput = 18;
+    public const int Movement = 19;
+    public const int MoveOrder = 20;
+    public const int Parent = 21;
+    public const int Physics = 22;
+    public const int Player = 23;
+    public const int Position = 24;
+    public const int Reload = 25;
+    public const int Resource = 26;
+    public const int Rotation = 27;
+    public const int Selected = 28;
+    public const int SelectionArea = 29;
+    public const int Squad = 30;
+    public const int Stickable = 31;
+    public const int Unit = 32;
+    public const int UnitsCache = 33;
+    public const int Velocity = 34;
+    public const int View = 35;
 
-    public const int TotalComponents = 35;
-
-    static readonly string[] components = {
+    public const int TotalComponents = 36;
+
+    static readonly string[] components = {
         "Ai",
         "Animate",
-        "AttachView",
+        "AttachRoot",
+        "AttachTo",
         "AttackInput",
         "AttackOrder",
         "Audio",
@@ -77,15 +79,17 @@ public static class ComponentIds {
         "UnitsCache",
         "Velocity",
         "View"
-    };
-
-    public static string IdToString(int componentId) {
-        return components[componentId];
+    };
+
+    public static string IdToString(int componentId) {
+        return components[componentId];
     }
 
     private static readonly IDictionary<Type, int> componentIds = new Dictionary<Type, int>() {
         { typeof (AiComponent), Ai },
         { typeof (AnimateComponent), Animate },
+        { typeof (AttachRootComponent), AttachRoot },
+        { typeof (AttachToComponent), AttachTo },
         { typeof (AttackInputComponent), AttackInput },
         { typeof (AttackOrderComponent), AttackOrder },
         { typeof (AudioComponent), Audio },
@@ -123,15 +127,15 @@ public static class ComponentIds {
     public static int ComponentToId(IComponent component) {
         return componentIds[component.GetType()];
     }
-}
-
-namespace Entitas {
-    public partial class Matcher : AllOfMatcher {
-        public Matcher(int index) : base(new [] { index }) {
-        }
-
-        public override string ToString() {
-            return ComponentIds.IdToString(indices[0]);
-        }
-    }
+}
+
+namespace Entitas {
+    public partial class Matcher : AllOfMatcher {
+        public Matcher(int index) : base(new [] { index }) {
+        }
+
+        public override string ToString() {
+            return ComponentIds.IdToString(indices[0]);
+        }
+    }
 }
