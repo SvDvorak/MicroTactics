@@ -116,13 +116,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UnityVS.MicroTactics.CSharp.csproj">
-      <Project>{a7a55391-1c2d-c12a-f2c3-d7ede3d3aacc}</Project>
-      <Name>UnityVS.MicroTactics.CSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UnityVS.MicroTactics.CSharp.Editor.csproj">
-      <Project>{D6F6D517-5320-D49F-A649-BF01687C2F17}</Project>
-      <Name>UnityVS.MicroTactics.CSharp.Editor</Name>
+    <ProjectReference Include="..\MicroTactics.CSharp.csproj">
+      <Project>{ec0acb81-b22e-9cc4-86dc-c4ab2f101809}</Project>
+      <Name>MicroTactics.CSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

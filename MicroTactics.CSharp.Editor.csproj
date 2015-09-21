@@ -114,26 +114,26 @@
     <Reference Include="Mono.GameMath">
       <HintPath>Assets\Libraries\Mono.GameMath.dll</HintPath>
     </Reference>
-    <Reference Include="BasicSerializer">
-      <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>Assets\Libraries\UnityTestTools\UnitTesting\Editor\NUnit\Libs\Mono.Cecil.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>Assets\Libraries\UnityTestTools\UnitTesting\Editor\NUnit\Libs\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.core.interfaces">
-      <HintPath>Assets\Libraries\UnityTestTools\UnitTesting\Editor\NUnit\Libs\nunit.core.interfaces.dll</HintPath>
+    <Reference Include="NSubstitute">
+      <HintPath>Assets\Libraries\UnityTestTools\UnitTesting\Editor\NSubstitute\NSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Assets\Libraries\UnityTestTools\UnitTesting\Editor\NUnit\Libs\Mono.Cecil.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Cecil.Mdb">
+      <HintPath>Assets\Libraries\UnityTestTools\UnitTesting\Editor\NUnit\Libs\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.core">
       <HintPath>Assets\Libraries\UnityTestTools\UnitTesting\Editor\NUnit\Libs\nunit.core.dll</HintPath>
     </Reference>
-    <Reference Include="NSubstitute">
-      <HintPath>Assets\Libraries\UnityTestTools\UnitTesting\Editor\NSubstitute\NSubstitute.dll</HintPath>
+    <Reference Include="nunit.core.interfaces">
+      <HintPath>Assets\Libraries\UnityTestTools\UnitTesting\Editor\NUnit\Libs\nunit.core.interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>Assets\Libraries\UnityTestTools\UnitTesting\Editor\NUnit\Libs\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicSerializer">
+      <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
