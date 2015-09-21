@@ -50,7 +50,7 @@ namespace MicroTactics.Tests.Features
         {
             return new TestEntity()
                 .AddView(null)
-                .AddCollision(collidedWith, null, new Vector3(velocityMagnitude, 0, 0))
+                .AddCollision(collidedWith, new Vector3(velocityMagnitude, 0, 0))
                 .AddStickable(1)
                 .AddPhysics(null);
         }

@@ -7,5 +7,5 @@ using UnityEngine;
 
 public class AttachRootComponent : IComponent
 {
-    public GameObject Root;
+    public GameObject Value;
 }

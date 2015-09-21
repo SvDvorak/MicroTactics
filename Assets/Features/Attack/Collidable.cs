@@ -20,6 +20,6 @@ public class Collidable : MonoBehaviour
             return;
         }
 
-        Entity.AddCollision(otherCollidable.Entity, collision.collider.gameObject, collision.relativeVelocity.ToV3());
+        Entity.AddCollision(otherCollidable.Entity, collision.relativeVelocity.ToV3());
     }
 }

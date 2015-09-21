@@ -12,16 +12,16 @@ namespace Entitas {
             _attachRootComponentPool.Clear();
         }
 
-        public Entity AddAttachRoot(UnityEngine.GameObject newRoot) {
+        public Entity AddAttachRoot(UnityEngine.GameObject newValue) {
             var component = _attachRootComponentPool.Count > 0 ? _attachRootComponentPool.Pop() : new AttachRootComponent();
-            component.Root = newRoot;
+            component.Value = newValue;
             return AddComponent(ComponentIds.AttachRoot, component);
         }
 
-        public Entity ReplaceAttachRoot(UnityEngine.GameObject newRoot) {
+        public Entity ReplaceAttachRoot(UnityEngine.GameObject newValue) {
             var previousComponent = hasAttachRoot ? attachRoot : null;
             var component = _attachRootComponentPool.Count > 0 ? _attachRootComponentPool.Pop() : new AttachRootComponent();
-            component.Root = newRoot;
+            component.Value = newValue;
             ReplaceComponent(ComponentIds.AttachRoot, component);
             if (previousComponent != null) {
                 _attachRootComponentPool.Push(previousComponent);
