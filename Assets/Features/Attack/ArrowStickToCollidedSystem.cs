@@ -16,7 +16,7 @@ public class ArrowStickToCollidedSystem : IReactiveSystem, IEnsureComponents
             var otherEntity = entity.collision.Entity;
             if (otherEntity != null)
             {
-                otherEntity.AddChildTwoWay(entity);
+                entity.AddAttachTo(entity.collision.Entity);
             }
         }
     }

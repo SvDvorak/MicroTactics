@@ -23,7 +23,7 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void SticksWhenRelativeVelocityIsHigh()
+        public void AttachesToWhenRelativeVelocityIsHighEnough()
         {
             var stickToEntity = new TestEntity();
             var fastArrow = CreateCollidingArrow(stickToEntity, float.PositiveInfinity);
@@ -33,17 +33,17 @@ namespace MicroTactics.Tests.Features
 
             fastArrow.hasPhysics.Should().BeFalse("should remove physics when collision is hard");
             slowArrow.hasPhysics.Should().BeTrue("should not remove physics when collision is soft");
-            fastArrow.ShouldHaveParent(stickToEntity);
+            fastArrow.ShouldAttachTo(stickToEntity);
         }
 
         [Fact]
-        public void DoesNotSetParentWhenOtherEntityIsNull()
+        public void DoesNotAttachWhenOtherEntityIsNull()
         {
             var fastArrow = CreateCollidingArrow(null, float.PositiveInfinity);
 
             _sut.Execute(fastArrow.AsList());
 
-            fastArrow.hasParent.Should().BeFalse("should not set parent when other entity is null");
+            fastArrow.hasAttachTo.Should().BeFalse("should not attach when other entity is null");
         }
 
         private static Entity CreateCollidingArrow(TestEntity collidedWith, float velocityMagnitude)
