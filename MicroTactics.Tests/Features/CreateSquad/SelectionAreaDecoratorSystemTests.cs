@@ -8,7 +8,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
 {
     public class SelectionAreaDecoratorSystemTests
     {
-        private readonly SelectionAreaAddDecoratorSystem _sut = new SelectionAreaAddDecoratorSystem();
+        private readonly SelectionAreaDecoratorSystem _sut = new SelectionAreaDecoratorSystem();
         private readonly TestPool _pool = new TestPool();
         private readonly Entity _squad1 = new TestEntity().AddSquad(0);
         private readonly Entity _squad2 = new TestEntity().AddSquad(1);
@@ -50,40 +50,6 @@ namespace MicroTactics.Tests.Features.CreateSquad
         {
             entity.children.Value.ShouldAllBeEquivalentTo(selectionAreaEntity.AsList());
             selectionAreaEntity.selectionArea.Parent.Should().Be(entity);
-        }
-    }
-
-    public class SelectionAreaRemoveDecoratorSystemTests
-    {
-        private readonly SelectionAreaRemoveDecoratorSystem _sut = new SelectionAreaRemoveDecoratorSystem();
-        private readonly Entity _squad1 = CreateSquadWithSelectionArea();
-        private readonly Entity _squad2 = CreateSquadWithSelectionArea();
-
-        [Fact]
-        public void TriggersOnRemovedSquadOrPlayer()
-        {
-            _sut.triggers[0].Should().Be(Matcher.AllOf(Matcher.Destroy, Matcher.Squad, Matcher.Player).OnEntityAdded());
-            _sut.triggers[1].Should().Be(Matcher.AllOf(Matcher.Squad, Matcher.Player).OnEntityRemoved());
-        }
-
-        [Fact]
-        public void DestroysSelectionAreaWhenSquadIsDestroyed()
-        {
-            Execute(_squad1, _squad2);
-
-            _squad1.children.Value.First().ShouldBeDestroyed(true);
-            _squad2.children.Value.First().ShouldBeDestroyed(true);
-        }
-
-        private static Entity CreateSquadWithSelectionArea()
-        {
-            Entity selectionArea = new TestEntity();
-            return new TestEntity().AddSquad(0).AddChildTwoWay(selectionArea);
-        }
-
-        private void Execute(params Entity[] squads)
-        {
-            _sut.Execute(squads.ToList());
         }
     }
 }

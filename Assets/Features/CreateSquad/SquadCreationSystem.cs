@@ -29,7 +29,7 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
 
     private void CreateUnitsForSquad(SquadComponent squad, BoxFormationComponent formation)
     {
-        for (var i = 0; i < formation.Columns*formation.Rows; i++)
+        for (var i = 0; i < formation.Columns * formation.Rows; i++)
         {
             var position = UnitInSquadPositioner.GetPosition(formation, i);
             var unit = _pool.CreateEntity()
@@ -51,12 +51,8 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
     {
         var unitsInSquad = _unitsGroup.GetEntities().Where(x => x.unit.SquadNumber == squadNumber);
         unitsInSquad.Foreach(x =>
-            {
-                x.IsDestroy(true);
-                foreach (var child in x.children.Value)
-                {
-                    child.IsDestroy(true);
-                }
-            });
+        {
+            x.RecursiveDestroy();
+        });
     }
 }

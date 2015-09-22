@@ -41,7 +41,18 @@ namespace MicroTactics.Tests.Features
             healthEntity2.ShouldHaveHealth(90);
         }
 
-        private Entity CreateHealthyEntityWithCollision(int collisionVelocity)
+        [Fact]
+        public void SetsEntityAsDeadWhenHealthIsBelowZero()
+        {
+            var dyingEntity = CreateHealthyEntityWithCollision(float.PositiveInfinity);
+
+            _sut.Execute(dyingEntity.AsList());
+
+            dyingEntity.ShouldBeDestroyed(true);
+            dyingEntity.isKeepView.Should().BeTrue("should keep view when dead");
+        }
+
+        private Entity CreateHealthyEntityWithCollision(float collisionVelocity)
         {
             return new TestEntity().AddHealth(100).AddCollision(_collidedWith, new Vector3(collisionVelocity, 0, 0));
         }

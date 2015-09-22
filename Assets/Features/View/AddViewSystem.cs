@@ -30,7 +30,7 @@ public class AddViewSystem : IReactiveSystem
             AddColliderIfAvailable(view, entity);
 
             entity.AddView(view);
-            GameObjectConfigure.ConfigureGameObject(view, entity);
+            GameObjectConfigurer.AttachEntity(view, entity);
         }
     }
 

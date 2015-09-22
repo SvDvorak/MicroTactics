@@ -22,26 +22,27 @@ public static class ComponentIds {
     public const int Health = 16;
     public const int Hidden = 17;
     public const int Input = 18;
-    public const int MoveInput = 19;
-    public const int Movement = 20;
-    public const int MoveOrder = 21;
-    public const int Parent = 22;
-    public const int Physics = 23;
-    public const int Player = 24;
-    public const int Position = 25;
-    public const int Reload = 26;
-    public const int Resource = 27;
-    public const int Rotation = 28;
-    public const int Selected = 29;
-    public const int SelectionArea = 30;
-    public const int Squad = 31;
-    public const int Stickable = 32;
-    public const int Unit = 33;
-    public const int UnitsCache = 34;
-    public const int Velocity = 35;
-    public const int View = 36;
+    public const int KeepView = 19;
+    public const int MoveInput = 20;
+    public const int Movement = 21;
+    public const int MoveOrder = 22;
+    public const int Parent = 23;
+    public const int Physics = 24;
+    public const int Player = 25;
+    public const int Position = 26;
+    public const int Reload = 27;
+    public const int Resource = 28;
+    public const int Rotation = 29;
+    public const int Selected = 30;
+    public const int SelectionArea = 31;
+    public const int Squad = 32;
+    public const int Stickable = 33;
+    public const int Unit = 34;
+    public const int UnitsCache = 35;
+    public const int Velocity = 36;
+    public const int View = 37;
 
-    public const int TotalComponents = 37;
+    public const int TotalComponents = 38;
 
     static readonly string[] components = {
         "Ai",
@@ -63,6 +64,7 @@ public static class ComponentIds {
         "Health",
         "Hidden",
         "Input",
+        "KeepView",
         "MoveInput",
         "Movement",
         "MoveOrder",
@@ -107,6 +109,7 @@ public static class ComponentIds {
         { typeof (HealthComponent), Health },
         { typeof (HiddenComponent), Hidden },
         { typeof (InputComponent), Input },
+        { typeof (KeepViewComponent), KeepView },
         { typeof (MoveInputComponent), MoveInput },
         { typeof (MovementComponent), Movement },
         { typeof (MoveOrderComponent), MoveOrder },

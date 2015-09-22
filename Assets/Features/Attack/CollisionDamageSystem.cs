@@ -12,7 +12,17 @@ namespace Assets.Features.Attack
         {
             foreach (var entity in entities)
             {
-                entity.ReplaceHealth(entity.health.Value - entity.collision.RelativeVelocity.Length());
+                var newHealth = entity.health.Value - entity.collision.RelativeVelocity.Length();
+                if (newHealth > 0)
+                {
+                    entity.ReplaceHealth(newHealth);
+                }
+                else
+                {
+                    entity
+                        .RecursiveDestroy()
+                        .IsKeepView(true);
+                }
             }
         }
     }

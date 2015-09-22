@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Entitas;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class RemoveViewSystem : IReactiveSystem
 {
     public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Destroy, Matcher.View).OnEntityAdded(); } }
 
-
     public void Execute(List<Entity> entities)
     {
         foreach (var entity in entities)
         {
-            UnityEngine.Object.Destroy(entity.view.Value);
+            var view = entity.view.Value;
+            GameObjectConfigurer.DetachEntity(view, entity);
+
+            if (!entity.isKeepView)
+            {
+                Object.Destroy(view);
+            }
         }
     }
 }

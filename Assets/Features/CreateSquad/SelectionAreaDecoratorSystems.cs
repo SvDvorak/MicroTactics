@@ -3,7 +3,7 @@ using Entitas;
 
 namespace Assets.Features.CreateSquad
 {
-    public class SelectionAreaAddDecoratorSystem : IReactiveSystem, ISetPool
+    public class SelectionAreaDecoratorSystem : IReactiveSystem, ISetPool
     {
         private Pool _pool;
 
@@ -31,22 +31,6 @@ namespace Assets.Features.CreateSquad
                 .AddResource(Res.SelectionArea);
 
             entity.AddChildTwoWay(selectionArea);
-        }
-    }
-
-    public class SelectionAreaRemoveDecoratorSystem : IMultiReactiveSystem
-    {
-        public TriggerOnEvent[] triggers { get { return new[] { Matcher.AllOf(Matcher.Destroy, Matcher.Squad, Matcher.Player).OnEntityAdded(), Matcher.AllOf(Matcher.Squad, Matcher.Player).OnEntityRemoved() }; } }
-
-        public void Execute(List<Entity> entities)
-        {
-            foreach (var entity in entities)
-            {
-                foreach (var child in entity.children.Value)
-                {
-                    child.IsDestroy(true);
-                }
-            }
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Assets.Features.Destruction
                 if (destroyEntity.delayedDestroy.Frames == 0)
                 {
                     destroyEntity.RemoveDelayedDestroy();
-                    destroyEntity.IsDestroy(true);
+                    destroyEntity.RecursiveDestroy();
                 }
             }
         }
