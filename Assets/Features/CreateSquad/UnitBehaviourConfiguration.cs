@@ -13,8 +13,5 @@ public class UnitBehaviourConfiguration : MonoBehaviour, IEntityConfigurer
             .AddMovement(MovementSpeed);
 
         gameObject.AddComponent<Collidable>().SetEntity(entity);
-
-        //var collidableEntity = Pools.pool.CreateEntity().AddView(Collidable.gameObject);
-        //Collidable.SetEntity(collidableEntity);
     }
 }

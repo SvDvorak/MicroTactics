@@ -34,6 +34,7 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
             var position = UnitInSquadPositioner.GetPosition(formation, i);
             var unit = _pool.CreateEntity()
                 .AddUnit(squad.Number)
+                .AddHealth(100)
                 .AddPosition(position)
                 .AddRotation(Quaternion.Identity)
                 .AddResource(Res.Unit);

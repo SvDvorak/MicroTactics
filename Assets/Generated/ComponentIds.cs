@@ -19,28 +19,29 @@ public static class ComponentIds {
     public const int Enemy = 13;
     public const int Force = 14;
     public const int Ground = 15;
-    public const int Hidden = 16;
-    public const int Input = 17;
-    public const int MoveInput = 18;
-    public const int Movement = 19;
-    public const int MoveOrder = 20;
-    public const int Parent = 21;
-    public const int Physics = 22;
-    public const int Player = 23;
-    public const int Position = 24;
-    public const int Reload = 25;
-    public const int Resource = 26;
-    public const int Rotation = 27;
-    public const int Selected = 28;
-    public const int SelectionArea = 29;
-    public const int Squad = 30;
-    public const int Stickable = 31;
-    public const int Unit = 32;
-    public const int UnitsCache = 33;
-    public const int Velocity = 34;
-    public const int View = 35;
+    public const int Health = 16;
+    public const int Hidden = 17;
+    public const int Input = 18;
+    public const int MoveInput = 19;
+    public const int Movement = 20;
+    public const int MoveOrder = 21;
+    public const int Parent = 22;
+    public const int Physics = 23;
+    public const int Player = 24;
+    public const int Position = 25;
+    public const int Reload = 26;
+    public const int Resource = 27;
+    public const int Rotation = 28;
+    public const int Selected = 29;
+    public const int SelectionArea = 30;
+    public const int Squad = 31;
+    public const int Stickable = 32;
+    public const int Unit = 33;
+    public const int UnitsCache = 34;
+    public const int Velocity = 35;
+    public const int View = 36;
 
-    public const int TotalComponents = 36;
+    public const int TotalComponents = 37;
 
     static readonly string[] components = {
         "Ai",
@@ -59,6 +60,7 @@ public static class ComponentIds {
         "Enemy",
         "Force",
         "Ground",
+        "Health",
         "Hidden",
         "Input",
         "MoveInput",
@@ -102,6 +104,7 @@ public static class ComponentIds {
         { typeof (EnemyComponent), Enemy },
         { typeof (ForceComponent), Force },
         { typeof (GroundComponent), Ground },
+        { typeof (HealthComponent), Health },
         { typeof (HiddenComponent), Hidden },
         { typeof (InputComponent), Input },
         { typeof (MoveInputComponent), MoveInput },

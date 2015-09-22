@@ -84,12 +84,13 @@ namespace MicroTactics.Tests.Features.CreateSquad
         }
 
         [Fact]
-        public void AddsUnitAndResourceComponentToEachUnit()
+        public void AddsUnitHealthAndResourceComponentToEachUnit()
         {
             Execute(_squad1.ReplaceBoxFormation(1, 1, 0));
 
             var unit = Units.SingleEntity();
             unit.ShouldHaveUnit(0);
+            unit.ShouldHaveHealth(100);
             unit.ShouldHaveResource(Res.Unit);
         }
 

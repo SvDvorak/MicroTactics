@@ -94,9 +94,12 @@
     <Compile Include="Assets\Features\Attack\AttackInteractionSystem.cs" />
     <Compile Include="Assets\Features\Attack\AttackOrderComponent.cs" />
     <Compile Include="Assets\Features\Attack\AttackSystem.cs" />
+    <Compile Include="Assets\Features\Attack\ClearCollisionsSystem.cs" />
     <Compile Include="Assets\Features\Attack\Collidable.cs" />
     <Compile Include="Assets\Features\Attack\CollisionComponent.cs" />
+    <Compile Include="Assets\Features\Attack\CollisionDamageSystem.cs" />
     <Compile Include="Assets\Features\Attack\ForceComponent.cs" />
+    <Compile Include="Assets\Features\Attack\HealthComponent.cs" />
     <Compile Include="Assets\Features\Attack\PitchFromVelocitySystem.cs" />
     <Compile Include="Assets\Features\Attack\ReloadComponent.cs" />
     <Compile Include="Assets\Features\Attack\ReloadSystem.cs" />
@@ -180,6 +183,8 @@
     <Compile Include="Assets\Generated\ApplyForceSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ArrowStickToCollidedSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Attack.AttachToSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\Assets.Features.Attack.ClearCollisionsSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\Assets.Features.Attack.CollisionDamageSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Attack.ReloadSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.CreateSquad.SelectionAreaAddDecoratorSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.CreateSquad.SelectionAreaRemoveDecoratorSystemGeneratedExtension.cs" />
@@ -208,6 +213,7 @@
     <Compile Include="Assets\Generated\EnemyComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ForceComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\GroundComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\HealthComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\HiddenComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\HideHiddenSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\InputComponentGeneratedExtension.cs" />

@@ -11,6 +11,12 @@ public static class EntityExtensions
         entity.unit.SquadNumber.Should().Be(squadNumber);
     }
 
+    public static void ShouldHaveHealth(this Entity entity, float health)
+    {
+        entity.hasHealth.Should().BeTrue("entity should have a health component");
+        entity.health.Value.Should().Be(health);
+    }
+
     public static void ShouldHaveParent(this Entity child, Entity parent)
     {
         child.parent.Value.Should().Be(parent);

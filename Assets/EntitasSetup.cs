@@ -57,6 +57,7 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateArrowStickToCollidedSystem())
             .Add(pool.CreateAttachToSystem())
             .Add(pool.CreatePitchFromVelocitySystem())
+            .Add(pool.CreateCollisionDamageSystem())
 
             .Add(pool.CreateApplyForceSystem())
             .Add(pool.CreateRenderPositionSystem())
@@ -70,6 +71,7 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateSelectionAreaRemoveDecoratorSystem())
             .Add(pool.CreateRemoveViewSystem())
             .Add(pool.CreateRemovePhysicsSystem())
+            .Add(pool.CreateClearCollisionsSystem())
             .Add(pool.CreateDestroySystem());
     }
 }
