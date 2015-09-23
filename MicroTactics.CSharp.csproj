@@ -104,6 +104,7 @@
     <Compile Include="Assets\Features\Attack\ReloadComponent.cs" />
     <Compile Include="Assets\Features\Attack\ReloadSystem.cs" />
     <Compile Include="Assets\Features\Attack\RenderAttackArrowSystem.cs" />
+    <Compile Include="Assets\Features\Attack\SpawnHelper.cs" />
     <Compile Include="Assets\Features\Attack\SquadAttackOrderSystem.cs" />
     <Compile Include="Assets\Features\Attack\StickableComponent.cs" />
     <Compile Include="Assets\Features\Attack\VelocityComponent.cs" />
@@ -371,6 +372,7 @@
     <Compile Include="Assets\Squad\WalkSound.cs" />
     <Compile Include="Assets\StructMaybe.cs" />
     <Compile Include="Assets\TestHelpers\SimulateClick.cs" />
+    <Compile Include="Assets\Testing\ClickFireArrow.cs" />
     <Compile Include="Assets\TimedDestroy.cs" />
     <Compile Include="Assets\Triangulator.cs" />
     <Compile Include="Assets\TwoDimensionalCollection.cs" />

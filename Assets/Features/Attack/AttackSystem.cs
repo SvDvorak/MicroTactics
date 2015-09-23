@@ -48,14 +48,11 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
         var force = CalculateForce(firePosition.Y, entity.rotation, attackDirection.Length(), 1);
         force = AddRandomAimingVariation(force);
 
-        _pool.CreateEntity()
-            .AddResource(Res.Arrow)
+        SpawnHelper.SpawnArrow(_pool)
             .AddPosition(firePosition)
             .AddRotation(entity.rotation.ToQ())
             .AddForce(force)
-            .AddVelocity(attackDirection)
-            .AddStickable(10)
-            .AddDelayedDestroy(20*Simulation.FrameRate);
+            .AddVelocity(attackDirection);
     }
 
     private static Vector3 CalculateForce(
