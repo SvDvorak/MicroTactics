@@ -59,7 +59,7 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreatePitchFromVelocitySystem())
             .Add(pool.CreateCollisionDamageSystem())
 
-            .Add(pool.CreateApplyForceSystem())
+            .Add(pool.CreateApplyPhysicsSystem())
             .Add(pool.CreateRenderPositionSystem())
             .Add(pool.CreateRenderRotationSystem())
             .Add(pool.CreateHideHiddenSystem())

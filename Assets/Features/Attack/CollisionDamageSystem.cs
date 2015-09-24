@@ -21,7 +21,7 @@ namespace Assets.Features.Attack
                 {
                     entity
                         .RecursiveDestroy()
-                        .IsKeepView(true);
+                        .IsLeavingBody(true);
                 }
             }
         }

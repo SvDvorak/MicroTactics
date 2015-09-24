@@ -85,8 +85,8 @@
     <Compile Include="Assets\ConvexHullCalculator.cs" />
     <Compile Include="Assets\EntitasSetup.cs" />
     <Compile Include="Assets\Events.cs" />
+    <Compile Include="Assets\Features\ApplyPhysicsSystem.cs" />
     <Compile Include="Assets\Features\Attack\AiAttackOrderSystem.cs" />
-    <Compile Include="Assets\Features\Attack\ApplyForceSystem.cs" />
     <Compile Include="Assets\Features\Attack\ArrowStickToCollidedSystem.cs" />
     <Compile Include="Assets\Features\Attack\AttachToComponent.cs" />
     <Compile Include="Assets\Features\Attack\AttachToSystem.cs" />
@@ -132,6 +132,7 @@
     <Compile Include="Assets\Features\EnemyComponent.cs" />
     <Compile Include="Assets\Features\GameobjectConfigurer.cs" />
     <Compile Include="Assets\Features\InputComponent.cs" />
+    <Compile Include="Assets\Features\LimitPhysicsSystem.cs" />
     <Compile Include="Assets\Features\MouseInput.cs" />
     <Compile Include="Assets\Features\Move\AiComponent.cs" />
     <Compile Include="Assets\Features\Move\AiMoveOrderSystem.cs" />
@@ -169,7 +170,7 @@
     <Compile Include="Assets\Features\View\AddViewSystem.cs" />
     <Compile Include="Assets\Features\View\AttachRootComponent.cs" />
     <Compile Include="Assets\Features\View\HideHiddenSystem.cs" />
-    <Compile Include="Assets\Features\View\KeepViewComponent.cs" />
+    <Compile Include="Assets\Features\View\LeavingBodyComponent.cs" />
     <Compile Include="Assets\Features\View\LinkViewsStartSystem.cs" />
     <Compile Include="Assets\Features\View\RenderPositionSystem.cs" />
     <Compile Include="Assets\Features\View\RenderRotationSystem.cs" />
@@ -182,7 +183,7 @@
     <Compile Include="Assets\Generated\AiMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AnimateComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AnimateUnitSystemGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\ApplyForceSystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\ApplyPhysicsSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ArrowStickToCollidedSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Attack.AttachToSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Attack.ClearCollisionsSystemGeneratedExtension.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Assets\Generated\Assets.Features.Attack.ReloadSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.CreateSquad.SelectionAreaDecoratorSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Destruction.DelayedDestroySystemGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\Assets.Features.LimitPhysicsSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Move.RemoveMoveOrderSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Selection.MoveInteractionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Selection.SelectInteractionSystemGeneratedExtension.cs" />
@@ -218,7 +220,8 @@
     <Compile Include="Assets\Generated\HiddenComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\HideHiddenSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\InputComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\KeepViewComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\LeavingBodyComponentGeneratedExtension.cs" />
+    <Compile Include="Assets\Generated\LimitPhysicsComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\LinkViewsStartSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MeshUpdateSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\MoveInputComponentGeneratedExtension.cs" />

@@ -49,7 +49,7 @@ namespace MicroTactics.Tests.Features
             _sut.Execute(dyingEntity.AsList());
 
             dyingEntity.ShouldBeDestroyed(true);
-            dyingEntity.isKeepView.Should().BeTrue("should keep view when dead");
+            dyingEntity.isLeavingBody.Should().BeTrue("should leave body when dead");
         }
 
         private Entity CreateHealthyEntityWithCollision(float collisionVelocity)

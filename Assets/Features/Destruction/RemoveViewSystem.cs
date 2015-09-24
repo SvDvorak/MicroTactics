@@ -1,9 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Entitas;
-using UnityEngine;
 using Object = UnityEngine.Object;
 
 public class RemoveViewSystem : IReactiveSystem
@@ -17,7 +13,7 @@ public class RemoveViewSystem : IReactiveSystem
             var view = entity.view.Value;
             GameObjectConfigurer.DetachEntity(view, entity);
 
-            if (!entity.isKeepView)
+            if (!entity.isLeavingBody)
             {
                 Object.Destroy(view);
             }
