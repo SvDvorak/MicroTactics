@@ -112,7 +112,6 @@ public static class ComponentIds {
         { typeof (HiddenComponent), Hidden },
         { typeof (InputComponent), Input },
         { typeof (LeavingBodyComponent), LeavingBody },
-        { typeof (LimitPhysicsComponent), LimitPhysics },
         { typeof (MoveInputComponent), MoveInput },
         { typeof (MovementComponent), Movement },
         { typeof (MoveOrderComponent), MoveOrder },

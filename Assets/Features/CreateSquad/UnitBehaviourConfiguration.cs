@@ -8,13 +8,9 @@ public class UnitBehaviourConfiguration : MonoBehaviour, IGameObjectConfigurer
 
     public void OnAttachEntity(Entity entity)
     {
-        var limitYAxis = new LimitedAxes(false, true, false);
-        var limitAllAxes = new LimitedAxes(true, true, true);
-
         entity
             .AddAttachRoot(AttachRoot)
-            .AddMovement(MovementSpeed)
-            .AddLimitPhysics(limitYAxis, limitAllAxes);
+            .AddMovement(MovementSpeed);
 
         gameObject.AddComponent<Collidable>().SetEntity(entity);
     }
