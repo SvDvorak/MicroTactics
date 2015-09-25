@@ -23,25 +23,28 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void GivesAttackOrderAccordingToFormation()
+        public void GivesAttackOrderAccordingToFormationAndRotation()
         {
             var unit1 = CreateUnit();
             var unit2 = CreateUnit();
             var unit3 = CreateUnit();
             var unit4 = CreateUnit();
 
+            var rotation = Quaternion.LookAt(Vector3.Right);
+
             var squad = new TestEntity()
                 .AddSquad(0)
+                .AddRotation(rotation)
                 .AddUnitsCache(new [] { unit1, unit2, unit3, unit4 }.ToList())
                 .AddBoxFormation(2, 2, 2)
-                .AddAttackOrder(1, 0, 0);
+                .AddAttackOrder(1, 0, 1);
 
             _sut.Execute(squad.AsList());
 
-            unit1.ShouldHaveAttackOrderTo(new Vector3(0, 0, -1));
-            unit2.ShouldHaveAttackOrderTo(new Vector3(2, 0, -1));
-            unit3.ShouldHaveAttackOrderTo(new Vector3(0, 0, 1));
-            unit4.ShouldHaveAttackOrderTo(new Vector3(2, 0, 1));
+            unit1.ShouldHaveAttackOrderTo(new Vector3(2, 0, 0));
+            unit2.ShouldHaveAttackOrderTo(new Vector3(2, 0, 2));
+            unit3.ShouldHaveAttackOrderTo(new Vector3(0, 0, 0));
+            unit4.ShouldHaveAttackOrderTo(new Vector3(0, 0, 2));
         }
 
         [Fact]

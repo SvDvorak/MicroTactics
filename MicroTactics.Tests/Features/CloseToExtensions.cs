@@ -4,7 +4,7 @@ using Mono.GameMath;
 
 namespace MicroTactics.Tests.Features
 {
-    public static class QuaternionCloseToExtensions
+    public static class CloseToExtensions
     {
         private static float _minimumDifference = 0.0001f;
 

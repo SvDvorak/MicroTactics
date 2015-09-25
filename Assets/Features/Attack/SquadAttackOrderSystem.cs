@@ -22,7 +22,8 @@ public class SquadAttackOrderSystem : IReactiveSystem, IEnsureComponents
         for (var i = 0; i < unitsInSquad.Count; i++)
         {
             var unit = unitsInSquad[i];
-            var squadPosition = UnitInSquadPositioner.GetPosition(squadEntity.boxFormation, i);
+            var orientation = squadEntity.hasRotation ? squadEntity.rotation.ToQ() : Quaternion.Identity;
+            var squadPosition = UnitInSquadPositioner.GetPosition(squadEntity.boxFormation, i, orientation);
 
             unit.ReplaceAttackOrder(squadPosition + squadEntity.attackOrder.ToV3());
         }

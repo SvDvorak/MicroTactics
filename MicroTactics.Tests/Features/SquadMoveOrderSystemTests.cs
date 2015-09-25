@@ -20,12 +20,14 @@ namespace MicroTactics.Tests.Features
             _squad1 = new TestEntity()
                 .AddSquad(0)
                 .AddBoxFormation(1, 1, 0)
-                .AddMoveOrder(new Vector3(0, 1, 0), Quaternion.Identity);
+                .AddMoveOrder(new Vector3(0, 1, 0), Quaternion.Identity)
+                .ReplaceUnitsCache(new List<Entity>());
 
             _squad2 = new TestEntity()
                 .AddSquad(1)
                 .AddBoxFormation(1, 1, 0)
-                .AddMoveOrder(new Vector3(0, 2, 0), Quaternion.Identity);
+                .AddMoveOrder(new Vector3(0, 2, 0), Quaternion.Identity)
+                .ReplaceUnitsCache(new List<Entity>());
         }
 
         [Fact]
@@ -55,6 +57,19 @@ namespace MicroTactics.Tests.Features
             unit2.ShouldHaveMoveOrderTo(new Vector3(1, 1, 1), orientation);
             unit3.ShouldHaveMoveOrderTo(new Vector3(-1, 1, -1), orientation);
             unit4.ShouldHaveMoveOrderTo(new Vector3(-1, 1, 1), orientation);
+        }
+
+        [Fact]
+        public void SetsSquadOrientationFromOrder()
+        {
+            var orientation = Quaternion.LookAt(Vector3.Right);
+
+            _squad1
+                .ReplaceMoveOrder(Vector3.Zero, orientation);
+
+            _sut.Execute(_squad1.AsList());
+
+            _squad1.ShouldHaveRotation(orientation);
         }
 
         [Fact]

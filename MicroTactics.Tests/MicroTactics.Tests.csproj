@@ -105,7 +105,7 @@
     <Compile Include="Features\ArrowStickToCollidedSystemTests.cs" />
     <Compile Include="Features\TestRandom.cs" />
     <Compile Include="Features\UnitsCacheSystemTests.cs" />
-    <Compile Include="Features\QuaternionCloseToExtensions.cs" />
+    <Compile Include="Features\CloseToExtensions.cs" />
     <Compile Include="FloatExtensionsTests.cs" />
     <Compile Include="FormationTests.cs" />
     <Compile Include="IEnumerableExtensions.cs" />

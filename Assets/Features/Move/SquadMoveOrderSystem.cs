@@ -13,6 +13,7 @@ public class SquadMoveOrderSystem : IReactiveSystem
     {
         foreach (var squadEntity in entities)
         {
+            squadEntity.ReplaceRotation(squadEntity.moveOrder.Orientation);
             OrderUnitsToSquadRelativePositions(squadEntity.unitsCache.Units, squadEntity);
         }
     }

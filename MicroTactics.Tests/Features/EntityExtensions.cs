@@ -36,6 +36,12 @@ public static class EntityExtensions
         entity.position.ShouldBeEquivalentTo(new VectorClass(x, y, z));
     }
 
+    public static void ShouldHaveRotation(this Entity entity, Quaternion rotation)
+    {
+        entity.hasRotation.Should().BeTrue("the entity should have a rotation component");
+        entity.rotation.ToQ().ShouldBeCloseTo(rotation);
+    }
+
     public static void ShouldHaveResource(this Entity entity, string resource)
     {
         entity.hasResource.Should().BeTrue("the entity should have a resource component");
@@ -57,7 +63,7 @@ public static class EntityExtensions
     public static void ShouldHaveAttackOrderTo(this Entity entity, Vector3 position)
     {
         entity.hasAttackOrder.Should().BeTrue("entity should have received order");
-        entity.attackOrder.ToV3().Should().Be(position);
+        entity.attackOrder.ToV3().ShouldBeCloseTo(position);
     }
 
     public static void ShouldBeDestroyed(this Entity entity, bool expected)
