@@ -1,6 +1,7 @@
 ﻿using Assets;
 using Entitas;
 using FluentAssertions;
+using MicroTactics.Tests.Features;
 using Mono.GameMath;
 
 public static class EntityExtensions
@@ -49,7 +50,7 @@ public static class EntityExtensions
     public static void ShouldHaveMoveOrderTo(this Entity entity, Vector3 position, Quaternion orientation)
     {
         entity.hasMoveOrder.Should().BeTrue("entity should have received order");
-        entity.moveOrder.Position.Should().Be(position);
+        entity.moveOrder.Position.ShouldBeCloseTo(position);
         entity.moveOrder.Orientation.Should().Be(orientation);
     }
 

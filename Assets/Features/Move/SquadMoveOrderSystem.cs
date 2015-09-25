@@ -22,9 +22,10 @@ public class SquadMoveOrderSystem : IReactiveSystem
         for (var i = 0; i < unitsInSquad.Count; i++)
         {
             var unit = unitsInSquad[i];
-            var squadPosition = UnitInSquadPositioner.GetPosition(squadEntity.boxFormation, i);
+            var orientation = squadEntity.moveOrder.Orientation;
+            var squadPosition = UnitInSquadPositioner.GetPosition(squadEntity.boxFormation, i, orientation);
 
-            unit.ReplaceMoveOrder(squadPosition + squadEntity.moveOrder.Position, Quaternion.Identity);
+            unit.ReplaceMoveOrder(squadPosition + squadEntity.moveOrder.Position, orientation);
         }
     }
 }

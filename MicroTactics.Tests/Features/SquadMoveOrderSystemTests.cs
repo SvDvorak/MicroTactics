@@ -35,23 +35,26 @@ namespace MicroTactics.Tests.Features
         }
 
         [Fact]
-        public void OrdersUnitsAccordingToFormation()
+        public void OrdersUnitsAccordingToFormationAndRotation()
         {
             var unit1 = CreateUnit(0);
             var unit2 = CreateUnit(0);
             var unit3 = CreateUnit(0);
             var unit4 = CreateUnit(0);
 
+            var orientation = Quaternion.LookAt(Vector3.Right);
+
             _squad1
                 .ReplaceBoxFormation(2, 2, 2)
+                .ReplaceMoveOrder(new Vector3(0, 1, 0), orientation)
                 .ReplaceUnitsCache(new [] { unit1, unit2, unit3, unit4 }.ToList());
 
             _sut.Execute(_squad1.AsList());
 
-            unit1.ShouldHaveMoveOrderTo(new Vector3(-1, 1, -1));
-            unit2.ShouldHaveMoveOrderTo(new Vector3(1, 1, -1));
-            unit3.ShouldHaveMoveOrderTo(new Vector3(-1, 1, 1));
-            unit4.ShouldHaveMoveOrderTo(new Vector3(1, 1, 1));
+            unit1.ShouldHaveMoveOrderTo(new Vector3(1, 1, -1), orientation);
+            unit2.ShouldHaveMoveOrderTo(new Vector3(1, 1, 1), orientation);
+            unit3.ShouldHaveMoveOrderTo(new Vector3(-1, 1, -1), orientation);
+            unit4.ShouldHaveMoveOrderTo(new Vector3(-1, 1, 1), orientation);
         }
 
         [Fact]

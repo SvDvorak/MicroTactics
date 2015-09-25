@@ -17,7 +17,7 @@ namespace MicroTactics.Tests.Features
             _entity = pool.CreateEntity()
                 .AddPosition(0, 0, 0)
                 .AddRotation(Quaternion.Identity)
-                .AddMoveOrder(new Vector3(1, 0, 0), Quaternion.Identity)
+                .AddMoveOrder(new Vector3(1, 0, 0), Quaternion.LookAt(Vector3.Right))
                 .AddMovement(0.2f);
 
             _sut.SetPool(pool);
@@ -47,21 +47,11 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void RotatesTowardsTarget()
         {
-            _sut.Execute();
-
-            _entity.rotation.ToQ().ShouldBeCloseTo(Quaternion.LookAt(Vector3.Right));
-        }
-
-        [Fact]
-        public void DoesNotSetRotationWhenAlreadyStandingOnTarget()
-        {
-            _entity
-                .ReplaceMoveOrder(Vector3.Zero, new Quaternion())
-                .ReplacePosition(Vector3.Zero);
+            var orderOrientation = _entity.moveOrder.Orientation;
 
             _sut.Execute();
 
-            _entity.rotation.ToQ().Should().Be(Quaternion.Identity);
+            _entity.rotation.ToQ().ShouldBeCloseTo(orderOrientation);
         }
     }
 }

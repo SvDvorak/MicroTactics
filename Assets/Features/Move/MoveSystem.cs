@@ -1,6 +1,5 @@
 ﻿using Assets;
 using Entitas;
-using Mono.GameMath;
 
 public class MoveSystem : IExecuteSystem, ISetPool
 {
@@ -17,13 +16,7 @@ public class MoveSystem : IExecuteSystem, ISetPool
         {
             var newPosition = entity.position.ToV3().MoveTowards(entity.moveOrder.Position, entity.movement.MoveSpeed);
             entity.ReplacePosition(newPosition);
-
-            var moveDirection = entity.moveOrder.Position - entity.position.ToV3();
-            if(!moveDirection.Length().IsApproximately(0))
-            {
-                var newRotation = Quaternion.LookAt(moveDirection.Normalized());
-                entity.ReplaceRotation(newRotation);
-            }
+            entity.ReplaceRotation(entity.moveOrder.Orientation);
         }
     }
 }

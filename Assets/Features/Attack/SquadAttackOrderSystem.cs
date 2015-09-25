@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Assets;
 using Entitas;
+using Mono.GameMath;
 
 public class SquadAttackOrderSystem : IReactiveSystem, IEnsureComponents
 {
