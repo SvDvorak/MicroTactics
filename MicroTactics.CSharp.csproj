@@ -72,6 +72,9 @@
     <Reference Include="BasicSerializer">
       <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
     </Reference>
+    <Reference Include="BehaviourMachineRuntime">
+      <HintPath>Assets\Plugins\BehaviourMachine\BehaviourMachineRuntime.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="MicroTactics.CSharp.Plugins.csproj">
@@ -365,13 +368,11 @@
     <Compile Include="Assets\Squad\SquadDeselection.cs" />
     <Compile Include="Assets\Squad\SquadIntegrationTests.cs" />
     <Compile Include="Assets\Squad\SquadInteractionBase.cs" />
-    <Compile Include="Assets\Squad\SquadInteractionLogic.cs" />
     <Compile Include="Assets\Squad\SquadMove.cs" />
     <Compile Include="Assets\Squad\SquadSelection.cs" />
     <Compile Include="Assets\Squad\SquadState.cs" />
     <Compile Include="Assets\Squad\WalkSound.cs" />
     <Compile Include="Assets\StructMaybe.cs" />
-    <Compile Include="Assets\TestHelpers\SimulateClick.cs" />
     <Compile Include="Assets\Testing\ClickFireArrow.cs" />
     <Compile Include="Assets\TimedDestroy.cs" />
     <Compile Include="Assets\Triangulator.cs" />

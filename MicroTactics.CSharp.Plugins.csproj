@@ -72,8 +72,22 @@
     <Reference Include="BasicSerializer">
       <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
     </Reference>
+    <Reference Include="BehaviourMachineRuntime">
+      <HintPath>Assets\Plugins\BehaviourMachine\BehaviourMachineRuntime.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\ActionState.cs" />
+    <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\AnyState.cs" />
+    <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\BehaviourTree.cs" />
+    <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\Blackboard.cs" />
+    <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\EmptyState.cs" />
+    <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\FsmBehaviour.cs" />
+    <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\GlobalBlackboard.cs" />
+    <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\MonoState.cs" />
+    <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\StateBehaviour.cs" />
+    <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\StateMachine.cs" />
+    <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\UnityEventState.cs" />
     <Compile Include="Assets\Plugins\Vexe\Runtime\FastSave\Core\FSCommon.cs" />
     <Compile Include="Assets\Plugins\Vexe\Runtime\FastSave\Core\Load.cs" />
     <Compile Include="Assets\Plugins\Vexe\Runtime\FastSave\Core\Save.cs" />

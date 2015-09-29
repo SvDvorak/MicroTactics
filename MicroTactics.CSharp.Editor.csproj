@@ -135,6 +135,12 @@
     <Reference Include="BasicSerializer">
       <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
     </Reference>
+    <Reference Include="BehaviourMachineRuntime">
+      <HintPath>Assets\Plugins\BehaviourMachine\BehaviourMachineRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="BehaviourMachineEditor">
+      <HintPath>Assets\Plugins\Editor\BehaviourMachineEditor\BehaviourMachineEditor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="MicroTactics.CSharp.Plugins.csproj">
@@ -144,6 +150,10 @@
     <ProjectReference Include="MicroTactics.CSharp.csproj">
       <Project>{EC0ACB81-B22E-9CC4-86DC-C4AB2F101809}</Project>
       <Name>MicroTactics.CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="MicroTactics.CSharp.Editor.Plugins.csproj">
+      <Project>{4478C88A-9DFC-D81F-422D-EBC15656675E}</Project>
+      <Name>MicroTactics.CSharp.Editor.Plugins</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
