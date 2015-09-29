@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -116,11 +118,13 @@
     <Compile Include="Assets\Features\ConvexHullCalculator.cs" />
     <Compile Include="Assets\Features\CreateSquad\BoxFormationComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\ChildrenComponent.cs" />
+    <Compile Include="Assets\Features\CreateSquad\CreateEntityOnStart.cs" />
     <Compile Include="Assets\Features\CreateSquad\ParentComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\PositionComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\QuaternionClass.cs" />
     <Compile Include="Assets\Features\CreateSquad\ResourceComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SelectionAreaDecoratorSystems.cs" />
+    <Compile Include="Assets\Features\CreateSquad\SquadBehaviourConfiguration.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadComponent.cs" />
     <Compile Include="Assets\Features\CreateSquad\SquadCreationSystem.cs" />
     <Compile Include="Assets\Features\CreateSquad\UnitBehaviourConfiguration.cs" />

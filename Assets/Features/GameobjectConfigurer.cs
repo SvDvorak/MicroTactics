@@ -27,7 +27,7 @@ public static class GameObjectConfigurer
         PerformForEachConfigurer(unityObject, conf => conf.OnDetachEntity(entity));
     }
 
-    public static void PerformForEachConfigurer(GameObject unityObject, Action<IGameObjectConfigurer> action)
+    private static void PerformForEachConfigurer(GameObject unityObject, Action<IGameObjectConfigurer> action)
     {
         CachedEntityList.Clear();
         unityObject.GetComponents(CachedEntityList);
