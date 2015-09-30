@@ -31,11 +31,12 @@ namespace Assets.Testing
                 owner.root.SendEvent("SUCCESS");
                 return child.status;
             }
-            catch (Exception)
+            catch(Exception ex)
             {
-                if(Time.unscaledTime - _startTime > TimeoutInSeconds)
+                var isWithinTimeout = Time.unscaledTime - _startTime > TimeoutInSeconds;
+                if(isWithinTimeout)
                 {
-                    throw;
+                    throw ex;
                 }
             }
 

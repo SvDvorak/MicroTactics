@@ -4,6 +4,13 @@ using UnityEngine;
 
 public static class GameObjectExtensions
 {
+    public static GameObject Find(string name, bool isPartialName = false)
+    {
+        return GameObject
+            .FindObjectsOfType<GameObject>()
+            .SingleOrDefault(x => MatchName(x.name, name, isPartialName));
+    }
+
     public static IEnumerable<T> GetComponentsInChildren<T>(this GameObject gameObject, string name)
         where T : MonoBehaviour
     {

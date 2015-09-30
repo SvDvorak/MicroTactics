@@ -21,7 +21,8 @@ public class MouseInput : MonoBehaviour
 
     void Update ()
 	{
-        var possibleHits = RaycastUsingCamera();
+        var input = WilInput.Instance;
+        var possibleHits = input.RaycastFromMousePosition();
         var hitEntities = GetMatchingEntitiesForHits(possibleHits).ToList();
 
         if (!hitEntities.Any())
@@ -29,11 +30,11 @@ public class MouseInput : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (input.GetMouseButtonDown(0))
         {
             InputEntity.ReplaceInput(InputState.Press, hitEntities);
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (input.GetMouseButtonUp(0))
         {
             InputEntity.ReplaceInput(InputState.Release, hitEntities);
         }
@@ -43,24 +44,18 @@ public class MouseInput : MonoBehaviour
         }
     }
 
-    private List<EntityHit> GetMatchingEntitiesForHits(RaycastHit[] possibleHits)
+    private List<EntityHit> GetMatchingEntitiesForHits(IEnumerable<RayHit> possibleHits)
     {
         var viewables = _viewableGroup.GetEntities();
         return possibleHits
-            .Select(hit => new EntityHit(GetMatchingEntity(viewables, hit), hit.point.ToV3()))
+            .Select(hit => new EntityHit(GetMatchingEntity(viewables, hit), hit.Point.ToV3()))
             .Where(hit => hit.Entity != null)
             .ToList();
     }
 
-    private static Entity GetMatchingEntity(Entity[] viewables, RaycastHit hit)
+    private static Entity GetMatchingEntity(Entity[] viewables, RayHit hit)
     {
-        return viewables.SingleOrDefault(x => x.view.Value == hit.transform.gameObject);
-    }
-
-    private RaycastHit[] RaycastUsingCamera()
-    {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        return Physics.RaycastAll(ray, Mathf.Infinity);
+        return viewables.SingleOrDefault(x => x.view.Value == hit.Transform.gameObject);
     }
 }
  

@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -354,6 +352,7 @@
     <Compile Include="Assets\Maybe.cs" />
     <Compile Include="Assets\ObjectExtensions.cs" />
     <Compile Include="Assets\QuaternionExtensions.cs" />
+    <Compile Include="Assets\RaiseExceptions.cs" />
     <Compile Include="Assets\Random.cs" />
     <Compile Include="Assets\RotateTestCode.cs" />
     <Compile Include="Assets\SetFrameRate.cs" />
@@ -379,8 +378,8 @@
     <Compile Include="Assets\Squad\WalkSound.cs" />
     <Compile Include="Assets\StructMaybe.cs" />
     <Compile Include="Assets\Testing\ClickFireArrow.cs" />
+    <Compile Include="Assets\Testing\ClickGameObject.cs" />
     <Compile Include="Assets\Testing\ColorAssert.cs" />
-    <Compile Include="Assets\Testing\FakeClick.cs" />
     <Compile Include="Assets\Testing\FindGameObjectsByPartialName.cs" />
     <Compile Include="Assets\Testing\GetChildByPartialName.cs" />
     <Compile Include="Assets\Testing\RenderingAssert.cs" />
