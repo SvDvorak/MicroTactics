@@ -4,9 +4,8 @@ using UnityEngine;
 
 public interface IInput
 {
-    bool GetMouseButtonDown(int button);
-    bool GetMouseButtonUp(int button);
     IEnumerable<RayHit> RaycastFromMousePosition();
+    InputState GetMouseState(int button);
 }
 
 public class WilInput
@@ -44,30 +43,61 @@ public class UnityInput : IInput
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         return Physics.RaycastAll(ray, Mathf.Infinity).Select(x => new RayHit(x));
     }
+
+    public InputState GetMouseState(int button)
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            return InputState.Press;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            return InputState.Release;
+        }
+
+        return InputState.Hover;
+    }
 }
 
 public class TestInput : IInput
 {
-    private readonly List<RayHit> _hits = new List<RayHit>();
-
-    public bool GetMouseButtonDown(int button)
-    {
-        return true;
-    }
-
-    public bool GetMouseButtonUp(int button)
-    {
-        return true;
-    }
+    private readonly Queue<MouseAction> _mouseActions = new Queue<MouseAction>();
 
     public IEnumerable<RayHit> RaycastFromMousePosition()
     {
-        return _hits;
+        if (!_mouseActions.Any())
+        {
+            return new List<RayHit>();
+        }
+
+        return _mouseActions.Peek().Hit.AsList();
     }
 
-    public void AddGameObjectClick(GameObject gameObject)
+    public InputState GetMouseState(int button)
     {
-        _hits.Add(new RayHit(gameObject.transform, new Vector3()));
+        return _mouseActions.Dequeue().State;
+    }
+
+    public void AddMouseDown(GameObject gameObject)
+    {
+        _mouseActions.Enqueue(new MouseAction(InputState.Press, new RayHit(gameObject.transform, new Vector3())));
+    }
+
+    public void AddMouseUp(GameObject gameObject)
+    {
+        _mouseActions.Enqueue(new MouseAction(InputState.Release, new RayHit(gameObject.transform, new Vector3())));
+    }
+
+    private class MouseAction
+    {
+        public MouseAction(InputState state, RayHit hit)
+        {
+            State = state;
+            Hit = hit;
+        }
+
+        public InputState State { get; private set; }
+        public RayHit Hit { get; private set; }
     }
 }
 

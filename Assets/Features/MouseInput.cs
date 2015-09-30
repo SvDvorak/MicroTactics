@@ -30,18 +30,7 @@ public class MouseInput : MonoBehaviour
             return;
         }
 
-        if (input.GetMouseButtonDown(0))
-        {
-            InputEntity.ReplaceInput(InputState.Press, hitEntities);
-        }
-        else if (input.GetMouseButtonUp(0))
-        {
-            InputEntity.ReplaceInput(InputState.Release, hitEntities);
-        }
-        else
-        {
-            InputEntity.ReplaceInput(InputState.Hover, hitEntities);
-        }
+        InputEntity.ReplaceInput(input.GetMouseState(0), hitEntities);
     }
 
     private List<EntityHit> GetMatchingEntitiesForHits(IEnumerable<RayHit> possibleHits)
