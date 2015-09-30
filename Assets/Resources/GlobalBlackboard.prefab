@@ -159,6 +159,11 @@ MonoBehaviour:
     m_Blackboard: {fileID: 11401726}
     m_IsConstant: 0
     m_IsSystem: 1
+  - m_ID: -950197851
+    m_Name: SUCCESS
+    m_Blackboard: {fileID: 11401726}
+    m_IsConstant: 0
+    m_IsSystem: 0
   m_Namespace: BehaviourMachine
   m_GUICallback: {fileID: 0}
 --- !u!1001 &100100000
@@ -167,7 +172,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_ConcreteFsmEvents.Array.size
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_ConcreteFsmEvents.Array.data[21].m_Name
+      value: SUCCESS
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 179848}

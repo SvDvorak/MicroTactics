@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Entitas;
+using UnityEngine;
 
 public class HideHiddenSystem : IReactiveSystem, IEnsureComponents
 {
@@ -11,7 +12,7 @@ public class HideHiddenSystem : IReactiveSystem, IEnsureComponents
     {
         foreach (var entity in entities)
         {
-            entity.view.Value.SetActive(!entity.isHidden);
+            entity.view.Value.GetComponent<MeshRenderer>().enabled = !entity.isHidden;
         }
     }
 }

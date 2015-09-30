@@ -69,11 +69,11 @@
     <Reference Include="Mono.GameMath">
       <HintPath>Assets\Libraries\Mono.GameMath.dll</HintPath>
     </Reference>
-    <Reference Include="BasicSerializer">
-      <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
-    </Reference>
     <Reference Include="BehaviourMachineRuntime">
       <HintPath>Assets\Plugins\BehaviourMachine\BehaviourMachineRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicSerializer">
+      <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using System;
+using Entitas;
 using UnityEngine;
 
 public class UnitBehaviourConfiguration : MonoBehaviour, IGameObjectConfigurer

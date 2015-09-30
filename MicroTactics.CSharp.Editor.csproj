@@ -132,14 +132,14 @@
     <Reference Include="nunit.framework">
       <HintPath>Assets\Libraries\UnityTestTools\UnitTesting\Editor\NUnit\Libs\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="BasicSerializer">
-      <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
-    </Reference>
     <Reference Include="BehaviourMachineRuntime">
       <HintPath>Assets\Plugins\BehaviourMachine\BehaviourMachineRuntime.dll</HintPath>
     </Reference>
     <Reference Include="BehaviourMachineEditor">
       <HintPath>Assets\Plugins\Editor\BehaviourMachineEditor\BehaviourMachineEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicSerializer">
+      <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

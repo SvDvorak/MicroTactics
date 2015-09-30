@@ -71,11 +71,11 @@
     <Reference Include="Mono.GameMath">
       <HintPath>Assets\Libraries\Mono.GameMath.dll</HintPath>
     </Reference>
-    <Reference Include="BasicSerializer">
-      <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
-    </Reference>
     <Reference Include="BehaviourMachineRuntime">
       <HintPath>Assets\Plugins\BehaviourMachine\BehaviourMachineRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicSerializer">
+      <HintPath>Assets\Plugins\Vexe\Runtime\FastSave\Serializer\BasicSerializer.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +138,7 @@
     <Compile Include="Assets\Features\Destruction\RemoveViewSystem.cs" />
     <Compile Include="Assets\Features\EnemyComponent.cs" />
     <Compile Include="Assets\Features\GameobjectConfigurer.cs" />
+    <Compile Include="Assets\Features\GroundBehaviourConfiguration.cs" />
     <Compile Include="Assets\Features\InputComponent.cs" />
     <Compile Include="Assets\Features\MouseInput.cs" />
     <Compile Include="Assets\Features\Move\AiComponent.cs" />
@@ -378,6 +379,15 @@
     <Compile Include="Assets\Squad\WalkSound.cs" />
     <Compile Include="Assets\StructMaybe.cs" />
     <Compile Include="Assets\Testing\ClickFireArrow.cs" />
+    <Compile Include="Assets\Testing\ColorAssert.cs" />
+    <Compile Include="Assets\Testing\FakeClick.cs" />
+    <Compile Include="Assets\Testing\FindGameObjectsByPartialName.cs" />
+    <Compile Include="Assets\Testing\GetChildByPartialName.cs" />
+    <Compile Include="Assets\Testing\RenderingAssert.cs" />
+    <Compile Include="Assets\Testing\RepeatTillTimeout.cs" />
+    <Compile Include="Assets\Testing\SingleRun.cs" />
+    <Compile Include="Assets\Testing\TestSuccess.cs" />
+    <Compile Include="Assets\Testing\WilInput.cs" />
     <Compile Include="Assets\TimedDestroy.cs" />
     <Compile Include="Assets\Triangulator.cs" />
     <Compile Include="Assets\TwoDimensionalCollection.cs" />
