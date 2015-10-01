@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -380,10 +382,12 @@
     <Compile Include="Assets\Testing\ClickFireArrow.cs" />
     <Compile Include="Assets\Testing\ClickGameObject.cs" />
     <Compile Include="Assets\Testing\ColorAssert.cs" />
+    <Compile Include="Assets\Testing\FindGameObjectByPartialName.cs" />
     <Compile Include="Assets\Testing\FindGameObjectsByPartialName.cs" />
     <Compile Include="Assets\Testing\GetChildByPartialName.cs" />
     <Compile Include="Assets\Testing\RenderingAssert.cs" />
     <Compile Include="Assets\Testing\RepeatTillTimeout.cs" />
+    <Compile Include="Assets\Testing\SelectSquad.cs" />
     <Compile Include="Assets\Testing\SingleRun.cs" />
     <Compile Include="Assets\Testing\TestSuccess.cs" />
     <Compile Include="Assets\Testing\WilInput.cs" />

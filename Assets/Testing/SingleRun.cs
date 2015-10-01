@@ -14,7 +14,7 @@ namespace Assets.Testing
 
             child.OnTick();
 
-            owner.root.SendEvent("SUCCESS");
+            owner.root.SendEvent(GlobalBlackboard.FINISHED);
             return Status.Success;
         }
     }

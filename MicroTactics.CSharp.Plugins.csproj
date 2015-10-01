@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>GamePlugins:3</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -88,6 +90,8 @@
     <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\StateBehaviour.cs" />
     <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\StateMachine.cs" />
     <Compile Include="Assets\Plugins\BehaviourMachine\Wrapper\UnityEventState.cs" />
+    <Compile Include="Assets\Plugins\BehaviourMachineTests\FinishOnSuccessAction.cs" />
+    <Compile Include="Assets\Plugins\BehaviourMachineTests\SendFinished.cs" />
     <Compile Include="Assets\Plugins\Vexe\Runtime\FastSave\Core\FSCommon.cs" />
     <Compile Include="Assets\Plugins\Vexe\Runtime\FastSave\Core\Load.cs" />
     <Compile Include="Assets\Plugins\Vexe\Runtime\FastSave\Core\Save.cs" />

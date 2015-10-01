@@ -1,6 +1,4 @@
-﻿using BehaviourMachine;
-
-namespace BehaviourMachine
+﻿namespace BehaviourMachine
 {
     public class TestSuccess : StateBehaviour
     {

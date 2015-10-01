@@ -163,6 +163,7 @@
     <Compile Include="Assets\Plugins\Editor\BehaviourMachineEditor\Wrapper\BehaviourTreeEditor.cs" />
     <Compile Include="Assets\Plugins\Editor\BehaviourMachineEditor\Wrapper\BlackboardEditor.cs" />
     <Compile Include="Assets\Plugins\Editor\BehaviourMachineEditor\Wrapper\MonoStateEditor.cs" />
+    <Compile Include="Assets\Plugins\Editor\BehaviourMachineEditorTests\ActStateEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Libraries\UnityTestTools\LICENSE.txt" />
