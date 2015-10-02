@@ -429,7 +429,7 @@ MonoBehaviour:
   m_HideScript: 1
   m_Position: {x: 60, y: 350}
   m_Transitions: []
-  m_CachedInstanceID: 8642
+  m_CachedInstanceID: 17038
 --- !u!114 &1311841399
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_Transitions:
   - m_Destination: {fileID: 1311841398}
     m_EventID: -10
-  m_CachedInstanceID: 8644
+  m_CachedInstanceID: 17040
   m_Description: 
   m_IgnoreTimeScale: 0
   m_ResetStatusOnDisable: 1
@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Transitions:
   - m_Destination: {fileID: 1311841399}
     m_EventID: -10
-  m_CachedInstanceID: 8646
+  m_CachedInstanceID: 17042
   m_NodeSerialization:
     m_NodeTypes:
     - BehaviourMachine.EveryFrame
@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Transitions:
   - m_Destination: {fileID: 1311841400}
     m_EventID: -10
-  m_CachedInstanceID: 8648
+  m_CachedInstanceID: 17044
   m_NodeSerialization:
     m_NodeTypes:
     - BehaviourMachine.EveryFrame
@@ -654,7 +654,7 @@ MonoBehaviour:
   m_HideScript: 1
   m_Position: {x: 0, y: 0}
   m_Transitions: []
-  m_CachedInstanceID: 8650
+  m_CachedInstanceID: 17046
   m_Description: 
   m_EnabledState: {fileID: 0}
   m_LastEnabledState: {fileID: 0}
@@ -902,7 +902,7 @@ MonoBehaviour:
   m_HideScript: 1
   m_Position: {x: 50, y: 390}
   m_Transitions: []
-  m_CachedInstanceID: 8672
+  m_CachedInstanceID: 17070
 --- !u!114 &1890947627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,7 +921,7 @@ MonoBehaviour:
   m_HideScript: 1
   m_Position: {x: 0, y: 0}
   m_Transitions: []
-  m_CachedInstanceID: 8674
+  m_CachedInstanceID: 17072
   m_Description: 
   m_EnabledState: {fileID: 0}
   m_LastEnabledState: {fileID: 0}
@@ -985,7 +985,7 @@ MonoBehaviour:
   m_Transitions:
   - m_Destination: {fileID: 1890947631}
     m_EventID: -10
-  m_CachedInstanceID: 8678
+  m_CachedInstanceID: 17076
   m_Description: 
   m_IgnoreTimeScale: 0
   m_ResetStatusOnDisable: 1
@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_Transitions:
   - m_Destination: {fileID: 1890947626}
     m_EventID: -10
-  m_CachedInstanceID: 8680
+  m_CachedInstanceID: 17078
   m_Description: 
   m_IgnoreTimeScale: 0
   m_ResetStatusOnDisable: 1
@@ -1119,7 +1119,7 @@ MonoBehaviour:
   m_Transitions:
   - m_Destination: {fileID: 1890947630}
     m_EventID: -10
-  m_CachedInstanceID: 8682
+  m_CachedInstanceID: 17080
   m_NodeSerialization:
     m_NodeTypes:
     - BehaviourMachine.EveryFrame
@@ -1180,7 +1180,7 @@ MonoBehaviour:
   m_Transitions:
   - m_Destination: {fileID: 1890947629}
     m_EventID: -10
-  m_CachedInstanceID: 8684
+  m_CachedInstanceID: 17082
   m_NodeSerialization:
     m_NodeTypes:
     - BehaviourMachine.EveryFrame
@@ -1227,8 +1227,8 @@ GameObject:
   - 4: {fileID: 2132531139}
   - 114: {fileID: 2132531138}
   - 114: {fileID: 2132531137}
-  - 114: {fileID: 2132531136}
   - 114: {fileID: 2132531140}
+  - 114: {fileID: 2132531136}
   m_Layer: 0
   m_Name: GameSetup
   m_TagString: Untagged
@@ -1244,7 +1244,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2132531135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae40952bbc6bc354995fbce7cf166960, type: 3}
+  m_Script: {fileID: 11500000, guid: 510658f794a09da479a85ade833db3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &2132531137

@@ -40,7 +40,7 @@ GameObject:
   - 4: {fileID: 404658}
   - 95: {fileID: 9550962}
   - 54: {fileID: 5410416}
-  - 114: {fileID: 11470156}
+  - 114: {fileID: 11431922}
   m_Layer: 11
   m_Name: Unit
   m_TagString: Untagged
@@ -205,6 +205,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11431922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2583702ebdd2a64e92458b8cb77baa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementSpeed: .0799999982
+  AttachRoot: {fileID: 0}
 --- !u!114 &11445958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -216,19 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c117a1dd9180f40a44640bcc840c9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11470156
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 145978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acb3b2f82ac2f684ca50bc6306b1c391, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementSpeed: .0599999987
-  AttachRoot: {fileID: 186188}
 --- !u!136 &13649908
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -292,7 +292,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MovementSpeed
-      value: .0599999987
+      value: .0799999982
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
