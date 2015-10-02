@@ -78,14 +78,19 @@ public class TestInput : IInput
         return _mouseActions.Dequeue().State;
     }
 
-    public void AddMouseDown(GameObject gameObject)
+    public void AddMouseDown(GameObject gameObject, Vector3 position)
     {
-        _mouseActions.Enqueue(new MouseAction(InputState.Press, new RayHit(gameObject.transform, new Vector3())));
+        _mouseActions.Enqueue(new MouseAction(InputState.Press, new RayHit(gameObject.transform, position)));
     }
 
-    public void AddMouseUp(GameObject gameObject)
+    public void AddMouseUp(GameObject gameObject, Vector3 position)
     {
-        _mouseActions.Enqueue(new MouseAction(InputState.Release, new RayHit(gameObject.transform, new Vector3())));
+        _mouseActions.Enqueue(new MouseAction(InputState.Release, new RayHit(gameObject.transform, position)));
+    }
+
+    public void AddMouseHover(GameObject gameObject, Vector3 position)
+    {
+        _mouseActions.Enqueue(new MouseAction(InputState.Hover, new RayHit(gameObject.transform, position)));
     }
 
     private class MouseAction

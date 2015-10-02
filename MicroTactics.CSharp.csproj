@@ -385,6 +385,7 @@
     <Compile Include="Assets\Testing\FindGameObjectByPartialName.cs" />
     <Compile Include="Assets\Testing\FindGameObjectsByPartialName.cs" />
     <Compile Include="Assets\Testing\GetChildByPartialName.cs" />
+    <Compile Include="Assets\Testing\InsideColliderAssert.cs" />
     <Compile Include="Assets\Testing\RenderingAssert.cs" />
     <Compile Include="Assets\Testing\RepeatTillTimeout.cs" />
     <Compile Include="Assets\Testing\SelectSquad.cs" />

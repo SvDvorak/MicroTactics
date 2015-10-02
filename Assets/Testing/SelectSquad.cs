@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using System.Linq;
 using Assets.Features.CreateSquad;
 using BehaviourMachine;
 using Entitas;
+using Vexe.Runtime.Extensions;
 
 namespace Assets.Testing
 {
@@ -15,10 +17,24 @@ namespace Assets.Testing
             var entity = SquadPlacementObject.Value.GetComponent<CreateEntityOnStart>().Entity;
             var selectionArea = entity.children.Value.Single(x => x.hasSelectionArea);
 
-            var input = new TestInput();
-            input.AddMouseDown(selectionArea.view.Value);
-            input.AddMouseUp(selectionArea.view.Value);
-            WilInput.Instance = input;
+            ClickGameObject.PerformClickDrag(selectionArea.view.Value);
+
+            return Status.Success;
+        }
+    }
+
+    [NodeInfo(category = "MicroTactics/", icon = "GameObject")]
+    public class GetSquadUnits : ActionNode
+    {
+        public GameObjectVar SquadPlacementObject;
+        public DynamicList UnitList;
+
+        public override Status Update()
+        {
+            UnitList.Clear();
+            var squad = SquadPlacementObject.Value.GetComponent<CreateEntityOnStart>().Entity;
+            var units = squad.unitsCache.Units.Select(x => x.view.Value).ToList();
+            units.Foreach(x => UnitList.Add(x));
 
             return Status.Success;
         }
