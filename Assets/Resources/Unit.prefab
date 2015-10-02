@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: .0799999982
-  AttachRoot: {fileID: 0}
+  AttachRoot: {fileID: 186188}
 --- !u!114 &11445958
 MonoBehaviour:
   m_ObjectHideFlags: 1
