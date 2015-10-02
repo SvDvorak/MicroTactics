@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Features;
 using Entitas;
 using UnityEngine;
 
 public class MeshUpdateSystem : IReactiveSystem
 {
-    private readonly Assets.Features.Triangulator _triangulator;
+    private readonly Triangulator _triangulator;
     public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.BoundingMesh, Matcher.View).OnEntityAdded(); } }
 
 
     public MeshUpdateSystem()
     {
-        _triangulator = new Assets.Features.Triangulator();
+        _triangulator = new Triangulator();
     }
 
     public void Execute(List<Entity> entities)

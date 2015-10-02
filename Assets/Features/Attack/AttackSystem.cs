@@ -48,7 +48,7 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
         var force = CalculateForce(firePosition.Y, entity.rotation, attackDirection.Length(), 1);
         force = AddRandomAimingVariation(force);
 
-        SpawnHelper.SpawnArrow(_pool)
+        SpawnHelper.Arrow(_pool)
             .AddPosition(firePosition)
             .AddRotation(entity.rotation.ToQ())
             .AddForce(force)

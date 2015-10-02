@@ -9,7 +9,6 @@ namespace Assets.Features.CreateSquad
 
         public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Squad, Matcher.Player).OnEntityAdded(); } }
 
-
         public void SetPool(Pool pool)
         {
             _pool = pool;
@@ -25,10 +24,7 @@ namespace Assets.Features.CreateSquad
 
         private void CreateSelectionArea(Entity entity)
         {
-            var selectionArea = _pool
-                .CreateEntity()
-                .AddSelectionArea(entity)
-                .AddResource(Res.SelectionArea);
+            var selectionArea = SpawnHelper.SelectionArea(_pool, entity);
 
             entity.AddChildTwoWay(selectionArea);
         }

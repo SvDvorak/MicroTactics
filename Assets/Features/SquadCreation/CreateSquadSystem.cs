@@ -4,13 +4,12 @@ using Entitas;
 using Mono.GameMath;
 using Vexe.Runtime.Extensions;
 
-public class SquadCreationSystem : IReactiveSystem, ISetPool
+public class CreateSquadSystem : IReactiveSystem, ISetPool
 {
     private Group _unitsGroup;
     private Pool _pool;
 
     public TriggerOnEvent trigger { get { return Matcher.AllOf(Matcher.Squad, Matcher.BoxFormation).OnEntityAdded(); } }
-
 
     public void SetPool(Pool pool)
     {
@@ -32,18 +31,9 @@ public class SquadCreationSystem : IReactiveSystem, ISetPool
         for (var i = 0; i < formation.Columns * formation.Rows; i++)
         {
             var position = UnitInSquadPositioner.GetPosition(formation, i);
-            var unit = _pool.CreateEntity()
-                .AddUnit(squad.Number)
-                .AddHealth(100)
-                .AddPosition(position)
-                .AddRotation(Quaternion.Identity)
-                .AddResource(Res.Unit);
+            var unit = SpawnHelper.Unit(_pool, squad.Number, position);
 
-            var selectedIndicator = _pool.CreateEntity()
-                .AddResource(Res.SelectedIndicator)
-                .IsHidden(true);
-
-            unit.AddChildTwoWay(selectedIndicator);
+            unit.AddChildTwoWay(SpawnHelper.SelectedIndicator(_pool));
         }
     }
 

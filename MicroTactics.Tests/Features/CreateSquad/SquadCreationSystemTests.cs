@@ -8,7 +8,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
 {
     public class SquadCreationSystemTests
     {
-        private readonly SquadCreationSystem _sut;
+        private readonly CreateSquadSystem _sut;
         private readonly TestPool _pool;
         private readonly Entity _squad1 = new TestEntity().AddSquad(0).AddBoxFormation(0, 0, 0);
         private readonly Entity _squad2 = new TestEntity().AddSquad(1).AddBoxFormation(0, 0, 0);
@@ -17,7 +17,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
 
         public SquadCreationSystemTests()
         {
-            _sut = new SquadCreationSystem();
+            _sut = new CreateSquadSystem();
             _pool = new TestPool();
             _sut.SetPool(_pool);
 

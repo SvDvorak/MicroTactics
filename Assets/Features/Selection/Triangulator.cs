@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+using Mono.GameMath;
 
 // Code taken from http://wiki.unity3d.com/index.php?title=Triangulator
-namespace Assets
+namespace Assets.Features
 {
     public class Triangulator
     {
@@ -75,7 +75,7 @@ namespace Assets
             {
                 Vector2 pval = _points[p];
                 Vector2 qval = _points[q];
-                A += pval.x * qval.y - qval.x * pval.y;
+                A += pval.X * qval.Y - qval.X * pval.Y;
             }
             return (A * 0.5f);
         }
@@ -86,7 +86,7 @@ namespace Assets
             Vector2 A = _points[V[u]];
             Vector2 B = _points[V[v]];
             Vector2 C = _points[V[w]];
-            if (float.Epsilon > (((B.x - A.x) * (C.y - A.y)) - ((B.y - A.y) * (C.x - A.x))))
+            if (float.Epsilon > (((B.X - A.X) * (C.Y - A.Y)) - ((B.Y - A.Y) * (C.X - A.X))))
                 return false;
             for (p = 0; p < n; p++)
             {
@@ -104,12 +104,12 @@ namespace Assets
             float ax, ay, bx, by, cx, cy, apx, apy, bpx, bpy, cpx, cpy;
             float cCROSSap, bCROSScp, aCROSSbp;
 
-            ax = C.x - B.x; ay = C.y - B.y;
-            bx = A.x - C.x; by = A.y - C.y;
-            cx = B.x - A.x; cy = B.y - A.y;
-            apx = P.x - A.x; apy = P.y - A.y;
-            bpx = P.x - B.x; bpy = P.y - B.y;
-            cpx = P.x - C.x; cpy = P.y - C.y;
+            ax = C.X - B.X; ay = C.Y - B.Y;
+            bx = A.X - C.X; by = A.Y - C.Y;
+            cx = B.X - A.X; cy = B.Y - A.Y;
+            apx = P.X - A.X; apy = P.Y - A.Y;
+            bpx = P.X - B.X; bpy = P.Y - B.Y;
+            cpx = P.X - C.X; cpy = P.Y - C.Y;
 
             aCROSSbp = ax * bpy - ay * bpx;
             cCROSSap = cx * apy - cy * apx;

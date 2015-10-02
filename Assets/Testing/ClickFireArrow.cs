@@ -14,7 +14,7 @@ public class ClickFireArrow : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetMouseButtonDown(0))
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            SpawnHelper.SpawnArrow(Pools.pool)
+            SpawnHelper.Arrow(Pools.pool)
                 .AddPosition(ray.origin.ToV3())
                 .AddForce(ray.direction.ToV3()*1000)
                 .AddRotation(Quaternion.LookAt(ray.direction.ToV3()));
