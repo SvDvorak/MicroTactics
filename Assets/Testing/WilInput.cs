@@ -4,8 +4,7 @@ using UnityEngine;
 
 public interface IInput
 {
-    IEnumerable<RayHit> RaycastFromMousePosition();
-    InputState GetMouseState(int button);
+    MouseState GetMouseState(int button);
 }
 
 public class WilInput
@@ -38,72 +37,74 @@ public class UnityInput : IInput
         return Input.GetMouseButtonUp(button);
     }
 
-    public IEnumerable<RayHit> RaycastFromMousePosition()
+    public MouseState GetMouseState(int button)
     {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        return Physics.RaycastAll(ray, Mathf.Infinity).Select(x => new RayHit(x));
+        return new MouseState(GetMouseButtonState(button), RaycastFromMousePosition());
     }
 
-    public InputState GetMouseState(int button)
+    private InputState GetMouseButtonState(int button)
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(button))
         {
             return InputState.Press;
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(button))
         {
             return InputState.Release;
         }
 
         return InputState.Hover;
     }
+
+    private IEnumerable<RayHit> RaycastFromMousePosition()
+    {
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        return Physics.RaycastAll(ray, Mathf.Infinity).Select(x => new RayHit(x));
+    }
 }
 
 public class TestInput : IInput
 {
-    private readonly Queue<MouseAction> _mouseActions = new Queue<MouseAction>();
+    private readonly Queue<MouseState> _mouseActions = new Queue<MouseState>();
 
-    public IEnumerable<RayHit> RaycastFromMousePosition()
+    public MouseState GetMouseState(int button)
     {
-        if (!_mouseActions.Any())
+        if (_mouseActions.Count != 0)
         {
-            return new List<RayHit>();
+            return _mouseActions.Dequeue();
         }
 
-        return _mouseActions.Peek().Hit.AsList();
-    }
-
-    public InputState GetMouseState(int button)
-    {
-        return _mouseActions.Dequeue().State;
+        return DefaultMouseState;
     }
 
     public void AddMouseDown(GameObject gameObject, Vector3 position)
     {
-        _mouseActions.Enqueue(new MouseAction(InputState.Press, new RayHit(gameObject.transform, position)));
+        _mouseActions.Enqueue(new MouseState(InputState.Press, new RayHit(gameObject.transform, position).AsList()));
     }
 
     public void AddMouseUp(GameObject gameObject, Vector3 position)
     {
-        _mouseActions.Enqueue(new MouseAction(InputState.Release, new RayHit(gameObject.transform, position)));
+        _mouseActions.Enqueue(new MouseState(InputState.Release, new RayHit(gameObject.transform, position).AsList()));
     }
 
     public void AddMouseHover(GameObject gameObject, Vector3 position)
     {
-        _mouseActions.Enqueue(new MouseAction(InputState.Hover, new RayHit(gameObject.transform, position)));
+        _mouseActions.Enqueue(new MouseState(InputState.Hover, new RayHit(gameObject.transform, position).AsList()));
     }
 
-    private class MouseAction
+    private MouseState DefaultMouseState { get { return new MouseState(InputState.Hover, new List<RayHit>()); } }
+}
+
+public class MouseState
+{
+    public MouseState(InputState state, IEnumerable<RayHit> hits)
     {
-        public MouseAction(InputState state, RayHit hit)
-        {
-            State = state;
-            Hit = hit;
-        }
-
-        public InputState State { get; private set; }
-        public RayHit Hit { get; private set; }
+        State = state;
+        Hits = hits;
     }
+
+    public InputState State { get; private set; }
+    public IEnumerable<RayHit> Hits { get; private set; }
 }
 
 public struct RayHit

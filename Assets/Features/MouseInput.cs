@@ -22,21 +22,21 @@ public class MouseInput : MonoBehaviour
     void Update ()
 	{
         var input = WilInput.Instance;
-        var possibleHits = input.RaycastFromMousePosition();
-        var hitEntities = GetMatchingEntitiesForHits(possibleHits).ToList();
+        var mouseState = input.GetMouseState(0);
+        var hitEntities = GetMatchingEntitiesForHits(mouseState.Hits).ToList();
 
         if (!hitEntities.Any())
         {
             return;
         }
 
-        InputEntity.ReplaceInput(input.GetMouseState(0), hitEntities);
+        InputEntity.ReplaceInput(mouseState.State, hitEntities);
     }
 
-    private List<EntityHit> GetMatchingEntitiesForHits(IEnumerable<RayHit> possibleHits)
+    private List<EntityHit> GetMatchingEntitiesForHits(IEnumerable<RayHit> hits)
     {
         var viewables = _viewableGroup.GetEntities();
-        return possibleHits
+        return hits
             .Select(hit => new EntityHit(GetMatchingEntity(viewables, hit), hit.Point.ToV3()))
             .Where(hit => hit.Entity != null)
             .ToList();
