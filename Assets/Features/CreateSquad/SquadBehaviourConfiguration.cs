@@ -27,7 +27,6 @@ public class SquadBehaviourConfiguration : MonoBehaviour, IGameObjectConfigurer
             .AddSquad(GetNextSquadNumber())
             .AddBoxFormation(Columns, Rows, Spacing)
             .IsPlayer(IsPlayer)
-            .IsEnemy(IsPlayer)
             .AddPosition(Vector3.Zero)
             .AddRotation(Quaternion.Identity)
             .AddAudio(GetComponent<AudioSource>(), moveSounds);

@@ -1,20 +1,17 @@
-﻿using Entitas;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Mono.GameMath;
 using Xunit;
 
 namespace MicroTactics.Tests.Features
 {
-    public class AiAttackOrderSystemTests
+    public class AiAttackOrderSystemTests : AiOrderTestsBase
     {
         private readonly AiAttackOrderSystem _sut;
-        private readonly TestPool _pool;
 
         public AiAttackOrderSystemTests()
         {
             _sut = new AiAttackOrderSystem();
-            _pool = new TestPool();
-            _sut.SetPool(_pool);
+            _sut.SetPool(Pool);
         }
 
         [Fact]
@@ -72,16 +69,6 @@ namespace MicroTactics.Tests.Features
             _sut.Execute();
 
             ai.hasAttackOrder.Should().BeFalse("enemy is no longer in range so shouldn't have attack order");
-        }
-
-        private Entity CreateEnemyAt(float x, float y, float z)
-        {
-            return _pool.CreateEntity().AddPosition(x, y, z).IsEnemy(true);
-        }
-
-        private Entity CreateAiAt(float range, Vector3 vector)
-        {
-            return _pool.CreateEntity().AddPosition(vector).AddAi(range);
         }
     }
 }

@@ -136,7 +136,6 @@
     <Compile Include="Assets\Features\Destruction\DestroyComponent.cs" />
     <Compile Include="Assets\Features\Destruction\DestroySystem.cs" />
     <Compile Include="Assets\Features\Destruction\RemoveViewSystem.cs" />
-    <Compile Include="Assets\Features\EnemyComponent.cs" />
     <Compile Include="Assets\Features\GameobjectConfigurer.cs" />
     <Compile Include="Assets\Features\GroundBehaviourConfiguration.cs" />
     <Compile Include="Assets\Features\InputComponent.cs" />
@@ -219,7 +218,6 @@
     <Compile Include="Assets\Generated\DelayedDestroyComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\DestroyComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\DestroySystemGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\EnemyComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ForceComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\GroundComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\HealthComponentGeneratedExtension.cs" />

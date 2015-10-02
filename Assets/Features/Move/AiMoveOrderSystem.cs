@@ -6,17 +6,18 @@ using Mono.GameMath;
 public class AiMoveOrderSystem : IExecuteSystem, ISetPool
 {
     private Group _aiSquads;
-    private Group _enemies;
+    private Group _positionable;
 
     public void SetPool(Pool pool)
     {
         _aiSquads = pool.GetGroup(Matcher.AllOf(Matcher.Squad, Matcher.Ai, Matcher.Position));
-        _enemies = pool.GetGroup(Matcher.AllOf(Matcher.Enemy, Matcher.Position));
+        _positionable = pool.GetGroup(Matcher.Position);
     }
 
     public void Execute()
     {
-        var enemy = _enemies.GetSingleEntity();
+        var entities = _positionable.GetEntities();
+        var enemy = entities.SingleOrDefault(x => x.isPlayer);
         if (enemy == null)
         {
             return;

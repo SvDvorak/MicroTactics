@@ -6,12 +6,12 @@ using Mono.GameMath;
 public class AiAttackOrderSystem : IExecuteSystem, ISetPool
 {
     private Group _ais;
-    private Group _enemies;
+    private Group _positionable;
 
     public void SetPool(Pool pool)
     {
         _ais = pool.GetGroup(Matcher.AllOf(Matcher.Ai, Matcher.Position));
-        _enemies = pool.GetGroup(Matcher.AllOf(Matcher.Enemy, Matcher.Position));
+        _positionable = pool.GetGroup(Matcher.Position);
     }
 
     public void Execute()
@@ -33,7 +33,8 @@ public class AiAttackOrderSystem : IExecuteSystem, ISetPool
 
     private Maybe<Entity> GetClosestEnemyTo(Entity aiEntity)
     {
-        return _enemies.GetEntities()
+        return _positionable.GetEntities()
+            .Where(x => x.isPlayer)
             .Select(x => new { Entity = x, Diff = GetDifference(x.position.ToV3(), aiEntity.position.ToV3()) })
             .OrderBy(x => x.Diff)
             .Where(x => x.Diff < aiEntity.ai.SeeingRange)

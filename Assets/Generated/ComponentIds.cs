@@ -105,7 +105,6 @@ public static class ComponentIds {
         { typeof (CollisionComponent), Collision },
         { typeof (DelayedDestroyComponent), DelayedDestroy },
         { typeof (DestroyComponent), Destroy },
-        { typeof (EnemyComponent), Enemy },
         { typeof (ForceComponent), Force },
         { typeof (GroundComponent), Ground },
         { typeof (HealthComponent), Health },
