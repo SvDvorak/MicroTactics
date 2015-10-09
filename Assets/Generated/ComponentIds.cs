@@ -1,52 +1,46 @@
-using System;
-using System.Collections.Generic;
-using Entitas;
-
 public static class ComponentIds {
-    public const int AffectingSystems = 0;
-    public const int Ai = 1;
-    public const int Animate = 2;
-    public const int AttachRoot = 3;
-    public const int AttachTo = 4;
-    public const int AttackInput = 5;
-    public const int AttackOrder = 6;
-    public const int Audio = 7;
-    public const int BoundingMesh = 8;
-    public const int BoxFormation = 9;
-    public const int Children = 10;
-    public const int Collision = 11;
-    public const int DelayedDestroy = 12;
-    public const int Destroy = 13;
-    public const int Force = 14;
-    public const int Ground = 15;
-    public const int Health = 16;
-    public const int Hidden = 17;
-    public const int Input = 18;
-    public const int LeavingBody = 19;
-    public const int MoveInput = 20;
-    public const int Movement = 21;
-    public const int MoveOrder = 22;
-    public const int Parent = 23;
-    public const int Physics = 24;
-    public const int PitchFromVelocity = 25;
-    public const int Player = 26;
-    public const int Position = 27;
-    public const int Reload = 28;
-    public const int Resource = 29;
-    public const int Rotation = 30;
-    public const int Selected = 31;
-    public const int SelectionArea = 32;
-    public const int Squad = 33;
-    public const int Stickable = 34;
-    public const int Unit = 35;
-    public const int UnitsCache = 36;
-    public const int Velocity = 37;
-    public const int View = 38;
+    public const int Ai = 0;
+    public const int Animate = 1;
+    public const int AttachRoot = 2;
+    public const int AttachTo = 3;
+    public const int AttackInput = 4;
+    public const int AttackOrder = 5;
+    public const int Audio = 6;
+    public const int BoundingMesh = 7;
+    public const int BoxFormation = 8;
+    public const int Children = 9;
+    public const int Collision = 10;
+    public const int DelayedDestroy = 11;
+    public const int Destroy = 12;
+    public const int Force = 13;
+    public const int Ground = 14;
+    public const int Health = 15;
+    public const int Hidden = 16;
+    public const int Input = 17;
+    public const int LeavingBody = 18;
+    public const int MoveInput = 19;
+    public const int Movement = 20;
+    public const int MoveOrder = 21;
+    public const int Parent = 22;
+    public const int Physics = 23;
+    public const int PitchFromVelocity = 24;
+    public const int Player = 25;
+    public const int Position = 26;
+    public const int Reload = 27;
+    public const int Resource = 28;
+    public const int Rotation = 29;
+    public const int Selected = 30;
+    public const int SelectionArea = 31;
+    public const int Squad = 32;
+    public const int Stickable = 33;
+    public const int Unit = 34;
+    public const int UnitsCache = 35;
+    public const int Velocity = 36;
+    public const int View = 37;
 
-    public const int TotalComponents = 39;
-
-    static readonly string[] components = {
-        "AffectingSystems",
+    public const int TotalComponents = 38;
+
+    public static readonly string[] componentNames = {
         "Ai",
         "Animate",
         "AttachRoot",
@@ -85,66 +79,46 @@ public static class ComponentIds {
         "UnitsCache",
         "Velocity",
         "View"
-    };
-
-    public static string IdToString(int componentId) {
-        return components[componentId];
-    }
-
-    private static readonly IDictionary<Type, int> componentIds = new Dictionary<Type, int>() {
-        { typeof (AffectingSystemsComponent), AffectingSystems },
-        { typeof (AiComponent), Ai },
-        { typeof (AnimateComponent), Animate },
-        { typeof (AttachRootComponent), AttachRoot },
-        { typeof (AttachToComponent), AttachTo },
-        { typeof (AttackInputComponent), AttackInput },
-        { typeof (AttackOrderComponent), AttackOrder },
-        { typeof (AudioComponent), Audio },
-        { typeof (BoundingMeshComponent), BoundingMesh },
-        { typeof (BoxFormationComponent), BoxFormation },
-        { typeof (ChildrenComponent), Children },
-        { typeof (CollisionComponent), Collision },
-        { typeof (DelayedDestroyComponent), DelayedDestroy },
-        { typeof (DestroyComponent), Destroy },
-        { typeof (ForceComponent), Force },
-        { typeof (GroundComponent), Ground },
-        { typeof (HealthComponent), Health },
-        { typeof (HiddenComponent), Hidden },
-        { typeof (InputComponent), Input },
-        { typeof (LeavingBodyComponent), LeavingBody },
-        { typeof (MoveInputComponent), MoveInput },
-        { typeof (MovementComponent), Movement },
-        { typeof (MoveOrderComponent), MoveOrder },
-        { typeof (ParentComponent), Parent },
-        { typeof (PhysicsComponent), Physics },
-        { typeof (PitchFromVelocityComponent), PitchFromVelocity },
-        { typeof (PlayerComponent), Player },
-        { typeof (PositionComponent), Position },
-        { typeof (ReloadComponent), Reload },
-        { typeof (ResourceComponent), Resource },
-        { typeof (RotationComponent), Rotation },
-        { typeof (SelectedComponent), Selected },
-        { typeof (SelectionAreaComponent), SelectionArea },
-        { typeof (SquadComponent), Squad },
-        { typeof (StickableComponent), Stickable },
-        { typeof (UnitComponent), Unit },
-        { typeof (UnitsCacheComponent), UnitsCache },
-        { typeof (VelocityComponent), Velocity },
-        { typeof (ViewComponent), View }
-    };
-
-    public static int ComponentToId(IComponent component) {
-        return componentIds[component.GetType()];
-    }
-}
-
-namespace Entitas {
-    public partial class Matcher : AllOfMatcher {
-        public Matcher(int index) : base(new [] { index }) {
-        }
-
-        public override string ToString() {
-            return ComponentIds.IdToString(indices[0]);
-        }
-    }
+    };
+
+    public static readonly System.Type[] componentTypes = {
+        typeof(AiComponent),
+        typeof(AnimateComponent),
+        typeof(AttachRootComponent),
+        typeof(AttachToComponent),
+        typeof(AttackInputComponent),
+        typeof(AttackOrderComponent),
+        typeof(AudioComponent),
+        typeof(BoundingMeshComponent),
+        typeof(BoxFormationComponent),
+        typeof(ChildrenComponent),
+        typeof(CollisionComponent),
+        typeof(DelayedDestroyComponent),
+        typeof(DestroyComponent),
+        typeof(ForceComponent),
+        typeof(GroundComponent),
+        typeof(HealthComponent),
+        typeof(HiddenComponent),
+        typeof(InputComponent),
+        typeof(LeavingBodyComponent),
+        typeof(MoveInputComponent),
+        typeof(MovementComponent),
+        typeof(MoveOrderComponent),
+        typeof(ParentComponent),
+        typeof(PhysicsComponent),
+        typeof(PitchFromVelocityComponent),
+        typeof(PlayerComponent),
+        typeof(PositionComponent),
+        typeof(ReloadComponent),
+        typeof(ResourceComponent),
+        typeof(RotationComponent),
+        typeof(SelectedComponent),
+        typeof(SelectionAreaComponent),
+        typeof(SquadComponent),
+        typeof(StickableComponent),
+        typeof(UnitComponent),
+        typeof(UnitsCacheComponent),
+        typeof(VelocityComponent),
+        typeof(ViewComponent)
+    };
 }

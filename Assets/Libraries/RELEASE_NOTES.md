@@ -1,10 +1,79 @@
+# 0.24.1
+##### Entitas.Unity.VisualDebugging
+- Added support for adding components to multiple entities at once at runtime
+
+
+# 0.24.0
+
+##### Breaking changes
+Please follow the [Entitas upgrade guide](https://github.com/sschmid/Entitas-CSharp/blob/master/EntitasUpgradeGuide.md)
+
+##### Entitas.Unity.CodeGenerator
+- Throwing exception when attempting to generate while Unity is still compiling or assembly won't compile
+
+##### Entitas.Unity.VisualDebugging
+- Added support for creating entities and adding components at runtime
+
+![entitas unity visualdebugging-debugpool](https://cloud.githubusercontent.com/assets/233700/10291395/d83c3ec4-6ba9-11e5-9c1d-3e18fe2c6370.png)
+
+![entitas unity visualdebugging-entity](https://cloud.githubusercontent.com/assets/233700/10291401/e15d29be-6ba9-11e5-8fc1-87767430342c.png)
+
+
+# 0.23.0
+
+##### Breaking changes
+Before updating, please follow the [Entitas upgrade guide](https://github.com/sschmid/Entitas-CSharp/blob/master/EntitasUpgradeGuide.md)
+
+- Gerneral
+  - Updated and applied policy
+
+##### Entitas
+- Reimplemented new matcher AnyOf and NoneOf
+
+```csharp
+Matcher.AllOf(Matcher.A, Matcher.B)
+       .AnyOf(Matcher.C, Matcher.D)
+       .NoneOf(Matcher.E, Matcher.F);
+
+```
+
+##### Entitas.CodeGenerator
+- Updated generators to work with new matchers
+- PoolsGenerator generates Pools.allPools (#39)
+- Code Generators convert local newline to unix newline
+
+##### Entitas.Unity.CodeGenerator
+- Changed CodeGeneratorConfig.disabledCodeGenerators to CodeGeneratorConfig.enabledCodeGenerators
+
+
+# 0.22.3
+
+##### Entitas
+- Added reactiveSystem.Clear() and systems.ClearReactiveSystems()
+- Added IClearReactiveSystem. When implemented, clears reactive system after execute finished
+
+
+# 0.22.2
+
+##### Fixes
+- Entitas
+  - GroupObserver retains entities only once
+
+##### Entitas.Unity.VisualDebugging
+- PoolObserver now shows retained entities
+- Destroying EntityBehaviour e.OnEntityReleased instead of e.OnComponentRemoved
+
+##### Other
+- New logo
+
+
 # 0.22.1
 
 ##### Entitas
 - Throwing an exception when releasing an entity that is not destroyed yet (#32)
 
 ##### Entitas.Unity.VisualDebugging
-- Added HierarchyIcon
+- Added hierarchy icon
 - Renamed DebugSystems related classes
 
 ##### Other
@@ -75,7 +144,8 @@ Please follow the [Entitas upgrade guide](https://github.com/sschmid/Entitas-CSh
 - Added `IEnsureComponents` to optionally ensure entities passed in via ReactiveSystem have certain components
 - Added `IExcludeComponents` to optionally exclude entities passed in via ReactiveSystem
 - Added support for multiple PoolAttributes on components
-```cs
+
+```csharp
 [PoolA, PoolB, PoolC]
 public class SomeComponent : IComponent {}
 ```
@@ -176,7 +246,8 @@ Please follow the [Entitas upgrade guide](https://github.com/sschmid/Entitas-CSh
 
 ##### Breaking changes
 - Added `systemCodeGenerators` to CodeGenerator.Generate()
-```cs
+
+```csharp
 CodeGenerator.Generate(Type[] types, string[] poolNames, string dir,
                             IComponentCodeGenerator[] componentCodeGenerators,
                             ISystemCodeGenerator[] systemCodeGenerators,
@@ -185,13 +256,15 @@ CodeGenerator.Generate(Type[] types, string[] poolNames, string dir,
 
 ##### Entitas.CodeGenerator
 - Added PoolsGenerator which creates a getter for all pools
-```cs
+
+```csharp
 var pool = Pools.pool;
 var metaPool = Pools.meta;
 ```
 
 - Added SystemExtensionsGenerator
-```cs
+
+```csharp
 new Systems()
     .Add(pool.CreateGameBoardSystem())
     .Add(pool.CreateCreateGameBoardCacheSystem())
@@ -266,7 +339,8 @@ new Systems()
 
 ##### Entitas.Unity.CodeGenerator
 - Added fluent api to Entity
-```cs
+
+```csharp
 pool.CreateEntity()
     .IsGameBoardElement(true)
     .IsMovable(true)

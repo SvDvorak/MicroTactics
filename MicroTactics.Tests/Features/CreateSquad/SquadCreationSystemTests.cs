@@ -21,7 +21,7 @@ namespace MicroTactics.Tests.Features.CreateSquad
             _pool = new TestPool();
             _sut.SetPool(_pool);
 
-            _pool.Count.Should().Be(0);
+            _pool.count.Should().Be(0);
         }
 
         [Fact]

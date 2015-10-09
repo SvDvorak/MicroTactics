@@ -3,7 +3,7 @@
 </p>
 <p align="center">
     <a href="https://gitter.im/sschmid/Entitas-CSharp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
-        <img src="https://img.shields.io/badge/gitter-join%20chat%20→-brightgreen.svg" alt="Join the chat at https://gitter.im/sschmid/Entitas-CSharp"></a>
+        <img src="https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg" alt="Join the chat at https://gitter.im/sschmid/Entitas-CSharp"></a>
 
     <a href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fgithub.com%2Fsschmid%2FEntitas-CSharp&screen_name=s_schmid&tw_p=followbutton">
         <img src="https://img.shields.io/badge/twitter-follow%20%40s__schmid-blue.svg" alt="Twitter Follow Me"></a>
@@ -18,10 +18,11 @@
 Entitas - The Entity Component System for C# and Unity
 ======================================================
 
-Entitas is a super fast Entity Component System specifically made for C# and Unity. Internal caching and blazing fast component access makes it second to none. Several design decisions were made to work optimal in a garbage collected environment and to go easy on the garbage collector. Entitas comes with an optional code generator which radically reduces the amount of code you have to write and [makes your code read like well written prose.][clean-coders]
+Entitas is a super fast Entity Component System (ECS) specifically made for C# and Unity. Internal caching and blazing fast component access makes it second to none. Several design decisions were made to work optimal in a garbage collected environment and to go easy on the garbage collector. Entitas comes with an optional code generator which radically reduces the amount of code you have to write and [makes your code read like well written prose.][clean-coders]
 
 [![Download Entitas.zip][download-entitas-shield]][entitas-zip]
 ### **[» Wiki, Roadmap, Overview and example projects][wiki]**
+### **[» Community: Games and Examples #madeWithEntitas][wiki-games-and-examples]**
 
 
 Watch the talk from Unite Europe 2015
@@ -34,8 +35,9 @@ Watch the talk from Unite Europe 2015
 First glimpse
 =============
 
-The optional [code generator][wiki-code-generator] lets you write code that is super fast, save and literally screams its intent.
-```cs
+The optional [code generator][wiki-code-generator] lets you write code that is super fast, safe and literally screams its intent.
+
+```csharp
 public static Entity CreateRedGem(this Pool pool, int x, int y) {
     return pool.CreateEntity()
                .IsGameBoardElement(true)
@@ -46,7 +48,7 @@ public static Entity CreateRedGem(this Pool pool, int x, int y) {
 }
 ```
 
-```cs
+```csharp
 var entities = pool.GetEntities(Matcher.AllOf(Matcher.Move, Matcher.Position));
 foreach (var entity in entities) {
     var move = entity.move;
@@ -74,7 +76,7 @@ Code Generator
 
 The Code Generator generates classes and methods for you, so you can focus on getting the job done. It radically reduces the amount of code you have to write and improves readability by a huge magnitude. It makes your code less error-prone while ensuring best performance. I strongly recommend using it!
 
-[Read more...][wiki-code-generator]]
+[Read more...][wiki-code-generator]
 
 
 Unity integration
@@ -114,6 +116,10 @@ Contributing to Entitas
 =======================
 
 The project is hosted on [GitHub][github-entitas] where you can [report issues][issues], fork the project and [submit pull requests][pulls].
+
+Entitas.sln contains all projects and tests in one solution. All Unity projects are not committed to the repository and can be generated with Unity. Open Entitas.Unity, Entitas.Unity.CodeGenerator and Entitas.Unity.VisualDebugging in Unity and generate all projects by clicking Assets -> Sync MonoDevelop Project.
+
+To run the tests, navigate to the project root folder and execute runTests.sh.
 
 - Check the [issues][issues] to make sure nobody hasn't already requested it and/or contributed it
 - Fork the project
@@ -157,6 +163,7 @@ Entitas is also available in
 [wiki-overview]: https://github.com/sschmid/Entitas-CSharp/wiki/Overview "Wiki - Overview"
 [wiki-unity-integration]: https://github.com/sschmid/Entitas-CSharp/wiki/Unity-integration "Wiki - Unity Integration"
 [wiki-example-projects]: https://github.com/sschmid/Entitas-CSharp/wiki/Example-projects "Wiki - Example Projects"
+[wiki-games-and-examples]: https://github.com/sschmid/Entitas-CSharp/wiki/Games-and-Examples "Wiki - Games and Examples #madeWithEntitas"
 
 [unite-europe-2015-video-thumbnail]: https://raw.githubusercontent.com/sschmid/Entitas-CSharp/develop/Readme/Images/UniteEurope-2015.png "Video: Watch the Entitas Talk at Unite Europe 2015"
 [unite-europe-2015-video]: http://buff.ly/1KtKlm6 "Video: Watch the Entitas Talk at Unite Europe 2015"

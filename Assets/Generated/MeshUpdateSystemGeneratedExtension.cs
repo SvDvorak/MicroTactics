@@ -1,7 +1,7 @@
-namespace Entitas {
-    public partial class Pool {
-        public ISystem CreateMeshUpdateSystem() {
-            return this.CreateSystem<MeshUpdateSystem>();
-        }
-    }
+namespace Entitas {
+    public partial class Pool {
+        public ISystem CreateMeshUpdateSystem() {
+            return this.CreateSystem<MeshUpdateSystem>();
+        }
+    }
 }

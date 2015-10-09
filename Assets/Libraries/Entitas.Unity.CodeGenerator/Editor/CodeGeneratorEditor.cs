@@ -10,16 +10,20 @@ namespace Entitas.Unity.CodeGenerator {
 
         [MenuItem("Entitas/Generate")]
         public static void Generate() {
-            var types = Assembly.GetAssembly(typeof(Entity)).GetTypes();
-            var config = new CodeGeneratorConfig(EntitasPreferencesEditor.LoadConfig());
+            assertCanGenerate();
 
-            var disabledCodeGenerators = config.disabledCodeGenerators;
-            var codeGenerators = GetCodeGenerators()
-                .Where(type => !disabledCodeGenerators.Contains(type.Name))
+            var types = Assembly.GetAssembly(typeof(Entity)).GetTypes();
+            var codeGenerators = GetCodeGenerators();
+            var codeGeneratorNames = codeGenerators.Select(cg => cg.Name).ToArray();
+            var config = new CodeGeneratorConfig(EntitasPreferencesEditor.LoadConfig(), codeGeneratorNames);
+
+            var enabledCodeGeneratorNames = config.enabledCodeGenerators;
+            var enabledCodeGenerators = codeGenerators
+                .Where(type => enabledCodeGeneratorNames.Contains(type.Name))
                 .Select(type => (ICodeGenerator)Activator.CreateInstance(type))
                 .ToArray();
 
-            Entitas.CodeGenerator.CodeGenerator.Generate(types, config.pools, config.generatedFolderPath, codeGenerators);
+            Entitas.CodeGenerator.CodeGenerator.Generate(types, config.pools, config.generatedFolderPath, enabledCodeGenerators);
 
             AssetDatabase.Refresh();
         }
@@ -33,6 +37,20 @@ namespace Entitas.Unity.CodeGenerator {
                     && type != typeof(ISystemCodeGenerator))
                 .OrderBy(type => type.FullName)
                 .ToArray();
+        }
+
+        static void assertCanGenerate() {
+            if (EditorApplication.isCompiling) {
+                throw new Exception("Can not generate because Unity is still compiling. Please wait...");
+            }
+
+            var assembly = Assembly.GetAssembly(typeof(Editor));
+            var logEntries = assembly.GetType("UnityEditorInternal.LogEntries");
+            logEntries.GetMethod("Clear").Invoke(new object(), null);
+            var canCompile = (int)logEntries.GetMethod("GetCount").Invoke(new object(), null) == 0;
+            if (!canCompile) {
+                throw new Exception("Can not generate because there are compile errors!");
+            }
         }
     }
 }

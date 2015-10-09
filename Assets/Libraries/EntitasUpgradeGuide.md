@@ -1,3 +1,49 @@
+# Entitas 0.24.0 upgrade guide
+To fix the compile errors after updating to Entitas 0.24.0, delete in `Pools.cs`
+
+```csharp
+#if (UNITY_EDITOR)
+var poolObserver = new Entitas.Unity.VisualDebugging.PoolObserver(_pool, ComponentIds.componentNames, ComponentIds.componentTypes, "Pool");
+UnityEngine.Object.DontDestroyOnLoad(poolObserver.entitiesContainer);
+#endif
+```
+
+and generate again.
+
+
+# Entitas 0.23.0 upgrade guide
+Entitas 0.23.0 changed and applied naming conventions.
+Before updating to this version, follow these steps to prepare your project:
+
+#### Rename
+
+    Pool.Count       -> Pool.count
+    Group.Count      -> Group.count
+    Properties.count -> Properties.count
+
+#### Find/Replace in generated folder
+
+    ": AllOfMatcher "              -> ""
+    ": base(new [] { index }) "    -> ""
+    "static AllOfMatcher _matcher" -> "static IMatcher _matcher"
+    "public static AllOfMatcher"   -> "public static IMatcher"
+    "new Matcher"                  -> "Matcher.AllOf"
+
+#### Delete
+
+In generated ...ComponentIds
+
+    namespace Entitas {
+        public partial class XYZMatcher {
+            public Matcher(int index) {
+            }
+
+            public override string ToString() {
+                return ComponentIds.IdToString(indices[0]);
+            }
+        }
+    }
+
 # Entitas 0.22.0 upgrade guide
 Entitas 0.22.0 changed IReactiveSystem and IMultiReactiveSystem and renamed IStartSystem.Start to IInitializeSystem.Initialize.
 

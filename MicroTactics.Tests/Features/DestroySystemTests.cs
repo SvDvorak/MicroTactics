@@ -31,7 +31,7 @@ namespace MicroTactics.Tests.Features
             sut.SetPool(testPool);
             sut.Execute(destroyEntity.AsList());
 
-            testPool.Count.Should().Be(1, "pool should only contain non-destroyed entities after running system");
+            testPool.count.Should().Be(1, "pool should only contain non-destroyed entities after running system");
         }
     }
 }

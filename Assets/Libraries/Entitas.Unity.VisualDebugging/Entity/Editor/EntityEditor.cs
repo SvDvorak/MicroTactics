@@ -50,6 +50,16 @@ namespace Entitas.Unity.VisualDebugging {
                 pool.DestroyEntity(entity);
             }
 
+            EditorGUILayout.BeginHorizontal();
+            entityBehaviour.componentToAdd = EditorGUILayout.Popup(entityBehaviour.componentToAdd, entityBehaviour.componentNames);
+            if (GUILayout.Button("Add Component")) {
+                var index = entityBehaviour.componentToAdd;
+                var componentType = entityBehaviour.componentTypes[index];
+                var component = (IComponent)Activator.CreateInstance(componentType);
+                entity.AddComponent(index, component);
+            }
+            EditorGUILayout.EndHorizontal();
+
             EditorGUILayout.BeginVertical(GUI.skin.box);
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Components (" + entity.GetComponents().Length + ")", EditorStyles.boldLabel);
@@ -71,6 +81,20 @@ namespace Entitas.Unity.VisualDebugging {
         }
 
         void drawMultiTargets() {
+            EditorGUILayout.BeginHorizontal();
+            var aEntityBehaviour = (EntityBehaviour)targets[0];
+            aEntityBehaviour.componentToAdd = EditorGUILayout.Popup(aEntityBehaviour.componentToAdd, aEntityBehaviour.componentNames);
+            if (GUILayout.Button("Add Component")) {
+                var index = aEntityBehaviour.componentToAdd;
+                var componentType = aEntityBehaviour.componentTypes[index];
+                foreach (var t in targets) {
+                    var entity = ((EntityBehaviour)t).entity;
+                    var component = (IComponent)Activator.CreateInstance(componentType);
+                    entity.AddComponent(index, component);
+                }
+            }
+            EditorGUILayout.EndHorizontal();
+
             if (GUILayout.Button("Destroy selected entities")) {
                 foreach (var t in targets) {
                     var entityBehaviour = (EntityBehaviour)t;
@@ -238,7 +262,7 @@ namespace Entitas.Unity.VisualDebugging {
             var config = new VisualDebuggingConfig(EntitasPreferencesEditor.LoadConfig());
             var folder = config.defaultInstanceCreatorFolderPath;
             var filePath = folder + "Default_type_InstanceCreator.cs";
-            var template = string.Format(defaultInstanceCreatorTemplateFormat, typeName);
+            var template = string.Format(DEFAULT_INSTANCE_CREATOR_TEMPLATE_FORMAT, typeName);
             generateTemplate(folder, filePath, template);
         }
 
@@ -246,7 +270,7 @@ namespace Entitas.Unity.VisualDebugging {
             var config = new VisualDebuggingConfig(EntitasPreferencesEditor.LoadConfig());
             var folder = config.typeDrawerFolderPath;
             var filePath = folder + "Type_TypeDrawer.cs";
-            var template = string.Format(typeDrawerTemplateFormat, typeName);
+            var template = string.Format(TYPE_DRAWER_TEMPLATE_FORMAT, typeName);
             generateTemplate(folder, filePath, template);
         }
 
@@ -260,7 +284,7 @@ namespace Entitas.Unity.VisualDebugging {
             Selection.activeObject = AssetDatabase.LoadMainAssetAtPath(filePath);
         }
 
-        const string defaultInstanceCreatorTemplateFormat = @"using System;
+        const string DEFAULT_INSTANCE_CREATOR_TEMPLATE_FORMAT = @"using System;
 using Entitas.Unity.VisualDebugging;
 
 // Please rename class name and file name
@@ -276,7 +300,7 @@ public class Default_type_InstanceCreator : IDefaultInstanceCreator {{
 }}
 ";
 
-        const string typeDrawerTemplateFormat = @"using System;
+        const string TYPE_DRAWER_TEMPLATE_FORMAT = @"using System;
 using Entitas;
 using Entitas.Unity.VisualDebugging;
 

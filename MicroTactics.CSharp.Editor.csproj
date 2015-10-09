@@ -259,12 +259,14 @@
     <Compile Include="Assets\Editor\Vexe\Visibility\VisibilityLogic.cs" />
     <Compile Include="Assets\Editor\Vexe\Windows\BetterWindow.cs" />
     <Compile Include="Assets\Editor\Vexe\Windows\SelectionWindow.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.CodeGenerator\Editor\CodeGeneratorConfig.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.CodeGenerator\Editor\CodeGeneratorEditor.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.CodeGenerator\Editor\CodeGeneratorPreferencesDrawer.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\DebugSystems\Editor\DebugSystemsEditor.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\DebugSystems\Editor\SystemsMonitorEditor.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Editor\EntitasStats.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Editor\HierarchyIconEditor.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Editor\VisualDebuggingConfig.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Editor\VisualDebuggingPreferencesDrawer.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\DefaultInstanceCreator\DefaultArrayCreator.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\DefaultInstanceCreator\DefaultStringCreator.cs" />
@@ -291,6 +293,7 @@
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\Entity\Editor\TypeDrawer\Vector4TypeDrawer.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity.VisualDebugging\PoolObserver\Editor\PoolObserverEditor.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity\Editor\EntitasCheckForUpdates.cs" />
+    <Compile Include="Assets\Libraries\Entitas.Unity\Editor\EntitasPreferencesConfig.cs" />
     <Compile Include="Assets\Libraries\Entitas.Unity\Editor\EntitasPreferencesEditor.cs" />
     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Editor\AssertionComponentEditor.cs" />
     <Compile Include="Assets\Libraries\UnityTestTools\Assertions\Editor\AssertionExplorerWindow.cs" />
