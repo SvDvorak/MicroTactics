@@ -43,10 +43,7 @@ namespace MicroTactics.Tests.Features
 
         private Entity CreateArrowEntity()
         {
-            return _pool.CreateEntity()
-                .AddRotation(Quaternion.Identity)
-                .AddPhysics(null)
-                .AddVelocity(0, 0, 0);
+            return SpawnHelper.Arrow(_pool);
         }
     }
 }

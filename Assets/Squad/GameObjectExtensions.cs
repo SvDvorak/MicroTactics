@@ -8,7 +8,7 @@ public static class GameObjectExtensions
     {
         return GameObject
             .FindObjectsOfType<GameObject>()
-            .SingleOrDefault(x => MatchName(x.name, name, isPartialName));
+            .First(x => MatchName(x.name, name, isPartialName));
     }
 
     public static IEnumerable<T> GetComponentsInChildren<T>(this GameObject gameObject, string name)
@@ -23,12 +23,16 @@ public static class GameObjectExtensions
         return gameObject.GetChildren(name, isPartialName).FirstOrDefault();
     }
 
+    public static IEnumerable<GameObject> GetChildren(this GameObject gameObject)
+    {
+        return gameObject.transform.Cast<Transform>().Select(x => x.gameObject);
+    } 
+
     public static IEnumerable<GameObject> GetChildren(this GameObject gameObject, string expectedName, bool isPartialName = false)
     {
-        return gameObject.transform
-            .Cast<Transform>()
-            .Where(x => MatchName(x.name, expectedName, isPartialName))
-            .Select(x => x.gameObject);
+        return gameObject
+            .GetChildren()
+            .Where(x => MatchName(x.name, expectedName, isPartialName));
     }
 
     private static bool MatchName(string actualName, string expectedName, bool isPartialName)

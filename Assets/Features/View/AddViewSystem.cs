@@ -26,7 +26,6 @@ public class AddViewSystem : IReactiveSystem
             SetTransformIfAvailable(view, entity);
             AddParentIfAvailable(view, entity);
             AddAnimatorIfAvailable(view, entity);
-            AddPhysicsIfAvailable(view, entity);
             AddColliderIfAvailable(view, entity);
 
             entity.AddView(view);
@@ -61,15 +60,6 @@ public class AddViewSystem : IReactiveSystem
         if (animator != null)
         {
             entity.AddAnimate(animator);
-        }
-    }
-
-    private static void AddPhysicsIfAvailable(GameObject view, Entity entity)
-    {
-        var rigidbody = view.GetComponent<Rigidbody>();
-        if (rigidbody != null)
-        {
-            entity.AddPhysics(rigidbody);
         }
     }
 

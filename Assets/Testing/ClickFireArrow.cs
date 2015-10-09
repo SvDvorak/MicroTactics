@@ -4,10 +4,6 @@ using Quaternion = Mono.GameMath.Quaternion;
 
 public class ClickFireArrow : MonoBehaviour
 {
-    private void Start()
-    {
-    }
-
 #if (UNITY_EDITOR)
     private void Update()
     {
@@ -15,9 +11,9 @@ public class ClickFireArrow : MonoBehaviour
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             SpawnHelper.Arrow(Pools.pool)
-                .AddPosition(ray.origin.ToV3())
-                .AddForce(ray.direction.ToV3()*1000)
-                .AddRotation(Quaternion.LookAt(ray.direction.ToV3()));
+                .ReplacePosition(ray.origin.ToV3())
+                .ReplaceForce(ray.direction.ToV3()*100)
+                .ReplaceRotation(Quaternion.LookAt(ray.direction.ToV3()));
         }
     }
 #endif

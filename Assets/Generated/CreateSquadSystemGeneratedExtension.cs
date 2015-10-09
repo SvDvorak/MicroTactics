@@ -1,6 +1,6 @@
 namespace Entitas {
     public partial class Pool {
-        public ISystem CreateSquadCreationSystem() {
+        public ISystem CreateCreateSquadSystem() {
             return this.CreateSystem<CreateSquadSystem>();
         }
     }

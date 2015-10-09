@@ -9,10 +9,12 @@ namespace MicroTactics.Tests.Features
     public class ArrowStickToCollidedSystemTests
     {
         private readonly ArrowStickToCollidedSystem _sut;
+        private readonly TestPool _pool;
 
         public ArrowStickToCollidedSystemTests()
         {
             _sut = new ArrowStickToCollidedSystem();
+            _pool = new TestPool();
         }
 
         [Fact]
@@ -25,7 +27,7 @@ namespace MicroTactics.Tests.Features
         [Fact]
         public void AttachesToWhenRelativeVelocityIsHighEnough()
         {
-            var stickToEntity = new TestEntity();
+            var stickToEntity = _pool.CreateEntity();
             var fastArrow = CreateCollidingArrow(stickToEntity, float.PositiveInfinity);
             var slowArrow = CreateCollidingArrow(new TestEntity(), 0);
 
@@ -46,13 +48,12 @@ namespace MicroTactics.Tests.Features
             fastArrow.hasAttachTo.Should().BeFalse("should not attach when other entity is null");
         }
 
-        private static Entity CreateCollidingArrow(TestEntity collidedWith, float velocityMagnitude)
+        private Entity CreateCollidingArrow(Entity collidedWith, float velocityMagnitude)
         {
-            return new TestEntity()
-                .AddView(null)
+            return SpawnHelper.Arrow(_pool)
+                .AddPhysics(null)
                 .AddCollision(collidedWith, new Vector3(velocityMagnitude, 0, 0))
-                .AddStickable(1)
-                .AddPhysics(null);
+                .ReplaceStickable(1);
         }
     }
 }

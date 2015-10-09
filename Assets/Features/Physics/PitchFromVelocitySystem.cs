@@ -5,22 +5,22 @@ using Mono.GameMath;
 
 public class PitchFromVelocitySystem : IExecuteSystem, ISetPool
 {
-    private Group _arrowGroup;
+    private Group _pitchFromVelocityGroup;
 
     public void SetPool(Pool pool)
     {
-        _arrowGroup = pool.GetGroup(Matcher.AllOf(Matcher.Physics, Matcher.Rotation, Matcher.Velocity));
+        _pitchFromVelocityGroup = pool.GetGroup(Matcher.PitchFromVelocity);
     }
 
     public void Execute()
     {
-        foreach (var arrow in _arrowGroup.GetEntities().Where(x => !x.hasCollision))
+        foreach (var toPitch in _pitchFromVelocityGroup.GetEntities())
         {
-            var velocity = arrow.velocity.ToV3();
+            var velocity = toPitch.velocity.ToV3();
             if (!velocity.LengthSquared().IsApproximately(0))
             {
                 var newForward = Quaternion.LookAt(velocity.Normalized());
-                arrow.ReplaceRotation(newForward);
+                toPitch.ReplaceRotation(newForward);
             }
         }
     }

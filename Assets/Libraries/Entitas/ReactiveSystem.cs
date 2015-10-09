@@ -79,12 +79,31 @@ namespace Entitas {
 
                 _observer.ClearCollectedEntities();
                 if (_buffer.Count != 0) {
+                    UpdateAffectingSystemsOnEntities();
+
                     _subsystem.Execute(_buffer);
-                    for (int i = 0, bufferCount = _buffer.Count; i < bufferCount; i++) {
+                    for (int i = 0, bufferCount = _buffer.Count; i < bufferCount; i++)
+                    {
                         _buffer[i].Release();
                     }
                     _buffer.Clear();
                 }
+            }
+        }
+
+        private void UpdateAffectingSystemsOnEntities()
+        {
+            foreach (var entity in _buffer)
+            {
+                var currentSystems = entity.hasAffectingSystems
+                    ? entity.affectingSystems.Systems
+                    : new List<string>();
+                var systemName = _subsystem.GetType().Name;
+                if (!currentSystems.Contains(systemName))
+                {
+                    currentSystems.Add(systemName);
+                }
+                entity.ReplaceAffectingSystems(currentSystems);
             }
         }
     }

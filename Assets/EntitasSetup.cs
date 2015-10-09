@@ -26,7 +26,7 @@ public class EntitasSetup : MonoBehaviour
 #endif
             .Add(pool.CreateReadPhysicsSystem())
 
-            .Add(pool.CreateSquadCreationSystem())
+            .Add(pool.CreateCreateSquadSystem())
             .Add(pool.CreateSelectionAreaDecoratorSystem())
             .Add(pool.CreateUnitsCacheSystem())
             .Add(pool.CreateSquadCenterPositionSystem())

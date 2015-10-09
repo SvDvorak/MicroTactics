@@ -3,32 +3,32 @@ using System.Collections.Generic;
 using Entitas;
 
 public static class ComponentIds {
-    public const int Ai = 0;
-    public const int Animate = 1;
-    public const int AttachRoot = 2;
-    public const int AttachTo = 3;
-    public const int AttackInput = 4;
-    public const int AttackOrder = 5;
-    public const int Audio = 6;
-    public const int BoundingMesh = 7;
-    public const int BoxFormation = 8;
-    public const int Children = 9;
-    public const int Collision = 10;
-    public const int DelayedDestroy = 11;
-    public const int Destroy = 12;
-    public const int Enemy = 13;
+    public const int AffectingSystems = 0;
+    public const int Ai = 1;
+    public const int Animate = 2;
+    public const int AttachRoot = 3;
+    public const int AttachTo = 4;
+    public const int AttackInput = 5;
+    public const int AttackOrder = 6;
+    public const int Audio = 7;
+    public const int BoundingMesh = 8;
+    public const int BoxFormation = 9;
+    public const int Children = 10;
+    public const int Collision = 11;
+    public const int DelayedDestroy = 12;
+    public const int Destroy = 13;
     public const int Force = 14;
     public const int Ground = 15;
     public const int Health = 16;
     public const int Hidden = 17;
     public const int Input = 18;
     public const int LeavingBody = 19;
-    public const int LimitPhysics = 20;
-    public const int MoveInput = 21;
-    public const int Movement = 22;
-    public const int MoveOrder = 23;
-    public const int Parent = 24;
-    public const int Physics = 25;
+    public const int MoveInput = 20;
+    public const int Movement = 21;
+    public const int MoveOrder = 22;
+    public const int Parent = 23;
+    public const int Physics = 24;
+    public const int PitchFromVelocity = 25;
     public const int Player = 26;
     public const int Position = 27;
     public const int Reload = 28;
@@ -46,6 +46,7 @@ public static class ComponentIds {
     public const int TotalComponents = 39;
 
     static readonly string[] components = {
+        "AffectingSystems",
         "Ai",
         "Animate",
         "AttachRoot",
@@ -59,19 +60,18 @@ public static class ComponentIds {
         "Collision",
         "DelayedDestroy",
         "Destroy",
-        "Enemy",
         "Force",
         "Ground",
         "Health",
         "Hidden",
         "Input",
         "LeavingBody",
-        "LimitPhysics",
         "MoveInput",
         "Movement",
         "MoveOrder",
         "Parent",
         "Physics",
+        "PitchFromVelocity",
         "Player",
         "Position",
         "Reload",
@@ -92,6 +92,7 @@ public static class ComponentIds {
     }
 
     private static readonly IDictionary<Type, int> componentIds = new Dictionary<Type, int>() {
+        { typeof (AffectingSystemsComponent), AffectingSystems },
         { typeof (AiComponent), Ai },
         { typeof (AnimateComponent), Animate },
         { typeof (AttachRootComponent), AttachRoot },
@@ -116,6 +117,7 @@ public static class ComponentIds {
         { typeof (MoveOrderComponent), MoveOrder },
         { typeof (ParentComponent), Parent },
         { typeof (PhysicsComponent), Physics },
+        { typeof (PitchFromVelocityComponent), PitchFromVelocity },
         { typeof (PlayerComponent), Player },
         { typeof (PositionComponent), Position },
         { typeof (ReloadComponent), Reload },

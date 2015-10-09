@@ -49,10 +49,10 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
         force = AddRandomAimingVariation(force);
 
         SpawnHelper.Arrow(_pool)
-            .AddPosition(firePosition)
-            .AddRotation(entity.rotation.ToQ())
-            .AddForce(force)
-            .AddVelocity(attackDirection);
+            .ReplacePosition(firePosition)
+            .ReplaceRotation(entity.rotation.ToQ())
+            .ReplaceForce(force)
+            .ReplaceVelocity(attackDirection);
     }
 
     private static Vector3 CalculateForce(
