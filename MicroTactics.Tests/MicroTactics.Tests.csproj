@@ -89,7 +89,6 @@
     <Compile Include="Features\DelayedDestroySystemTests.cs" />
     <Compile Include="Features\ReloadSystemTests.cs" />
     <Compile Include="Features\ShowSelectedIndicatorForSquadSystemTests.cs" />
-    <Compile Include="Features\PitchFromVelocitySystemTests.cs" />
     <Compile Include="Features\AttackSystemTests.cs" />
     <Compile Include="Features\CreateSquad\SquadCreationSystemTests.cs" />
     <Compile Include="Features\CreateSquad\TestEntity.cs" />

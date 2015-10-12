@@ -106,7 +106,6 @@ public static class ComponentIds {
         typeof(MoveOrderComponent),
         typeof(ParentComponent),
         typeof(PhysicsComponent),
-        typeof(PitchFromVelocityComponent),
         typeof(PlayerComponent),
         typeof(PositionComponent),
         typeof(ReloadComponent),

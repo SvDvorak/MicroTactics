@@ -85,7 +85,7 @@ namespace MicroTactics.Tests.Features
         {
             _sut.Execute(_attackingEntity.AsList());
 
-            PoolEntity().ShouldBeStickable(10);
+            PoolEntity().ShouldBeStickable(1);
         }
 
         [Fact]

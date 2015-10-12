@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -53,11 +51,17 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -140,8 +144,6 @@
     <Compile Include="Assets\Features\Physics\CollisionComponent.cs" />
     <Compile Include="Assets\Features\Physics\CollisionDamageSystem.cs" />
     <Compile Include="Assets\Features\Physics\PhysicsComponent.cs" />
-    <Compile Include="Assets\Features\Physics\PitchFromVelocityComponent.cs" />
-    <Compile Include="Assets\Features\Physics\PitchFromVelocitySystem.cs" />
     <Compile Include="Assets\Features\Physics\ReadPhysicsSystem.cs" />
     <Compile Include="Assets\Features\Physics\RemovePhysicsSystem.cs" />
     <Compile Include="Assets\Features\Physics\StickableComponent.cs" />
@@ -233,8 +235,6 @@
     <Compile Include="Assets\Generated\MovementComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ParentComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\PhysicsComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\PitchFromVelocityComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\PitchFromVelocitySystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\PlayerComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Pools.cs" />
     <Compile Include="Assets\Generated\PositionComponentGeneratedExtension.cs" />

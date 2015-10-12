@@ -7,12 +7,11 @@ public class SpawnHelper
     {
         return pool.CreateEntity()
             .AddResource(Res.Arrow)
-            //.AddPosition(Vector3.Zero)
-            //.AddRotation(Quaternion.Identity)
-            //.AddForce(Vector3.Zero)
-            //.AddVelocity(Vector3.Zero)
-            //.AddStickable(10)
-            //.IsPitchFromVelocity(true)
+            .AddPosition(Vector3.Zero)
+            .AddRotation(Quaternion.Identity)
+            .AddForce(Vector3.Zero)
+            .AddVelocity(Vector3.Zero)
+            .AddStickable(1)
             .AddDelayedDestroy(20*Simulation.FrameRate);
     }
 

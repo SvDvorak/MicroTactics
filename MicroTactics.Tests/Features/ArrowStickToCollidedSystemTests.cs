@@ -33,9 +33,8 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute(new[] { fastArrow, slowArrow }.ToList());
 
-            fastArrow.hasPhysics.Should().BeFalse("should remove physics when collision is hard");
-            slowArrow.hasPhysics.Should().BeTrue("should not remove physics when collision is soft");
             fastArrow.ShouldAttachTo(stickToEntity);
+            slowArrow.hasAttachTo.Should().BeFalse("slow arrow should not attach on collision");
         }
 
         [Fact]

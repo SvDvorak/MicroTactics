@@ -6,6 +6,7 @@ public class UnitBehaviourConfiguration : MonoBehaviour, IGameObjectConfigurer
 {
     public float MovementSpeed;
     public GameObject AttachRoot;
+    private Collidable _collidable;
 
     public void OnAttachEntity(Entity entity)
     {
@@ -13,7 +14,8 @@ public class UnitBehaviourConfiguration : MonoBehaviour, IGameObjectConfigurer
             .AddAttachRoot(AttachRoot)
             .AddMovement(MovementSpeed);
 
-        gameObject.AddComponent<Collidable>().SetEntity(entity);
+        _collidable = gameObject.AddComponent<Collidable>();
+        _collidable.SetEntity(entity);
     }
 
     public void OnDetachEntity(Entity entity)

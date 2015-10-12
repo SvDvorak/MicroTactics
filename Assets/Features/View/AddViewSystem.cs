@@ -8,7 +8,13 @@ public class AddViewSystem : IReactiveSystem
     public TriggerOnEvent trigger { get { return Matcher.Resource.OnEntityAdded(); } }
 
 
-    private readonly Transform _viewsContainer = new GameObject("Views").transform;
+    private readonly Transform _viewsContainer;
+
+    public AddViewSystem()
+    {
+        var existingViewContainer = GameObject.Find("Views");
+        _viewsContainer = existingViewContainer != null ? existingViewContainer.transform : new GameObject("Views").transform;
+    }
 
     public void Execute(List<Entity> entities)
     {

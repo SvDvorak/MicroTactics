@@ -11,12 +11,11 @@ public class ArrowStickToCollidedSystem : IReactiveSystem, IEnsureComponents
     {
         foreach (var entity in entities.Where(ShouldStick))
         {
-            entity.RemovePhysics();
-
             var otherEntity = entity.collision.OtherEntity;
             if (otherEntity != null)
             {
-                entity.AddAttachTo(entity.collision.OtherEntity);
+                entity
+                    .AddAttachTo(entity.collision.OtherEntity);
             }
         }
     }
