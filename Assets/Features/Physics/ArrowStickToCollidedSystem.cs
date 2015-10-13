@@ -12,10 +12,9 @@ public class ArrowStickToCollidedSystem : IReactiveSystem, IEnsureComponents
         foreach (var entity in entities.Where(ShouldStick))
         {
             var otherEntity = entity.collision.OtherEntity;
-            if (otherEntity != null)
+            if (otherEntity != null && !entity.hasAttachTo && !entity.collision.OtherEntity.hasStickable)
             {
-                entity
-                    .AddAttachTo(entity.collision.OtherEntity);
+                entity.AddAttachTo(entity.collision.OtherEntity);
             }
         }
     }

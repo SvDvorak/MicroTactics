@@ -47,6 +47,22 @@ namespace MicroTactics.Tests.Features
             fastArrow.hasAttachTo.Should().BeFalse("should not attach when other entity is null");
         }
 
+        [Fact]
+        public void DoesNotAttachWhenArrowIsAlreadyAttached()
+        {
+            var collidedWith1 = _pool.CreateEntity();
+            var arrow = CreateCollidingArrow(collidedWith1, float.PositiveInfinity);
+
+            _sut.Execute(arrow.AsList());
+
+            var collidedWith2 = _pool.CreateEntity();
+            arrow.ReplaceCollision(collidedWith2, new Vector3(float.PositiveInfinity));
+
+            _sut.Execute(arrow.AsList());
+
+            arrow.ShouldAttachTo(collidedWith1);
+        }
+
         private Entity CreateCollidingArrow(Entity collidedWith, float velocityMagnitude)
         {
             return SpawnHelper.Arrow(_pool)
