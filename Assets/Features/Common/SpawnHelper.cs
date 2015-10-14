@@ -11,7 +11,7 @@ public class SpawnHelper
             .AddRotation(Quaternion.Identity)
             .AddForce(Vector3.Zero)
             .AddVelocity(Vector3.Zero)
-            .AddStickable(1)
+            .AddStickable(10)
             .AddDelayedDestroy(20*Simulation.FrameRate);
     }
 

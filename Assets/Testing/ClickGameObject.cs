@@ -1,4 +1,5 @@
-﻿using BehaviourMachine;
+﻿using System;
+using BehaviourMachine;
 using UnityEngine;
 
 namespace Assets.Testing
@@ -6,27 +7,25 @@ namespace Assets.Testing
     [NodeInfo(category = "Test/", icon = "GameObject")]
     public class ClickGameObject : ActionNode
     {
-        public GameObjectVar GameObject;
-        public Vector3Var Press;
-        public Vector3Var Release;
+        public GameObjectVar PressObject;
+        [VariableInfo(nullLabel = "Use same as press")]
+        public GameObjectVar ReleaseObject;
+        [VariableInfo(nullLabel = "Zero vector")]
+        public Vector3Var PressPosition;
+        [VariableInfo(nullLabel = "Zero vector")]
+        public Vector3Var ReleasePosition;
 
         public override Status Update()
         {
-            var pressPosition = Press.isNone ? Vector3.zero : Press.Value;
-            var releasePosition = Release.isNone ? Vector3.zero : Release.Value;
-            PerformClickDrag(GameObject.Value, pressPosition, releasePosition);
+            var releaseObject = ReleaseObject.isNone ? PressObject.Value : ReleaseObject.Value;
+            var pressPosition = PressPosition.isNone ? Vector3.zero : PressPosition.Value;
+            var releasePosition = ReleasePosition.isNone ? Vector3.zero : ReleasePosition.Value;
+
+            TestInput.SetTestInput()
+                .Click(PressObject.Value, pressPosition)
+                .Release(releaseObject, releasePosition);
+
             return Status.Success;
-        }
-
-        public static void PerformClickDrag(GameObject gameObject, Vector3 pressPosition = new Vector3(), Vector3 releasePosition = new Vector3())
-        {
-            var input = new TestInput();
-
-            input.AddMouseDown(gameObject, pressPosition);
-            input.AddMouseHover(gameObject, releasePosition);
-            input.AddMouseUp(gameObject, releasePosition);
-
-            WilInput.Instance = input;
         }
     }
 }

@@ -5,14 +5,15 @@ using UnityEngine;
 public class UnitBehaviourConfiguration : MonoBehaviour, IGameObjectConfigurer
 {
     public float MovementSpeed;
-    public Rigidbody AttachRoot;
+    public Rigidbody Rigidbody;
+    public Animator Animator;
     private Collidable _collidable;
 
     public void OnAttachEntity(Entity entity)
     {
         entity
-            .AddPhysics(AttachRoot)
-            .AddAttachRoot(AttachRoot.gameObject)
+            .AddPhysics(Rigidbody)
+            .AddAnimate(Animator)
             .AddMovement(MovementSpeed);
 
         _collidable = gameObject.AddComponent<Collidable>();

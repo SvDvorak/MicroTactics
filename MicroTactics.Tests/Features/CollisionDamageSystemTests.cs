@@ -14,12 +14,10 @@ namespace MicroTactics.Tests.Features
     public class CollisionDamageSystemTests
     {
         private readonly CollisionDamageSystem _sut;
-        private readonly TestEntity _collidedWith;
 
         public CollisionDamageSystemTests()
         {
             _sut = new CollisionDamageSystem();
-            _collidedWith = new TestEntity();
         }
 
         [Fact]
@@ -54,7 +52,7 @@ namespace MicroTactics.Tests.Features
 
         private Entity CreateHealthyEntityWithCollision(float collisionVelocity)
         {
-            return new TestEntity().AddHealth(100).AddCollision(_collidedWith, new Vector3(collisionVelocity, 0, 0));
+            return new TestEntity().AddHealth(100).AddCollision(null, new Vector3(collisionVelocity, 0, 0));
         }
     }
 }

@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using Assets.Features.CreateSquad;
 using BehaviourMachine;
-using Entitas;
 
 namespace Assets.Testing
 {
@@ -13,10 +9,9 @@ namespace Assets.Testing
 
         public override Status Update()
         {
-            var entity = SquadPlacementObject.Value.GetComponent<CreateEntityOnStart>().Entity;
-            var selectionArea = entity.children.Value.Single(x => x.hasSelectionArea);
+            var squadSelection = GetSquadSelectionObject.GetSquadSelection(SquadPlacementObject.Value);
 
-            ClickGameObject.PerformClickDrag(selectionArea.view.Value);
+            TestInput.SetTestInput().Click(squadSelection);
 
             return Status.Success;
         }

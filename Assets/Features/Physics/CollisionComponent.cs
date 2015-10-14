@@ -1,8 +1,9 @@
 ﻿using Entitas;
+using UnityEngine;
 using Vector3 = Mono.GameMath.Vector3;
 
 public class CollisionComponent : IComponent
 {
-    public Entity OtherEntity;
+    public Collider Collider;
     public Vector3 RelativeVelocity;
 }

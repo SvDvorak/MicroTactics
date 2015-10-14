@@ -1,50 +1,45 @@
 public static class ComponentIds {
     public const int Ai = 0;
     public const int Animate = 1;
-    public const int AttachRoot = 2;
-    public const int AttachTo = 3;
-    public const int AttackInput = 4;
-    public const int AttackOrder = 5;
-    public const int Audio = 6;
-    public const int BoundingMesh = 7;
-    public const int BoxFormation = 8;
-    public const int Children = 9;
-    public const int Collision = 10;
-    public const int DelayedDestroy = 11;
-    public const int Destroy = 12;
-    public const int Force = 13;
-    public const int Ground = 14;
-    public const int Health = 15;
-    public const int Hidden = 16;
-    public const int Input = 17;
-    public const int LeavingBody = 18;
-    public const int MoveInput = 19;
-    public const int Movement = 20;
-    public const int MoveOrder = 21;
-    public const int Parent = 22;
-    public const int Physics = 23;
-    public const int PitchFromVelocity = 24;
-    public const int Player = 25;
-    public const int Position = 26;
-    public const int Reload = 27;
-    public const int Resource = 28;
-    public const int Rotation = 29;
-    public const int Selected = 30;
-    public const int SelectionArea = 31;
-    public const int Squad = 32;
-    public const int Stickable = 33;
-    public const int Unit = 34;
-    public const int UnitsCache = 35;
-    public const int Velocity = 36;
-    public const int View = 37;
+    public const int AttackInput = 2;
+    public const int AttackOrder = 3;
+    public const int Audio = 4;
+    public const int BoundingMesh = 5;
+    public const int BoxFormation = 6;
+    public const int Children = 7;
+    public const int Collision = 8;
+    public const int DelayedDestroy = 9;
+    public const int Destroy = 10;
+    public const int Force = 11;
+    public const int Ground = 12;
+    public const int Health = 13;
+    public const int Hidden = 14;
+    public const int Input = 15;
+    public const int LeavingBody = 16;
+    public const int MoveInput = 17;
+    public const int Movement = 18;
+    public const int MoveOrder = 19;
+    public const int Parent = 20;
+    public const int Physics = 21;
+    public const int Player = 22;
+    public const int Position = 23;
+    public const int Reload = 24;
+    public const int Resource = 25;
+    public const int Rotation = 26;
+    public const int Selected = 27;
+    public const int SelectionArea = 28;
+    public const int Squad = 29;
+    public const int Stickable = 30;
+    public const int Unit = 31;
+    public const int UnitsCache = 32;
+    public const int Velocity = 33;
+    public const int View = 34;
 
-    public const int TotalComponents = 38;
+    public const int TotalComponents = 35;
 
     public static readonly string[] componentNames = {
         "Ai",
         "Animate",
-        "AttachRoot",
-        "AttachTo",
         "AttackInput",
         "AttackOrder",
         "Audio",
@@ -65,7 +60,6 @@ public static class ComponentIds {
         "MoveOrder",
         "Parent",
         "Physics",
-        "PitchFromVelocity",
         "Player",
         "Position",
         "Reload",
@@ -84,8 +78,6 @@ public static class ComponentIds {
     public static readonly System.Type[] componentTypes = {
         typeof(AiComponent),
         typeof(AnimateComponent),
-        typeof(AttachRootComponent),
-        typeof(AttachToComponent),
         typeof(AttackInputComponent),
         typeof(AttackOrderComponent),
         typeof(AudioComponent),

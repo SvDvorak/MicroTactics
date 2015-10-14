@@ -87,10 +87,4 @@ public static class EntityExtensions
     {
         entity.isDestroy.Should().Be(expected, "entity " + entity + " should " + (expected ? "" : "not ") + "be hidden");
     }
-
-    public static void ShouldAttachTo(this Entity attacher, Entity attachee)
-    {
-        attacher.hasAttachTo.Should().BeTrue(attacher + " should have attach component");
-        attacher.attachTo.Entity.Should().Be(attachee, attacher + " should be attached to " + attachee);
-    }
 }

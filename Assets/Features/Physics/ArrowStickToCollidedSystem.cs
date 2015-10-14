@@ -1,21 +1,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using Entitas;
+using UnityEngine;
 
 public class ArrowStickToCollidedSystem : IReactiveSystem, IEnsureComponents
 {
     public TriggerOnEvent trigger { get { return Matcher.Collision.OnEntityAdded(); } }
-    public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.Stickable, Matcher.Physics); } }
+    public IMatcher ensureComponents { get { return Matcher.AllOf(Matcher.View, Matcher.Stickable, Matcher.Physics); } }
 
     public void Execute(List<Entity> entities)
     {
         foreach (var entity in entities.Where(ShouldStick))
         {
-            var otherEntity = entity.collision.OtherEntity;
-            if (otherEntity != null && !entity.hasAttachTo && !entity.collision.OtherEntity.hasStickable)
-            {
-                entity.AddAttachTo(entity.collision.OtherEntity);
-            }
+            var parent = entity.collision.Collider.transform;
+            var arrow = entity.view.Value;
+            arrow.transform.SetParent(parent, true);
+            arrow.PerformForHierarchy(SetKinematic);
+        }
+    }
+
+    private static void SetKinematic(GameObject gameObject)
+    {
+        var rigidBody = gameObject.GetComponent<Rigidbody>();
+        if (rigidBody != null)
+        {
+            rigidBody.isKinematic = true;
         }
     }
 

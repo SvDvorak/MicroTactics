@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -90,8 +92,6 @@
     <Compile Include="Assets\Events.cs" />
     <Compile Include="Assets\Features\Attack\AiAttackOrderSystem.cs" />
     <Compile Include="Assets\Features\Attack\ArrowConfiguration.cs" />
-    <Compile Include="Assets\Features\Attack\AttachToComponent.cs" />
-    <Compile Include="Assets\Features\Attack\AttachToSystem.cs" />
     <Compile Include="Assets\Features\Attack\AttackInputComponent.cs" />
     <Compile Include="Assets\Features\Attack\AttackInteractionSystem.cs" />
     <Compile Include="Assets\Features\Attack\AttackOrderComponent.cs" />
@@ -170,7 +170,6 @@
     <Compile Include="Assets\Features\SquadCreation\UnitsCacheComponent.cs" />
     <Compile Include="Assets\Features\SquadCreation\UnitsCacheSystem.cs" />
     <Compile Include="Assets\Features\View\AddViewSystem.cs" />
-    <Compile Include="Assets\Features\View\AttachRootComponent.cs" />
     <Compile Include="Assets\Features\View\HideHiddenSystem.cs" />
     <Compile Include="Assets\Features\View\RenderPositionSystem.cs" />
     <Compile Include="Assets\Features\View\RenderRotationSystem.cs" />
@@ -187,7 +186,6 @@
     <Compile Include="Assets\Generated\AnimateUnitSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ApplyPhysicsSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\ArrowStickToCollidedSystemGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\Assets.Features.Attack.AttachToSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Attack.ClearCollisionsSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Attack.CollisionDamageSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.Attack.ReloadSystemGeneratedExtension.cs" />
@@ -199,8 +197,6 @@
     <Compile Include="Assets\Generated\Assets.Features.Selection.SelectedInteractionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.SquadAudioSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\Assets.Features.View.AddViewParentSystemGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\AttachRootComponentGeneratedExtension.cs" />
-    <Compile Include="Assets\Generated\AttachToComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AttackInputComponentGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AttackInteractionSystemGeneratedExtension.cs" />
     <Compile Include="Assets\Generated\AttackOrderComponentGeneratedExtension.cs" />
@@ -373,6 +369,7 @@
     <Compile Include="Assets\Testing\FindGameObjectsByPartialName.cs" />
     <Compile Include="Assets\Testing\FollowWithOffset.cs" />
     <Compile Include="Assets\Testing\GetChildByPartialName.cs" />
+    <Compile Include="Assets\Testing\GetSquadSelectionObject.cs" />
     <Compile Include="Assets\Testing\GetSquadUnits.cs" />
     <Compile Include="Assets\Testing\InsideColliderAssert.cs" />
     <Compile Include="Assets\Testing\IsChildOfAssertion.cs" />
@@ -381,6 +378,7 @@
     <Compile Include="Assets\Testing\SelectSquad.cs" />
     <Compile Include="Assets\Testing\SingleRun.cs" />
     <Compile Include="Assets\Testing\SpawnArrow.cs" />
+    <Compile Include="Assets\Testing\Temp\AddForce.cs" />
     <Compile Include="Assets\Testing\TestSuccess.cs" />
     <Compile Include="Assets\Testing\WilInput.cs" />
     <Compile Include="Assets\TimedDestroy.cs" />

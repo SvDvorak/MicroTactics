@@ -54,7 +54,6 @@ public class EntitasSetup : MonoBehaviour
             .Add(pool.CreateReloadSystem())
 
             .Add(pool.CreateArrowStickToCollidedSystem())
-            .Add(pool.CreateAttachToSystem())
             .Add(pool.CreateCollisionDamageSystem())
 
             .Add(pool.CreateApplyPhysicsSystem())

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -33,6 +34,15 @@ public static class GameObjectExtensions
         return gameObject
             .GetChildren()
             .Where(x => MatchName(x.name, expectedName, isPartialName));
+    }
+
+    public static void PerformForHierarchy(this GameObject gameObject, Action<GameObject> action)
+    {
+        action(gameObject);
+        foreach (var child in gameObject.GetChildren())
+        {
+            child.PerformForHierarchy(action);
+        }
     }
 
     private static bool MatchName(string actualName, string expectedName, bool isPartialName)

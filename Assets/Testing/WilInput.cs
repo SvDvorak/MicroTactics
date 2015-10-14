@@ -66,6 +66,16 @@ public class UnityInput : IInput
 public class TestInput : IInput
 {
     private readonly Queue<MouseState> _mouseActions = new Queue<MouseState>();
+    private Vector3 _lastClickPosition;
+
+    private TestInput() { }
+
+    public static TestInput SetTestInput()
+    {
+        var input = new TestInput();
+        WilInput.Instance = input;
+        return input;
+    }
 
     public MouseState GetMouseState(int button)
     {
@@ -77,19 +87,39 @@ public class TestInput : IInput
         return DefaultMouseState;
     }
 
-    public void AddMouseDown(GameObject gameObject, Vector3 position)
+    public TestInput Click(GameObject gameObject, Vector3 position = new Vector3())
+    {
+        _lastClickPosition = position;
+        return AddMouseDown(gameObject, position);
+    }
+
+    public TestInput Release(GameObject gameObject, Vector3 position = new Vector3())
+    {
+        var hasMovedSinceClick = _lastClickPosition != position;
+        if (hasMovedSinceClick)
+        {
+            AddMouseHover(gameObject, position);
+        }
+
+        return AddMouseUp(gameObject, position);
+    }
+
+    private TestInput AddMouseDown(GameObject gameObject, Vector3 position)
     {
         _mouseActions.Enqueue(new MouseState(InputState.Press, new RayHit(gameObject.transform, position).AsList()));
+        return this;
     }
 
-    public void AddMouseUp(GameObject gameObject, Vector3 position)
+    private TestInput AddMouseUp(GameObject gameObject, Vector3 position)
     {
         _mouseActions.Enqueue(new MouseState(InputState.Release, new RayHit(gameObject.transform, position).AsList()));
+        return this;
     }
 
-    public void AddMouseHover(GameObject gameObject, Vector3 position)
+    private TestInput AddMouseHover(GameObject gameObject, Vector3 position)
     {
         _mouseActions.Enqueue(new MouseState(InputState.Hover, new RayHit(gameObject.transform, position).AsList()));
+        return this;
     }
 
     private MouseState DefaultMouseState { get { return new MouseState(InputState.Hover, new List<RayHit>()); } }
