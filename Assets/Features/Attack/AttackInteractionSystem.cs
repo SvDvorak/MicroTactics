@@ -1,7 +1,7 @@
-    using System.Collections.Generic;
-    using System.Linq;
-    using Assets;
-    using Entitas;
+using System.Collections.Generic;
+using System.Linq;
+using Assets;
+using Entitas;
 
 public class AttackInteractionSystem : IReactiveSystem, ISetPool, IEnsureComponents
 {

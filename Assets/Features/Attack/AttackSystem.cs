@@ -45,7 +45,7 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
     private void SpawnArrow(Entity entity, Vector3 attackDirection)
     {
         var firePosition = entity.position.ToV3() + new Vector3(0, 4, 0);
-        var force = CalculateForce(firePosition.Y, entity.rotation, attackDirection.Length(), 1);
+        var force = CalculateForce(firePosition.Y, entity.rotation, attackDirection.Length(), 5);
         force = AddRandomAimingVariation(force);
 
         SpawnHelper.Arrow(_pool)
