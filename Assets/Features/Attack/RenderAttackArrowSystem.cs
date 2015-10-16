@@ -32,7 +32,8 @@ public class RenderAttackArrowSystem : IReactiveSystem, IInitializeSystem
             var startToEnd = attackInput.Target - attackInput.Start;
 
             SetPositions(attackInput.Start, attackInput.Target);
-            SetRotation(Quaternion.LookAt(-startToEnd.Normalized()));
+            var lookAt = Quaternion.LookAt(startToEnd.Normalized());
+            SetRotation(lookAt);
             HideIfTooShort(startToEnd);
         }
         else

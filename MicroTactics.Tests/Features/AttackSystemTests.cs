@@ -42,6 +42,8 @@ namespace MicroTactics.Tests.Features
             poolEntities.Second().ShouldHaveResource("Arrow");
         }
 
+        private const float ArrowMass = 5;
+
         [Fact]
         public void CalculatesPositionRotationAndForceToFire()
         {
@@ -56,8 +58,8 @@ namespace MicroTactics.Tests.Features
 
             var arrowEntity = PoolEntity();
             arrowEntity.position.ToV3().ShouldBeCloseTo(new Vector3(10, 4, 0));
-            arrowEntity.rotation.ToQ().ShouldBeCloseTo(lookingToTheRight);
-            arrowEntity.force.ToV3().ShouldBeCloseTo(new Vector3(263.8441f, 427.368f, 0));
+            arrowEntity.rotation.ToQ().ShouldBeCloseTo(new Quaternion(-0.6016797f, 0.371458769f, 0, 0.707106769f));
+            arrowEntity.force.ToV3().ShouldBeCloseTo(new Vector3(263.8441f, 427.368f, 0)*ArrowMass);
         }
 
         [Fact]
@@ -69,7 +71,7 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute(_attackingEntity.AsList());
 
-            PoolEntity().force.ToV3().ShouldBeCloseTo(new Vector3(263.1658f, 427.225f, 11.49776f));
+            PoolEntity().force.ToV3().ShouldBeCloseTo(new Vector3(263.1658f, 427.225f, 11.49776f)*ArrowMass);
         }
 
         [Fact]

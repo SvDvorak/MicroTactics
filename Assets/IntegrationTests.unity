@@ -126,7 +126,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d940e636fd44be84e9b7e8da46f700ef, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d940e636fd44be84e9b7e8da46f700ef, type: 2}
       propertyPath: m_LocalRotation.x
@@ -179,7 +179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &244444612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,7 +695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &727709476
 Transform:
   m_ObjectHideFlags: 0
@@ -726,7 +726,9 @@ MonoBehaviour:
   m_Color: 0
   m_HideScript: 1
   m_Position: {x: 60, y: 250}
-  m_Transitions: []
+  m_Transitions:
+  - m_Destination: {fileID: 727709478}
+    m_EventID: -10
   m_CachedInstanceID: -303698
   m_Description: 
   m_IgnoreTimeScale: 0
@@ -846,9 +848,9 @@ MonoBehaviour:
     - {fileID: 701004196}
     m_IntValue: 010000000100000004000000f23c951403000000f23c951402000000
     m_FloatValue:
+    - .200000003
     - 0
-    - 0
-    - -10
+    - 10
     m_StringValue:
     - EveryFrame
     - GetSquadSelectionObject
@@ -1537,10 +1539,10 @@ MonoBehaviour:
     m_FloatValue:
     - 0
     - 0
-    - -10
+    - 10
     - 0
     - 0
-    - -20
+    - 0
     m_StringValue:
     - EveryFrame
     - ClickGameObject
@@ -1789,7 +1791,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d940e636fd44be84e9b7e8da46f700ef, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d940e636fd44be84e9b7e8da46f700ef, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1881,7 +1883,7 @@ Transform:
   - {fileID: 1281356565}
   - {fileID: 415154821}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!1001 &1740346843
 Prefab:
   m_ObjectHideFlags: 0

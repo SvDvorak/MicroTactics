@@ -41,10 +41,10 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute(squad.AsList());
 
-            unit1.ShouldHaveAttackOrderTo(new Vector3(2, 0, 0));
-            unit2.ShouldHaveAttackOrderTo(new Vector3(2, 0, 2));
-            unit3.ShouldHaveAttackOrderTo(new Vector3(0, 0, 0));
-            unit4.ShouldHaveAttackOrderTo(new Vector3(0, 0, 2));
+            unit1.ShouldHaveAttackOrderTo(new Vector3(0, 0, 2));
+            unit2.ShouldHaveAttackOrderTo(new Vector3(0, 0, 0));
+            unit3.ShouldHaveAttackOrderTo(new Vector3(2, 0, 2));
+            unit4.ShouldHaveAttackOrderTo(new Vector3(2, 0, 0));
         }
 
         [Fact]

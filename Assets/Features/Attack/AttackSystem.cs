@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using Assets;
 using Entitas;
 using Mono.GameMath;
+using UnityEngine;
+using Color = UnityEngine.Color;
 using Mathf = UnityEngine.Mathf;
+using Quaternion = Mono.GameMath.Quaternion;
 using Random = Assets.Random;
+using Vector3 = Mono.GameMath.Vector3;
 
 public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
 {
@@ -45,26 +49,27 @@ public class AttackSystem : IReactiveSystem, ISetPool, IEnsureComponents
     private void SpawnArrow(Entity entity, Vector3 attackDirection)
     {
         var firePosition = entity.position.ToV3() + new Vector3(0, 4, 0);
-        var force = CalculateForce(firePosition.Y, entity.rotation, attackDirection.Length(), 5);
+        var force = CalculateForce(firePosition.Y, entity.rotation.ToQ(), attackDirection.Length(), 5);
         force = AddRandomAimingVariation(force);
+        var arrowOrientation = Quaternion.LookAt(force.Normalized());
 
         SpawnHelper.Arrow(_pool)
             .ReplacePosition(firePosition)
-            .ReplaceRotation(entity.rotation.ToQ())
+            .ReplaceRotation(arrowOrientation)
             .ReplaceForce(force)
             .ReplaceVelocity(attackDirection);
     }
 
     private static Vector3 CalculateForce(
         float elevation,
-        QuaternionClass targetRotation,
+        Quaternion targetRotation,
         float targetDistance,
         float mass)
     {
         // Algorithm taken from http://physics.stackexchange.com/questions/27992/solving-for-initial-velocity-required-to-launch-a-projectile-to-a-given-destinat
         const int fireAngle = 45;
-        var verticalAimRotation = Quaternion.CreateFromAxisAngle(Vector3.Left, -fireAngle);
-        var fireDirection = targetRotation.ToQ()*verticalAimRotation*Vector3.Forward;
+        var verticalAimRotation = Quaternion.CreateFromAxisAngle(Vector3.Left, fireAngle);
+        var fireDirection = targetRotation*verticalAimRotation*Vector3.Forward;
         var inRadians = MathHelper.ToRadians(fireAngle);
         var requiredVelocity = 1/Mathf.Cos(inRadians)*
                                Mathf.Sqrt(

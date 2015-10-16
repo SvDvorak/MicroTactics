@@ -53,10 +53,10 @@ namespace MicroTactics.Tests.Features
 
             _sut.Execute(_squad1.AsList());
 
-            unit1.ShouldHaveMoveOrderTo(new Vector3(1, 1, -1), orientation);
-            unit2.ShouldHaveMoveOrderTo(new Vector3(1, 1, 1), orientation);
-            unit3.ShouldHaveMoveOrderTo(new Vector3(-1, 1, -1), orientation);
-            unit4.ShouldHaveMoveOrderTo(new Vector3(-1, 1, 1), orientation);
+            unit1.ShouldHaveMoveOrderTo(new Vector3(-1, 1, 1), orientation);
+            unit2.ShouldHaveMoveOrderTo(new Vector3(-1, 1, -1), orientation);
+            unit3.ShouldHaveMoveOrderTo(new Vector3(1, 1, 1), orientation);
+            unit4.ShouldHaveMoveOrderTo(new Vector3(1, 1, -1), orientation);
         }
 
         [Fact]

@@ -6,7 +6,7 @@ namespace MicroTactics.Tests.Features
 {
     public static class CloseToExtensions
     {
-        private static float _minimumDifference = 0.0001f;
+        private static float _minimumDifference = 0.001f;
 
         public static void ShouldBeCloseTo(this Vector3 actual, Vector3 expected)
         {
